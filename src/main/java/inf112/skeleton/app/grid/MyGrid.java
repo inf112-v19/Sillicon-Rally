@@ -9,6 +9,7 @@ public class MyGrid<T> {
     private int width;
     private int height;
 
+
     public MyGrid(int width, int height) {
         super();
         if (width <= 0 || height <= 0) {
