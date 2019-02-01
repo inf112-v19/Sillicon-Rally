@@ -22,6 +22,7 @@ public class connectionSetup {
         multiplayerRole = reader.next();
         reader.close();
 
+        //TODO etablere en strøm av informasjon ut/inn
         if(multiplayerRole.equals(server)){
             try {
                 ServerSocket ServerSide = new ServerSocket(decidedPort);
@@ -41,7 +42,5 @@ public class connectionSetup {
 
         }
     }
-
-
 
 }
