@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.demo.Demo;
+import inf112.skeleton.app.demo.TiledTest;
 
 
 public class Main {
@@ -15,11 +16,11 @@ public class Main {
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "hello-world";
-        cfg.width = 480;
-        cfg.height = 320;
+        cfg.width = 2160;
+        cfg.height = 1440;
 
        // new LwjglApplication(new HelloWorld(), cfg);
-        new LwjglApplication(new Demo(), cfg);
+        new LwjglApplication(new TiledTest(), cfg);
 
 
 
