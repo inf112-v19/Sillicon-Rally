@@ -22,6 +22,6 @@ public class Main {
         for (int i = 0; i < 84; i++) {
             System.out.println(i+1 + ": " + stack.drawCard());
         }
-        
+
     }
 }
