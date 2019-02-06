@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector3;
 
 
 public class TiledTest extends ApplicationAdapter implements InputProcessor {
@@ -23,23 +24,28 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
     SpriteBatch sb;
     Texture texture;
     Sprite sprite;
+    Sprite sprite2;
 
-    @Override public void create () {
+    @Override
+    public void create () {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false,w,h);
+        camera.setToOrtho(false,w,h );
         camera.update();
-        tiledMap = new TmxMapLoader().load("MyCrappyMap.tmx");
+        tiledMap = new TmxMapLoader().load("RoboRally.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         Gdx.input.setInputProcessor(this);
 
-        /*
+
         sb = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("pik.png"));
+        texture = new Texture(Gdx.files.internal("car.jpg"));
         sprite = new Sprite(texture);
-        */
+        texture = new Texture(Gdx.files.internal("pickUp.png"));
+        sprite2 = new Sprite(texture);
+        sprite2.setX(300);
+
     }
 
     @Override public void render () {
@@ -49,10 +55,24 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
         camera.update();
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
-      //  sb.begin();
-    //    sprite.draw(sb);
-      //  sb.end();
+        sb.setProjectionMatrix(camera.combined);
+        sb.begin();
+        sprite.draw(sb);
+        sprite2.draw(sb);
+
+        if (sprite.getX() == sprite2.getX()) {
+            collision();
+        }
+
+        sb.end();
+
     }
+
+    private void collision() {
+        texture = new Texture(Gdx.files.internal("pickUp.png"));
+        sprite = new Sprite(texture);
+    }
+
 
     @Override public boolean keyDown(int keycode) {
         return false;
@@ -60,14 +80,21 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
 
     @Override public boolean keyUp(int keycode) {
 
+        if(keycode == Input.Keys.RIGHT) {
+            sprite.setX(sprite.getX() + 128);
+
+         //   camera.translate(-32, 0);
+        }
+        if(keycode == Input.Keys.LEFT) {
+            //camera.translate(32,0);
+            sprite.setX(sprite.getX() - 20);
+        }
         if(keycode == Input.Keys.RIGHT)
-            camera.translate(-32,0);
-        if(keycode == Input.Keys.LEFT)
-            camera.translate(32,0);
-        if(keycode == Input.Keys.RIGHT)
-            camera.translate(-32,0);
-        if(keycode == Input.Keys.UP)
-            camera.translate(0,-32);
+          //  camera.translate(-32,0);
+        if(keycode == Input.Keys.UP) {
+
+            //camera.translate(0,-32);
+        }
         if(keycode == Input.Keys.DOWN)
             camera.translate(0,32);
         if(keycode == Input.Keys.NUM_1)
@@ -83,7 +110,12 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
     }
 
     @Override public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+
+        Vector3 clickCoordinates = new Vector3(screenX,screenY,0);
+        Vector3 position = camera.unproject(clickCoordinates);
+        sprite.setPosition(position.x, position.y);
+        System.out.println("x: " + sprite.getX() + " y: " + sprite.getY());
+        return true;
     }
 
     @Override public boolean touchUp(int screenX, int screenY, int pointer, int button) {

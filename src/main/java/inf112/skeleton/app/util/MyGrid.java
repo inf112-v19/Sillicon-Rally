@@ -8,9 +8,11 @@ public class MyGrid {
     private Cell[][] grid;
     private int pixelsPerTile;
 
+
     public MyGrid(int width, int length, int pPT) {
         this.grid = new Cell[width][length];
         this.pixelsPerTile = pPT;
+
     }
 
 

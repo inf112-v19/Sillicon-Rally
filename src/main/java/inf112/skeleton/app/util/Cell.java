@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Cell {
 
+
     private ArrayList<Object> list;
 
     public Cell() {
