@@ -1,7 +1,7 @@
 package inf112.skeleton.app.hazards;
 
 public class BoardHazards {
-
+    //TODO fix logic once robot interaction is made
     public void Mountain(){
     }
 
@@ -42,6 +42,12 @@ public class BoardHazards {
         //position
         int x;
         int y;
+    }
+
+    public void checkpoints(){
+        // "at turn end"
+        // grant residing player a "flag"
+        // when picked up all flags declare winner.
     }
 
 }
