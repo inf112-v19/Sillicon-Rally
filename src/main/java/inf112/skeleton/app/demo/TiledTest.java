@@ -48,9 +48,9 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
         camera.update();
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
-    //    sb.begin();
+        sb.begin();
     //    sprite.draw(sb);
-    //    sb.end();
+        sb.end();
     }
 
     @Override public boolean keyDown(int keycode) {
@@ -58,6 +58,9 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
     }
 
     @Override public boolean keyUp(int keycode) {
+
+        if(keycode == Input.Keys.RIGHT)
+            camera.translate(-32,0);
         if(keycode == Input.Keys.LEFT)
             camera.translate(32,0);
         if(keycode == Input.Keys.RIGHT)
