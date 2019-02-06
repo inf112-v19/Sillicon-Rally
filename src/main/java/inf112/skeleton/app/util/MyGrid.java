@@ -5,12 +5,13 @@ package inf112.skeleton.app.util;
  */
 public class MyGrid {
 
-    private int width;
-    private int length;
-    private int[][] board;
+    private Cell[][] grid;
+    private int pixelsPerTile;
 
 
-    public MyGrid() {
+    public MyGrid(int width, int length, int pPT) {
+        this.grid = new Cell[width][length];
+        this.pixelsPerTile = pPT;
 
     }
 
