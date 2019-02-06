@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+
 public class TiledTest extends ApplicationAdapter implements InputProcessor {
     Texture img;
     TiledMap tiledMap;
@@ -48,9 +49,9 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
         camera.update();
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
-        sb.begin();
+      //  sb.begin();
     //    sprite.draw(sb);
-        sb.end();
+      //  sb.end();
     }
 
     @Override public boolean keyDown(int keycode) {
