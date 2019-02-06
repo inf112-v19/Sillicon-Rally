@@ -2,6 +2,12 @@ package inf112.skeleton.app;
 
 import java.awt.*;
 
-public class Tile implements ITile {
-    public Color color =  Color.DARK_GRAY;
+public class Tile implements ITile, Comparable<Tile> {
+    public int x;
+    public int y;
+
+    @Override
+    public int compareTo(Tile o) {
+        return 0;
+    }
 }
