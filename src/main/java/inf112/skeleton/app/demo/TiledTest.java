@@ -59,9 +59,9 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
 
     @Override public boolean keyUp(int keycode) {
         if(keycode == Input.Keys.LEFT)
-            camera.translate(-32,0);
-        if(keycode == Input.Keys.RIGHT)
             camera.translate(32,0);
+        if(keycode == Input.Keys.RIGHT)
+            camera.translate(-32,0);
         if(keycode == Input.Keys.UP)
             camera.translate(0,-32);
         if(keycode == Input.Keys.DOWN)

@@ -1,12 +1,12 @@
 package inf112.skeleton.app.card;
 
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class MyCard {
-    private String faceName;
-    private Suit suit;        //"type" of card. in classic card game the 4 suits are diamonds, hearts, clubs and spades
-    private int value;          //
-
+    private Sprite cardSprite;
+    private Suit cardSuit;        //"type" of card. in classic card game the 4 suits are diamonds, hearts, clubs and spades
+    private int cardValue;        //
 
 /*
     Constructor for MyCard
@@ -14,39 +14,24 @@ public class MyCard {
     @param faceName
     @param value: could be the amount of tiles player could move
  */
-    public MyCard (Suit suit, String faceName, int value){
-        setSuit(suit);
-        this.faceName = faceName;
-        setValue(value);
+    public MyCard (Sprite cardSprite, Suit cardSuit, int cardValue){
+        this.cardSprite = cardSprite;
+        this.cardSuit = cardSuit;
+        this.cardValue = cardValue;
     }
 
-
-
-public enum Suit{
-        ATTACK, MOVE;
-    }
-
-
-    public String getFaceName(){
-       return faceName;
-    }
+    public enum Suit{
+       MOVE, ROTATION
+        }
 
 
 
-//setters & getters for Suit
-    public Suit getSuit(){  return suit; }
-    public void setSuit(Suit suit){
-        if (suit == null)
-            throw new RuntimeException("Suit cannot be null");
-        this.suit = suit;
-    }
 
 
-//setters & getters for Rank
-    public int getValue(){  return value;    }
-    public void setValue(int value){
-        this.value = value;
-    }
 
 
+
+    public Sprite getCardSprite(){ return cardSprite;   }
+    public Suit getCardSuit(){ return cardSuit; }
+    public int getCardValue(){  return cardValue;   }
 }
