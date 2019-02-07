@@ -68,6 +68,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         if (keycode == Input.Keys.RIGHT) {
             player.setX(x + moveDistance);
+            System.out.println(player.getX());
         }
         if (keycode == Input.Keys.LEFT) {
             player.setX(x - moveDistance);
