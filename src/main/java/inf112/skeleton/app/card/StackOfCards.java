@@ -10,7 +10,7 @@ import java.util.Collections;
  */
 public class StackOfCards {
 
-    public static MyStack<MoveCard> stack = new MyStack<>(84);
+    public static MyStack<MoveCard> stack = new MyStack<>();
 
     public StackOfCards() {
         ArrayList<MoveCard> cards = new ArrayList<>();
@@ -50,5 +50,10 @@ public class StackOfCards {
             stack.push(temp);
         }
     }
+
+    public MoveCard drawCard() {
+        return stack.pop();
+    }
+
 
 }

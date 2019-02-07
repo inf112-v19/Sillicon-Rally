@@ -1,59 +1,50 @@
 package inf112.skeleton.app.util;
 
-import java.lang.reflect.Array;
-
 /**
  * Created by Martin on 01/02/2019.
  */
-public class MyStack<T>  {
 
-    private int maxSize;
-    private T[] array;
-    private int head;
+public class MyStack<E> {
 
-    public MyStack(int maxSize) {
-        this.maxSize = maxSize;
-//        @SuppressWarnings("unchecked")
-        this.array = (T[]) Array.newInstance(MyStack.class, maxSize);
-        this.head = 0;
+    private Node head;
+
+    public class Node {
+        private Node next;
+        private E payload;
+
+        public Node(E item) {
+            this.payload = item;
+            this.next = null;
+        }
     }
 
-    /**public MyStack (int maxSize) {
-        array = new T[maxSize];
-        head = 0;
-    }*/
-
-    public void push(T elem) {
-        if (isFull()) {
-            return;
-        }
-        array[head] = elem;
-        head++;
-    }
-
-    public T peek() {
-        if (!isEmpty()) {
-            return array[head - 1];
-        }
-        return null;
-    }
-
-    public T pop() {
-        if (isEmpty()) {
-            return null;
-        }
-        head--;
-        T temp = array[head];
-        array[head] = null;
-        return temp;
+    public MyStack() {
+        this.head = null;
     }
 
     public boolean isEmpty() {
-        return head == 0;
+        return head == null;
     }
 
-    public boolean isFull() {
-        return head == maxSize;
+    public E peek() {
+        return this.head.payload;
+    }
+    public E pop() {
+        if (isEmpty())
+            return null;
+
+        Node newTop = head.next;
+        E item = head.payload;
+        head = newTop;
+
+
+        return item;
     }
 
+    public void push(E item) {
+        Node newTop = new Node(item);
+
+        newTop.next = head;
+        head = newTop;
+    }
 }
