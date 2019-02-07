@@ -73,13 +73,18 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             player.setX(x + moveDistance);
             } else {
                 switch (dir) {
-                    case North: player.rotate(180);
-                    case South: player.rotate(-90);
-                    case West: player.rotate(180);
+                    case North:
+                        player.rotate(180);
+                    case South:
+                        player.rotate(-90);
+                    case West:
+                        player.rotate(180);
                 }
                 dir = Direction.East;
             }
-            System.out.println(dir);
+
+            System.out.println(player.getX());
+
         }
         
         if (keycode == Input.Keys.LEFT) {
@@ -87,13 +92,15 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             player.setX(x - moveDistance);
             } else {
                 switch (dir) {
-                    case South: player.rotate(180);
-                    case North: player.rotate(-90);
-                    case East: player.rotate(180);
+                    case South:
+                        player.rotate(180);
+                    case North:
+                        player.rotate(-90);
+                    case East:
+                        player.rotate(180);
                 }
                 dir = Direction.West;
             }
-            System.out.println(dir);
         }
         if (keycode == Input.Keys.UP) {
             if (dir == Direction.North) {
@@ -106,7 +113,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                 }
                 dir = Direction.North;
             }
-            System.out.println(dir);
         }
         if (keycode == Input.Keys.DOWN) {
             if (dir == Direction.South) {
@@ -119,7 +125,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                 }
                 dir = Direction.South;
             }
-            System.out.println(dir);
         }
 
         return false;
