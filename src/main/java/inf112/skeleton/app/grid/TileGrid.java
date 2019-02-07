@@ -14,7 +14,8 @@ public class TileGrid<Tile> {
     }
 
     public Diretion getRelativeDirection(Tile to, Tile from) {
-        int toX = to.
+       //int toX = to.
+        return null;
 
     }
 

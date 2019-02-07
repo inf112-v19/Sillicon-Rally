@@ -33,7 +33,7 @@ public class MoveCard {
     }
 
     public enum Type{
-        move1, move2, move3, turnleft, turnright, uturn, backup;
+        move1, move2, move3, turnleft, turnright, uturn, backup
     }
 
     public String toString() {

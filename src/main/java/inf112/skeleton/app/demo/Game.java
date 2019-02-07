@@ -1,8 +1,8 @@
 package inf112.skeleton.app.demo;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -14,8 +14,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-import java.util.ArrayList;
-
 public class Game extends ApplicationAdapter implements InputProcessor {
     TiledMap tiledMap;
     OrthographicCamera camera;
@@ -23,6 +21,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     SpriteBatch sb;
     Texture texture;
     Sprite player;
+    Direction dir;
+
 
     @Override
     public void create() {
@@ -39,6 +39,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("car.jpg"));
         player = new Sprite(texture);
+        player.setPosition(10,40);
+        dir = Direction.West;
     }
 
     @Override
@@ -66,17 +68,58 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         float y = player.getY();
         int moveDistance = 128;
 
-        if (keycode == Input.Keys.RIGHT) {
+        if (keycode == Input.Keys.RIGHT ) {
+            if (dir == Direction.East) {
             player.setX(x + moveDistance);
+            } else {
+                switch (dir) {
+                    case North: player.rotate(180);
+                    case South: player.rotate(-90);
+                    case West: player.rotate(180);
+                }
+                dir = Direction.East;
+            }
+            System.out.println(dir);
         }
+        
         if (keycode == Input.Keys.LEFT) {
+            if (dir == Direction.West) {
             player.setX(x - moveDistance);
+            } else {
+                switch (dir) {
+                    case South: player.rotate(180);
+                    case North: player.rotate(-90);
+                    case East: player.rotate(180);
+                }
+                dir = Direction.West;
+            }
+            System.out.println(dir);
         }
         if (keycode == Input.Keys.UP) {
+            if (dir == Direction.North) {
             player.setY(y + moveDistance);
+            } else {
+                switch (dir) {
+                    case West: player.rotate(180);
+                    case East: player.rotate(-90);
+                    case South: player.rotate(180);
+                }
+                dir = Direction.North;
+            }
+            System.out.println(dir);
         }
         if (keycode == Input.Keys.DOWN) {
+            if (dir == Direction.South) {
             player.setY(y - moveDistance);
+            } else {
+                switch (dir) {
+                    case East: player.rotate(180);
+                    case West: player.rotate(-90);
+                    case North: player.rotate(180);
+                }
+                dir = Direction.South;
+            }
+            System.out.println(dir);
         }
 
         return false;
@@ -115,5 +158,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     @Override
     public boolean scrolled(int i) {
         return false;
+    }
+
+    public enum Direction{
+        North, East, South, West
     }
 }
