@@ -1,35 +1,27 @@
 
-Møtereferat 8 februar;
+Oppgave 1:
+Gruppen vår heter Silicon Rally
+Teamleder: Ditlef Diseth 
+Kundekontakt: Martin Ulland
 
-Teamleder - Ditlef
-Kundekontakt - Martin
-
-
-Diverse kompetanser: 
-Alle har omtrent lik kompetanse med relativt liten erfaring innenfor grafikk og spillproduksjon. Alle har litt erfaring med git siden alle har hatt INF101. 
-
-
-
-Organisering:
+Alle har omtrent lik kompetanse med relativt liten erfaring innenfor grafikk og spillproduksjon. Alle har litt erfaring med git siden alle har hatt INF101 og ellers programmeringserfaringer fra INF100 og INF102. 
 
 Vi prøvde oss først på å dele opp arbeidsfordelingen på github, men vi endret til Trello med intensjoner om bedre innsikt i arbeidsoppgavene og struktur. 
-
-Vi burde sette opp egne branches
 
 Oppgave 2: 
 
 Målet for applikasjonen er for spillet å ha et brett med flere spillere (enten mot andre spillere eller mot pc’en) med minst en gamemode.
 
 Applikasjonen må ha
-*flerspiller mulighet
-*et fungerende spillbrett med forskjellige elementer
-*en kortstokk av bevegelses-kort som kan dele ut og stokke kortene
-*en gamemode
+Flerspiller mulighet
+Et fungerende spillbrett med forskjellige elementer
+En kortstokk av bevegelses-kort som kan dele ut og stokke kortene
+En gamemode
 
-For den føre iterasjonen skal vi fokuserer på
-*et enkelt spillbrett (uten elementer som laser etc)
-*en brikke (trenger ikke full funksjonalitet) 
-*enkle kort for bevegelse (ikke full kortstokk eller kortstokk funksjonalitet)
+For den føre iterasjonen skal vi fokuserer på;
+Et enkelt spillbrett (uten elementer som laser etc)
+En brikke (trenger ikke full funksjonalitet) 
+Enkle kort for bevegelse (ikke full kortstokk eller kortstokk funksjonalitet)
 
 Oppgave 3:
 Vi følger Scrum-metodikken, der vi har laget et Trello board for å holde oversikt over hvor langt vi har kommet. Vi prøvde oss først på å dele opp arbeidsfordelingen på github, men vi endret til Trello med intensjoner om bedre innsikt i arbeidsoppgavene og struktur. 
