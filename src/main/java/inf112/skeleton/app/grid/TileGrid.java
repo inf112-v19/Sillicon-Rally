@@ -75,7 +75,7 @@ public class TileGrid {
             for (int j = 0; j < columns; j++) {
 
                 for (Sprite sprite : grid[i][j].getSprites()) {
-                    
+                    list.add(sprite);
                 }
             }
         }

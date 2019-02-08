@@ -53,9 +53,6 @@ public class Tile implements ITile, Comparable<Tile> {
     }
 
     public ArrayList<Sprite> getSprites() {
-        if (list.isEmpty())
-            return null;
-
         return list;
     }
 
