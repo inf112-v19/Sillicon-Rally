@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
+    final int TILE_SIZE_IN_PX = 128;
     TiledMap tiledMap;
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
@@ -29,7 +30,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public void create() {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-        grid = new TileGrid((int)h, (int)w, 128);
+        grid = new TileGrid((int)h, (int)w, TILE_SIZE_IN_PX);
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
@@ -61,7 +62,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     }
 
     private void drawSprites() {
-        player.draw(sb);
+        for (Sprite sprite : grid.getAllSpritesOnMap()) {
+            sprite.draw(sb);
+        }
+        //player.draw(sb);
     }
 
 
@@ -69,7 +73,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public boolean keyDown(int keycode) {
         float x = player.getX();
         float y = player.getY();
-        int moveDistance = 128;
+        int moveDistance = TILE_SIZE_IN_PX;
 
         if (keycode == Input.Keys.RIGHT ) {
             if (dir == Direction.East) {
