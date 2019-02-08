@@ -19,3 +19,4 @@ Skriv en kort beskrivelse av prosessen i prosess- og prosjektplanen.
 organisering av prosjektet gjøres ved hjelp av et project board for å holde styr på hva vi har gjort og hva som må gjøres. 
 møter blir avtalt på labben eller evt på andre møter. 
 vi har også laget en facebook gruppe chat for kommunikasjon mellom møter og evt arrangering av møter.
+ iluabfenø<lkfnasøozl
