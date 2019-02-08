@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import inf112.skeleton.app.grid.TileGrid;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
     TiledMap tiledMap;
@@ -22,12 +23,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     Texture texture;
     Sprite player;
     Direction dir;
-
+    TileGrid grid;
 
     @Override
     public void create() {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
+        grid = new TileGrid((int)h, (int)w, 128);
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
@@ -41,6 +43,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         player = new Sprite(texture);
         player.setPosition(10,40);
         dir = Direction.West;
+        grid.getTile(0,0).addSprite(player);
     }
 
     @Override
