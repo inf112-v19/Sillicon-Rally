@@ -45,14 +45,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("car.jpg"));
         player = new Sprite(texture);
-<<<<<<< HEAD
-        player.setPosition(10,40); //plasserer bilen ca midt i hver tile.
-        dir = Direction.West; //startretning
-=======
+
         player.setPosition(10,40);
         dir = Direction.West;
         grid.getTile(0,0).addSprite(player);
->>>>>>> 3b5f5d2b13d3b6c262bbdacf10dcfeb2e7170df3
     }
 
     @Override
