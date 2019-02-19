@@ -62,7 +62,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         drawSprites();
         sb.end();
     }
-
+    
     private void drawSprites() {
         for (Sprite sprite : grid.getAllSpritesOnMap()) {
             sprite.draw(sb);
