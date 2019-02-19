@@ -1,6 +1,9 @@
 package inf112.skeleton.app.grid;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Tile;
+
+import java.util.ArrayList;
 
 /*
 * En klasse som tar imot to pikselbaserte koordinater og returnerer
@@ -65,5 +68,19 @@ public class TileGrid {
         return tile;
     }
 
+    public ArrayList<Sprite> getAllSpritesOnMap() {
+        ArrayList<Sprite> list = new ArrayList<>();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+
+                for (Sprite sprite : grid[i][j].getSprites()) {
+                    list.add(sprite);
+                }
+            }
+        }
+
+        return list;
+    }
 
 }

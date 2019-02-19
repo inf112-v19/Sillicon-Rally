@@ -1,6 +1,9 @@
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -51,6 +54,21 @@ public class GridTest {
         Tile tile = tg.getTileFromCoordinates(128, 0);
         assertEquals(1, tile.y);
         assertEquals(0, tile.x);
+    }
+
+    @Test
+    public void getAllSpritesOnMapTest() {
+        TileGrid tg = newGrid();
+
+        Sprite one = new Sprite();
+        Sprite oneCopy = one;
+
+        ArrayList<Sprite> sprites = tg.getAllSpritesOnMap();
+
+        for (Sprite sp : sprites) {
+            assertEquals(one, sp);
+        }
+
 
     }
 

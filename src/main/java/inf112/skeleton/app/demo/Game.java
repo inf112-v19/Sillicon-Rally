@@ -13,21 +13,25 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import inf112.skeleton.app.grid.TileGrid;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
+    final int TILE_SIZE_IN_PX = 128;
     TiledMap tiledMap;
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
     SpriteBatch sb;
     Texture texture;
     Sprite player;
-    Direction dir; //La til en public enum metode i bunn av denne appen, men Direction burde kanskje være en egen klasse?
+    Direction dir;
+    TileGrid grid;
 
 
     @Override
     public void create() {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
+        grid = new TileGrid((int)h, (int)w, TILE_SIZE_IN_PX);
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
@@ -36,11 +40,19 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         Gdx.input.setInputProcessor(this);
 
+        tiledMap.getLayers().get("walls");
+
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("car.jpg"));
         player = new Sprite(texture);
+<<<<<<< HEAD
         player.setPosition(10,40); //plasserer bilen ca midt i hver tile.
         dir = Direction.West; //startretning
+=======
+        player.setPosition(10,40);
+        dir = Direction.West;
+        grid.getTile(0,0).addSprite(player);
+>>>>>>> 3b5f5d2b13d3b6c262bbdacf10dcfeb2e7170df3
     }
 
     @Override
@@ -56,9 +68,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         drawSprites();
         sb.end();
     }
-
+    
     private void drawSprites() {
-        player.draw(sb);
+        for (Sprite sprite : grid.getAllSpritesOnMap()) {
+            sprite.draw(sb);
+        }
+        //player.draw(sb);
     }
 
 
@@ -66,7 +81,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public boolean keyDown(int keycode) {
         float x = player.getX();
         float y = player.getY();
-        int moveDistance = 128;
+        int moveDistance = TILE_SIZE_IN_PX;
 
         /**La til litt kode på hver input for å rotere
          * spiller ved første tastetrykk om spilleren ikke allerede vender riktig retning
