@@ -73,4 +73,25 @@ public class Player extends Sprite {
         }
     }
 
+    public void uTurn() {
+        switch (currentDirection) {
+            case East:
+                this.rotate(180);
+                this.currentDirection = Game.Direction.West;
+                break;
+            case West:
+                this.rotate(180);
+                this.currentDirection = Game.Direction.East;
+                break;
+            case North:
+                this.rotate(180);
+                this.currentDirection = Game.Direction.South;
+                break;
+            case South:
+                this.rotate(180);
+                this.currentDirection = Game.Direction.North;
+                break;
+        }
+    }
+
 }
