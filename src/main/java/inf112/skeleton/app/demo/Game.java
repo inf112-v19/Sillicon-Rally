@@ -14,8 +14,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.Tile;
 import inf112.skeleton.app.grid.TileGrid;
-import javafx.scene.input.KeyCode;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
     final int TILE_SIZE_IN_PX = 128;
@@ -49,7 +49,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
        // player = new Sprite(texture);
         startDirection = Direction.West;
         player = new Player(texture, startDirection);
-        player.setPosition(10,40);
+        player.setPosition(0,0);
         grid.getTile(0,0).addSprite(player);
 
     }
@@ -77,6 +77,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        float x = player.getX();
+        float y = player.getY();
+
+        Tile currentTile = grid.getTileFromCoordinates(y, x);
 
         int moveDistance = TILE_SIZE_IN_PX;
 
@@ -94,7 +98,20 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             player.moveDown(moveDistance);
         }
 
+        updatePlayerPositionInGrid(currentTile);
+
         return false;
+    }
+
+    private void updatePlayerPositionInGrid(Tile currentTile) {
+        float x = player.getX();
+        float y = player.getY();
+
+        currentTile.getSprites().remove(player);
+        grid.getTileFromCoordinates(y, x).addSprite(player);
+
+        System.out.println(grid.getTileFromCoordinates(y,x));
+
     }
 
     @Override

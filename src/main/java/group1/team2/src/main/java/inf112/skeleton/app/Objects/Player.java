@@ -13,22 +13,6 @@ public class Player extends Sprite {
         this.currentDirection = startDirection;
     }
 
-
-    public void setCurrentDirection(Game.Direction currentDirection) {
-        if (currentDirection == this.currentDirection) {
-            return;
-        } else {
-            switch (this.currentDirection) {
-                case North:
-                    this.rotate(180);
-                case South:
-                    this.rotate(-90);
-                case West:
-                    this.rotate(180);
-            }
-        }
-    }
-
     public void moveRight(int moveDistance) {
         if (currentDirection == Game.Direction.East) {
             this.setX(this.getX() + moveDistance);
