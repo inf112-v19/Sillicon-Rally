@@ -85,17 +85,29 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         int moveDistance = TILE_SIZE_IN_PX;
 
         if (keycode == Input.Keys.RIGHT ) {
-            player.moveRight(moveDistance);
+            player.turnRight(moveDistance);
         }
         
         if (keycode == Input.Keys.LEFT) {
-            player.moveLeft(moveDistance);
+            player.turnLeft(moveDistance);
         }
         if (keycode == Input.Keys.UP) {
-            player.moveUp(moveDistance);
+            player.turnUp(moveDistance);
         }
         if (keycode == Input.Keys.DOWN) {
-            player.moveDown(moveDistance);
+            player.turnDown(moveDistance);
+        }
+
+        if (keycode == Input.Keys.valueOf("1")) {
+            player.moveForward(1, moveDistance);
+        }
+
+        if (keycode == Input.Keys.valueOf("2")) {
+            player.moveForward(2, moveDistance);
+        }
+
+        if (keycode == Input.Keys.valueOf("3")) {
+            player.moveForward(3, moveDistance);
         }
 
         updatePlayerPositionInGrid(currentTile);
