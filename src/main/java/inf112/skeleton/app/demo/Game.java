@@ -39,6 +39,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         Gdx.input.setInputProcessor(this);
 
+        tiledMap.getLayers().get("walls");
+
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("car.jpg"));
         player = new Sprite(texture);

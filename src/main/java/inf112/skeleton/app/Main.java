@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
-        cfg.title = "hello-world";
+        cfg.title = "Silion_Rally";
         cfg.width = 1080;
         cfg.height = 720;
 
