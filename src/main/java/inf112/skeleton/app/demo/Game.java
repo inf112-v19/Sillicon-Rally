@@ -21,7 +21,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     SpriteBatch sb;
     Texture texture;
     Sprite player;
-    Direction dir;
+    Direction dir; //La til en public enum metode i bunn av denne appen, men Direction burde kanskje være en egen klasse?
 
 
     @Override
@@ -39,8 +39,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("car.jpg"));
         player = new Sprite(texture);
-        player.setPosition(10,40);
-        dir = Direction.West;
+        player.setPosition(10,40); //plasserer bilen ca midt i hver tile.
+        dir = Direction.West; //startretning
     }
 
     @Override
@@ -68,14 +68,17 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         float y = player.getY();
         int moveDistance = 128;
 
+        /**La til litt kode på hver input for å rotere
+         * spiller ved første tastetrykk om spilleren ikke allerede vender riktig retning
+         */
         if (keycode == Input.Keys.RIGHT ) {
             if (dir == Direction.East) {
             player.setX(x + moveDistance);
             } else {
                 switch (dir) {
                     case North:
-                        player.rotate(180);
-                    case South:
+                        player.rotate(180); //vet ikke hvorfor, men må rotere spiller en ulogisk mengde
+                    case South:                     // i dette tilfellet for at det skal fungere riktig.
                         player.rotate(-90);
                     case West:
                         player.rotate(180);
@@ -83,7 +86,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                 dir = Direction.East;
             }
 
-            System.out.println(player.getX());
+           // System.out.println(player.getX());
 
         }
         
