@@ -26,7 +26,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     Texture texture;
     Player player;
     Direction startDirection;
-    TileGrid grid;
+    public TileGrid grid;
 
     @Override
     public void create() {
@@ -46,7 +46,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("car.jpg"));
 
-       // player = new Sprite(texture);
         startDirection = Direction.West;
         player = new Player(texture, startDirection);
         player.setPosition(0,0);
@@ -68,7 +67,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb.end();
     }
     
-    private void drawSprites() {
+    public void drawSprites() {
         for (Sprite sprite : grid.getAllSpritesOnMap()) {
             sprite.draw(sb);
         }
@@ -85,37 +84,34 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         int moveDistance = TILE_SIZE_IN_PX;
 
         if (keycode == Input.Keys.RIGHT ) {
-            player.turnRight(moveDistance);
+            player.turnRight();
         }
         
         if (keycode == Input.Keys.LEFT) {
-            player.turnLeft(moveDistance);
-        }
-        if (keycode == Input.Keys.UP) {
-            player.turnUp(moveDistance);
-        }
-        if (keycode == Input.Keys.DOWN) {
-            player.turnDown(moveDistance);
+            player.turnLeft();
         }
 
         if (keycode == Input.Keys.valueOf("1")) {
-            player.moveForward(1, moveDistance);
+            player.moveForward(1, moveDistance, this, currentTile);
         }
 
         if (keycode == Input.Keys.valueOf("2")) {
-            player.moveForward(2, moveDistance);
+            player.moveForward(2, moveDistance, this, currentTile);
         }
 
         if (keycode == Input.Keys.valueOf("3")) {
-            player.moveForward(3, moveDistance);
+            player.moveForward(3, moveDistance, this, currentTile);
         }
 
-        updatePlayerPositionInGrid(currentTile);
+        if (keycode == Input.Keys.U) {
+            player.uTurn();
+        }
+
 
         return false;
     }
 
-    private void updatePlayerPositionInGrid(Tile currentTile) {
+    public void updatePlayerPositionInGrid(Tile currentTile) {
         float x = player.getX();
         float y = player.getY();
 

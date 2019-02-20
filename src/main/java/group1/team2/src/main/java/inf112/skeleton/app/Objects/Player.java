@@ -1,7 +1,9 @@
 package group1.team2.src.main.java.inf112.skeleton.app.Objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import inf112.skeleton.app.Tile;
 import inf112.skeleton.app.demo.Game;
 
 public class Player extends Sprite {
@@ -12,10 +14,18 @@ public class Player extends Sprite {
         this.currentDirection = startDirection;
     }
 
-    public void moveForward(int steps, int moveDistance) {
+    public void moveForward(int steps, int moveDistance, Game game, Tile currentTile) {
         System.out.println(currentDirection);
         for (int i = 0; i < steps; i++) {
             moveForward(moveDistance);
+            try {
+                //Forsøk på å lage en delay mellom hvert steg
+                Thread.sleep(50);
+                game.updatePlayerPositionInGrid(currentTile);
+                currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
+                game.drawSprites();
+            } catch (Exception e) {
+            }
         }
     }
 
@@ -35,6 +45,7 @@ public class Player extends Sprite {
         }
     }
 
+
     private boolean checkForNegativeCoordiantes(int moveDistance) {
         switch (currentDirection) {
             case West: return (this.getX() - moveDistance) < 0;
@@ -44,73 +55,20 @@ public class Player extends Sprite {
         return false;
     }
 
-    public void turnRight(int moveDistance) {
-            switch (currentDirection) {
-                case North:
-                    this.rotate(180);
-                case South:
-                    this.rotate(-90);
-                case West:
-                    this.rotate(180);
-
-            currentDirection = Game.Direction.East;
-        }
-    }
-
-    public void turnLeft(int moveDistance) {
-                switch (currentDirection) {
-                    case South:
-                        this.rotate(180);
-                    case North:
-                        this.rotate(-90);
-                    case East:
-                        this.rotate(180);
-                }
-                currentDirection = Game.Direction.West;
+    public void turnRight() {
+        this.rotate(-90);
+        currentDirection = Game.Direction.East;
 
     }
 
-    public void turnUp(int moveDistance) {
-                switch (currentDirection) {
-                    case West: this.rotate(180);
-                    case East: this.rotate(-90);
-                    case South: this.rotate(180);
-                }
-                currentDirection = Game.Direction.North;
-    }
-
-    public void turnDown(int moveDistance) {
-
-            switch (currentDirection) {
-                case East: this.rotate(180);
-                case West: this.rotate(-90);
-                case North: this.rotate(180);
-            }
-            currentDirection = Game.Direction.South;
+    public void turnLeft() {
+        this.rotate(90);
+        currentDirection = Game.Direction.West;
 
     }
+
 
     public void uTurn() {
-        switch (currentDirection) {
-            case East:
-                this.rotate(180);
-                this.currentDirection = Game.Direction.West;
-                break;
-            case West:
-                this.rotate(180);
-                this.currentDirection = Game.Direction.East;
-                break;
-            case North:
-                this.rotate(180);
-                this.currentDirection = Game.Direction.South;
-                break;
-            case South:
-                this.rotate(180);
-                this.currentDirection = Game.Direction.North;
-                break;
-        }
+        this.rotate(180);
     }
-
-
-
 }
