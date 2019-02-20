@@ -13,6 +13,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
@@ -22,9 +24,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     TiledMapRenderer tiledMapRenderer;
     SpriteBatch sb;
     Texture texture;
-    Sprite player;
-    Direction dir;
-    TileGrid grid;
+    Player player;
+    Direction startDirection;
+    public TileGrid grid;
 
 
     @Override
@@ -44,11 +46,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("car.jpg"));
-        player = new Sprite(texture);
 
-        player.setPosition(10,40);
-        dir = Direction.West;
+        startDirection = Direction.West;
+        player = new Player(texture, startDirection);
+        player.setPosition(5,40);
         grid.getTile(0,0).addSprite(player);
+
     }
 
     @Override
@@ -65,11 +68,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb.end();
     }
     
-    private void drawSprites() {
+    public void drawSprites() {
         for (Sprite sprite : grid.getAllSpritesOnMap()) {
             sprite.draw(sb);
         }
-        //player.draw(sb);
     }
 
 
@@ -77,71 +79,49 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public boolean keyDown(int keycode) {
         float x = player.getX();
         float y = player.getY();
+
+        //Viktig å fjerne spilleren fra sin nåværende tile
+        Tile currentTile = grid.getTileFromCoordinates(y, x);
+
         int moveDistance = TILE_SIZE_IN_PX;
 
-        /**La til litt kode på hver input for å rotere
-         * spiller ved første tastetrykk om spilleren ikke allerede vender riktig retning
-         */
-        if (keycode == Input.Keys.RIGHT ) {
-            if (dir == Direction.East) {
-            player.setX(x + moveDistance);
-            } else {
-                switch (dir) {
-                    case North:
-                        player.rotate(180); //vet ikke hvorfor, men må rotere spiller en ulogisk mengde
-                    case South:                     // i dette tilfellet for at det skal fungere riktig.
-                        player.rotate(-90);
-                    case West:
-                        player.rotate(180);
-                }
-                dir = Direction.East;
-            }
-
-           // System.out.println(player.getX());
-
+        if (keycode == Input.Keys.RIGHT) {
+            player.turnRight();
         }
         
         if (keycode == Input.Keys.LEFT) {
-            if (dir == Direction.West) {
-            player.setX(x - moveDistance);
-            } else {
-                switch (dir) {
-                    case South:
-                        player.rotate(180);
-                    case North:
-                        player.rotate(-90);
-                    case East:
-                        player.rotate(180);
-                }
-                dir = Direction.West;
-            }
-        }
-        if (keycode == Input.Keys.UP) {
-            if (dir == Direction.North) {
-            player.setY(y + moveDistance);
-            } else {
-                switch (dir) {
-                    case West: player.rotate(180);
-                    case East: player.rotate(-90);
-                    case South: player.rotate(180);
-                }
-                dir = Direction.North;
-            }
-        }
-        if (keycode == Input.Keys.DOWN) {
-            if (dir == Direction.South) {
-            player.setY(y - moveDistance);
-            } else {
-                switch (dir) {
-                    case East: player.rotate(180);
-                    case West: player.rotate(-90);
-                    case North: player.rotate(180);
-                }
-                dir = Direction.South;
-            }
+            player.turnLeft();
         }
 
+        if (keycode == Input.Keys.valueOf("1")) {
+            player.moveForward(1, moveDistance, this, currentTile);
+        }
+
+        if (keycode == Input.Keys.valueOf("2")) {
+            player.moveForward(2, moveDistance, this, currentTile);
+        }
+
+        if (keycode == Input.Keys.valueOf("3")) {
+            player.moveForward(3, moveDistance, this, currentTile);
+        }
+
+        if (keycode == Input.Keys.U) {
+            player.uTurn();
+        }
+
+
         return false;
+    }
+
+    public void updatePlayerPositionInGrid(Tile currentTile) {
+        float x = player.getX();
+        float y = player.getY();
+
+        currentTile.getSprites().remove(player);
+        grid.getTileFromCoordinates(y, x).addSprite(player);
+
+        System.out.println(grid.getTileFromCoordinates(y,x));
+
     }
 
     @Override

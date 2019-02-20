@@ -47,6 +47,7 @@ public class TileGrid {
 
     public Tile getTileFromCoordinates(float yCoor, float xCoor) {
 
+
         if ((xCoor % tileSizeInPx == 0) && (yCoor % tileSizeInPx == 0)) {
             int x = ((int) xCoor / tileSizeInPx);
             int y = ((int) yCoor / tileSizeInPx);
@@ -82,5 +83,4 @@ public class TileGrid {
 
         return list;
     }
-
 }
