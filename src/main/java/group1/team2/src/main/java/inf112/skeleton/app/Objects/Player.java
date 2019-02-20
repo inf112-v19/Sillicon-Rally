@@ -21,6 +21,7 @@ public class Player extends Sprite {
             try {
                 //Forsøk på å lage en delay mellom hvert steg
                 Thread.sleep(50);
+                //Oppdater spillerens posisjon i TileGrid
                 game.updatePlayerPositionInGrid(currentTile);
                 currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
                 game.drawSprites();
@@ -57,13 +58,31 @@ public class Player extends Sprite {
 
     public void turnRight() {
         this.rotate(-90);
-        currentDirection = Game.Direction.East;
+
+        switch (currentDirection) {
+            case North: currentDirection = Game.Direction.East;
+            break;
+            case East: currentDirection = Game.Direction.South;
+            break;
+            case South: currentDirection = Game.Direction.West;
+            break;
+            case West: currentDirection = Game.Direction.North;
+        }
 
     }
 
     public void turnLeft() {
         this.rotate(90);
-        currentDirection = Game.Direction.West;
+
+        switch (currentDirection) {
+            case North: currentDirection = Game.Direction.West;
+                break;
+            case East: currentDirection = Game.Direction.North;
+                break;
+            case South: currentDirection = Game.Direction.East;
+                break;
+            case West: currentDirection = Game.Direction.South;
+        }
 
     }
 

@@ -79,6 +79,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         float x = player.getX();
         float y = player.getY();
 
+        //Viktig å fjerne spilleren fra sin nåværende tile
         Tile currentTile = grid.getTileFromCoordinates(y, x);
 
         int moveDistance = TILE_SIZE_IN_PX;
