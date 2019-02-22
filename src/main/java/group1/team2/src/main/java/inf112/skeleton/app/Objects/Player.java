@@ -1,6 +1,5 @@
 package group1.team2.src.main.java.inf112.skeleton.app.Objects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Tile;
@@ -8,10 +7,14 @@ import inf112.skeleton.app.demo.Game;
 
 public class Player extends Sprite {
     Game.Direction currentDirection;
+    int livesLeft;
+    int hitCounters;
 
     public Player(Texture texture, Game.Direction startDirection) {
         super(texture);
         this.currentDirection = startDirection;
+        this.livesLeft = 3;
+        this.hitCounters = 10;
     }
 
     public void moveForward(int steps, int moveDistance, Game game, Tile currentTile) {
@@ -43,6 +46,19 @@ public class Player extends Sprite {
             break;
             case West: this.setX(this.getX() - moveDistance);
             break;
+        }
+    }
+
+    private void moveBackwards (int moveDistance) {
+        switch (currentDirection) {
+            case North: this.setY(this.getY() - moveDistance);
+                break;
+            case East: this.setX(this.getX() - moveDistance);
+                break;
+            case South: this.setY(this.getY() + moveDistance);
+                break;
+            case West: this.setX(this.getX() + moveDistance);
+                break;
         }
     }
 
@@ -99,5 +115,13 @@ public class Player extends Sprite {
                 break;
             case West: currentDirection = Game.Direction.East;
         }
+    }
+
+    public int getLives() {
+        return livesLeft;
+    }
+
+    public int getHitCounters() {
+        return hitCounters;
     }
 }

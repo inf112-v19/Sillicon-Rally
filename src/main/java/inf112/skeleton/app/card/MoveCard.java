@@ -1,17 +1,22 @@
 package inf112.skeleton.app.card;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import java.util.Random;
 
 /**
  * Created by Martin on 01/02/2019.
  */
-public class MoveCard {
+public class MoveCard extends Sprite{
 
     Random rand = new Random();
     private Type type;
     private int priority;
 
-    public MoveCard(Type t) {
+
+    public MoveCard(Type t, Texture texture) {
+        super(texture);
         type = t;
         switch (t) {
             case move1: priority = rand.nextInt(650) + 490;
