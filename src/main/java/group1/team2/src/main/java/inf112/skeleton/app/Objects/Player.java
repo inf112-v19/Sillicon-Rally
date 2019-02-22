@@ -48,6 +48,19 @@ public class Player extends Sprite {
         System.out.printf("x: %f y: %f",this.getX(), this.getY());
     }
 
+    private void moveBackwards (int moveDistance) {
+        switch (currentDirection) {
+            case North: this.setY(this.getY() - moveDistance);
+                break;
+            case East: this.setX(this.getX() - moveDistance);
+                break;
+            case South: this.setY(this.getY() + moveDistance);
+                break;
+            case West: this.setX(this.getX() + moveDistance);
+                break;
+        }
+    }
+
 
     private boolean checkForNegativeCoordinates(int moveDistance) {
         switch (currentDirection) {
@@ -134,6 +147,7 @@ public class Player extends Sprite {
             game.updatePlayerPositionInGrid(currentTile);
         }
     }
+
 }
 
 

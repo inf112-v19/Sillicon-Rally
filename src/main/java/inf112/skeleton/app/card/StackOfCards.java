@@ -1,5 +1,6 @@
 package inf112.skeleton.app.card;
 
+import com.badlogic.gdx.graphics.Texture;
 import inf112.skeleton.app.util.MyStack;
 
 import java.util.ArrayList;
@@ -10,10 +11,26 @@ import java.util.Collections;
  */
 public class StackOfCards {
 
+    Texture textureMove1;
+    Texture textureMove2;
+    Texture textureMove3;
+    Texture textureUTurn;
+    Texture textureRightTurn;
+    Texture textureLeftTurn;
+    Texture textureReversing;
+
     public static MyStack<MoveCard> stack = new MyStack<>();
 
     public StackOfCards() {
         ArrayList<MoveCard> cards = new ArrayList<>();
+        textureMove1 = ;
+        textureMove2;
+        textureMove3;
+        textureUTurn;
+        textureRightTurn;
+        textureLeftTurn;
+        textureReversing;
+
 
         for (int i = 0; i < 18; i++) {
             //create and add turnleft, turnright, move1 cards to list
