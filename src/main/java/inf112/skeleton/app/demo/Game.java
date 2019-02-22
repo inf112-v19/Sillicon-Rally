@@ -28,6 +28,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     Direction startDirection;
     public TileGrid grid;
 
+
     @Override
     public void create() {
         float w = Gdx.graphics.getWidth();
@@ -48,7 +49,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         startDirection = Direction.West;
         player = new Player(texture, startDirection);
-        player.setPosition(0,0);
+        player.setPosition(5,40);
         grid.getTile(0,0).addSprite(player);
 
     }
@@ -84,7 +85,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         int moveDistance = TILE_SIZE_IN_PX;
 
-        if (keycode == Input.Keys.RIGHT ) {
+        if (keycode == Input.Keys.RIGHT) {
             player.turnRight();
         }
         
