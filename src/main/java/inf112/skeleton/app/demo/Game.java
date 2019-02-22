@@ -119,8 +119,19 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         currentTile.getSprites().remove(player);
         grid.getTileFromCoordinates(y, x).addSprite(player);
+        Player tempForTest = (Player) grid.getAllSpritesOnMap().get(0);
+        Tile tile = grid.getTileFromCoordinates(tempForTest.getY(), tempForTest.getX());
+        System.out.println(tile);
 
-        System.out.println(grid.getTileFromCoordinates(y,x));
+        if (tile.y == 1 && tile.x == 1) {
+            player.setBackupLocation(tile);
+            System.out.println("Backup ==== " + tile);
+        }
+
+        if (tile.x == 2 && tile.y == 2) {
+            System.out.println("Reseting from  " + tile);
+            player.resetToBackupLocation(128, this);
+        }
 
     }
 
