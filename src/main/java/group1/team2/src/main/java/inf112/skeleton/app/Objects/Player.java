@@ -7,45 +7,42 @@ import inf112.skeleton.app.demo.Game;
 
 public class Player extends Sprite {
     Game.Direction currentDirection;
-    int livesLeft;
-    int hitCounters;
+    Tile backupLocation;
 
     public Player(Texture texture, Game.Direction startDirection) {
         super(texture);
         this.currentDirection = startDirection;
-        this.livesLeft = 3;
-        this.hitCounters = 10;
+        backupLocation = null;
     }
 
     public void moveForward(int steps, int moveDistance, Game game, Tile currentTile) {
-        System.out.println(currentDirection);
         for (int i = 0; i < steps; i++) {
             moveForward(moveDistance);
-            try {
-                //Forsøk på å lage en delay mellom hvert steg
-                Thread.sleep(50);
-                //Oppdater spillerens posisjon i TileGrid
-                game.updatePlayerPositionInGrid(currentTile);
-                currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
-                game.drawSprites();
-            } catch (Exception e) {
-            }
+            game.updatePlayerPositionInGrid(currentTile);
+            System.out.println("Trig");
+            currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
+            game.drawSprites();
+
         }
     }
 
     private void moveForward(int moveDistance) {
-        if (checkForNegativeCoordiantes(moveDistance)) {
+        if (checkForNegativeCoordinates(moveDistance)) {
             return;
         }
         switch (currentDirection) {
-            case North: this.setY(this.getY() + moveDistance);
-            break;
-            case East: this.setX(this.getX() + moveDistance);
-            break;
-            case South: this.setY(this.getY() - moveDistance);
-            break;
-            case West: this.setX(this.getX() - moveDistance);
-            break;
+            case North:
+                this.setY(this.getY() + moveDistance);
+                break;
+            case East:
+                this.setX(this.getX() + moveDistance);
+                break;
+            case South:
+                this.setY(this.getY() - moveDistance);
+                break;
+            case West:
+                this.setX(this.getX() - moveDistance);
+                break;
         }
     }
 
@@ -63,10 +60,12 @@ public class Player extends Sprite {
     }
 
 
-    private boolean checkForNegativeCoordiantes(int moveDistance) {
+    private boolean checkForNegativeCoordinates(int moveDistance) {
         switch (currentDirection) {
-            case West: return (this.getX() - moveDistance) < 0;
-            case South: return (this.getY() - moveDistance) < 0;
+            case West:
+                return (this.getX() - moveDistance) < 0;
+            case South:
+                return (this.getY() - moveDistance) < 0;
         }
 
         return false;
@@ -76,13 +75,17 @@ public class Player extends Sprite {
         this.rotate(-90);
 
         switch (currentDirection) {
-            case North: currentDirection = Game.Direction.East;
-            break;
-            case East: currentDirection = Game.Direction.South;
-            break;
-            case South: currentDirection = Game.Direction.West;
-            break;
-            case West: currentDirection = Game.Direction.North;
+            case North:
+                currentDirection = Game.Direction.East;
+                break;
+            case East:
+                currentDirection = Game.Direction.South;
+                break;
+            case South:
+                currentDirection = Game.Direction.West;
+                break;
+            case West:
+                currentDirection = Game.Direction.North;
         }
 
     }
@@ -91,13 +94,17 @@ public class Player extends Sprite {
         this.rotate(90);
 
         switch (currentDirection) {
-            case North: currentDirection = Game.Direction.West;
+            case North:
+                currentDirection = Game.Direction.West;
                 break;
-            case East: currentDirection = Game.Direction.North;
+            case East:
+                currentDirection = Game.Direction.North;
                 break;
-            case South: currentDirection = Game.Direction.East;
+            case South:
+                currentDirection = Game.Direction.East;
                 break;
-            case West: currentDirection = Game.Direction.South;
+            case West:
+                currentDirection = Game.Direction.South;
         }
 
     }
@@ -107,21 +114,38 @@ public class Player extends Sprite {
         this.rotate(180);
 
         switch (currentDirection) {
-            case North: currentDirection = Game.Direction.South;
+            case North:
+                currentDirection = Game.Direction.South;
                 break;
-            case East: currentDirection = Game.Direction.West;
+            case East:
+                currentDirection = Game.Direction.West;
                 break;
-            case South: currentDirection = Game.Direction.North;
+            case South:
+                currentDirection = Game.Direction.North;
                 break;
-            case West: currentDirection = Game.Direction.East;
+            case West:
+                currentDirection = Game.Direction.East;
         }
     }
 
-    public int getLives() {
-        return livesLeft;
+    public void setBackupLocation(Tile backupLocation) {
+        this.backupLocation = backupLocation;
     }
 
-    public int getHitCounters() {
-        return hitCounters;
+    public void setCurrentDirection(Game.Direction currentDirection) {
+        this.currentDirection = currentDirection;
     }
+
+
+    public void resetToBackupLocation(int tilesizeInPx, Game game) {
+        if (this.backupLocation != null) {
+            Tile currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
+            this.setY((float) (backupLocation.y * tilesizeInPx));
+            this.setX((float) (backupLocation.x * tilesizeInPx));
+            game.updatePlayerPositionInGrid(currentTile);
+        }
+    }
+
 }
+
+
