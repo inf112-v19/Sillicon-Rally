@@ -17,18 +17,13 @@ public class Player extends Sprite {
     }
 
     public void moveForward(int steps, int moveDistance, Game game, Tile currentTile) {
-        System.out.println(currentDirection);
         for (int i = 0; i < steps; i++) {
             moveForward(moveDistance);
-            try {
-                //Forsøk på å lage en delay mellom hvert steg
-                Thread.sleep(50);
-                //Oppdater spillerens posisjon i TileGrid
-                game.updatePlayerPositionInGrid(currentTile);
-                currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
-                game.drawSprites();
-            } catch (Exception e) {
-            }
+            game.updatePlayerPositionInGrid(currentTile);
+            System.out.println("Trig");
+            currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
+            game.drawSprites();
+
         }
     }
 

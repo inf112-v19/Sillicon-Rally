@@ -63,15 +63,15 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         sb.setProjectionMatrix(camera.combined);
-        sb.begin();
         drawSprites();
-        sb.end();
     }
     
     public void drawSprites() {
+        sb.begin();
         for (Sprite sprite : grid.getAllSpritesOnMap()) {
             sprite.draw(sb);
         }
+        sb.end();
     }
 
 
@@ -119,8 +119,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         currentTile.getSprites().remove(player);
         grid.getTileFromCoordinates(y, x).addSprite(player);
-        Player tempForTest = (Player) grid.getAllSpritesOnMap().get(0);
-        Tile tile = grid.getTileFromCoordinates(tempForTest.getY(), tempForTest.getX());
+        Tile tile = grid.getTileFromCoordinates(player.getY(), player.getX());
         System.out.println(tile);
 
         if (tile.y == 1 && tile.x == 1) {
