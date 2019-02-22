@@ -15,8 +15,8 @@ public class CustomCamera extends OrthographicCamera {
         int heightNumberOfTiles = layer.getHeight();
         int widthNumberOfTiles = layer.getWidth();
 
-        float pixelHeight = heightNumberOfTiles * y;
-        float pixelWidth = widthNumberOfTiles * x;
+        float pixelHeight = heightNumberOfTiles * y + 128;
+        float pixelWidth = widthNumberOfTiles * x + 128;
 
         this.setToOrtho(false, pixelWidth, pixelHeight);
         this.update();

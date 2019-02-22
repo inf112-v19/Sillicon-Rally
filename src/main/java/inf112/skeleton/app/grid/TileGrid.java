@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class TileGrid {
     int tileSizeInPx;
     Tile[][] grid;
-    int rows;
-    int columns;
+    public int rows;
+    public int columns;
     int size;
 
     public TileGrid(int rows, int columns, int tileSizeInPx) {
@@ -64,8 +64,9 @@ public class TileGrid {
     * Get a tile based on the Tiles x and y coordinates, 0,0 being bottom left
      */
     public Tile getTile(int y, int x) {
-        if (y > columns || x > rows)
+        if (x > columns || y > rows) {
             throw new IllegalArgumentException();
+        }
 
         Tile tile = grid[(rows-1) - y][x];
 

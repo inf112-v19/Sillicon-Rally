@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
@@ -19,7 +20,7 @@ import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.util.CustomCamera;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
-    final int TILE_SIZE_IN_PX = 128;
+    public int TILE_SIZE_IN_PX;
     TiledMap tiledMap;
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
@@ -32,22 +33,35 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public void create() {
-        float w = Gdx.graphics.getWidth();
-        float h = Gdx.graphics.getHeight();
-        grid = new TileGrid((int)h, (int)w, TILE_SIZE_IN_PX);
-
         tiledMap = new TmxMapLoader().load("RoboRally.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        this. TILE_SIZE_IN_PX = getTileSize();
         camera = new CustomCamera(tiledMap);
 
+        this.grid = makeGrid();
         Gdx.input.setInputProcessor(this);
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("car.jpg"));
 
         startDirection = Direction.West;
         player = new Player(texture, startDirection);
-        player.setPosition(5,40);
+        player.setPosition(0,0);
         grid.getTile(0,0).addSprite(player);
+    }
+
+    public TileGrid makeGrid() {
+        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
+
+        int heightNumberOfTiles = layer.getHeight();
+        int widthNumberOfTiles = layer.getWidth();
+
+        return new TileGrid(heightNumberOfTiles, widthNumberOfTiles, TILE_SIZE_IN_PX);
+    }
+
+    //Only works if each til is a square
+    public int getTileSize() {
+        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
+        return (int) layer.getTileWidth();
 
     }
 
