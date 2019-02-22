@@ -1,6 +1,5 @@
 package group1.team2.src.main.java.inf112.skeleton.app.Objects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Tile;
@@ -28,7 +27,7 @@ public class Player extends Sprite {
     }
 
     private void moveForward(int moveDistance) {
-        if (checkForNegativeCoordiantes(moveDistance)) {
+        if (checkForNegativeCoordinates(moveDistance)) {
             return;
         }
         switch (currentDirection) {
@@ -48,7 +47,7 @@ public class Player extends Sprite {
     }
 
 
-    private boolean checkForNegativeCoordiantes(int moveDistance) {
+    private boolean checkForNegativeCoordinates(int moveDistance) {
         switch (currentDirection) {
             case West:
                 return (this.getX() - moveDistance) < 0;

@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.Tile;
 import inf112.skeleton.app.grid.TileGrid;
+import inf112.skeleton.app.util.CustomCamera;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
     final int TILE_SIZE_IN_PX = 128;
@@ -35,15 +36,11 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         float h = Gdx.graphics.getHeight();
         grid = new TileGrid((int)h, (int)w, TILE_SIZE_IN_PX);
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, w, h);
-        camera.update();
         tiledMap = new TmxMapLoader().load("RoboRally.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        camera = new CustomCamera(tiledMap);
+
         Gdx.input.setInputProcessor(this);
-
-        tiledMap.getLayers().get("walls");
-
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("car.jpg"));
 
