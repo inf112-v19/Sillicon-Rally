@@ -45,8 +45,11 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         startDirection = Direction.West;
         player = new Player(texture, startDirection);
-        player.setPosition(0,0);
+        player.setPosition(0,40);
         grid.getTile(0,0).addSprite(player);
+
+        TeleportObstacle teleports = new TeleportObstacle(this);
+        CollisionHandler collisionHandler = new CollisionHandler(this);
     }
 
     public TileGrid makeGrid() {
@@ -119,6 +122,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         if (keycode == Input.Keys.U) {
             player.uTurn();
         }
+
+        CollisionHandler collisionHandler = new CollisionHandler(this);
+        collisionHandler.checkCollision();
 
 
         return false;

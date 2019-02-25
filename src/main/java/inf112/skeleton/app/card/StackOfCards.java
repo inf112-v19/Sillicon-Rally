@@ -23,15 +23,18 @@ public class StackOfCards {
 
     public StackOfCards() {
         ArrayList<MoveCard> cards = new ArrayList<>();
-        textureMove1 = ;
+        /*
+        textureMove1;
         textureMove2;
         textureMove3;
         textureUTurn;
         textureRightTurn;
         textureLeftTurn;
         textureReversing;
+        */
 
 
+        /*
         for (int i = 0; i < 18; i++) {
             //create and add turnleft, turnright, move1 cards to list
             MoveCard card1 = new MoveCard(MoveCard.Type.move1);
@@ -41,6 +44,7 @@ public class StackOfCards {
             cards.add(card2);
             cards.add(card3);
         }
+
 
         for (int i = 0; i < 6; i++) {
             //create and add move3, uturn, backup cards to list
@@ -57,14 +61,15 @@ public class StackOfCards {
             MoveCard card1 = new MoveCard(MoveCard.Type.move2);
             cards.add(card1);
         }
+        */
 
         //shuffle list
         Collections.shuffle(cards);
 
         //add all 84 card to Stack.
         for (int i = 0; i < 84; i++) {
-            MoveCard temp = cards.get(i);
-            stack.push(temp);
+//            MoveCard temp = cards.get(i);
+//            stack.push(temp);
         }
     }
 

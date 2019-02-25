@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="10" height="8" tilewidth="128" tileheight="128" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="10" height="8" tilewidth="128" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="6">
  <tileset firstgid="1" source="test.tsx"/>
+ <tileset firstgid="10" source="desert_map.tsx"/>
  <layer id="1" name="Rutelag 1" width="10" height="8">
   <data encoding="csv">
 3,3,3,3,3,3,3,3,3,3,
 3,3,3,3,3,3,3,3,3,3,
+3,3,3,3,3,3,18,3,3,3,
 3,3,3,3,3,3,3,3,3,3,
 3,3,3,3,3,3,3,3,3,3,
-3,3,3,3,3,3,3,3,3,3,
-3,3,3,3,3,3,3,3,3,3,
+3,3,18,3,3,3,3,3,3,3,
 3,3,3,3,3,3,3,3,3,3,
 3,3,3,3,3,3,3,3,3,3
 </data>
  </layer>
+ <objectgroup id="2" name="Teleports">
+  <object id="4" x="256" y="640" width="128" height="128">
+   <properties>
+    <property name="teleport-from" value=""/>
+   </properties>
+  </object>
+  <object id="5" x="768" y="256" width="128" height="128">
+   <properties>
+    <property name="teleport-from" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
