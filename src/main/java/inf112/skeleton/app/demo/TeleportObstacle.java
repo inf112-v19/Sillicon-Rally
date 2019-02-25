@@ -35,9 +35,7 @@ public class TeleportObstacle extends Sprite {
     public void setTeleportToLocation(int xLocation, int yLocation) {
         xTeleportTo = xLocation;
         yTeleportTo = yLocation;
-
-
-
+        
         game.grid.getTileFromCoordinates(yLocation,xLocation).getSprites().add(this);
     }
 
