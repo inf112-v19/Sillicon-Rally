@@ -11,42 +11,35 @@ import java.util.Collections;
  */
 public class StackOfCards {
 
-    Texture textureMove1;
-    Texture textureMove2;
-    Texture textureMove3;
-    Texture textureUTurn;
-    Texture textureRightTurn;
-    Texture textureLeftTurn;
-    Texture textureReversing;
 
     public static MyStack<MoveCard> stack = new MyStack<>();
 
     public StackOfCards() {
         ArrayList<MoveCard> cards = new ArrayList<>();
-        textureMove1 = ;
-        textureMove2;
-        textureMove3;
-        textureUTurn;
-        textureRightTurn;
-        textureLeftTurn;
-        textureReversing;
+        Texture textureMove1 = new Texture("cardLayouts/Move1.png");
+        Texture textureMove2 = new Texture("cardLayouts/Move2.png");
+        Texture textureMove3 = new Texture("cardLayouts/Move3.png");
+        Texture textureUTurn = new Texture("cardLayouts/UTurn.png");
+        Texture textureRightTurn = new Texture("cardLayouts/RightTurn.png");
+        Texture textureLeftTurn = new Texture("cardLayouts/LeftTurn.png");
+        Texture textureReversing = new Texture("cardLayouts/Reverse1.png");
 
 
         for (int i = 0; i < 18; i++) {
             //create and add turnleft, turnright, move1 cards to list
-            MoveCard card1 = new MoveCard(MoveCard.Type.move1);
-            MoveCard card2 = new MoveCard(MoveCard.Type.turnleft);
-            MoveCard card3 = new MoveCard(MoveCard.Type.turnright);
+            MoveCard card1 = new MoveCard(MoveCard.Type.move1, textureMove1);
+            MoveCard card2 = new MoveCard(MoveCard.Type.turnleft, textureLeftTurn);
+            MoveCard card3 = new MoveCard(MoveCard.Type.turnright, textureRightTurn);
             cards.add(card1);
             cards.add(card2);
             cards.add(card3);
         }
 
         for (int i = 0; i < 6; i++) {
-            //create and add move3, uturn, backup cards to list
-            MoveCard card1 = new MoveCard(MoveCard.Type.move3);
-            MoveCard card2 = new MoveCard(MoveCard.Type.uturn);
-            MoveCard card3 = new MoveCard(MoveCard.Type.backup);
+            //create and add move3, uturn, reverse cards to list
+            MoveCard card1 = new MoveCard(MoveCard.Type.move3, textureMove3);
+            MoveCard card2 = new MoveCard(MoveCard.Type.uturn, textureUTurn);
+            MoveCard card3 = new MoveCard(MoveCard.Type.reverse, textureReversing);
             cards.add(card1);
             cards.add(card2);
             cards.add(card3);
@@ -54,7 +47,7 @@ public class StackOfCards {
 
         for (int i = 0; i < 12; i++) {
             //create and add move2 cards to list
-            MoveCard card1 = new MoveCard(MoveCard.Type.move2);
+            MoveCard card1 = new MoveCard(MoveCard.Type.move2, textureMove2);
             cards.add(card1);
         }
 

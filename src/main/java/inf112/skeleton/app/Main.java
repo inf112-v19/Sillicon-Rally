@@ -2,7 +2,6 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.demo.Game;
 
 public class Main {
@@ -18,10 +17,6 @@ public class Main {
 
         new LwjglApplication(new Game(), cfg);
 
-        StackOfCards stack = new StackOfCards();
-        for (int i = 0; i < 84; i++) {
-            System.out.println(i+1 + ": " + stack.drawCard());
-        }
 
     }
 }

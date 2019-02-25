@@ -15,8 +15,12 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.Tile;
+import inf112.skeleton.app.card.MoveCard;
+import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.util.CustomCamera;
+
+import java.util.ArrayList;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
     final int TILE_SIZE_IN_PX = 128;
@@ -28,6 +32,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     Player player;
     Direction startDirection;
     public TileGrid grid;
+    StackOfCards deck;
+    ArrayList<MoveCard> cardsInUse;
+    int xC, yC;
 
 
     @Override
@@ -49,6 +56,24 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         player.setPosition(5,40);
         grid.getTile(0,0).addSprite(player);
 
+        cardsInUse = new ArrayList<>();
+        deck = new StackOfCards();
+        xC = -70;
+        yC = Gdx.graphics.getHeight() + 300;
+
+        draw9cards();
+
+
+    }
+
+    private void draw9cards() {
+        for (int i = 0; i < 9; i++) {
+            MoveCard kort = deck.drawCard();
+            kort.setSize(400,600);
+            kort.setPosition(xC,yC);
+            xC += 210;
+            cardsInUse.add(kort);
+        }
     }
 
     @Override
@@ -62,11 +87,15 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb.setProjectionMatrix(camera.combined);
         drawSprites();
     }
-    
+
     public void drawSprites() {
         sb.begin();
         for (Sprite sprite : grid.getAllSpritesOnMap()) {
             sprite.draw(sb);
+        }
+        for (MoveCard card :
+                cardsInUse) {
+            card.draw(sb);
         }
         sb.end();
     }
@@ -85,7 +114,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         if (keycode == Input.Keys.RIGHT) {
             player.turnRight();
         }
-        
+
         if (keycode == Input.Keys.LEFT) {
             player.turnLeft();
         }
@@ -116,8 +145,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         currentTile.getSprites().remove(player);
         grid.getTileFromCoordinates(y, x).addSprite(player);
-        Tile tile = grid.getTileFromCoordinates(player.getY(), player.getX());  
+        Tile tile = grid.getTileFromCoordinates(player.getY(), player.getX());
     }
+
+
+
+
 
     @Override
     public boolean keyUp(int i) {

@@ -1,4 +1,4 @@
-package group1.team2.src.main.java.inf112.skeleton.app.Objects;
+/**package group1.team2.src.main.java.inf112.skeleton.app.Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -58,3 +58,4 @@ public class PlayerTest {
     }
 
 }
+*/
