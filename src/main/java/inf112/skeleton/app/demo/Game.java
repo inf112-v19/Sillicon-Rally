@@ -33,7 +33,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public void create() {
-        tiledMap = new TmxMapLoader().load("RoboRally.tmx");
+        tiledMap = new TmxMapLoader().load("testnr2.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         this. TILE_SIZE_IN_PX = getTileSize();
         camera = new CustomCamera(tiledMap);
