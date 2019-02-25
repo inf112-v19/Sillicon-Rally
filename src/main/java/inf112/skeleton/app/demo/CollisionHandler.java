@@ -1,6 +1,5 @@
 package inf112.skeleton.app.demo;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.Tile;
 
@@ -23,7 +22,7 @@ public class CollisionHandler {
             if (spritesOnTile.get(i).equals(player))
                 continue;
             if (spritesOnTile.get(i) instanceof TeleportObstacle) {
-                ((TeleportObstacle) spritesOnTile.get(i)).handleCollision(player);
+                ((TeleportObstacle) spritesOnTile.get(i)).handleTeleportCollision(player);
             }
         }
 
