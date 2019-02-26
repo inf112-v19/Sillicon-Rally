@@ -46,7 +46,7 @@ public class TeleportObstacle extends Sprite {
         game.grid.getTileFromCoordinates(yLocation,xLocation).getSprites().add(this);
     }
 
-    public void handleCollision(Player player) {
+    public void handleTeleportCollision(Player player) {
         Tile teleportFromTile = game.grid.getTileFromCoordinates(yTeleportFrom, yTeleportFrom);
         Tile playerTile = game.grid.getTileFromCoordinates(player.getY(), player.getX());
 
