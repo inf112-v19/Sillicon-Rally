@@ -81,7 +81,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         return new TileGrid(heightNumberOfTiles, widthNumberOfTiles, TILE_SIZE_IN_PX);
     }
 
-    //Only works if each til is a square
+    //Only works if each tile is a square with equal sides
     public int getTileSize() {
         TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
         return (int) layer.getTileWidth();
@@ -144,11 +144,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             player.uTurn();
         }
 
+        return false;
+    }
+
+    public void checkCollision() {
         CollisionHandler collisionHandler = new CollisionHandler(this);
         collisionHandler.checkCollision();
-
-
-        return false;
     }
 
     public void updatePlayerPositionInGrid(Tile currentTile) {
@@ -157,7 +158,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         currentTile.getSprites().remove(player);
         grid.getTileFromCoordinates(y, x).addSprite(player);
-        Tile tile = grid.getTileFromCoordinates(player.getY(), player.getX());
     }
 
 

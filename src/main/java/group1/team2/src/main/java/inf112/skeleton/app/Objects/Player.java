@@ -20,8 +20,7 @@ public class Player extends Sprite {
             moveForward(moveDistance);
             game.updatePlayerPositionInGrid(currentTile);
             currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
-            System.out.println(currentTile);
-            game.drawSprites();
+            game.checkCollision();
 
         }
     }
@@ -44,7 +43,6 @@ public class Player extends Sprite {
                 this.setX(this.getX() - moveDistance);
                 break;
         }
-        System.out.printf("x: %f y: %f",this.getX(), this.getY());
     }
 
     private void moveBackwards (int moveDistance) {
