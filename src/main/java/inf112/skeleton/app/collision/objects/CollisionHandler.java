@@ -1,7 +1,8 @@
-package inf112.skeleton.app.demo;
+package inf112.skeleton.app.collision.objects;
 
-import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.Tile;
+import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.grid.Tile;
+import inf112.skeleton.app.game.Game;
 
 import java.util.List;
 

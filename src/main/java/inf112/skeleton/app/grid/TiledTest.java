@@ -1,4 +1,4 @@
-package inf112.skeleton.app.demo;
+package inf112.skeleton.app.grid;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -34,7 +34,7 @@ public class TiledTest extends ApplicationAdapter implements InputProcessor {
         camera = new OrthographicCamera();
         camera.setToOrtho(false,w,h );
         camera.update();
-        tiledMap = new TmxMapLoader().load("RoboRally.tmx");
+        tiledMap = new TmxMapLoader().load("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         Gdx.input.setInputProcessor(this);
 

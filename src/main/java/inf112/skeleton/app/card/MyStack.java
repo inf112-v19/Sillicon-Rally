@@ -1,11 +1,10 @@
-package inf112.skeleton.app.util;
+package inf112.skeleton.app.card;
 
 /**
  * Created by Martin on 01/02/2019.
  */
 
 public class MyStack<E> {
-
     private Node head;
 
     public class Node {

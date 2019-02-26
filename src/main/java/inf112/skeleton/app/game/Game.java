@@ -1,4 +1,4 @@
-package inf112.skeleton.app.demo;
+package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -14,11 +14,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.Tile;
+import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
+import inf112.skeleton.app.collision.objects.TeleportObstacle;
 import inf112.skeleton.app.grid.TileGrid;
-import inf112.skeleton.app.util.CustomCamera;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
     public int TILE_SIZE_IN_PX;
@@ -34,7 +34,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public void create() {
-        tiledMap = new TmxMapLoader().load("testnr2.tmx");
+        tiledMap = new TmxMapLoader().load("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         this. TILE_SIZE_IN_PX = getTileSize();
         camera = new CustomCamera(tiledMap);

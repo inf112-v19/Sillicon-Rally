@@ -1,7 +1,6 @@
 package inf112.skeleton.app.card;
 
 import com.badlogic.gdx.graphics.Texture;
-import inf112.skeleton.app.util.MyStack;
 
 import java.util.ArrayList;
 import java.util.Collections;
