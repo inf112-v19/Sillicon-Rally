@@ -19,8 +19,8 @@ public class Player extends Sprite {
         for (int i = 0; i < steps; i++) {
             moveForward(moveDistance);
             game.updatePlayerPositionInGrid(currentTile);
-            System.out.println("Trig");
             currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
+            System.out.println(currentTile);
             game.drawSprites();
 
         }
@@ -44,6 +44,7 @@ public class Player extends Sprite {
                 this.setX(this.getX() - moveDistance);
                 break;
         }
+        System.out.printf("x: %f y: %f",this.getX(), this.getY());
     }
 
     private void moveBackwards (int moveDistance) {

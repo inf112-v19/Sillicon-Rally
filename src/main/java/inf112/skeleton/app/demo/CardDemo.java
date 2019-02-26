@@ -19,10 +19,10 @@ public class CardDemo implements ApplicationListener {
     @Override
     public void create() {
         deck = new StackOfCards();
-        MoveCard kort1 = deck.drawCard();
-        MoveCard kort2 = deck.drawCard();
-        MoveCard kort3 = deck.drawCard();
-        MoveCard kort4 = deck.drawCard();
+        MoveCard kort1 = deck.nextCard();
+        MoveCard kort2 = deck.nextCard();
+        MoveCard kort3 = deck.nextCard();
+        MoveCard kort4 = deck.nextCard();
 
 
         kort1.setSize(100, 200);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="10" height="8" tilewidth="96" tileheight="96" infinite="0" nextlayerid="3" nextobjectid="3">
+ <tileset firstgid="1" source="standard.tsx"/>
+ <layer id="1" name="Rutelag 1" width="10" height="8">
+  <data encoding="csv">
+5,5,5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,5,5,
+5,5,47,5,5,6,5,5,5,5,
+5,5,5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,5,5,
+5,5,6,5,5,5,5,47,5,5,
+5,5,5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,5,5
+</data>
+ </layer>
+ <objectgroup id="2" name="Teleports">
+  <object id="1" x="192" y="480" width="96" height="96">
+   <properties>
+    <property name="teleport-from" value="teleport-from"/>
+   </properties>
+  </object>
+  <object id="2" x="480" y="192" width="96" height="96">
+   <properties>
+    <property name="teleport-to" value="teleport-to"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -35,6 +35,7 @@ public class StackOfCards {
             cards.add(card3);
         }
 
+
         for (int i = 0; i < 6; i++) {
             //create and add move3, uturn, reverse cards to list
             MoveCard card1 = new MoveCard(MoveCard.Type.move3, textureMove3);
@@ -51,17 +52,18 @@ public class StackOfCards {
             cards.add(card1);
         }
 
+
         //shuffle list
         Collections.shuffle(cards);
 
         //add all 84 card to Stack.
         for (int i = 0; i < 84; i++) {
-            MoveCard temp = cards.get(i);
-            stack.push(temp);
+//            MoveCard temp = cards.get(i);
+//            stack.push(temp);
         }
     }
 
-    public MoveCard drawCard() {
+    public MoveCard nextCard() {
         return stack.pop();
     }
 
