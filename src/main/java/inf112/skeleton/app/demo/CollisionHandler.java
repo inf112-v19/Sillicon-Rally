@@ -25,6 +25,9 @@ public class CollisionHandler {
             if (spritesOnTile.get(i) instanceof TeleportObstacle) {
                 ((TeleportObstacle) spritesOnTile.get(i)).handleCollision(player);
             }
+            if(spritesOnTile.get(i) instanceof Savestate){
+                ((Savestate) spritesOnTile.get(i)).handleCollision(player);
+            }
         }
 
     }
