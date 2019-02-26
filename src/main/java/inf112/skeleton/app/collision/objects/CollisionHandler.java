@@ -1,6 +1,7 @@
 package inf112.skeleton.app.collision.objects;
 
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.demo.Savestate;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.game.Game;
 
@@ -24,6 +25,9 @@ public class CollisionHandler {
                 continue;
             if (spritesOnTile.get(i) instanceof TeleportObstacle) {
                 ((TeleportObstacle) spritesOnTile.get(i)).handleTeleportCollision(player);
+            }
+            if(spritesOnTile.get(i) instanceof Savestate){
+                ((Savestate) spritesOnTile.get(i)).handleCollision(player);
             }
         }
 
