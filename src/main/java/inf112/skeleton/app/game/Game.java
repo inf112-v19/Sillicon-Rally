@@ -16,17 +16,18 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.Tile;
+import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.util.CustomCamera;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
     public int TILE_SIZE_IN_PX;
-    TiledMap tiledMap;
+    public TiledMap tiledMap;
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
     SpriteBatch sb;
     Texture texture;
-    Player player;
+    public Player player;
     Direction startDirection;
     public TileGrid grid;
 

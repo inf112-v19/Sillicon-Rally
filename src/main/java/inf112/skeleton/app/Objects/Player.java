@@ -2,8 +2,8 @@ package group1.team2.src.main.java.inf112.skeleton.app.Objects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import inf112.skeleton.app.Tile;
-import inf112.skeleton.app.demo.Game;
+import inf112.skeleton.app.grid.Tile;
+import inf112.skeleton.app.game.Game;
 
 public class Player extends Sprite {
     Game.Direction currentDirection;
