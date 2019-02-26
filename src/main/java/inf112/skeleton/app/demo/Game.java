@@ -54,7 +54,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         player = new Player(texture, startDirection);
         player.setSize(100,50);
         player.setOriginCenter();
-        player.setPosition(0,30);
+        player.setPosition(0,20);
         grid.getTile(0,0).addSprite(player);
 
 
