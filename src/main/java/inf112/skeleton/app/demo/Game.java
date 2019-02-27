@@ -109,7 +109,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb.end();
     }
 
-
     @Override
     public boolean keyDown(int keycode) {
         float x = player.getX();
