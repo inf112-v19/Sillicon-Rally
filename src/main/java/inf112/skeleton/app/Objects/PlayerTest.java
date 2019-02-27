@@ -1,12 +1,14 @@
+
 /**package group1.team2.src.main.java.inf112.skeleton.app.Objects;
+package inf112.skeleton.app.Objects;
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import inf112.skeleton.app.Tile;
-import inf112.skeleton.app.demo.Game;
+import inf112.skeleton.app.grid.Tile;
+import inf112.skeleton.app.game.Game;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,9 +29,6 @@ public class PlayerTest {
         cfg.title = "Silion_Rally";
         cfg.width = 1080;
         cfg.height = 720;
-
-        //new LwjglApplication(new HelloWorld(), cfg);
-        //new LwjglApplication(new TiledTest(), cfg);
 
         new LwjglApplication(new Game(), cfg);
 

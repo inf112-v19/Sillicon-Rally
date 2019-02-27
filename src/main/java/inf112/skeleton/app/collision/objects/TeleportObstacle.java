@@ -1,17 +1,14 @@
-package inf112.skeleton.app.demo;
+package inf112.skeleton.app.collision.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.Tile;
-
-import java.awt.*;
+import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.grid.Tile;
+import inf112.skeleton.app.game.Game;
 
 public class TeleportObstacle extends Sprite {
     Game game;

@@ -1,5 +1,5 @@
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import inf112.skeleton.app.Tile;
+import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import org.junit.Test;
 

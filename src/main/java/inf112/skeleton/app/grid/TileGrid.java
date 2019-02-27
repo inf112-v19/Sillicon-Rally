@@ -1,7 +1,6 @@
 package inf112.skeleton.app.grid;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import inf112.skeleton.app.Tile;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package inf112.skeleton.app.hazards;
+package inf112.skeleton.app.collision.objects;
 
 public class BoardHazards {
     //TODO fix logic once robot interaction is made

@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import group1.team2.src.main.java.inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.game.Game;
 
 public class Savestate extends Sprite {
     Game game;

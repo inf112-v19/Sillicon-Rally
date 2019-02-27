@@ -1,8 +1,8 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.grid;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import inf112.skeleton.app.ITile;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Tile implements ITile, Comparable<Tile> {

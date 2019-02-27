@@ -1,4 +1,4 @@
-package inf112.skeleton.app.util;
+package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
