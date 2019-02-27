@@ -178,6 +178,7 @@ public class Player implements IGameObject {
         return this.x;
     }
 
+
     public void setPosition(int x, int y, TileGrid grid) {
         Tile currentTile = grid.getTileFromCoordinates(getY(), getX());
         setX(x);

@@ -15,8 +15,6 @@ public class TeleportObstacle implements IGameObject {
     Game game;
     int xTeleportFrom, yTeleportFrom;
     int xTeleportTo, yTeleportTo;
-    Sprite teleportToSprite;
-    Sprite teleportFromSprite;
 
 
     public TeleportObstacle(Game game) {
@@ -50,8 +48,12 @@ public class TeleportObstacle implements IGameObject {
         Tile playerTile = game.grid.getTileFromCoordinates(player.getY(), player.getX());
 
         if (teleportFromTile.equals(playerTile)) {
-            player.setX(xTeleportTo);
-            player.setY(yTeleportTo);
+            int deltaX = (int) (xTeleportTo - player.getX());
+            int dealtY = (int) (yTeleportTo - player.getY());
+            int newX = (int) (deltaX + player.getX());
+            int newY = (int) (dealtY + player.getY());
+
+            player.setPosition(newX, newY, game.grid);
             game.updatePlayerPositionInGrid(playerTile);
         }
     }
