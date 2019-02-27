@@ -44,7 +44,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("robot1.png"));
 
-        startDirection = Direction.West;
+        startDirection = Direction.North;
         player = new Player(texture, startDirection);
         player.setPosition(0,0);
         grid.getTile(0,0).addSprite(player);
