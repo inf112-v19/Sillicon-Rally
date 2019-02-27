@@ -42,11 +42,11 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         this.grid = makeGrid();
         Gdx.input.setInputProcessor(this);
         sb = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("car.jpg"));
+        texture = new Texture(Gdx.files.internal("robot1.png"));
 
         startDirection = Direction.West;
         player = new Player(texture, startDirection);
-        player.setPosition(0,40);
+        player.setPosition(0,0);
         grid.getTile(0,0).addSprite(player);
 
         TeleportObstacle teleports = new TeleportObstacle(this);
