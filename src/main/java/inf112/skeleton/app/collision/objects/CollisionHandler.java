@@ -18,7 +18,7 @@ public class CollisionHandler {
 
     public void checkCollision() {
         Tile playerTile = game.grid.getTileFromCoordinates(player.getY(), player.getX());
-        List spritesOnTile = playerTile.getSprites();
+        List spritesOnTile = playerTile.getGameObjects();
         System.out.println(spritesOnTile);
         for (int i = 0; i < spritesOnTile.size(); i++) {
             if (spritesOnTile.get(i).equals(player))

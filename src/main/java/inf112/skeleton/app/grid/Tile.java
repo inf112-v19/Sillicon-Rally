@@ -1,7 +1,7 @@
 package inf112.skeleton.app.grid;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.ITile;
+import inf112.skeleton.app.Objects.IGameObject;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class Tile implements ITile, Comparable<Tile> {
     public int xCoordTo;
     public int yCoordFrom;
     public int yCoordTo;
-    ArrayList<Sprite> list;
+    ArrayList<IGameObject> list;
 
     public Tile(int x, int y, int tileSizeInPx) {
         this.x = x;
@@ -52,12 +52,12 @@ public class Tile implements ITile, Comparable<Tile> {
         return "[x: " + this.x + " y: " +this.y + " ]";
     }
 
-    public ArrayList<Sprite> getSprites() {
+    public ArrayList<IGameObject> getGameObjects() {
         return list;
     }
 
-    public void addSprite(Sprite sprite) {
-        list.add(sprite);
+    public void addGameObject(IGameObject mapObject) {
+        list.add(mapObject);
     }
 
 }

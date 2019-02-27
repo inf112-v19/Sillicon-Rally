@@ -14,10 +14,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.collision.objects.TeleportObstacle;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
-import inf112.skeleton.app.collision.objects.TeleportObstacle;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
@@ -26,7 +27,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
     SpriteBatch sb;
-    Texture texture;
     public Player player;
     Direction startDirection;
     public TileGrid grid;
@@ -42,15 +42,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         this.grid = makeGrid();
         Gdx.input.setInputProcessor(this);
         sb = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("car.jpg"));
 
         startDirection = Direction.West;
-        player = new Player(texture, startDirection);
-        player.setPosition(0,40);
-        grid.getTile(0,0).addSprite(player);
+        player = new Player(new Texture(Gdx.files.internal("car.jpg")), startDirection);
+        player.setPosition(0,40, this);
+        grid.getTile(0,0).addGameObject(player);
 
-        TeleportObstacle teleports = new TeleportObstacle(this);
-        CollisionHandler collisionHandler = new CollisionHandler(this);
+        TeleportObstacle teleport = new TeleportObstacle(this);
     }
 
     public TileGrid makeGrid() {
@@ -78,13 +76,14 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         sb.setProjectionMatrix(camera.combined);
-        drawSprites();
+        drawSpritesFromGrid();
     }
     
-    public void drawSprites() {
+    public void drawSpritesFromGrid() {
         sb.begin();
-        for (Sprite sprite : grid.getAllSpritesOnMap()) {
-            sprite.draw(sb);
+        for (IGameObject gameObject : grid.getAllSpritesOnMap()) {
+            if (gameObject.getSprite() != null)
+                gameObject.getSprite().draw(sb);
         }
         sb.end();
     }
@@ -136,8 +135,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         float x = player.getX();
         float y = player.getY();
 
-        currentTile.getSprites().remove(player);
-        grid.getTileFromCoordinates(y, x).addSprite(player);
+        currentTile.getGameObjects().remove(player);
+        grid.getTileFromCoordinates(y, x).addGameObject(player);
     }
 
     @Override

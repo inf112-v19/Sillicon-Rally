@@ -6,18 +6,20 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.game.Game;
 
-public class TeleportObstacle extends Sprite {
+public class TeleportObstacle implements IGameObject {
     Game game;
     int xTeleportFrom, yTeleportFrom;
     int xTeleportTo, yTeleportTo;
+    Sprite teleportToSprite;
+    Sprite teleportFromSprite;
 
 
     public TeleportObstacle(Game game) {
-        super(new Texture(Gdx.files.internal("sprites/clockface.png")));
         this.game = game;
 
         TiledMap map = game.tiledMap;
@@ -33,14 +35,14 @@ public class TeleportObstacle extends Sprite {
         xTeleportTo = xLocation;
         yTeleportTo = yLocation;
 
-        game.grid.getTileFromCoordinates(yLocation,xLocation).getSprites().add(this);
+        game.grid.getTileFromCoordinates(yLocation,xLocation).getGameObjects().add(this);
     }
 
     public void setTeleportFromLocation(int xLocation, int yLocation) {
         xTeleportFrom = xLocation;
         yTeleportFrom = yLocation;
 
-        game.grid.getTileFromCoordinates(yLocation,xLocation).getSprites().add(this);
+        game.grid.getTileFromCoordinates(yLocation,xLocation).getGameObjects().add(this);
     }
 
     public void handleTeleportCollision(Player player) {
@@ -55,4 +57,8 @@ public class TeleportObstacle extends Sprite {
     }
 
 
+    @Override
+    public Sprite getSprite() {
+        return null;
+    }
 }

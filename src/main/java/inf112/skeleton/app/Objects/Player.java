@@ -5,12 +5,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.game.Game;
 
-public class Player extends Sprite {
+public class Player implements IGameObject {
     Game.Direction currentDirection;
     Tile backupLocation;
+    Sprite sprite;
 
     public Player(Texture texture, Game.Direction startDirection) {
-        super(texture);
+        this.sprite = new Sprite(texture);
         this.currentDirection = startDirection;
         backupLocation = null;
     }
@@ -71,7 +72,7 @@ public class Player extends Sprite {
     }
 
     public void turnRight() {
-        this.rotate(-90);
+        sprite.rotate(-90);
 
         switch (currentDirection) {
             case North:
@@ -90,7 +91,7 @@ public class Player extends Sprite {
     }
 
     public void turnLeft() {
-        this.rotate(90);
+        sprite.rotate(90);
 
         switch (currentDirection) {
             case North:
@@ -110,7 +111,7 @@ public class Player extends Sprite {
 
 
     public void uTurn() {
-        this.rotate(180);
+        sprite.rotate(180);
 
         switch (currentDirection) {
             case North:
@@ -145,6 +146,33 @@ public class Player extends Sprite {
         }
     }
 
+    @Override
+    public Sprite getSprite() {
+        return this.sprite;
+    }
+
+    public void setX(float x) {
+        sprite.setX(x);
+    }
+
+    public void setY(float y) {
+        sprite.setY(y);
+    }
+
+    public float getY() {
+        return sprite.getY();
+    }
+
+    public float getX() {
+        return sprite.getX();
+    }
+
+    public void setPosition(int x, int y, Game game) {
+        Tile currentTile = game.grid.getTileFromCoordinates(getY(), getX());
+        setX(x);
+        setY(y);
+        game.updatePlayerPositionInGrid(currentTile);
+    }
 }
 
 
