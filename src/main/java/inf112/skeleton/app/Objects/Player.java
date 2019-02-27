@@ -4,11 +4,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.grid.TileGrid;
 
 public class Player implements IGameObject {
     Game.Direction currentDirection;
     Tile backupLocation;
     Sprite sprite;
+    float x;
+    float y;
+
+    //Construcot used for testing purposes only
+    public Player() {
+        this.currentDirection = Game.Direction.West;
+        backupLocation = null;
+    }
 
     public Player(Texture texture, Game.Direction startDirection) {
         this.sprite = new Sprite(texture);
@@ -148,31 +157,36 @@ public class Player implements IGameObject {
 
     @Override
     public Sprite getSprite() {
+        sprite.setX(this.x);
+        sprite.setY(this.y);
         return this.sprite;
     }
 
     public void setX(float x) {
-        sprite.setX(x);
+        this.x = x;
     }
 
     public void setY(float y) {
-        sprite.setY(y);
+        this.y = y;
     }
 
     public float getY() {
-        return sprite.getY();
+        return this.y;
     }
 
     public float getX() {
-        return sprite.getX();
+        return this.x;
     }
 
-    public void setPosition(int x, int y, Game game) {
-        Tile currentTile = game.grid.getTileFromCoordinates(getY(), getX());
+    public void setPosition(int x, int y, TileGrid grid) {
+        Tile currentTile = grid.getTileFromCoordinates(getY(), getX());
         setX(x);
         setY(y);
-        game.updatePlayerPositionInGrid(currentTile);
+
+        currentTile.getGameObjects().remove(this);
+        grid.getTileFromCoordinates(y, x).addGameObject(this);
     }
+
 }
 
 

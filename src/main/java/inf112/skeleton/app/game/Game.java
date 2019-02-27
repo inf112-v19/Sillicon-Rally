@@ -45,7 +45,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         startDirection = Direction.West;
         player = new Player(new Texture(Gdx.files.internal("car.jpg")), startDirection);
-        player.setPosition(0,40, this);
+        player.setPosition(0,40, grid);
         grid.getTile(0,0).addGameObject(player);
 
         TeleportObstacle teleport = new TeleportObstacle(this);
