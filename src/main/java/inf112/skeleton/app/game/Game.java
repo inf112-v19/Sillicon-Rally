@@ -35,8 +35,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     private Direction startDirection;
     public TileGrid grid;
     private StackOfCards deck;
-    private ArrayList<MoveCard> list;
+    private ArrayList<MoveCard> cardsOnBoard;
     private int cardXPos, lifeXPos;
+    private Sprite numbers;
     private Sprite backboard;
     private Sprite lives;
 
@@ -69,7 +70,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         texture = new Texture("sprites/exmplLife.png");
         lives = new Sprite(texture);
         lives.setSize(300,150);
-        lives.setPosition(750, -180);
+        lives.setPosition(750, -230);
+
+        texture = new Texture("sprites/number1to5.png");
+        numbers = new Sprite(texture);
+        numbers.setSize(1050, 600);
+        numbers.setPosition(-30,-730);
 
         deck = new StackOfCards();
         drawFiveCards();
@@ -85,13 +91,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     private void drawFiveCards() {
         int cardYPos = -800;
         cardXPos = -235;
-        list = new ArrayList<>();
+        cardsOnBoard = new ArrayList<>();
         MoveCard card;
         for (int i = 0; i < 5; i++) {
             card = deck.nextCard();
             card.setSize(470,670);
             card.setPosition(cardXPos, cardYPos);
-            list.add(card);
+            cardsOnBoard.add(card);
             cardXPos += 240;
         }
     }
@@ -129,10 +135,11 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         for (Sprite sprite : grid.getAllSpritesOnMap()) {
             sprite.draw(sb);
         }
-        for (MoveCard card : list) {
+        for (MoveCard card : cardsOnBoard) {
             card.draw(sb);
         }
         lives.draw(sb);
+        numbers.draw(sb);
         sb.end();
     }
 
