@@ -7,13 +7,16 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.collision.objects.TeleportObstacle;
@@ -21,33 +24,48 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
+import java.util.ArrayList;
+
 public class Game extends ApplicationAdapter implements InputProcessor {
     public int TILE_SIZE_IN_PX;
     public TiledMap tiledMap;
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
     SpriteBatch sb;
+    private Direction startDirection;
     public Player player;
-    Direction startDirection;
     public TileGrid grid;
-    public StackOfCards deck;
     public GameMap gameMap;
-
-
+    private StackOfCards deck;
+    private ArrayList<MoveCard> list;
+    private int cardXPos;
+    private Sprite backboard;
+    private Sprite lives;
+    private Texture texture;
 
     @Override
     public void create() {
+
         gameMap = new GameMap("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
         camera = new CustomCamera(gameMap.getTiledMap());
+        tiledMap = new TmxMapLoader().load("map.v.01.tmx");
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        camera = new CustomCamera(tiledMap);
+        camera.translate( -470, -700);
 
         this.grid = makeGrid();
         Gdx.input.setInputProcessor(this);
         sb = new SpriteBatch();
+        texture = new Texture(Gdx.files.internal("sprites/car.jpg"));
 
         startDirection = Direction.West;
 
+        texture = new Texture("cardLayouts/mech.jpg");
+        backboard = new Sprite(texture);
+        backboard.setSize(1250,680);
+        backboard.setPosition(-140,-700);
 
         deck = new StackOfCards();
 
@@ -62,10 +80,35 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
     public void addObstaclesToMap() {
         TeleportObstacle teleport = new TeleportObstacle(gameMap, grid);
+        texture = new Texture("sprites/exmplLife.png");
+        lives = new Sprite(texture);
+        lives.setSize(300,150);
+        lives.setPosition(750, -180);
+
+        deck = new StackOfCards();
+        drawFiveCards();
+
+        TeleportObstacle tele = new TeleportObstacle(gameMap,grid);
+        CollisionHandler coll = new CollisionHandler(this);
+
     }
 
-    
-
+    //"draw", as in drawing cards from a deck of cards.
+    //not "draw", as in drawing the picture of a card in the application.
+    //#tricky #difference #notTheSame ##
+    private void drawFiveCards() {
+        int cardYPos = -800;
+        cardXPos = -235;
+        list = new ArrayList<>();
+        MoveCard card;
+        for (int i = 0; i < 5; i++) {
+            card = deck.nextCard();
+            card.setSize(470,670);
+            card.setPosition(cardXPos, cardYPos);
+            list.add(card);
+            cardXPos += 240;
+        }
+    }
 
 
     public TileGrid makeGrid() {
@@ -86,14 +129,17 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(1,0,0,1);
+        Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         camera.update();
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         sb.setProjectionMatrix(camera.combined);
+
         drawSpritesFromGrid();
+        drawHUD();
     }
     
     public void drawSpritesFromGrid() {
@@ -102,7 +148,17 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             if (gameObject.getSprite() != null)
                 gameObject.getSprite().draw(sb);
         }
-       
+        sb.end();
+    }
+
+    //draws sprites in spritebatch
+    public void drawHUD() {
+        sb.begin();
+        backboard.draw(sb);
+        for (MoveCard card : list) {
+            card.draw(sb);
+        }
+        lives.draw(sb);
         sb.end();
     }
 
@@ -140,6 +196,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             player.uTurn();
         }
 
+        if (keycode == Input.Keys.Q) {
+
+        }
+
         return false;
     }
 
@@ -156,6 +216,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         grid.getTileFromCoordinates(y, x).addGameObject(player);
     }
 
+    @Override
+    public void dispose() {
+        sb.dispose();
+        texture.dispose();
+        tiledMap.dispose();
+    }
 
     @Override
     public boolean keyUp(int i) {
@@ -195,4 +261,5 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public enum Direction{
         North, East, South, West
     }
+
 }
