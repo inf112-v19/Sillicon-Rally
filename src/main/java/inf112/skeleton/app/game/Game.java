@@ -36,6 +36,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public TileGrid grid;
     private StackOfCards deck;
     private ArrayList<MoveCard> cardsOnBoard;
+    private MoveCard temp;
     private int cardXPos, lifeXPos;
     private Sprite numbers;
     private Sprite backboard;
@@ -162,26 +163,79 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         }
 
         if (keycode == Input.Keys.valueOf("1")) {
-            player.moveForward(1, moveDistance, this, currentTile);
+            int index = 0;
+            if (cardsOnBoard.get(index) != null) {
+                movePlayer(index, moveDistance, currentTile);
+                cardsOnBoard.remove(index);
+            }
         }
 
         if (keycode == Input.Keys.valueOf("2")) {
-            player.moveForward(2, moveDistance, this, currentTile);
+            int index = 1;
+            if (cardsOnBoard.get(index) != null) {
+                movePlayer(index, moveDistance, currentTile);
+                cardsOnBoard.remove(index);
+            }
         }
 
         if (keycode == Input.Keys.valueOf("3")) {
-            player.moveForward(3, moveDistance, this, currentTile);
+            int index = 2;
+            if (cardsOnBoard.get(index) != null) {
+                movePlayer(index, moveDistance, currentTile);
+                cardsOnBoard.remove(index);
+            }
+        }
+
+        if (keycode == Input.Keys.valueOf("4")) {
+            int index = 3;
+            if (cardsOnBoard.get(index) != null) {
+                movePlayer(index, moveDistance, currentTile);
+                cardsOnBoard.remove(index);
+            }
+        }
+
+        if (keycode == Input.Keys.valueOf("5")) {
+            int index = 4;
+            if (cardsOnBoard.get(index) != null) {
+                movePlayer(index, moveDistance, currentTile);
+                cardsOnBoard.remove(index);
+            }
         }
 
         if (keycode == Input.Keys.U) {
             player.uTurn();
         }
 
-        if (keycode == Input.Keys.Q) {
+        if (keycode == Input.Keys.UP) {
+            player.moveForward(1, moveDistance, this, currentTile);
+        }
 
+        if (keycode == Input.Keys.DOWN) {
+            player.moveForward(-1,moveDistance,this, currentTile);
         }
 
         return false;
+    }
+
+    private void movePlayer(int index, int moveDistance, Tile currentTile) {
+        temp = cardsOnBoard.get(index);
+        switch (temp.getType()) {
+            case move1:
+                player.moveForward(1, moveDistance, this, currentTile);
+            case move2:
+                player.moveForward(2, moveDistance, this, currentTile);
+            case move3:
+                player.moveForward(3, moveDistance, this, currentTile);
+            case uturn:
+                player.uTurn();
+            case turnleft:
+                player.turnLeft();
+            case turnright:
+                player.turnRight();
+            case reverse:
+                player.moveForward(-1, moveDistance, this, currentTile);
+        }
+
     }
 
     public void checkCollision() {
