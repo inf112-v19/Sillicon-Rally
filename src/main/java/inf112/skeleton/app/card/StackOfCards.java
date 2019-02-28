@@ -57,8 +57,8 @@ public class StackOfCards {
 
         //add all 84 card to Stack.
         for (int i = 0; i < 84; i++) {
-//            MoveCard temp = cards.get(i);
-//            stack.push(temp);
+            MoveCard temp = cards.get(i);
+            stack.push(temp);
         }
     }
 

@@ -45,15 +45,22 @@ public class Player extends Sprite {
         }
     }
 
-    private void moveBackwards (int moveDistance) {
+    private void moveBackwards(int moveDistance) {
+        if (checkForNegativeCoordinates(moveDistance)) {
+            return;
+        }
         switch (currentDirection) {
-            case North: this.setY(this.getY() - moveDistance);
+            case North:
+                this.setY(this.getY() - moveDistance);
                 break;
-            case East: this.setX(this.getX() - moveDistance);
+            case East:
+                this.setX(this.getX() - moveDistance);
                 break;
-            case South: this.setY(this.getY() + moveDistance);
+            case South:
+                this.setY(this.getY() + moveDistance);
                 break;
-            case West: this.setX(this.getX() + moveDistance);
+            case West:
+                this.setX(this.getX() + moveDistance);
                 break;
         }
     }
