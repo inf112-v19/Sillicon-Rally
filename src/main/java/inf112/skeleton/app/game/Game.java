@@ -36,11 +36,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public TileGrid grid;
     private StackOfCards deck;
     private ArrayList<MoveCard> cardsOnBoard;
+    private MoveCard[] listt;
     private MoveCard temp;
     private int cardXPos, lifeXPos;
     private Sprite numbers;
     private Sprite backboard;
     private Sprite lives;
+    private Boolean[] booList;
 
 
     @Override
@@ -79,6 +81,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         numbers.setPosition(-30,-730);
 
         deck = new StackOfCards();
+        listt = new MoveCard[5];
+        booList = new Boolean[5];
+
+
         drawFiveCards();
 
         TeleportObstacle tele = new TeleportObstacle(this);
@@ -92,14 +98,14 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     private void drawFiveCards() {
         int cardYPos = -800;
         cardXPos = -235;
-        cardsOnBoard = new ArrayList<>();
         MoveCard card;
         for (int i = 0; i < 5; i++) {
             card = deck.nextCard();
             card.setSize(470,670);
             card.setPosition(cardXPos, cardYPos);
-            cardsOnBoard.add(card);
+            listt[i] = card;
             cardXPos += 240;
+            booList[i] = false;
         }
     }
 
@@ -136,8 +142,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         for (Sprite sprite : grid.getAllSpritesOnMap()) {
             sprite.draw(sb);
         }
-        for (MoveCard card : cardsOnBoard) {
-            card.draw(sb);
+        for (int i = 0; i < 5; i++) {
+            if(!booList[i]) {
+                listt[i].draw(sb);
+            }
         }
         lives.draw(sb);
         numbers.draw(sb);
@@ -164,41 +172,46 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         if (keycode == Input.Keys.valueOf("1")) {
             int index = 0;
-            if (cardsOnBoard.get(index) != null) {
+            if (listt[index] != null) {
                 movePlayer(index, moveDistance, currentTile);
-                cardsOnBoard.remove(index);
+                listt[index] = null;
+                booList[index] = true;
             }
         }
 
         if (keycode == Input.Keys.valueOf("2")) {
             int index = 1;
-            if (cardsOnBoard.get(index) != null) {
+            if (listt[index] != null) {
                 movePlayer(index, moveDistance, currentTile);
-                cardsOnBoard.remove(index);
+                listt[index] = null;
+                booList[index] = true;
             }
         }
 
         if (keycode == Input.Keys.valueOf("3")) {
             int index = 2;
-            if (cardsOnBoard.get(index) != null) {
+            if (listt[index] != null) {
                 movePlayer(index, moveDistance, currentTile);
-                cardsOnBoard.remove(index);
+                listt[index] = null;
+                booList[index] = true;
             }
         }
 
         if (keycode == Input.Keys.valueOf("4")) {
             int index = 3;
-            if (cardsOnBoard.get(index) != null) {
+            if (listt[index] != null) {
                 movePlayer(index, moveDistance, currentTile);
-                cardsOnBoard.remove(index);
+                listt[index] = null;
+                booList[index] = true;
             }
         }
 
         if (keycode == Input.Keys.valueOf("5")) {
             int index = 4;
-            if (cardsOnBoard.get(index) != null) {
+            if (listt[index] != null) {
                 movePlayer(index, moveDistance, currentTile);
-                cardsOnBoard.remove(index);
+                listt[index] = null;
+                booList[index] = true;
             }
         }
 
@@ -218,8 +231,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     }
 
     private void movePlayer(int index, int moveDistance, Tile currentTile) {
-        temp = cardsOnBoard.get(index);
-        switch (temp.getType()) {
+        temp = listt[index];
+        MoveCard.Type type = temp.getType();
+        switch (type) {
             case move1:
                 player.moveForward(1, moveDistance, this, currentTile);
             case move2:
@@ -232,8 +246,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                 player.turnLeft();
             case turnright:
                 player.turnRight();
-            case reverse:
-                player.moveForward(-1, moveDistance, this, currentTile);
+            default:
+                System.out.println("did nothing");
+        }
+        for (int i = 0; i < 5; i++) {
+        System.out.println(listt[i]);
+            System.out.println(booList[i]);
         }
 
     }
