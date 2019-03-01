@@ -20,6 +20,7 @@ import inf112.skeleton.app.collision.objects.TeleportObstacle;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.grid.TileGrid;
+import inf112.skeleton.app.map.GameMap;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
     public int TILE_SIZE_IN_PX;
@@ -30,14 +31,18 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public Player player;
     Direction startDirection;
     public TileGrid grid;
+    public GameMap gameMap;
 
 
     @Override
     public void create() {
-        tiledMap = new TmxMapLoader().load("map.v.01.tmx");
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        //tiledMap = new TmxMapLoader().load("map.v.01.tmx");
+        //tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+
+        gameMap = new GameMap("map.v.01.tmx");
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this. TILE_SIZE_IN_PX = getTileSize();
-        camera = new CustomCamera(tiledMap);
+        camera = new CustomCamera(gameMap.getTiledMap());
 
         this.grid = makeGrid();
         Gdx.input.setInputProcessor(this);
@@ -48,11 +53,11 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         player.setPosition(0,40, grid);
         grid.getTile(0,0).addGameObject(player);
 
-        TeleportObstacle teleport = new TeleportObstacle(this);
+        TeleportObstacle teleport = new TeleportObstacle(gameMap, grid);
     }
 
     public TileGrid makeGrid() {
-        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
+        TiledMapTileLayer layer = (TiledMapTileLayer)gameMap.getMapLayerByIndex(0);
 
         int heightNumberOfTiles = layer.getHeight();
         int widthNumberOfTiles = layer.getWidth();
@@ -62,7 +67,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
     //Only works if each tile is a square with equal sides
     public int getTileSize() {
-        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
+        TiledMapTileLayer layer = (TiledMapTileLayer)gameMap.getMapLayerByIndex(0);
         return (int) layer.getTileWidth();
 
     }

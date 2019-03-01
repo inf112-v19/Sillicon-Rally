@@ -10,42 +10,46 @@ import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.grid.TileGrid;
+import inf112.skeleton.app.map.GameMap;
 
 public class TeleportObstacle implements IGameObject {
-    Game game;
+   // Game game;
     int xTeleportFrom, yTeleportFrom;
     int xTeleportTo, yTeleportTo;
+    GameMap map;
 
 
-    public TeleportObstacle(Game game) {
-        this.game = game;
+    public TeleportObstacle(GameMap map,TileGrid grid) {
+        this.map = map;
 
-        TiledMap map = game.tiledMap;
-        MapLayer layer = map.getLayers().get("Teleports");
+        //TiledMap map = game.tiledMap;
+        //GameMap map = game.gameMap;
+        MapLayer layer = map.getMapLayerByName("Teleports");
         RectangleMapObject tpFrom = (RectangleMapObject) layer.getObjects().get(0);
         RectangleMapObject tpTo = (RectangleMapObject) layer.getObjects().get(1);
 
-        setTeleportFromLocation((int) tpFrom.getRectangle().getX(), (int) tpFrom.getRectangle().getY());
-        setTeleportToLocation((int) tpTo.getRectangle().getX(), (int) tpTo.getRectangle().getY());
+        setTeleportFromLocation((int) tpFrom.getRectangle().getX(), (int) tpFrom.getRectangle().getY(), grid);
+        setTeleportToLocation((int) tpTo.getRectangle().getX(), (int) tpTo.getRectangle().getY(), grid);
     }
 
-    public void setTeleportToLocation(int xLocation, int yLocation) {
+    public void setTeleportToLocation(int xLocation, int yLocation, TileGrid grid) {
         xTeleportTo = xLocation;
         yTeleportTo = yLocation;
 
-        game.grid.getTileFromCoordinates(yLocation,xLocation).getGameObjects().add(this);
+        grid.getTileFromCoordinates(yLocation,xLocation).getGameObjects().add(this);
     }
 
-    public void setTeleportFromLocation(int xLocation, int yLocation) {
+    public void setTeleportFromLocation(int xLocation, int yLocation, TileGrid grid) {
         xTeleportFrom = xLocation;
         yTeleportFrom = yLocation;
 
-        game.grid.getTileFromCoordinates(yLocation,xLocation).getGameObjects().add(this);
+        grid.getTileFromCoordinates(yLocation,xLocation).getGameObjects().add(this);
     }
 
-    public void handleTeleportCollision(Player player) {
-        Tile teleportFromTile = game.grid.getTileFromCoordinates(yTeleportFrom, yTeleportFrom);
-        Tile playerTile = game.grid.getTileFromCoordinates(player.getY(), player.getX());
+    public void handleTeleportCollision(Player player, TileGrid grid) {
+        Tile teleportFromTile = grid.getTileFromCoordinates(yTeleportFrom, yTeleportFrom);
+        Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
         if (teleportFromTile.equals(playerTile)) {
             int deltaX = (int) (xTeleportTo - player.getX());
@@ -53,8 +57,8 @@ public class TeleportObstacle implements IGameObject {
             int newX = (int) (deltaX + player.getX());
             int newY = (int) (dealtY + player.getY());
 
-            player.setPosition(newX, newY, game.grid);
-            game.updatePlayerPositionInGrid(playerTile);
+            player.setPosition(newX, newY, grid);
+            //game.updatePlayerPositionInGrid(playerTile);
         }
     }
 
