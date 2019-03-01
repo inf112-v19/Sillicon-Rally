@@ -65,6 +65,12 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>com.badlogicgames.gdx</groupId>
+      <artifactId>gdx-backend-headless</artifactId>
+      <version>1.6.2</version>
+    </dependency>
+
   </dependencies>
 
   <build>

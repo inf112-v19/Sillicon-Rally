@@ -36,12 +36,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public void create() {
-        //tiledMap = new TmxMapLoader().load("map.v.01.tmx");
-        //tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-
-        gameMap = new GameMap("map.v.01.tmx");
+        gameMap = new GameMap("core/assets/map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
-        this. TILE_SIZE_IN_PX = getTileSize();
+        this.TILE_SIZE_IN_PX = getTileSize();
         camera = new CustomCamera(gameMap.getTiledMap());
 
         this.grid = makeGrid();
@@ -49,10 +46,14 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb = new SpriteBatch();
 
         startDirection = Direction.West;
-        player = new Player(new Texture(Gdx.files.internal("car.jpg")), startDirection);
-        player.setPosition(0,40, grid);
+        player = new Player(new Texture(Gdx.files.internal("core/assets/car.jpg")), startDirection);
+        player.setY(40);
         grid.getTile(0,0).addGameObject(player);
 
+        addObstaclesToMap();
+    }
+
+    public void addObstaclesToMap() {
         TeleportObstacle teleport = new TeleportObstacle(gameMap, grid);
     }
 

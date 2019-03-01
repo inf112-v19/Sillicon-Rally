@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public class GameMap  {
     TiledMap tiledMap;
+    public int TILESIZE_IN_PX;
 
     public GameMap(String fileName) {
         this.tiledMap = new TmxMapLoader().load(fileName);
@@ -24,5 +25,10 @@ public class GameMap  {
 
     public TiledMap getTiledMap() {
         return this.tiledMap;
+    }
+
+    public int getTileSize() {
+        TiledMapTileLayer layer = (TiledMapTileLayer) getMapLayerByIndex(0);
+        return (int) layer.getTileWidth();
     }
 }

@@ -13,7 +13,7 @@ public class Player implements IGameObject {
     float x;
     float y;
 
-    //Construcot used for testing purposes only
+    //Constructor used for testing purposes only
     public Player() {
         this.currentDirection = Game.Direction.West;
         backupLocation = null;
@@ -179,7 +179,7 @@ public class Player implements IGameObject {
     }
 
 
-    public void setPosition(int x, int y, TileGrid grid) {
+    public void setPosition(int y, int x, TileGrid grid) {
         Tile currentTile = grid.getTileFromCoordinates(getY(), getX());
         setX(x);
         setY(y);

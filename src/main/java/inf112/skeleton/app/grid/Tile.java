@@ -12,7 +12,7 @@ public class Tile implements ITile, Comparable<Tile> {
     public int xCoordTo;
     public int yCoordFrom;
     public int yCoordTo;
-    ArrayList<IGameObject> list;
+    ArrayList<IGameObject> listOfObjectsOnTile;
 
     public Tile(int x, int y, int tileSizeInPx) {
         this.x = x;
@@ -21,7 +21,7 @@ public class Tile implements ITile, Comparable<Tile> {
         xCoordTo = (x+1) * tileSizeInPx;
         yCoordFrom = y * tileSizeInPx;
         yCoordTo = (y+1) * tileSizeInPx;
-        list = new ArrayList<>();
+        listOfObjectsOnTile = new ArrayList<>();
     }
 
     public int getX() {
@@ -53,11 +53,11 @@ public class Tile implements ITile, Comparable<Tile> {
     }
 
     public ArrayList<IGameObject> getGameObjects() {
-        return list;
+        return listOfObjectsOnTile;
     }
 
     public void addGameObject(IGameObject mapObject) {
-        list.add(mapObject);
+        listOfObjectsOnTile.add(mapObject);
     }
 
 }

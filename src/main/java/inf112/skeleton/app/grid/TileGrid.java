@@ -57,6 +57,7 @@ public class TileGrid {
 
             return getTile(y, x);
         }
+
         return getTile(yTile, xTile);
     }
 
