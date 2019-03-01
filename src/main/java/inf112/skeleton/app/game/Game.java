@@ -40,7 +40,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public void create() {
-        gameMap = new GameMap("core/assets/map.v.01.tmx");
+        gameMap = new GameMap("/core/assets/map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
         camera = new CustomCamera(gameMap.getTiledMap());
@@ -54,7 +54,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         cardsOnBoard = new ArrayList<>();
         deck = new StackOfCards();
 
-        player = new Player(new Texture("car.jpg"), startDirection);
+        player = new Player(new Texture("core/assets/sprites/car.jpg"), startDirection);
         player.setY(40);
         grid.getTile(0,0).addGameObject(player);
 
@@ -156,9 +156,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         currentTile.getGameObjects().remove(player);
         grid.getTileFromCoordinates(y, x).addGameObject(player);
     }
-
-
-
 
 
     @Override
