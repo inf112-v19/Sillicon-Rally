@@ -7,7 +7,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public class GameMap  {
     TiledMap tiledMap;
-    public int TILESIZE_IN_PX;
 
     public GameMap(String fileName) {
         this.tiledMap = new TmxMapLoader().load(fileName);
