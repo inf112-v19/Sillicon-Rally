@@ -35,7 +35,6 @@ public class MyStack<E> {
     public E pop() {
         if (isEmpty())
             return null;
-
         Node newTop = head.next;
         E item = head.payload;
         head = newTop;
@@ -46,7 +45,6 @@ public class MyStack<E> {
 
     public void push(E item) {
         Node newTop = new Node(item);
-
         newTop.next = head;
         head = newTop;
         size++;

@@ -84,7 +84,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         listt = new MoveCard[5];
         booList = new Boolean[5];
 
-
         drawFiveCards();
 
         TeleportObstacle tele = new TeleportObstacle(this);
@@ -101,11 +100,14 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         MoveCard card;
         for (int i = 0; i < 5; i++) {
             card = deck.nextCard();
-            card.setSize(470,670);
-            card.setPosition(cardXPos, cardYPos);
+            if (card != null) {
+                card.setSize(470, 670);
+                card.setPosition(cardXPos, cardYPos);
+                booList[i] = false;
+            }
             listt[i] = card;
             cardXPos += 240;
-            booList[i] = false;
+
         }
     }
 
@@ -224,7 +226,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         }
 
         if (keycode == Input.Keys.DOWN) {
-            player.moveForward(-1,moveDistance,this, currentTile);
+            player.uTurn();
+            player.moveForward(1,moveDistance,this,currentTile);
+            player.uTurn();
+        }
+
+        if (keycode == Input.Keys.R) {
+            drawFiveCards();
         }
 
         return false;
@@ -236,22 +244,29 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         switch (type) {
             case move1:
                 player.moveForward(1, moveDistance, this, currentTile);
+                break;
             case move2:
                 player.moveForward(2, moveDistance, this, currentTile);
+                break;
             case move3:
                 player.moveForward(3, moveDistance, this, currentTile);
+                break;
             case uturn:
                 player.uTurn();
+                break;
             case turnleft:
                 player.turnLeft();
+
+                break;
             case turnright:
                 player.turnRight();
+                break;
+            case reverse:
+                player.uTurn();
+                player.moveForward(1,moveDistance,this,currentTile);
+                player.uTurn();
             default:
                 System.out.println("did nothing");
-        }
-        for (int i = 0; i < 5; i++) {
-        System.out.println(listt[i]);
-            System.out.println(booList[i]);
         }
 
     }

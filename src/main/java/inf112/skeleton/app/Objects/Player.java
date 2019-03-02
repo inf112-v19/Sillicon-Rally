@@ -12,7 +12,7 @@ public class Player extends Sprite {
     public Player(Texture texture, Game.Direction startDirection) {
         super(texture);
         this.currentDirection = startDirection;
-        backupLocation = null;
+        this.backupLocation = null;
     }
 
     public void moveForward(int steps, int moveDistance, Game game, Tile currentTile) {
@@ -20,7 +20,7 @@ public class Player extends Sprite {
             moveForward(moveDistance);
             game.updatePlayerPositionInGrid(currentTile);
             currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
-            game.checkCollision();
+            //game.checkCollision();
 
         }
     }
