@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -36,6 +37,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public StackOfCards deck;
     private ArrayList<MoveCard> cardsOnBoard;
     public GameMap gameMap;
+
 
 
     @Override
@@ -105,7 +107,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             if (gameObject.getSprite() != null)
                 gameObject.getSprite().draw(sb);
         }
-
+        flag.draw(sb);
         sb.end();
     }
 
