@@ -40,7 +40,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public void create() {
-        gameMap = new GameMap("core/assets/map.v.01.tmx");
+        gameMap = new GameMap("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
         camera = new CustomCamera(gameMap.getTiledMap());
