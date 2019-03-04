@@ -20,7 +20,7 @@ public class Player extends Sprite {
             moveForward(moveDistance);
             game.updatePlayerPositionInGrid(currentTile);
             currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
-            //game.checkCollision();
+            game.checkCollision();
 
         }
     }
