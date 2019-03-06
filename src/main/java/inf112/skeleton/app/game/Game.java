@@ -24,8 +24,6 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
-import java.util.ArrayList;
-
 public class Game extends ApplicationAdapter implements InputProcessor {
     public int TILE_SIZE_IN_PX;
     public TiledMap tiledMap;
@@ -37,7 +35,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public TileGrid grid;
     public GameMap gameMap;
     private StackOfCards deck;
-    private ArrayList<MoveCard> list;
+    private MoveCard temp;
+    private MoveCard[] listt;
+    private Boolean[] booList;
     private int cardXPos;
     private Sprite backboard;
     private Sprite lives;
@@ -84,8 +84,9 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         lives = new Sprite(texture);
         lives.setSize(300,150);
         lives.setPosition(750, -180);
-
         deck = new StackOfCards();
+        listt = new MoveCard[5];
+        booList = new Boolean[5];
         drawFiveCards();
 
         TeleportObstacle tele = new TeleportObstacle(gameMap,grid);
@@ -99,14 +100,17 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     private void drawFiveCards() {
         int cardYPos = -800;
         cardXPos = -235;
-        list = new ArrayList<>();
         MoveCard card;
         for (int i = 0; i < 5; i++) {
             card = deck.nextCard();
-            card.setSize(470,670);
-            card.setPosition(cardXPos, cardYPos);
-            list.add(card);
+            if (card != null) {
+                card.setSize(470, 670);
+                card.setPosition(cardXPos, cardYPos);
+                booList[i] = false;
+            }
+            listt[i] = card;
             cardXPos += 240;
+
         }
     }
 
@@ -155,8 +159,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public void drawHUD() {
         sb.begin();
         backboard.draw(sb);
-        for (MoveCard card : list) {
-            card.draw(sb);
+        for (int i = 0; i < 5; i++) {
+            if (booList[i] != true) {
+                listt[i].draw(sb);
+            }
         }
         lives.draw(sb);
         sb.end();
@@ -181,26 +187,97 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         }
 
         if (keycode == Input.Keys.valueOf("1")) {
-            player.moveForward(1, moveDistance, this, currentTile);
+            int index = 0;
+            if (listt[index] != null) {
+                movePlayer(index, moveDistance, currentTile);
+                listt[index] = null;
+                booList[index] = true;
+            }
         }
 
         if (keycode == Input.Keys.valueOf("2")) {
-            player.moveForward(2, moveDistance, this, currentTile);
+            int index = 1;
+            if (listt[index] != null) {
+                movePlayer(index, moveDistance, currentTile);
+                listt[index] = null;
+                booList[index] = true;
+            }
         }
 
         if (keycode == Input.Keys.valueOf("3")) {
-            player.moveForward(3, moveDistance, this, currentTile);
+            int index = 2;
+            if (listt[index] != null) {
+                movePlayer(index, moveDistance, currentTile);
+                listt[index] = null;
+                booList[index] = true;
+            }
+        }
+
+        if (keycode == Input.Keys.valueOf("4")) {
+            int index = 3;
+            if (listt[index] != null) {
+                movePlayer(index, moveDistance, currentTile);
+                listt[index] = null;
+                booList[index] = true;
+            }
+        }
+
+        if (keycode == Input.Keys.valueOf("5")) {
+            int index = 4;
+            if (listt[index] != null) {
+                movePlayer(index, moveDistance, currentTile);
+                listt[index] = null;
+                booList[index] = true;
+            }
         }
 
         if (keycode == Input.Keys.U) {
             player.uTurn();
         }
+        if (keycode == Input.Keys.UP) {
+            player.moveForward(1, moveDistance, this, currentTile);
+        }
 
-        if (keycode == Input.Keys.Q) {
+        if (keycode == Input.Keys.DOWN) {
+            player.moveForward(1,moveDistance * (-1),this,currentTile);
+        }
 
+        if (keycode == Input.Keys.R) {
+            drawFiveCards();
         }
 
         return false;
+    }
+
+    private void movePlayer(int index, int moveDistance, Tile currentTile) {
+        temp = listt[index];
+        MoveCard.Type type = temp.getType();
+        switch (type) {
+            case move1:
+                player.moveForward(1, moveDistance, this, currentTile);
+                break;
+            case move2:
+                player.moveForward(2, moveDistance, this, currentTile);
+                break;
+            case move3:
+                player.moveForward(3, moveDistance, this, currentTile);
+                break;
+            case uturn:
+                player.uTurn();
+                break;
+            case turnleft:
+                player.turnLeft();
+
+                break;
+            case turnright:
+                player.turnRight();
+                break;
+            case reverse:
+                player.moveForward(1,moveDistance * (-1),this,currentTile);
+            default:
+                System.out.println("did nothing");
+        }
+
     }
 
     public void checkCollision() {

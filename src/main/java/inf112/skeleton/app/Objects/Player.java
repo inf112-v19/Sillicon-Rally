@@ -22,7 +22,7 @@ public class Player implements IGameObject {
     public Player(Texture texture, Game.Direction startDirection) {
         this.sprite = new Sprite(texture);
         this.currentDirection = startDirection;
-        backupLocation = null;
+        this.backupLocation = null;
     }
 
     public void moveForward(int steps, int moveDistance, Game game, Tile currentTile) {
