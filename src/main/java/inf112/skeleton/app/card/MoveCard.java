@@ -25,7 +25,7 @@ public class MoveCard extends Sprite{
             case turnleft: priority = rand.nextInt(410) + 70;
             case turnright: priority = rand.nextInt(420) + 80;
             case uturn: priority = rand.nextInt(60) + 10;
-            case backup: priority = rand.nextInt(480) + 430;
+            case reverse: priority = rand.nextInt(480) + 430;
         }
     }
 
@@ -38,7 +38,7 @@ public class MoveCard extends Sprite{
     }
 
     public enum Type{
-        move1, move2, move3, turnleft, turnright, uturn, backup
+        move1, move2, move3, turnleft, turnright, uturn, reverse
     }
 
     public String toString() {

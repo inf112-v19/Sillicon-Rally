@@ -4,13 +4,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.grid.TileGrid;
 
-public class Player extends Sprite {
+public class Player implements IGameObject {
     Game.Direction currentDirection;
     Tile backupLocation;
+    Sprite sprite;
+    float x;
+    float y;
+
+    //Constructor used for testing purposes only
+    public Player() {
+        this.currentDirection = Game.Direction.West;
+        backupLocation = null;
+    }
 
     public Player(Texture texture, Game.Direction startDirection) {
-        super(texture);
+        this.sprite = new Sprite(texture);
         this.currentDirection = startDirection;
         backupLocation = null;
     }
@@ -71,7 +81,7 @@ public class Player extends Sprite {
     }
 
     public void turnRight() {
-        this.rotate(-90);
+        sprite.rotate(-90);
 
         switch (currentDirection) {
             case North:
@@ -90,7 +100,7 @@ public class Player extends Sprite {
     }
 
     public void turnLeft() {
-        this.rotate(90);
+        sprite.rotate(90);
 
         switch (currentDirection) {
             case North:
@@ -110,7 +120,7 @@ public class Player extends Sprite {
 
 
     public void uTurn() {
-        this.rotate(180);
+        sprite.rotate(180);
 
         switch (currentDirection) {
             case North:
@@ -143,6 +153,39 @@ public class Player extends Sprite {
             this.setX((float) (backupLocation.x * tilesizeInPx));
             game.updatePlayerPositionInGrid(currentTile);
         }
+    }
+
+    @Override
+    public Sprite getSprite() {
+        sprite.setX(this.x);
+        sprite.setY(this.y);
+        return this.sprite;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public float getY() {
+        return this.y;
+    }
+
+    public float getX() {
+        return this.x;
+    }
+
+
+    public void setPosition(int y, int x, TileGrid grid) {
+        Tile currentTile = grid.getTileFromCoordinates(getY(), getX());
+        setX(x);
+        setY(y);
+
+        currentTile.getGameObjects().remove(this);
+        grid.getTileFromCoordinates(y, x).addGameObject(this);
     }
 
 }

@@ -6,10 +6,6 @@ public interface iPlayer {
 
     Boolean isAi();
 
-    int getHitPoints();
-
-    int getLives();
-
     void getSprite();
 
     boolean isAlive();

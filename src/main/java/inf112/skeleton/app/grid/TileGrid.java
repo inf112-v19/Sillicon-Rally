@@ -1,6 +1,7 @@
 package inf112.skeleton.app.grid;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import inf112.skeleton.app.Objects.IGameObject;
 
 import java.util.ArrayList;
 
@@ -56,6 +57,7 @@ public class TileGrid {
 
             return getTile(y, x);
         }
+
         return getTile(yTile, xTile);
     }
 
@@ -72,14 +74,14 @@ public class TileGrid {
         return tile;
     }
 
-    public ArrayList<Sprite> getAllSpritesOnMap() {
-        ArrayList<Sprite> list = new ArrayList<>();
+    public ArrayList<IGameObject> getAllSpritesOnMap() {
+        ArrayList<IGameObject> list = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
 
-                for (Sprite sprite : grid[i][j].getSprites()) {
-                    list.add(sprite);
+                for (IGameObject gameObject : grid[i][j].getGameObjects()) {
+                    list.add(gameObject);
                 }
             }
         }

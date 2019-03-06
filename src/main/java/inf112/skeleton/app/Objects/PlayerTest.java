@@ -1,12 +1,12 @@
+
 package inf112.skeleton.app.Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Texture;
-import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.game.Game;
-
+import inf112.skeleton.app.grid.Tile;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -32,8 +32,7 @@ public class PlayerTest {
         Texture texture = new Texture(Gdx.files.internal("car.jpg"));
         player = new Player(texture, startDirection);
         startDirection = Game.Direction.East;
-        player.setPosition(0,0);
-        game.grid.getTile(0,0).addSprite(player);
+        game.grid.getTile(0,0).addGameObject(player);
     }
 
     @Test
@@ -48,7 +47,7 @@ public class PlayerTest {
         Tile currentTile = game.grid.getTileFromCoordinates(player.getY(), player.getX());
         player.moveForward(2, TILE_SIZE_IN_PX, game, currentTile);
 
-        List list = game.grid.getTile(0,0).getSprites();
+        List list = game.grid.getTile(0,0).getGameObjects();
 
         assertEquals(0, list.size());
     }

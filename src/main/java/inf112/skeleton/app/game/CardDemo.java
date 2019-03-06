@@ -3,12 +3,9 @@ package inf112.skeleton.app.game;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import inf112.skeleton.app.card.MoveCard;
+import inf112.skeleton.app.card.StackOfCards;
 
 /**
  * Created by Martin on 06/02/2019.
@@ -16,38 +13,38 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class CardDemo implements ApplicationListener {
 
     private SpriteBatch batch;
-    private Texture texture;
-    private Sprite sprite;
+    private StackOfCards deck;
 
-    public class MyActor extends Actor {
-
-        Texture texture = new Texture(Gdx.files.internal("car.png"));
-
-        @Override
-        public void draw(Batch batch, float alpha){
-            batch.draw(texture,0,0);
-        }
-    }
-
-    private Stage stage;
 
     @Override
     public void create() {
-        stage = new Stage();
+        deck = new StackOfCards();
+        MoveCard kort1 = deck.nextCard();
+        MoveCard kort2 = deck.nextCard();
+        MoveCard kort3 = deck.nextCard();
+        MoveCard kort4 = deck.nextCard();
 
-        MyActor myActor = new MyActor();
-        stage.addActor(myActor);
+
+        kort1.setSize(100, 200);
+        kort1.setPosition(1,1);
+
+        kort2.setSize(50, 100);
+        kort2.setPosition(500,500);
+
+
     }
 
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
 
     @Override
     public void render() {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.draw();
+
+
+        batch.begin();
+
+
+        batch.end();
     }
 
     @Override
@@ -60,5 +57,10 @@ public class CardDemo implements ApplicationListener {
 
     @Override
     public void resume() {
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
     }
 }

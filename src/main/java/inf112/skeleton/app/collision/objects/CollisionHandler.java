@@ -18,13 +18,13 @@ public class CollisionHandler {
 
     public void checkCollision() {
         Tile playerTile = game.grid.getTileFromCoordinates(player.getY(), player.getX());
-        List spritesOnTile = playerTile.getSprites();
+        List spritesOnTile = playerTile.getGameObjects();
         System.out.println(spritesOnTile);
         for (int i = 0; i < spritesOnTile.size(); i++) {
             if (spritesOnTile.get(i).equals(player))
                 continue;
             if (spritesOnTile.get(i) instanceof TeleportObstacle) {
-                ((TeleportObstacle) spritesOnTile.get(i)).handleTeleportCollision(player);
+                ((TeleportObstacle) spritesOnTile.get(i)).handleTeleportCollision(player, game.grid);
             }
             if(spritesOnTile.get(i) instanceof Savestate){
                 ((Savestate) spritesOnTile.get(i)).handleCollision(player);
