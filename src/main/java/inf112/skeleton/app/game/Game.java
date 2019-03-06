@@ -17,6 +17,7 @@ import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.collision.objects.ObjectConstructor;
 import inf112.skeleton.app.collision.objects.TeleportObstacle;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
@@ -32,7 +33,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     TiledMapRenderer tiledMapRenderer;
     SpriteBatch sb;
     public Player player;
-    Direction startDirection;
     public TileGrid grid;
     public StackOfCards deck;
     private ArrayList<MoveCard> cardsOnBoard;
@@ -51,24 +51,16 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         Gdx.input.setInputProcessor(this);
         sb = new SpriteBatch();
 
-        startDirection = Direction.North;
 
         cardsOnBoard = new ArrayList<>();
         deck = new StackOfCards();
 
-        player = new Player(new Texture("robot1.png"), startDirection);
-        player.getSprite().setOriginCenter();
+
+        ObjectConstructor constructor = new ObjectConstructor(gameMap, grid);
+        player = constructor.player;
         grid.getTile(0,0).addGameObject(player);
 
-        addObstaclesToMap();
     }
-
-    public void addObstaclesToMap() {
-        TeleportObstacle teleport = new TeleportObstacle(gameMap, grid);
-    }
-
-    
-
 
 
     public TileGrid makeGrid() {
@@ -102,6 +94,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public void drawSpritesFromGrid() {
         sb.begin();
         for (IGameObject gameObject : grid.getAllSpritesOnMap()) {
+            //Not all GameObjects have sprites
             if (gameObject.getSprite() != null)
                 gameObject.getSprite().draw(sb);
         }

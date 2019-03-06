@@ -30,9 +30,8 @@ public class Player implements IGameObject {
             moveForward(moveDistance);
             game.updatePlayerPositionInGrid(currentTile);
             currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
-            game.checkCollision();
-
         }
+        game.checkCollision();
     }
 
     private void moveForward(int moveDistance) {
