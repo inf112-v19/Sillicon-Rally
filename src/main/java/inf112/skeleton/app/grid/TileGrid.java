@@ -65,8 +65,8 @@ public class TileGrid {
     * Get a tile based on the Tiles x and y coordinates, 0,0 being bottom left
      */
     public Tile getTile(int y, int x) {
-        if (x > columns || y > rows) {
-            throw new IllegalArgumentException();
+        if (x >= columns || y >= rows) {
+            throw new IllegalArgumentException("Attempt to move out of map");
         }
 
         Tile tile = grid[(rows-1) - y][x];

@@ -28,6 +28,7 @@ public class FlagObject implements IGameObject {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
         if (flagTile.equals(playerTile)) {
+            System.out.println(flagTile);
             player.setBackupLocation(flagTile);
             removeFlagFromMap(grid);
         }
