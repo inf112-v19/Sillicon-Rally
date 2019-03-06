@@ -51,15 +51,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         Gdx.input.setInputProcessor(this);
         sb = new SpriteBatch();
 
-        startDirection = Direction.West;
+        startDirection = Direction.North;
 
         cardsOnBoard = new ArrayList<>();
         deck = new StackOfCards();
 
-        player = new Player(new Texture("sprites/car.jpg"), startDirection);
-        player.getSprite().setSize(100,50);
+        player = new Player(new Texture("robot1.png"), startDirection);
         player.getSprite().setOriginCenter();
-        player.setY(20);
         grid.getTile(0,0).addGameObject(player);
 
         addObstaclesToMap();
