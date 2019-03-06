@@ -67,19 +67,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         backboard.setSize(1250,680);
         backboard.setPosition(-140,-700);
 
-        deck = new StackOfCards();
-
-        player = new Player(new Texture("sprites/car.jpg"), startDirection);
-        player.getSprite().setSize(100,50);
-        player.getSprite().setOriginCenter();
-        player.setY(20);
-        grid.getTile(0,0).addGameObject(player);
-
-        addObstaclesToMap();
-    }
-
-    public void addObstaclesToMap() {
-        TeleportObstacle teleport = new TeleportObstacle(gameMap, grid);
         texture = new Texture("sprites/exmplLife.png");
         lives = new Sprite(texture);
         lives.setSize(300,150);
@@ -87,7 +74,19 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         deck = new StackOfCards();
         listt = new MoveCard[5];
         booList = new Boolean[5];
+
+        player = new Player(new Texture("sprites/car.jpg"), startDirection);
+        player.getSprite().setSize(100,50);
+        player.getSprite().setOriginCenter();
+        player.setY(20);
+        grid.getTile(0,0).addGameObject(player);
+
         drawFiveCards();
+        addObstaclesToMap();
+    }
+
+    public void addObstaclesToMap() {
+        TeleportObstacle teleport = new TeleportObstacle(gameMap, grid);
 
         TeleportObstacle tele = new TeleportObstacle(gameMap,grid);
         CollisionHandler coll = new CollisionHandler(this);
@@ -114,7 +113,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         }
     }
 
-
+    
     public TileGrid makeGrid() {
         TiledMapTileLayer layer = (TiledMapTileLayer)gameMap.getMapLayerByIndex(0);
 
