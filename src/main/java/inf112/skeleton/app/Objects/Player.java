@@ -37,6 +37,7 @@ public class Player implements IGameObject {
     private void moveForward(int moveDistance, Game game) {
         if (chekForOutOfMapMove(moveDistance, game)) {
             handleDeath(game);
+            return;
         }
         switch (currentDirection) {
             case North:
@@ -161,15 +162,12 @@ public class Player implements IGameObject {
         this.backupLocation = null;
     }
 
-    public void setCurrentDirection(Game.Direction currentDirection) {
-        this.currentDirection = currentDirection;
-    }
-
 
     public void resetToBackupLocation(Game game) {
         int tilesizeInPx = game.getTileSize();
         if (this.backupLocation != null) {
             setPosition(backupLocation.y * tilesizeInPx, backupLocation.x *tilesizeInPx, game.grid);
+            System.out.println(game.grid.getTileFromCoordinates(this.getY(), this.getX()));
         }
     }
 

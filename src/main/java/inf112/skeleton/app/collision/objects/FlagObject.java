@@ -12,6 +12,7 @@ public class FlagObject implements IGameObject {
     Sprite sprite;
     int yLocation;
     int xLocation;
+    Tile flagTile;
 
     public FlagObject(RectangleMapObject flagFromTiled, TileGrid grid) {
         yLocation = (int) flagFromTiled.getRectangle().getY();
@@ -20,15 +21,14 @@ public class FlagObject implements IGameObject {
         sprite = new Sprite(texture);
         sprite.setSize(100,100);
 
-        grid.getTileFromCoordinates(yLocation, xLocation).addGameObject(this);
+        flagTile = grid.getTileFromCoordinates(yLocation, xLocation);
+        flagTile.addGameObject(this);
     }
 
     public void handleCollision(Player player, TileGrid grid) {
-        Tile flagTile = grid.getTileFromCoordinates(yLocation, xLocation);
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
         if (flagTile.equals(playerTile)) {
-            System.out.println(flagTile);
             player.setBackupLocation(flagTile);
             removeFlagFromMap(grid);
         }
@@ -48,5 +48,9 @@ public class FlagObject implements IGameObject {
 
         Tile myTile = grid.getTileFromCoordinates(this.yLocation, this.xLocation);
         myTile.getGameObjects().remove(this);
+    }
+
+    public Tile getTile() {
+        return this.flagTile;
     }
 }
