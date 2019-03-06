@@ -6,7 +6,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -16,7 +15,7 @@ import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
-import inf112.skeleton.app.collision.objects.TeleportObstacle;
+import inf112.skeleton.app.collision.objects.ObjectConstructor;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
@@ -28,7 +27,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     TiledMapRenderer tiledMapRenderer;
     SpriteBatch sb;
     public Player player;
-    Direction startDirection;
     public TileGrid grid;
     public StackOfCards deck;
     public GameMap gameMap;
@@ -46,26 +44,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         Gdx.input.setInputProcessor(this);
         sb = new SpriteBatch();
 
-        startDirection = Direction.West;
-
-
         deck = new StackOfCards();
 
-        player = new Player(new Texture("sprites/car.jpg"), startDirection);
-        player.getSprite().setSize(100,50);
-        player.getSprite().setOriginCenter();
-        player.setY(20);
+        ObjectConstructor constructor = new ObjectConstructor(gameMap, grid);
+        player = constructor.player;
         grid.getTile(0,0).addGameObject(player);
 
-        addObstaclesToMap();
     }
-
-    public void addObstaclesToMap() {
-        TeleportObstacle teleport = new TeleportObstacle(gameMap, grid);
-    }
-
-    
-
 
 
     public TileGrid makeGrid() {
@@ -99,10 +84,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public void drawSpritesFromGrid() {
         sb.begin();
         for (IGameObject gameObject : grid.getAllSpritesOnMap()) {
+            //Not all GameObjects have sprites
             if (gameObject.getSprite() != null)
                 gameObject.getSprite().draw(sb);
         }
-       
         sb.end();
     }
 
