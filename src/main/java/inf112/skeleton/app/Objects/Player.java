@@ -27,16 +27,16 @@ public class Player implements IGameObject {
 
     public void moveForward(int steps, int moveDistance, Game game, Tile currentTile) {
         for (int i = 0; i < steps; i++) {
-            moveForward(moveDistance);
+            moveForward(moveDistance, game);
             game.updatePlayerPositionInGrid(currentTile);
             currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
-            game.checkCollision();
-
         }
+        game.checkCollision();
     }
 
-    private void moveForward(int moveDistance) {
-        if (checkForNegativeCoordinates(moveDistance)) {
+    private void moveForward(int moveDistance, Game game) {
+        if (chekForOutOfMapMove(moveDistance, game)) {
+            handleDeath(game);
             return;
         }
         switch (currentDirection) {
@@ -55,28 +55,7 @@ public class Player implements IGameObject {
         }
     }
 
-    private void moveBackwards(int moveDistance) {
-        if (checkForNegativeCoordinates(moveDistance)) {
-            return;
-        }
-        switch (currentDirection) {
-            case North:
-                this.setY(this.getY() - moveDistance);
-                break;
-            case East:
-                this.setX(this.getX() - moveDistance);
-                break;
-            case South:
-                this.setY(this.getY() + moveDistance);
-                break;
-            case West:
-                this.setX(this.getX() + moveDistance);
-                break;
-        }
-    }
-
-
-    private boolean checkForNegativeCoordinates(int moveDistance) {
+    private boolean chekForOutOfMapMove(int moveDistance, Game game) {
         switch (currentDirection) {
             case West:
                 return (this.getX() - moveDistance) < 0;
@@ -84,7 +63,23 @@ public class Player implements IGameObject {
                 return (this.getY() - moveDistance) < 0;
         }
 
+        float newXLocation = this.getX() + moveDistance;
+        float newYLocation = this.getY() + moveDistance;
+
+        try {
+            game.grid.getTileFromCoordinates(newYLocation, newXLocation);
+        } catch (IllegalArgumentException e) {
+            return true;
+        }
+
         return false;
+    }
+
+    private void handleDeath(Game game) {
+        if (backupLocation != null) {
+            resetToBackupLocation(game);
+            deleteBackupLocation();
+        }
     }
 
     public void turnRight() {
@@ -146,19 +141,19 @@ public class Player implements IGameObject {
 
     public void setBackupLocation(Tile backupLocation) {
         this.backupLocation = backupLocation;
+        System.out.println(backupLocation);
     }
 
-    public void setCurrentDirection(Game.Direction currentDirection) {
-        this.currentDirection = currentDirection;
+    public void deleteBackupLocation() {
+        this.backupLocation = null;
     }
 
 
-    public void resetToBackupLocation(int tilesizeInPx, Game game) {
+    public void resetToBackupLocation(Game game) {
+        int tilesizeInPx = game.getTileSize();
         if (this.backupLocation != null) {
-            Tile currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
-            this.setY((float) (backupLocation.y * tilesizeInPx));
-            this.setX((float) (backupLocation.x * tilesizeInPx));
-            game.updatePlayerPositionInGrid(currentTile);
+            setPosition(backupLocation.y * tilesizeInPx, backupLocation.x *tilesizeInPx, game.grid);
+            System.out.println(game.grid.getTileFromCoordinates(this.getY(), this.getX()));
         }
     }
 

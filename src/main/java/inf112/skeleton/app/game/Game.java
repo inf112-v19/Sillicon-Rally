@@ -19,6 +19,7 @@ import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
+import inf112.skeleton.app.collision.objects.ObjectConstructor;
 import inf112.skeleton.app.collision.objects.TeleportObstacle;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
@@ -30,7 +31,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
     SpriteBatch sb;
-    private Direction startDirection;
     public Player player;
     public TileGrid grid;
     public GameMap gameMap;
@@ -60,8 +60,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         sb = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("sprites/car.jpg"));
 
-        startDirection = Direction.West;
-
         texture = new Texture("cardLayouts/mech.jpg");
         backboard = new Sprite(texture);
         backboard.setSize(1250,680);
@@ -71,14 +69,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         lives = new Sprite(texture);
         lives.setSize(300,150);
         lives.setPosition(750, -180);
+
         deck = new StackOfCards();
         listt = new MoveCard[5];
         booList = new Boolean[5];
 
-        player = new Player(new Texture("sprites/car.jpg"), startDirection);
-        player.getSprite().setSize(100,50);
-        player.getSprite().setOriginCenter();
-        player.setY(20);
+        ObjectConstructor constructor = new ObjectConstructor(gameMap, grid);
+        player = constructor.player;
         grid.getTile(0,0).addGameObject(player);
 
         drawFiveCards();
@@ -112,6 +109,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         }
     }
+
 
     
     public TileGrid makeGrid() {
@@ -148,6 +146,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public void drawSpritesFromGrid() {
         sb.begin();
         for (IGameObject gameObject : grid.getAllSpritesOnMap()) {
+            //Not all GameObjects have sprites
             if (gameObject.getSprite() != null)
                 gameObject.getSprite().draw(sb);
         }
@@ -164,6 +163,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             }
         }
         lives.draw(sb);
+
         sb.end();
     }
 
