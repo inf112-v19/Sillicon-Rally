@@ -107,7 +107,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             if (gameObject.getSprite() != null)
                 gameObject.getSprite().draw(sb);
         }
-        flag.draw(sb);
+        
         sb.end();
     }
 
