@@ -30,11 +30,8 @@ public class ObjectConstructor {
     }
 
     private void createPlayer() {
-        Game.Direction startDirection = Game.Direction.West;
-        player = new Player(new Texture("sprites/car.jpg"), startDirection);
-
-        //Center the player sprite
-        player.setY(40);
+        Game.Direction startDirection = Game.Direction.North;
+        player = new Player(new Texture("robot1.png"), startDirection);
     }
 
     private void createFlags() {
