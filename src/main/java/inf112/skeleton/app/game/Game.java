@@ -7,23 +7,19 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import inf112.skeleton.app.card.MoveCard;
-import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.card.StackOfCards;
+import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.collision.objects.TeleportObstacle;
 import inf112.skeleton.app.grid.Tile;
-import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
-
-import java.util.ArrayList;
 
 public class Game extends ApplicationAdapter implements InputProcessor {
     public int TILE_SIZE_IN_PX;
@@ -35,7 +31,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     Direction startDirection;
     public TileGrid grid;
     public StackOfCards deck;
-    private ArrayList<MoveCard> cardsOnBoard;
     public GameMap gameMap;
 
 
@@ -53,7 +48,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
         startDirection = Direction.West;
 
-        cardsOnBoard = new ArrayList<>();
+
         deck = new StackOfCards();
 
         player = new Player(new Texture("sprites/car.jpg"), startDirection);
@@ -107,7 +102,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             if (gameObject.getSprite() != null)
                 gameObject.getSprite().draw(sb);
         }
-        flag.draw(sb);
+       
         sb.end();
     }
 
