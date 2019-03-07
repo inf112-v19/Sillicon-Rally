@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 
 public class TileGrid {
-    int tileSizeInPx;
+    public int tileSizeInPx;
     Tile[][] grid;
     public int rows;
     public int columns;
