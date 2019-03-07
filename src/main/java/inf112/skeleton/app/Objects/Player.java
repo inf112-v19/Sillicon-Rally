@@ -2,8 +2,8 @@ package inf112.skeleton.app.Objects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class Player implements IGameObject {
@@ -55,27 +55,6 @@ public class Player implements IGameObject {
         }
     }
 
-    private void moveBackwards(int moveDistance) {
-        if (checkForNegativeCoordinates(moveDistance)) {
-            return;
-        }
-        switch (currentDirection) {
-            case North:
-                this.setY(this.getY() - moveDistance);
-                break;
-            case East:
-                this.setX(this.getX() - moveDistance);
-                break;
-            case South:
-                this.setY(this.getY() + moveDistance);
-                break;
-            case West:
-                this.setX(this.getX() + moveDistance);
-                break;
-        }
-    }
-
-
     private boolean chekForOutOfMapMove(int moveDistance, Game game) {
         switch (currentDirection) {
             case West:
@@ -100,8 +79,6 @@ public class Player implements IGameObject {
         if (backupLocation != null) {
             resetToBackupLocation(game);
             deleteBackupLocation();
-        } else {
-            System.exit(0);
         }
     }
 
