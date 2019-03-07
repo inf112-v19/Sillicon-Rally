@@ -17,7 +17,7 @@ public class MoveCard extends Sprite{
 
     public MoveCard(Type t, Texture texture) {
         super(texture);
-        type = t;
+        this.type = t;
         switch (t) {
             case move1: priority = rand.nextInt(650) + 490;
             case move2: priority = rand.nextInt(780) + 670;
@@ -34,7 +34,7 @@ public class MoveCard extends Sprite{
     }
 
     public Type getType() {
-        return type;
+        return this.type;
     }
 
     public enum Type{
@@ -42,7 +42,7 @@ public class MoveCard extends Sprite{
     }
 
     public String toString() {
-        return "type: " + type + ", priority: " + priority;
+        return type + "";
     }
 }
 

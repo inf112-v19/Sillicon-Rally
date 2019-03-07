@@ -6,6 +6,7 @@ package inf112.skeleton.app.card;
 
 public class MyStack<E> {
     private Node head;
+    public int size;
 
     public class Node {
         private Node next;
@@ -15,9 +16,11 @@ public class MyStack<E> {
             this.payload = item;
             this.next = null;
         }
+
     }
 
     public MyStack() {
+        size = 0;
         this.head = null;
     }
 
@@ -28,22 +31,22 @@ public class MyStack<E> {
     public E peek() {
         return this.head.payload;
     }
+
     public E pop() {
         if (isEmpty())
             return null;
-
         Node newTop = head.next;
         E item = head.payload;
         head = newTop;
-
+        size--;
 
         return item;
     }
 
     public void push(E item) {
         Node newTop = new Node(item);
-
         newTop.next = head;
         head = newTop;
+        size++;
     }
 }

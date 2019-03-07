@@ -22,7 +22,7 @@ public class Player implements IGameObject {
     public Player(Texture texture, Game.Direction startDirection) {
         this.sprite = new Sprite(texture);
         this.currentDirection = startDirection;
-        backupLocation = null;
+        this.backupLocation = null;
     }
 
     public void moveForward(int steps, int moveDistance, Game game, Tile currentTile) {
@@ -55,15 +55,22 @@ public class Player implements IGameObject {
         }
     }
 
-    private void moveBackwards (int moveDistance) {
+    private void moveBackwards(int moveDistance) {
+        if (checkForNegativeCoordinates(moveDistance)) {
+            return;
+        }
         switch (currentDirection) {
-            case North: this.setY(this.getY() - moveDistance);
+            case North:
+                this.setY(this.getY() - moveDistance);
                 break;
-            case East: this.setX(this.getX() - moveDistance);
+            case East:
+                this.setX(this.getX() - moveDistance);
                 break;
-            case South: this.setY(this.getY() + moveDistance);
+            case South:
+                this.setY(this.getY() + moveDistance);
                 break;
-            case West: this.setX(this.getX() + moveDistance);
+            case West:
+                this.setX(this.getX() + moveDistance);
                 break;
         }
     }

@@ -19,7 +19,7 @@ public class CustomCamera extends OrthographicCamera {
         float pixelWidth = widthNumberOfTiles * x;
 
 
-        this.setToOrtho(false, pixelWidth, pixelHeight);
+        this.setToOrtho(false, pixelWidth*2, pixelHeight*2);
         this.update();
 
     }
