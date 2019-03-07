@@ -25,16 +25,21 @@ public class Player implements IGameObject {
         this.backupLocation = null;
     }
 
-    public void moveForward(int steps, int moveDistance, Game game, Tile currentTile) {
+    public void moveStraight(int steps, int moveDistance, Game game, Tile currentTile) {
         for (int i = 0; i < steps; i++) {
-            moveForward(moveDistance, game);
+            moveStraight(moveDistance, game.grid);
         }
         game.checkCollision();
     }
 
-    private void moveForward(int moveDistance, Game game) {
+    private void handleDeath(TileGrid grid) {
+        if (backupLocation != null) {
+            resetToBackupLocation(grid);
+            deleteBackupLocation();
+        }
+    }
 
-        TileGrid grid = game.grid;
+    private void moveStraight(int moveDistance, TileGrid grid) {
 
         switch (currentDirection) {
             case North:
@@ -49,14 +54,6 @@ public class Player implements IGameObject {
             case West:
                 this.setPosition((int) getY(), (int) getX() - moveDistance, grid);
                 break;
-        }
-    }
-
-
-    private void handleDeath(TileGrid grid) {
-        if (backupLocation != null) {
-            resetToBackupLocation(grid);
-            deleteBackupLocation();
         }
     }
 
@@ -128,9 +125,9 @@ public class Player implements IGameObject {
 
 
     public void resetToBackupLocation(TileGrid grid) {
-        int tilesizeInPx = grid.tileSizeInPx;
+        int tileSizeInPx = grid.tileSizeInPx;
         if (this.backupLocation != null) {
-            setPosition(backupLocation.y * tilesizeInPx, backupLocation.x *tilesizeInPx, grid);
+            setPosition(backupLocation.y * tileSizeInPx, backupLocation.x *tileSizeInPx, grid);
             System.out.println(grid.getTileFromCoordinates(this.getY(), this.getX()));
         }
     }

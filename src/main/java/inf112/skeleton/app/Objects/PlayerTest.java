@@ -45,7 +45,7 @@ public class PlayerTest {
     public void updatePlayerPosInGridTest() {
         setup();
         Tile currentTile = game.grid.getTileFromCoordinates(player.getY(), player.getX());
-        player.moveForward(2, TILE_SIZE_IN_PX, game, currentTile);
+        player.moveStraight(2, TILE_SIZE_IN_PX, game, currentTile);
 
         List list = game.grid.getTile(0,0).getGameObjects();
 

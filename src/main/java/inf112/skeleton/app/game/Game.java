@@ -79,15 +79,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         grid.getTile(0,0).addGameObject(player);
 
         drawFiveCards();
-        addObstaclesToMap();
-    }
-
-    public void addObstaclesToMap() {
-        TeleportObstacle teleport = new TeleportObstacle(gameMap, grid);
-
-        TeleportObstacle tele = new TeleportObstacle(gameMap,grid);
-        CollisionHandler coll = new CollisionHandler(this);
-
     }
 
     //"draw", as in drawing cards from a deck of cards.
@@ -234,11 +225,11 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             player.uTurn();
         }
         if (keycode == Input.Keys.UP) {
-            player.moveForward(1, moveDistance, this, currentTile);
+            player.moveStraight(1, moveDistance, this, currentTile);
         }
 
         if (keycode == Input.Keys.DOWN) {
-            player.moveForward(1,moveDistance * (-1),this,currentTile);
+            player.moveStraight(1,moveDistance * (-1),this,currentTile);
         }
 
         if (keycode == Input.Keys.R) {
@@ -253,13 +244,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         MoveCard.Type type = temp.getType();
         switch (type) {
             case move1:
-                player.moveForward(1, moveDistance, this, currentTile);
+                player.moveStraight(1, moveDistance, this, currentTile);
                 break;
             case move2:
-                player.moveForward(2, moveDistance, this, currentTile);
+                player.moveStraight(2, moveDistance, this, currentTile);
                 break;
             case move3:
-                player.moveForward(3, moveDistance, this, currentTile);
+                player.moveStraight(3, moveDistance, this, currentTile);
                 break;
             case uturn:
                 player.uTurn();
@@ -272,7 +263,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                 player.turnRight();
                 break;
             case reverse:
-                player.moveForward(1,moveDistance * (-1),this,currentTile);
+                player.moveStraight(1,moveDistance * (-1),this,currentTile);
             default:
                 System.out.println("did nothing");
         }
@@ -282,14 +273,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public void checkCollision() {
         CollisionHandler collisionHandler = new CollisionHandler(this);
         collisionHandler.checkCollision();
-    }
-
-    public void updatePlayerPositionInGrid(Tile currentTile) {
-        float x = player.getX();
-        float y = player.getY();
-
-        currentTile.getGameObjects().remove(player);
-        grid.getTileFromCoordinates(y, x).addGameObject(player);
     }
 
     @Override
