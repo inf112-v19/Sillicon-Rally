@@ -93,6 +93,8 @@ public class Player implements IGameObject {
         if (backupLocation != null) {
             resetToBackupLocation(game);
             deleteBackupLocation();
+        } else {
+            System.exit(0);
         }
     }
 
