@@ -63,8 +63,13 @@ public class Player implements IGameObject {
                 return (this.getY() - moveDistance) < 0;
         }
 
-        float newXLocation = this.getX() + moveDistance;
-        float newYLocation = this.getY() + moveDistance;
+        float newXLocation = this.getX();
+        float newYLocation = this.getY();
+
+        if (currentDirection == Game.Direction.East)
+            newXLocation+= moveDistance;
+        if (currentDirection == Game.Direction.South)
+            newYLocation+= moveDistance;
 
         try {
             game.grid.getTileFromCoordinates(newYLocation, newXLocation);
