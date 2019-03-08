@@ -13,14 +13,14 @@ import inf112.skeleton.app.map.GameMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObjectConstructor {
+public class GameObjectFactory {
     public GameMap map;
     public TileGrid grid;
     public Player player;
     public List<IGameObject> flags;
     public TeleportObstacle teleportObstacle;
 
-    public ObjectConstructor(GameMap map, TileGrid grid) {
+    public GameObjectFactory(GameMap map, TileGrid grid) {
         this.map = map;
         this.grid = grid;
 

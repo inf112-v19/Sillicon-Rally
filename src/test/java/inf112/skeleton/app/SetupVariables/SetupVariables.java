@@ -18,11 +18,11 @@ public class SetupVariables {
     public GameMap gameMap;
     public TeleportObstacle teleport;
     public Player player;
-    int TILESIZE_IN_PX;
+    public int TILESIZE_IN_PX;
 
     public SetupVariables() {
         setup();
-        this.gameMap = new GameMap("core/assets/map.v.01.tmx");
+        this.gameMap = new GameMap("map.v.01.tmx");
         this.grid = makeGrid(gameMap);
         this.teleport = new TeleportObstacle(gameMap, grid);
         this.player = new Player();

@@ -2,6 +2,7 @@ package inf112.skeleton.app.Objects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.game.Game;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
@@ -25,60 +26,40 @@ public class Player implements IGameObject {
         this.backupLocation = null;
     }
 
-    public void moveForward(int steps, int moveDistance, Game game, Tile currentTile) {
+    public void moveStraight(int steps, int moveDistance, TileGrid grid) {
         for (int i = 0; i < steps; i++) {
-            moveForward(moveDistance, game);
-            game.updatePlayerPositionInGrid(currentTile);
-            currentTile = game.grid.getTileFromCoordinates(this.getY(), this.getX());
+            moveStraight(moveDistance, grid);
         }
-        game.checkCollision();
+        checkCollision(grid);
     }
 
-    private void moveForward(int moveDistance, Game game) {
-        if (chekForOutOfMapMove(moveDistance, game)) {
-            handleDeath(game);
-            return;
+    private void checkCollision(TileGrid grid) {
+        CollisionHandler collisionHandler = new CollisionHandler(grid, this);
+        collisionHandler.checkCollision();
+    }
+
+    private void handleDeath(TileGrid grid) {
+        if (backupLocation != null) {
+            resetToBackupLocation(grid);
+            deleteBackupLocation();
         }
+    }
+
+    private void moveStraight(int moveDistance, TileGrid grid) {
+
         switch (currentDirection) {
             case North:
-                this.setY(this.getY() + moveDistance);
+                this.setPosition((int) getY()+moveDistance, (int) getX(), grid);
                 break;
             case East:
-                this.setX(this.getX() + moveDistance);
+                this.setPosition((int) getY(), (int) getX() + moveDistance, grid);
                 break;
             case South:
-                this.setY(this.getY() - moveDistance);
+                this.setPosition((int) getY()- moveDistance, (int) getX(), grid);
                 break;
             case West:
-                this.setX(this.getX() - moveDistance);
+                this.setPosition((int) getY(), (int) getX() - moveDistance, grid);
                 break;
-        }
-    }
-
-    private boolean chekForOutOfMapMove(int moveDistance, Game game) {
-        switch (currentDirection) {
-            case West:
-                return (this.getX() - moveDistance) < 0;
-            case South:
-                return (this.getY() - moveDistance) < 0;
-        }
-
-        float newXLocation = this.getX() + moveDistance;
-        float newYLocation = this.getY() + moveDistance;
-
-        try {
-            game.grid.getTileFromCoordinates(newYLocation, newXLocation);
-        } catch (IllegalArgumentException e) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private void handleDeath(Game game) {
-        if (backupLocation != null) {
-            resetToBackupLocation(game);
-            deleteBackupLocation();
         }
     }
 
@@ -149,11 +130,11 @@ public class Player implements IGameObject {
     }
 
 
-    public void resetToBackupLocation(Game game) {
-        int tilesizeInPx = game.getTileSize();
+    public void resetToBackupLocation(TileGrid grid) {
+        int tileSizeInPx = grid.tileSizeInPx;
         if (this.backupLocation != null) {
-            setPosition(backupLocation.y * tilesizeInPx, backupLocation.x *tilesizeInPx, game.grid);
-            System.out.println(game.grid.getTileFromCoordinates(this.getY(), this.getX()));
+            setPosition(backupLocation.y * tileSizeInPx, backupLocation.x *tileSizeInPx, grid);
+            System.out.println(grid.getTileFromCoordinates(this.getY(), this.getX()));
         }
     }
 
@@ -180,14 +161,32 @@ public class Player implements IGameObject {
         return this.x;
     }
 
+    public boolean checkIfMoveIsOutOfBounds(int y, int x, TileGrid grid) {
+        if (y < 0 || x < 0)
+            return true;
+
+        int yTile = y /grid.tileSizeInPx;
+        int xTile = x/grid.tileSizeInPx;
+        if (yTile >= grid.rows || xTile >= grid.columns)
+            return true;
+
+        return false;
+    }
+
 
     public void setPosition(int y, int x, TileGrid grid) {
+        if (checkIfMoveIsOutOfBounds(y, x, grid)) {
+            handleDeath(grid);
+            return;
+        }
+
         Tile currentTile = grid.getTileFromCoordinates(getY(), getX());
         setX(x);
         setY(y);
 
         currentTile.getGameObjects().remove(this);
         grid.getTileFromCoordinates(y, x).addGameObject(this);
+        checkCollision(grid);
     }
 
 }
