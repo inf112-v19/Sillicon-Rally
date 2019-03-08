@@ -5,8 +5,10 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.collision.objects.FlagObject;
 import inf112.skeleton.app.collision.objects.TeleportObstacle;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
@@ -19,6 +21,8 @@ public class SetupVariables {
     public TeleportObstacle teleport;
     public Player player;
     public int TILESIZE_IN_PX;
+    public FlagObject flag;
+
 
     public SetupVariables() {
         setup();
@@ -27,6 +31,7 @@ public class SetupVariables {
         this.teleport = new TeleportObstacle(gameMap, grid);
         this.player = new Player();
         this.TILESIZE_IN_PX = gameMap.getTileSize();
+        this.flag = new FlagObject(2,4,grid);
     }
 
     public SetupVariables renew() {

@@ -10,8 +10,8 @@ import inf112.skeleton.app.grid.TileGrid;
 
 public class FlagObject implements IGameObject {
     Sprite sprite;
-    int yLocation;
-    int xLocation;
+    public int yLocation;
+    public int xLocation;
     Tile flagTile;
 
     public FlagObject(RectangleMapObject flagFromTiled, TileGrid grid) {
@@ -25,6 +25,15 @@ public class FlagObject implements IGameObject {
         flagTile.addGameObject(this);
     }
 
+    public FlagObject(int y, int x, TileGrid grid){
+        this.yLocation = y;
+        this.xLocation = x;
+        sprite = null;
+        flagTile = grid.getTileFromCoordinates(yLocation, xLocation);
+        flagTile.addGameObject(this);
+
+    }
+
     public void handleCollision(Player player, TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
@@ -33,6 +42,8 @@ public class FlagObject implements IGameObject {
             removeFlagFromMap(grid);
         }
     }
+
+
 
 
     @Override
