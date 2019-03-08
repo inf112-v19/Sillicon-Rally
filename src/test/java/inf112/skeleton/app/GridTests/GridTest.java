@@ -4,12 +4,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class GridTest {
     int rows = 10;
