@@ -2,6 +2,7 @@ package inf112.skeleton.app.Objects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.game.Game;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
@@ -25,11 +26,16 @@ public class Player implements IGameObject {
         this.backupLocation = null;
     }
 
-    public void moveStraight(int steps, int moveDistance, Game game, Tile currentTile) {
+    public void moveStraight(int steps, int moveDistance, TileGrid grid) {
         for (int i = 0; i < steps; i++) {
-            moveStraight(moveDistance, game.grid);
+            moveStraight(moveDistance, grid);
         }
-        game.checkCollision();
+        checkCollision(grid);
+    }
+
+    private void checkCollision(TileGrid grid) {
+        CollisionHandler collisionHandler = new CollisionHandler(grid, this);
+        collisionHandler.checkCollision();
     }
 
     private void handleDeath(TileGrid grid) {
@@ -155,7 +161,7 @@ public class Player implements IGameObject {
         return this.x;
     }
 
-    private boolean checkForIllegalOutOfMapMove(int y, int x, TileGrid grid) {
+    public boolean checkIfMoveIsOutOfBounds(int y, int x, TileGrid grid) {
         if (y < 0 || x < 0)
             return true;
 
@@ -169,7 +175,7 @@ public class Player implements IGameObject {
 
 
     public void setPosition(int y, int x, TileGrid grid) {
-        if (checkForIllegalOutOfMapMove(y, x, grid)) {
+        if (checkIfMoveIsOutOfBounds(y, x, grid)) {
             handleDeath(grid);
             return;
         }
@@ -180,6 +186,7 @@ public class Player implements IGameObject {
 
         currentTile.getGameObjects().remove(this);
         grid.getTileFromCoordinates(y, x).addGameObject(this);
+        checkCollision(grid);
     }
 
 }

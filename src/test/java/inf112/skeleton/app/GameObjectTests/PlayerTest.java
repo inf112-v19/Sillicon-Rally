@@ -1,19 +1,15 @@
-package inf112.skeleton.app.GridTests;
+package inf112.skeleton.app.GameObjectTests;
 
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.SetupVariables.SetupVariables;
 import inf112.skeleton.app.grid.Tile;
-import inf112.skeleton.app.game.Game;
-
 import inf112.skeleton.app.grid.TileGrid;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class PlayerTest {
 
-    Game.Direction startDirection = Game.Direction.West;
     Player player;
     TileGrid grid;
     int TILE_SIZE_IN_PX;
@@ -49,6 +45,22 @@ public class PlayerTest {
         setup();
         player.setY(135);
         assertEquals(135, player.getY());
+    }
+
+    @Test
+    public void checkIfMoveIsOutOfBoundsTest() {
+        int max = Integer.MAX_VALUE;
+        setup();
+        assertEquals(true, player.checkIfMoveIsOutOfBounds(-1, -1, grid));
+        assertEquals(true, player.checkIfMoveIsOutOfBounds(max, max, grid));
+    }
+
+    @Test
+    public void moveStraightTest() {
+        setup();
+        Tile testTile = new Tile(0,0, grid.tileSizeInPx);
+        player.moveStraight(2, grid.tileSizeInPx, grid);
+        assertEquals(true, testTile.equals(grid.getTile(0, 0)));
     }
 
 }

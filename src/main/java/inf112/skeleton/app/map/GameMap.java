@@ -5,6 +5,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
+/*
+* An abstraction over a TiledMap, with some methods that makes it easier to get
+* layers from the map.
+ */
 public class GameMap  {
     TiledMap tiledMap;
 

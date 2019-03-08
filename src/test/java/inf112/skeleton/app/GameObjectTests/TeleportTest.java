@@ -1,24 +1,11 @@
-package inf112.skeleton.app.TeleportTests;
+package inf112.skeleton.app.GameObjectTests;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.headless.HeadlessApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.SetupVariables.SetupVariables;
-import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.collision.objects.TeleportObstacle;
-import inf112.skeleton.app.game.Game;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
-import inf112.skeleton.app.map.GameMap;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

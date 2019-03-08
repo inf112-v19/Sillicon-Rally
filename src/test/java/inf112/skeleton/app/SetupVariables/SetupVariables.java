@@ -18,7 +18,7 @@ public class SetupVariables {
     public GameMap gameMap;
     public TeleportObstacle teleport;
     public Player player;
-    int TILESIZE_IN_PX;
+    public int TILESIZE_IN_PX;
 
     public SetupVariables() {
         setup();

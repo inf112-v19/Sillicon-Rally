@@ -19,8 +19,7 @@ import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
-import inf112.skeleton.app.collision.objects.ObjectConstructor;
-import inf112.skeleton.app.collision.objects.TeleportObstacle;
+import inf112.skeleton.app.collision.objects.GameObjectFactory;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
@@ -74,7 +73,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         listt = new MoveCard[5];
         booList = new Boolean[5];
 
-        ObjectConstructor constructor = new ObjectConstructor(gameMap, grid);
+        GameObjectFactory constructor = new GameObjectFactory(gameMap, grid);
         player = constructor.player;
         grid.getTile(0,0).addGameObject(player);
 
@@ -225,11 +224,11 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             player.uTurn();
         }
         if (keycode == Input.Keys.UP) {
-            player.moveStraight(1, moveDistance, this, currentTile);
+            player.moveStraight(1, moveDistance, grid);
         }
 
         if (keycode == Input.Keys.DOWN) {
-            player.moveStraight(1,moveDistance * (-1),this,currentTile);
+            player.moveStraight(1,moveDistance * (-1),grid);
         }
 
         if (keycode == Input.Keys.R) {
@@ -244,13 +243,13 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         MoveCard.Type type = temp.getType();
         switch (type) {
             case move1:
-                player.moveStraight(1, moveDistance, this, currentTile);
+                player.moveStraight(1, moveDistance, grid);
                 break;
             case move2:
-                player.moveStraight(2, moveDistance, this, currentTile);
+                player.moveStraight(2, moveDistance, grid);
                 break;
             case move3:
-                player.moveStraight(3, moveDistance, this, currentTile);
+                player.moveStraight(3, moveDistance, grid);
                 break;
             case uturn:
                 player.uTurn();
@@ -263,17 +262,19 @@ public class Game extends ApplicationAdapter implements InputProcessor {
                 player.turnRight();
                 break;
             case reverse:
-                player.moveStraight(1,moveDistance * (-1),this,currentTile);
+                player.moveStraight(1,moveDistance * (-1),grid);
             default:
                 System.out.println("did nothing");
         }
 
     }
 
+    /*
     public void checkCollision() {
         CollisionHandler collisionHandler = new CollisionHandler(this);
         collisionHandler.checkCollision();
     }
+    */
 
     @Override
     public void dispose() {
