@@ -24,7 +24,7 @@ Bli enda flinkere til å bruke Trello project board, inkludert deadlines.
 
 Forbedringspunkter:
 1. Fordeling av arbeidsoppgaver.
-2. Bli flinkere med Git. Alle skal gjennom kurset på https://learngitbranching.js.org/ - automatic! [learninggitbranching](https://learngitbranching.js.org/)
+2. Bli flinkere med Git. Alle skal gjennom kurset på [learning git branching](https://learngitbranching.js.org/)
 3. Skrive flere møtereferater.
  
  
