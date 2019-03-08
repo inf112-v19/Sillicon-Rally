@@ -1,6 +1,6 @@
     #Obligatorisk Øvelse 3
 
-##Deloppgave 1
+##Deloppgave 1##
 1. Rollene funker bra. Kundekontakt kan mest om spillet, regler og hva det er vi egentlig jobber for å få til, mens gruppeleder har overordnet ansvar for koden og at arbeidsoppgaver blir gjort.
 
 2. Vi må lære oss Git bedre. Vi har hatt noen utfordringer mtp hvordan vi merger vårt eget arbeid opp mot andres arbeid.
@@ -29,7 +29,7 @@ Forbedringspunkter:
  
  
  
-##Deloppgave 2
+##Deloppgave 2##
 Presisering av krav som har kommet fra kunden. (“X” = Ferdig “(X)” = Delvis ferdig).
      - Kunne få alle typene bevegelseskort			X
      - Dele ut 9 kort						
@@ -71,7 +71,7 @@ Verifisering av krav:
 Vi mangler foreløpig å implementere runder i spillet, dvs at det ikke er noen struktur enda. Vi har ingen poengsum, og det er ikke alle «farer» som er blitt implementert heller. Det som har blitt prioritert er å få de grunnleggende  byggesteinene på plass slik at vi lettere kan utvide spillet etter hvert.
  
  
-##Deloppgave 3
+##Deloppgave 3##
 For å kjøre programmet må man sette working directory til core/assets, og så kjøre main-metoden i Main-klassen som ligger i packagen «game».
 For å kjøre alle testene i Intellij:
   1. Gå til run -> edit configurations
