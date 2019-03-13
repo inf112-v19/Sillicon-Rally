@@ -30,10 +30,10 @@ public class Player implements IGameObject {
         for (int i = 0; i < steps; i++) {
             moveStraight(moveDistance, grid);
         }
-        checkCollision(grid);
+    //    checkCollision(grid);
     }
 
-    private void checkCollision(TileGrid grid) {
+    public void checkCollision(TileGrid grid) {
         CollisionHandler collisionHandler = new CollisionHandler(grid, this);
         collisionHandler.checkCollision();
     }
@@ -186,7 +186,7 @@ public class Player implements IGameObject {
 
         currentTile.getGameObjects().remove(this);
         grid.getTileFromCoordinates(y, x).addGameObject(this);
-        checkCollision(grid);
+       // checkCollision(grid);
     }
 
 }

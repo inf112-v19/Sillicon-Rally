@@ -235,6 +235,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
             drawFiveCards();
         }
 
+        player.checkCollision(grid);
+
         return false;
     }
 

@@ -19,6 +19,8 @@ public class GameObjectFactory {
     public Player player;
     public List<IGameObject> flags;
     public TeleportObstacle teleportObstacle;
+    public List<ConveyerObject> oneForwardBelts;
+    public List<ConveyerObject> twoForwardBelts;
 
     public GameObjectFactory(GameMap map, TileGrid grid) {
         this.map = map;
@@ -27,6 +29,7 @@ public class GameObjectFactory {
         createPlayer();
         createFlags();
         createTeleporter();
+        createConveyerBelts();
     }
 
     private void createPlayer() {
@@ -43,6 +46,27 @@ public class GameObjectFactory {
             RectangleMapObject flagRectangleObject = (RectangleMapObject) flag;
             flags.add(new FlagObject(flagRectangleObject, grid));
         }
+
+    }
+
+    private void createConveyerBelts() {
+        createFastBelt();
+        createNormalBelt();
+    }
+
+    private void createNormalBelt() {
+        int speed = 1;
+        oneForwardBelts = new ArrayList<>();
+
+        MapLayer layer = map.getMapLayerByName("OneForwardBelts");
+
+        for (MapObject belt : layer.getObjects()) {
+            RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
+            oneForwardBelts.add(new ConveyerObject(beltRectangleObject, grid, speed));
+        }
+    }
+
+    private void createFastBelt() {
 
     }
 

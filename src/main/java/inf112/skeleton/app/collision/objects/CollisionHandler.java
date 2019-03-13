@@ -33,6 +33,9 @@ public class CollisionHandler {
             if (spritesOnTile.get(i) instanceof  FlagObject) {
                 ((FlagObject) spritesOnTile.get(i)).handleCollision(player, grid);
             }
+            if (spritesOnTile.get(i) instanceof  ConveyerObject){
+                ((ConveyerObject) spritesOnTile.get(i)).handleCollision(player, grid);
+            }
         }
 
     }
