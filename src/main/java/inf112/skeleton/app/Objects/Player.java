@@ -8,7 +8,7 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class Player implements IGameObject {
-    Game.Direction currentDirection;
+    public Game.Direction currentDirection;
     Tile backupLocation;
     Sprite sprite;
     float x;
@@ -102,6 +102,7 @@ public class Player implements IGameObject {
     }
 
 
+
     public void uTurn() {
         sprite.rotate(180);
 
@@ -118,6 +119,7 @@ public class Player implements IGameObject {
             case West:
                 currentDirection = Game.Direction.East;
         }
+
     }
 
     public void setBackupLocation(Tile backupLocation) {

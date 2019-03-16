@@ -19,8 +19,10 @@ public class GameObjectFactory {
     public Player player;
     public List<IGameObject> flags;
     public TeleportObstacle teleportObstacle;
-    public List<ConveyerObject> oneForwardBelts;
-    public List<ConveyerObject> twoForwardBelts;
+    public List<ConveyorObjectWest> oneForwardBeltsWest;
+    public List<ConveyorObjectEast> oneForwardBeltsEast;
+    public List<ConveyorObjectNorth> oneForwardBeltsNorth;
+    public List<ConveyorObjectSouth> oneForwardBeltsSouth;
 
     public GameObjectFactory(GameMap map, TileGrid grid) {
         this.map = map;
@@ -29,7 +31,7 @@ public class GameObjectFactory {
         createPlayer();
         createFlags();
         createTeleporter();
-        createConveyerBelts();
+        createConveyorBelts();
     }
 
     private void createPlayer() {
@@ -49,26 +51,42 @@ public class GameObjectFactory {
 
     }
 
-    private void createConveyerBelts() {
-        createFastBelt();
-        createNormalBelt();
+    private void createConveyorBelts() {
+        createNormalBelts();
     }
 
-    private void createNormalBelt() {
+    private void createNormalBelts() {
         int speed = 1;
-        oneForwardBelts = new ArrayList<>();
+        oneForwardBeltsWest = new ArrayList<>();
+        oneForwardBeltsEast = new ArrayList<>();
+        oneForwardBeltsNorth = new ArrayList<>();
+        oneForwardBeltsSouth = new ArrayList<>();
 
-        MapLayer layer = map.getMapLayerByName("OneForwardBelts");
+        MapLayer beltWest = map.getMapLayerByName("OneForwardBeltsWest");
+        MapLayer beltEast = map.getMapLayerByName("OneForwardBeltsEast");
+        MapLayer beltNorth = map.getMapLayerByName("OneForwardBeltsNorth");
+        MapLayer beltSouth = map.getMapLayerByName("OneForwardBeltsSouth");
 
-        for (MapObject belt : layer.getObjects()) {
+
+        for (MapObject belt : beltWest.getObjects()) {
             RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
-            oneForwardBelts.add(new ConveyerObject(beltRectangleObject, grid, speed));
+            oneForwardBeltsWest.add(new ConveyorObjectWest(beltRectangleObject, grid, speed));
+        }
+       for (MapObject belt: beltEast.getObjects()) {
+            RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
+            oneForwardBeltsEast.add(new ConveyorObjectEast(beltRectangleObject, grid, speed));
+        }
+       for (MapObject belt: beltNorth.getObjects()) {
+            RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
+            oneForwardBeltsNorth.add(new ConveyorObjectNorth(beltRectangleObject, grid, speed));
+        }
+        for (MapObject belt: beltSouth.getObjects()) {
+            RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
+            oneForwardBeltsSouth.add(new ConveyorObjectSouth(beltRectangleObject, grid, speed));
         }
     }
 
-    private void createFastBelt() {
 
-    }
 
     private void createTeleporter() {
         this.teleportObstacle = new TeleportObstacle(map, grid);
