@@ -35,8 +35,8 @@ public class CollisionHandler {
             if (spritesOnTile.get(i) instanceof ConveyorObjectWest){
                 ((ConveyorObjectWest) spritesOnTile.get(i)).handleCollision(player, grid);
             }
-            if (spritesOnTile.get(i) instanceof ConveyorObjectEast){
-                ((ConveyorObjectEast) spritesOnTile.get(i)).handleCollision(player, grid);
+            if (spritesOnTile.get(i) instanceof ConveyorBeltObject){
+                ((ConveyorBeltObject) spritesOnTile.get(i)).handleCollision(player, grid);
             }
             if (spritesOnTile.get(i) instanceof ConveyorObjectNorth){
                 ((ConveyorObjectNorth) spritesOnTile.get(i)).handleCollision(player, grid);

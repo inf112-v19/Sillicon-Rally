@@ -20,7 +20,7 @@ public class GameObjectFactory {
     public List<IGameObject> flags;
     public TeleportObstacle teleportObstacle;
     public List<ConveyorObjectWest> oneForwardBeltsWest;
-    public List<ConveyorObjectEast> oneForwardBeltsEast;
+    public List<ConveyorBeltObject> oneForwardBeltsEast;
     public List<ConveyorObjectNorth> oneForwardBeltsNorth;
     public List<ConveyorObjectSouth> oneForwardBeltsSouth;
 
@@ -74,7 +74,7 @@ public class GameObjectFactory {
         }
        for (MapObject belt: beltEast.getObjects()) {
             RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
-            oneForwardBeltsEast.add(new ConveyorObjectEast(beltRectangleObject, grid, speed));
+            oneForwardBeltsEast.add(new ConveyorBeltObject(beltRectangleObject, grid, speed));
         }
        for (MapObject belt: beltNorth.getObjects()) {
             RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;

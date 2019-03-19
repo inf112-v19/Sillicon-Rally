@@ -10,14 +10,10 @@ import inf112.skeleton.app.grid.TileGrid;
 
 public class ConveyorObjectWest implements IGameObject {
     private int speed;
-    Sprite sprite;
     public int yLocation;
     public int xLocation;
     Tile conveyorTile;
-    Game.Direction originDirection;
     Game.Direction temporaryDirection = Game.Direction.West;
-    Player player;
-    TileGrid grid;
 
 
     public ConveyorObjectWest(RectangleMapObject conveyerFromTile, TileGrid grid, int speed){

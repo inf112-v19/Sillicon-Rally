@@ -8,21 +8,17 @@ import inf112.skeleton.app.game.Game;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
-public class ConveyorObjectEast implements IGameObject {
+public class ConveyorBeltObject implements IGameObject {
     private int speed;
-    Sprite sprite;
     public int yLocation;
     public int xLocation;
     Tile conveyorTile;
-    Game.Direction originDirection;
-    Game.Direction temporaryDirection;
-    Player player;
-    TileGrid grid;
 
-    public ConveyorObjectEast(RectangleMapObject conveyerFromTile, TileGrid grid, int speed){
+    public ConveyorBeltObject(RectangleMapObject conveyerFromTile, TileGrid grid, int speed){
         this.speed = speed;
         yLocation = (int) conveyerFromTile.getRectangle().getY();
         xLocation = (int) conveyerFromTile.getRectangle().getX();
+        System.out.println(conveyerFromTile.getProperties().get("east"));
 
         conveyorTile = grid.getTileFromCoordinates(yLocation, xLocation);
         conveyorTile.addGameObject(this);
@@ -33,7 +29,7 @@ public class ConveyorObjectEast implements IGameObject {
         int moveDistance = grid.tileSizeInPx;
 
         Game.Direction originDirection = player.currentDirection;
-        temporaryDirection = Game.Direction.East;
+        Game.Direction temporaryDirection = Game.Direction.East;
         player.currentDirection = temporaryDirection;
         player.moveStraight(speed, moveDistance, grid);
         player.currentDirection = originDirection;
