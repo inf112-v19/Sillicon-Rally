@@ -3,7 +3,7 @@ package inf112.skeleton.app.GameObjectTests;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.SetupVariables.SetupVariables;
 import inf112.skeleton.app.collision.objects.ConveyorBeltObject;
-import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.TileGrid;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +28,7 @@ private ConveyorBeltObject belt;
        setup();
        player = new Player();
        player.setPosition(2 * TILE_SIZE_IN_PIX, 2 *TILE_SIZE_IN_PIX, grid);
-       belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, Game.Direction.West);
+       belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, RoboGame.Direction.West);
        belt.handleCollision(player,grid);
        assertEquals(1 * TILE_SIZE_IN_PIX, (int) (player.getX()));
    }
@@ -37,7 +37,7 @@ private ConveyorBeltObject belt;
         setup();
         player = new Player();
         player.setPosition(2 * TILE_SIZE_IN_PIX, 2 *TILE_SIZE_IN_PIX, grid);
-        belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, Game.Direction.East);
+        belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, RoboGame.Direction.East);
         belt.handleCollision(player,grid);
         assertEquals(3 * TILE_SIZE_IN_PIX, (int) (player.getX()));
     }
@@ -48,7 +48,7 @@ private ConveyorBeltObject belt;
         setup();
         player = new Player();
         player.setPosition(2 * TILE_SIZE_IN_PIX, 2 *TILE_SIZE_IN_PIX, grid);
-        belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, Game.Direction.North);
+        belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, RoboGame.Direction.North);
         belt.handleCollision(player,grid);
         assertEquals(3 * TILE_SIZE_IN_PIX, (int) (player.getY()));
     }
@@ -58,7 +58,7 @@ private ConveyorBeltObject belt;
         setup();
         player = new Player();
         player.setPosition(2 * TILE_SIZE_IN_PIX, 2 *TILE_SIZE_IN_PIX, grid);
-        belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, Game.Direction.South);
+        belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, RoboGame.Direction.South);
         belt.handleCollision(player,grid);
         assertEquals(1 * TILE_SIZE_IN_PIX, (int) (player.getY()));
     }
@@ -69,7 +69,7 @@ private ConveyorBeltObject belt;
        setup();
        player = new Player();
        player.setPosition(0,0,grid);
-       belt = new ConveyorBeltObject(0,0, grid, 1, Game.Direction.West);
+       belt = new ConveyorBeltObject(0,0, grid, 1, RoboGame.Direction.West);
        belt.handleCollision(player,grid);
        assertEquals(0, (int) (player.getX()));
     }

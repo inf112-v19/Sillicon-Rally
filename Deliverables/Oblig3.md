@@ -72,7 +72,7 @@ Vi mangler foreløpig å implementere runder i spillet, dvs at det ikke er noen 
  
  
 ## Deloppgave 3
-For å kjøre programmet må man sette working directory til core/assets, og så kjøre main-metoden i Main-klassen som ligger i packagen «game».
+For å kjøre programmet må man sette working directory til core/assets, og så kjøre main-metoden i Main-klassen som ligger i packagen «roboGame».
 For å kjøre alle testene i Intellij:
   1. Gå til run -> edit configurations
   2. Lag en ny junit tests configuration

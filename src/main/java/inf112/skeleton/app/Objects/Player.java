@@ -3,12 +3,12 @@ package inf112.skeleton.app.Objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
-import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class Player implements IGameObject {
-    public Game.Direction currentDirection;
+    public RoboGame.Direction currentDirection;
     Tile backupLocation;
     Sprite sprite;
     float x;
@@ -16,11 +16,11 @@ public class Player implements IGameObject {
 
     //Constructor used for testing purposes only
     public Player() {
-        this.currentDirection = Game.Direction.West;
+        this.currentDirection = RoboGame.Direction.West;
         backupLocation = null;
     }
 
-    public Player(Texture texture, Game.Direction startDirection) {
+    public Player(Texture texture, RoboGame.Direction startDirection) {
         this.sprite = new Sprite(texture);
         this.currentDirection = startDirection;
         this.backupLocation = null;
@@ -68,16 +68,16 @@ public class Player implements IGameObject {
 
         switch (currentDirection) {
             case North:
-                currentDirection = Game.Direction.East;
+                currentDirection = RoboGame.Direction.East;
                 break;
             case East:
-                currentDirection = Game.Direction.South;
+                currentDirection = RoboGame.Direction.South;
                 break;
             case South:
-                currentDirection = Game.Direction.West;
+                currentDirection = RoboGame.Direction.West;
                 break;
             case West:
-                currentDirection = Game.Direction.North;
+                currentDirection = RoboGame.Direction.North;
         }
 
     }
@@ -87,16 +87,16 @@ public class Player implements IGameObject {
 
         switch (currentDirection) {
             case North:
-                currentDirection = Game.Direction.West;
+                currentDirection = RoboGame.Direction.West;
                 break;
             case East:
-                currentDirection = Game.Direction.North;
+                currentDirection = RoboGame.Direction.North;
                 break;
             case South:
-                currentDirection = Game.Direction.East;
+                currentDirection = RoboGame.Direction.East;
                 break;
             case West:
-                currentDirection = Game.Direction.South;
+                currentDirection = RoboGame.Direction.South;
         }
 
     }
@@ -108,16 +108,16 @@ public class Player implements IGameObject {
 
         switch (currentDirection) {
             case North:
-                currentDirection = Game.Direction.South;
+                currentDirection = RoboGame.Direction.South;
                 break;
             case East:
-                currentDirection = Game.Direction.West;
+                currentDirection = RoboGame.Direction.West;
                 break;
             case South:
-                currentDirection = Game.Direction.North;
+                currentDirection = RoboGame.Direction.North;
                 break;
             case West:
-                currentDirection = Game.Direction.East;
+                currentDirection = RoboGame.Direction.East;
         }
 
     }

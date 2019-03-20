@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="10" height="8" tilewidth="96" tileheight="96" infinite="0" nextlayerid="10" nextobjectid="34">
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="10" height="8" tilewidth="96" tileheight="96" infinite="0" nextlayerid="13" nextobjectid="37">
  <tileset firstgid="1" source="standard.tsx"/>
  <layer id="1" name="Rutelag 1" width="10" height="8">
   <data encoding="csv">
 5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,
-5,5,47,5,5,6,5,5,5,5,
+5,5,48,5,5,6,5,5,5,5,
 5,5,5,5,5,5,45,45,5,5,
 5,5,5,5,5,5,5,5,5,5,
 43,5,6,5,5,5,5,47,5,5,

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
@@ -14,7 +14,7 @@ public class ConveyorBeltObject implements IGameObject {
     public int yLocation;
     public int xLocation;
     Tile conveyorTile;
-    public Game.Direction direction;
+    public RoboGame.Direction direction;
 
     public ConveyorBeltObject(RectangleMapObject conveyorFromTile, TileGrid grid, int speed){
         this.speed = speed;
@@ -30,7 +30,7 @@ public class ConveyorBeltObject implements IGameObject {
     }
 
     //For testing only
-    public ConveyorBeltObject(int y, int x, TileGrid grid, int speed, Game.Direction dir){
+    public ConveyorBeltObject(int y, int x, TileGrid grid, int speed, RoboGame.Direction dir){
         this.yLocation = y;
         this.xLocation = x;
         conveyorTile = grid.getTileFromCoordinates(yLocation, xLocation);
@@ -41,15 +41,15 @@ public class ConveyorBeltObject implements IGameObject {
 
 
 
-    public Game.Direction getDirection(RectangleMapObject conveyorFromTile) {
+    public RoboGame.Direction getDirection(RectangleMapObject conveyorFromTile) {
 
         String directionProperty = (String) conveyorFromTile.getProperties().get("direction");
 
         switch (directionProperty) {
-            case "north": return Game.Direction.North;
-            case "east": return Game.Direction.East;
-            case "south": return Game.Direction.South;
-            case "west": return Game.Direction.West;
+            case "north": return RoboGame.Direction.North;
+            case "east": return RoboGame.Direction.East;
+            case "south": return RoboGame.Direction.South;
+            case "west": return RoboGame.Direction.West;
         }
 
         return null;
@@ -58,7 +58,7 @@ public class ConveyorBeltObject implements IGameObject {
     public void handleCollision(Player player, TileGrid grid){
         int moveDistance = grid.tileSizeInPx;
 
-        Game.Direction originalDirection = player.currentDirection;
+        RoboGame.Direction originalDirection = player.currentDirection;
         player.currentDirection = direction;
         player.moveStraight(speed, moveDistance, grid);
         player.currentDirection = originalDirection;

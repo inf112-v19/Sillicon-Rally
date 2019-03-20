@@ -6,7 +6,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
@@ -34,7 +34,7 @@ public class GameObjectFactory {
     }
 
     private void createPlayer() {
-        Game.Direction startDirection = Game.Direction.North;
+        RoboGame.Direction startDirection = RoboGame.Direction.North;
         player = new Player(new Texture("robot1.png"), startDirection);
     }
 

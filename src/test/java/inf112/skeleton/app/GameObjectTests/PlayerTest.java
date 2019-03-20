@@ -1,9 +1,8 @@
 package inf112.skeleton.app.GameObjectTests;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.SetupVariables.SetupVariables;
-import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 //import jdk.internal.util.xml.impl.Input;
@@ -16,7 +15,7 @@ public class PlayerTest {
 
     Player player;
     TileGrid grid;
-    Game game;
+    RoboGame roboGame;
     int TILE_SIZE_IN_PX;
 
 
@@ -53,7 +52,7 @@ public class PlayerTest {
         player = new Player();
         player.setPosition(2* TILE_SIZE_IN_PX,2 * TILE_SIZE_IN_PX, grid);
         Tile testTile = grid.getTileFromCoordinates(player.getY(), player.getX());
-        assertEquals(Game.Direction.West, player.currentDirection);
+        assertEquals(RoboGame.Direction.West, player.currentDirection);
         assertEquals(true, testTile.getGameObjects().contains(player));
     }
 

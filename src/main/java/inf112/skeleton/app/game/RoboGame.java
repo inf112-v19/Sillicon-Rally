@@ -1,10 +1,9 @@
 package inf112.skeleton.app.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,21 +15,20 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
-import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
-import com.badlogic.gdx.*;
 
-public class Game extends com.badlogic.gdx.Game implements InputProcessor {
+public class RoboGame extends Game implements InputProcessor {
+    public static OrthographicCamera camera;
     public int TILE_SIZE_IN_PX;
     public TiledMap tiledMap;
-    OrthographicCamera camera;
-    TiledMapRenderer tiledMapRenderer;
-    SpriteBatch sb;
+    public static TiledMapRenderer tiledMapRenderer;
+    public SpriteBatch sb;
     public Player player;
     public TileGrid grid;
     public GameMap gameMap;
@@ -43,9 +41,14 @@ public class Game extends com.badlogic.gdx.Game implements InputProcessor {
     private Sprite lives;
     private Texture texture;
 
+
+    public static final int ROBO_GAME_WIDTH = 1080;
+    public static final int ROBO_GAME_HEIGHT = 720;
+
     @Override
     public void create() {
 
+        this.setScreen(new MainMenuScreen(this));
         gameMap = new GameMap("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
@@ -79,7 +82,7 @@ public class Game extends com.badlogic.gdx.Game implements InputProcessor {
         grid.getTile(0,0).addGameObject(player);
 
         drawFiveCards();
-        this.setScreen(new MainMenuScreen(this));
+
     }
 
     //"draw", as in drawing cards from a deck of cards.
@@ -122,20 +125,11 @@ public class Game extends com.badlogic.gdx.Game implements InputProcessor {
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(0,0,0,1);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        camera.update();
-        tiledMapRenderer.setView(camera);
-        tiledMapRenderer.render();
-        sb.setProjectionMatrix(camera.combined);
-
-        drawSpritesFromGrid();
-        drawHUD();
+         super.render();
     }
     
     public void drawSpritesFromGrid() {
+        sb.end();
         sb.begin();
         for (IGameObject gameObject : grid.getAllSpritesOnMap()) {
             //Not all GameObjects have sprites
