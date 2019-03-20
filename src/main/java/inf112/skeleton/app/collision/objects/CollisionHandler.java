@@ -35,9 +35,9 @@ public class CollisionHandler {
             if (spritesOnTile.get(i) instanceof ConveyorBeltObject){
                 ((ConveyorBeltObject) spritesOnTile.get(i)).handleCollision(player, grid);
             }
-            /*if (spritesOnTile.get(i) instanceof LaserObject){
+            if(spritesOnTile.get(i) instanceof LaserObject){
                 ((LaserObject) spritesOnTile.get(i)).handleCollision(player, grid);
-            }*/
+            }
         }
 
     }
