@@ -32,6 +32,7 @@ public class GameObjectFactory {
         createFlags();
         createTeleporter();
         createConveyorBelts();
+        createLasers();
     }
 
     private void createPlayer() {
