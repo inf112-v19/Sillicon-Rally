@@ -3,7 +3,6 @@ package inf112.skeleton.app.collision.objects;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.demo.Savestate;
 import inf112.skeleton.app.grid.Tile;
-import inf112.skeleton.app.game.Game;
 import inf112.skeleton.app.grid.TileGrid;
 
 import java.util.List;
@@ -33,8 +32,8 @@ public class CollisionHandler {
             if (spritesOnTile.get(i) instanceof  FlagObject) {
                 ((FlagObject) spritesOnTile.get(i)).handleCollision(player, grid);
             }
-            if (spritesOnTile.get(i) instanceof  ConveyerObject){
-                ((ConveyerObject) spritesOnTile.get(i)).handleCollision(player, grid);
+            if (spritesOnTile.get(i) instanceof ConveyorBeltObject){
+                ((ConveyorBeltObject) spritesOnTile.get(i)).handleCollision(player, grid);
             }
         }
 

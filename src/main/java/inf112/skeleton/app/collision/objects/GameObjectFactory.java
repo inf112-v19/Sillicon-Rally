@@ -19,8 +19,9 @@ public class GameObjectFactory {
     public Player player;
     public List<IGameObject> flags;
     public TeleportObstacle teleportObstacle;
-    public List<ConveyerObject> oneForwardBelts;
-    public List<ConveyerObject> twoForwardBelts;
+
+    public List<ConveyorBeltObject> oneForwardBelts;
+
 
     public GameObjectFactory(GameMap map, TileGrid grid) {
         this.map = map;
@@ -29,7 +30,7 @@ public class GameObjectFactory {
         createPlayer();
         createFlags();
         createTeleporter();
-        createConveyerBelts();
+        createConveyorBelts();
     }
 
     private void createPlayer() {
@@ -49,26 +50,23 @@ public class GameObjectFactory {
 
     }
 
-    private void createConveyerBelts() {
-        createFastBelt();
-        createNormalBelt();
+    private void createConveyorBelts() {
+        createNormalBelts();
     }
 
-    private void createNormalBelt() {
+    private void createNormalBelts() {
+        this.oneForwardBelts = new ArrayList<>();
         int speed = 1;
-        oneForwardBelts = new ArrayList<>();
+        MapLayer belts = map.getMapLayerByName("Belts");
 
-        MapLayer layer = map.getMapLayerByName("OneForwardBelts");
 
-        for (MapObject belt : layer.getObjects()) {
+       for (MapObject belt: belts.getObjects()) {
             RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
-            oneForwardBelts.add(new ConveyerObject(beltRectangleObject, grid, speed));
+            oneForwardBelts.add(new ConveyorBeltObject(beltRectangleObject, grid, speed));
         }
     }
 
-    private void createFastBelt() {
 
-    }
 
     private void createTeleporter() {
         this.teleportObstacle = new TeleportObstacle(map, grid);
