@@ -42,8 +42,7 @@ public class Player implements IGameObject {
 
     public void takeDmg(int amount){
         HP-=amount;
-        TileGrid grid;
-        if(HP <= 0){
+        if(HP <= 3){
             System.out.println("take dmg");
         }
     }

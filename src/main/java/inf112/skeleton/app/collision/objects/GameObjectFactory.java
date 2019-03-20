@@ -55,11 +55,11 @@ public class GameObjectFactory {
     private void createLasers(){
         lasers = new ArrayList<>();
 
-        MapLayer layer = map.getMapLayerByName("Lasers");
+        MapLayer laserLayer = map.getMapLayerByName("Lasers");
 
-        for (MapObject flag : layer.getObjects()) {
-            RectangleMapObject flagRectangleObject = (RectangleMapObject) flag;
-            lasers.add(new FlagObject(flagRectangleObject, grid));
+        for (MapObject laser : laserLayer.getObjects() ) {
+            RectangleMapObject laserRectangleObject = (RectangleMapObject) laser;
+            lasers.add(new LaserObject(laserRectangleObject, grid));
         }
 
     }

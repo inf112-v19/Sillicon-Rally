@@ -21,6 +21,7 @@ public class LaserObject implements IGameObject {
 
         Texture texture = new Texture("TileSprites/tile-laser-1-start.png");
         sprite = new Sprite(texture);
+        sprite.setSize(95, 95);
 
         laserTile = grid.getTileFromCoordinates(xLocation, yLocation);
         laserTile.addGameObject(this);
@@ -30,14 +31,14 @@ public class LaserObject implements IGameObject {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
         if (laserTile.equals(playerTile)) {
-            player.takeDmg(2);
+            player.takeDmg(0);
         }
     }
 
     @Override
     public Sprite getSprite() {
-        sprite.setY(yLocation);
         sprite.setX(xLocation);
+        sprite.setY(yLocation);
 
         return sprite;
     }
