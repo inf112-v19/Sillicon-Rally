@@ -44,8 +44,7 @@ public class Player implements IGameObject {
         this.HP-=amount;
         TileGrid grid;
         if(HP <= 0){
-            this.handleDeath(grid);
-
+            this.uTurn();
         }
     }
 
