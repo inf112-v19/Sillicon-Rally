@@ -63,8 +63,9 @@ public class Player implements IGameObject {
         }
     }
 
-    public void turnRight() {
-        sprite.rotate(-90);
+    public void rotateClockwise() {
+        if (sprite != null)
+            sprite.rotate(-90);
 
         switch (currentDirection) {
             case North:
@@ -82,8 +83,9 @@ public class Player implements IGameObject {
 
     }
 
-    public void turnLeft() {
-        sprite.rotate(90);
+    public void rotateCounterClockwise() {
+        if (sprite != null)
+            sprite.rotate(90);
 
         switch (currentDirection) {
             case North:
@@ -145,6 +147,11 @@ public class Player implements IGameObject {
         sprite.setX(this.x);
         sprite.setY(this.y);
         return this.sprite;
+    }
+
+    @Override
+    public void handleCollision(Player player, TileGrid grid) {
+
     }
 
     public void setX(float x) {

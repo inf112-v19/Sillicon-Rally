@@ -24,7 +24,7 @@ public class CollisionHandler {
             if (spritesOnTile.get(i).equals(player))
                 continue;
             if (spritesOnTile.get(i) instanceof TeleportObstacle) {
-                ((TeleportObstacle) spritesOnTile.get(i)).handleTeleportCollision(player, grid);
+                ((TeleportObstacle) spritesOnTile.get(i)).handleCollision(player, grid);
             }
             if(spritesOnTile.get(i) instanceof Savestate){
                 ((Savestate) spritesOnTile.get(i)).handleCollision(player);
@@ -34,6 +34,9 @@ public class CollisionHandler {
             }
             if (spritesOnTile.get(i) instanceof ConveyorBeltObject){
                 ((ConveyorBeltObject) spritesOnTile.get(i)).handleCollision(player, grid);
+            }
+            if (spritesOnTile.get(i) instanceof TurnGearObject){
+                ((TurnGearObject) spritesOnTile.get(i)).handleCollision(player,grid);
             }
         }
 

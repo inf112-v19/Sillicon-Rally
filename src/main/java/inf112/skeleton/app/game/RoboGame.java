@@ -15,6 +15,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.Screen.GameScreen;
 import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
@@ -48,7 +49,7 @@ public class RoboGame extends Game implements InputProcessor {
     @Override
     public void create() {
 
-        this.setScreen(new MainMenuScreen(this));
+        this.setScreen(new GameScreen(this));
         gameMap = new GameMap("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
@@ -164,11 +165,11 @@ public class RoboGame extends Game implements InputProcessor {
         int moveDistance = TILE_SIZE_IN_PX;
 
         if (keycode == Input.Keys.RIGHT) {
-            player.turnRight();
+            player.rotateClockwise();
         }
 
         if (keycode == Input.Keys.LEFT) {
-            player.turnLeft();
+            player.rotateCounterClockwise();
         }
 
         if (keycode == Input.Keys.valueOf("1")) {
@@ -253,11 +254,11 @@ public class RoboGame extends Game implements InputProcessor {
                 player.uTurn();
                 break;
             case turnleft:
-                player.turnLeft();
+                player.rotateCounterClockwise();
 
                 break;
             case turnright:
-                player.turnRight();
+                player.rotateClockwise();
                 break;
             case reverse:
                 player.moveStraight(1,moveDistance * (-1),grid);

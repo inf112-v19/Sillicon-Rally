@@ -19,7 +19,7 @@ public class TeleportTest {
 
         //Put player at the teleportFrom position and make the teleporter do it's magid
         player.setPosition(teleport.xTeleportFromInPx, teleport.yTeleportFromInPx, grid);
-        teleport.handleTeleportCollision(player, grid);
+        teleport.handleCollision(player, grid);
 
 
         //Verify that the player has been moved to the teleportTo location.

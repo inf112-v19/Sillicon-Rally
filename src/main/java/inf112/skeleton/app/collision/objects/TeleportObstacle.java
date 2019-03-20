@@ -42,7 +42,8 @@ public class TeleportObstacle implements IGameObject {
         grid.getTileFromCoordinates(yLocation,xLocation).getGameObjects().add(this);
     }
 
-    public void handleTeleportCollision(Player player, TileGrid grid) {
+    @Override
+    public void handleCollision(Player player, TileGrid grid) {
         Tile teleportFromTile = grid.getTileFromCoordinates(yTeleportFromInPx, yTeleportFromInPx);
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
@@ -61,4 +62,6 @@ public class TeleportObstacle implements IGameObject {
     public Sprite getSprite() {
         return null;
     }
+
+
 }
