@@ -14,6 +14,8 @@ public class Player implements IGameObject {
     float x;
     float y;
 
+    public int HP = 3;
+
     //Constructor used for testing purposes only
     public Player() {
         this.currentDirection = RoboGame.Direction.West;
@@ -36,6 +38,15 @@ public class Player implements IGameObject {
     public void checkCollision(TileGrid grid) {
         CollisionHandler collisionHandler = new CollisionHandler(grid, this);
         collisionHandler.checkCollision();
+    }
+
+    public void takeDmg(int amount){
+        this.HP-=amount;
+        TileGrid grid;
+        if(HP <= 0){
+            this.handleDeath(grid);
+
+        }
     }
 
     private void handleDeath(TileGrid grid) {
