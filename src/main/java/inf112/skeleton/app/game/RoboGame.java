@@ -23,8 +23,9 @@ import inf112.skeleton.app.collision.objects.GameObjectFactory;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
+import com.badlogic.gdx.*;
 
-public class Game extends ApplicationAdapter implements InputProcessor {
+public class Game extends com.badlogic.gdx.Game implements InputProcessor {
     public int TILE_SIZE_IN_PX;
     public TiledMap tiledMap;
     OrthographicCamera camera;
@@ -78,6 +79,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
         grid.getTile(0,0).addGameObject(player);
 
         drawFiveCards();
+        this.setScreen(new MainMenuScreen(this));
     }
 
     //"draw", as in drawing cards from a deck of cards.
@@ -323,5 +325,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
     public enum Direction{
         North, East, South, West
     }
+
 
 }
