@@ -41,10 +41,10 @@ public class Player implements IGameObject {
     }
 
     public void takeDmg(int amount){
-        this.HP-=amount;
+        HP-=amount;
         TileGrid grid;
         if(HP <= 0){
-            this.uTurn();
+            System.out.println("take dmg");
         }
     }
 

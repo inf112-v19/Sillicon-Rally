@@ -30,8 +30,15 @@ public class LaserObject implements IGameObject {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
         if (laserTile.equals(playerTile)) {
-            player.takeDmg(1);
+            player.takeDmg(2);
         }
     }
 
+    @Override
+    public Sprite getSprite() {
+        sprite.setY(yLocation);
+        sprite.setX(xLocation);
+
+        return sprite;
+    }
 }
