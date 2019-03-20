@@ -29,7 +29,9 @@ public class LaserObject implements IGameObject {
     public void handleCollision(Player player, TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
-        //if (laserTile.equals(playerTile)) { }
+        if (laserTile.equals(playerTile)) {
+            player.takeDmg(1);
+        }
     }
 
 }
