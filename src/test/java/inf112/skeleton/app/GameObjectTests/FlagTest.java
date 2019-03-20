@@ -1,5 +1,5 @@
 
-package inf112.skeleton.app.TeleportTests;
+package inf112.skeleton.app.GameObjectTests;
 
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.SetupVariables.SetupVariables;

@@ -6,7 +6,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
@@ -20,6 +20,9 @@ public class GameObjectFactory {
     public List<IGameObject> flags;
     public TeleportObstacle teleportObstacle;
 
+    public List<ConveyorBeltObject> oneForwardBelts;
+
+
     public GameObjectFactory(GameMap map, TileGrid grid) {
         this.map = map;
         this.grid = grid;
@@ -27,10 +30,11 @@ public class GameObjectFactory {
         createPlayer();
         createFlags();
         createTeleporter();
+        createConveyorBelts();
     }
 
     private void createPlayer() {
-        Game.Direction startDirection = Game.Direction.North;
+        RoboGame.Direction startDirection = RoboGame.Direction.North;
         player = new Player(new Texture("robot1.png"), startDirection);
     }
 
@@ -45,6 +49,24 @@ public class GameObjectFactory {
         }
 
     }
+
+    private void createConveyorBelts() {
+        createNormalBelts();
+    }
+
+    private void createNormalBelts() {
+        this.oneForwardBelts = new ArrayList<>();
+        int speed = 1;
+        MapLayer belts = map.getMapLayerByName("Belts");
+
+
+       for (MapObject belt: belts.getObjects()) {
+            RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
+            oneForwardBelts.add(new ConveyorBeltObject(beltRectangleObject, grid, speed));
+        }
+    }
+
+
 
     private void createTeleporter() {
         this.teleportObstacle = new TeleportObstacle(map, grid);

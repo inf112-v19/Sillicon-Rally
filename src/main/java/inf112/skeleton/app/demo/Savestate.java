@@ -6,16 +6,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.game.Game;
+import inf112.skeleton.app.game.RoboGame;
 
 public class Savestate extends Sprite {
-    Game game;
+    RoboGame roboGame;
 
-    public Savestate(Game game){
+    public Savestate(RoboGame roboGame){
         super(new Texture(Gdx.files.internal("sprites/clockface.png")));
-        this.game = game;
+        this.roboGame = roboGame;
 
-        TiledMap map = game.tiledMap;
+        TiledMap map = roboGame.tiledMap;
         MapLayer layer = map.getLayers().get("Savestate");
     }
 

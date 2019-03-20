@@ -2,17 +2,22 @@ package inf112.skeleton.app.GameObjectTests;
 
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.SetupVariables.SetupVariables;
+import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
+//import jdk.internal.util.xml.impl.Input;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class PlayerTest {
 
     Player player;
     TileGrid grid;
+    RoboGame roboGame;
     int TILE_SIZE_IN_PX;
+
 
     public void setup() {
         SetupVariables variables = new SetupVariables();
@@ -30,6 +35,25 @@ public class PlayerTest {
         Tile checkTile = grid.getTile(2, 1);
 
         assertEquals(true, playerTile.equals(checkTile));
+    }
+
+    @Test
+    public void moveStraightTest() {
+        setup();
+        player = new Player();
+        player.setPosition(2 * TILE_SIZE_IN_PX,2* TILE_SIZE_IN_PX,grid);
+        player.moveStraight(1, grid.tileSizeInPx, grid);
+        assertEquals(1 * TILE_SIZE_IN_PX, player.getX());
+    }
+
+    @Test
+    void createPlayerTest(){
+        setup();
+        player = new Player();
+        player.setPosition(2* TILE_SIZE_IN_PX,2 * TILE_SIZE_IN_PX, grid);
+        Tile testTile = grid.getTileFromCoordinates(player.getY(), player.getX());
+        assertEquals(RoboGame.Direction.West, player.currentDirection);
+        assertEquals(true, testTile.getGameObjects().contains(player));
     }
 
 
@@ -55,12 +79,5 @@ public class PlayerTest {
         assertEquals(true, player.checkIfMoveIsOutOfBounds(max, max, grid));
     }
 
-    @Test
-    public void moveStraightTest() {
-        setup();
-        Tile testTile = new Tile(0,0, grid.tileSizeInPx);
-        player.moveStraight(2, grid.tileSizeInPx, grid);
-        assertEquals(true, testTile.equals(grid.getTile(0, 0)));
-    }
 
 }
