@@ -15,13 +15,16 @@ public class LaserObject implements IGameObject {
     Sprite sprite;
     Tile laserTile;
 
-    public LaserObject( RectangleMapObject laserFromTiled, TileGrid grid){
-        yLocation = (int) laserFromTiled.getRectangle().getY();
+    public LaserObject(RectangleMapObject laserFromTiled, TileGrid grid){
         xLocation = (int) laserFromTiled.getRectangle().getX();
-        Texture texture = new Texture(TODO);
+        yLocation = (int) laserFromTiled.getRectangle().getY();
+
+        Texture texture = new Texture("TileSprites/tile-laser-1-start.png");
         sprite = new Sprite(texture);
 
         laserTile = grid.getTileFromCoordinates(xLocation, yLocation);
         laserTile.addGameObject(this);
     }
+
+
 }

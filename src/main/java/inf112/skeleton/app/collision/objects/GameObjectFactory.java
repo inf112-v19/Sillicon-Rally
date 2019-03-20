@@ -18,6 +18,7 @@ public class GameObjectFactory {
     public TileGrid grid;
     public Player player;
     public List<IGameObject> flags;
+    public List<IGameObject> lasers;
     public TeleportObstacle teleportObstacle;
 
     public List<ConveyorBeltObject> oneForwardBelts;
@@ -46,6 +47,18 @@ public class GameObjectFactory {
         for (MapObject flag : layer.getObjects()) {
             RectangleMapObject flagRectangleObject = (RectangleMapObject) flag;
             flags.add(new FlagObject(flagRectangleObject, grid));
+        }
+
+    }
+
+    private void createLasers(){
+        lasers = new ArrayList<>();
+
+        MapLayer layer = map.getMapLayerByName("Lasers");
+
+        for (MapObject flag : layer.getObjects()) {
+            RectangleMapObject flagRectangleObject = (RectangleMapObject) flag;
+            lasers.add(new FlagObject(flagRectangleObject, grid));
         }
 
     }
