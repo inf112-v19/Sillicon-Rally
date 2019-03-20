@@ -9,7 +9,7 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class LaserObject implements IGameObject {
-    public String Orientation;
+
     public int xLocation;
     public int yLocation;
     Sprite sprite;
