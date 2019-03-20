@@ -8,31 +8,60 @@ import inf112.skeleton.app.game.Game;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
+
 public class ConveyorBeltObject implements IGameObject {
     private int speed;
     public int yLocation;
     public int xLocation;
     Tile conveyorTile;
+    public Game.Direction direction;
 
-    public ConveyorBeltObject(RectangleMapObject conveyerFromTile, TileGrid grid, int speed){
+    public ConveyorBeltObject(RectangleMapObject conveyorFromTile, TileGrid grid, int speed){
         this.speed = speed;
-        yLocation = (int) conveyerFromTile.getRectangle().getY();
-        xLocation = (int) conveyerFromTile.getRectangle().getX();
-        System.out.println(conveyerFromTile.getProperties().get("east"));
+        yLocation = (int) conveyorFromTile.getRectangle().getY();
+        xLocation = (int) conveyorFromTile.getRectangle().getX();
+        //System.out.println(conveyorFromTile.getProperties().get("east"));
+
+        //getDirection(conveyorFromTile);
+        direction = getDirection(conveyorFromTile);
 
         conveyorTile = grid.getTileFromCoordinates(yLocation, xLocation);
         conveyorTile.addGameObject(this);
     }
 
+    //For testing only
+    public ConveyorBeltObject(int y, int x, TileGrid grid, int speed, Game.Direction dir){
+        this.yLocation = y;
+        this.xLocation = x;
+        conveyorTile = grid.getTileFromCoordinates(yLocation, xLocation);
+        conveyorTile.addGameObject(this);
+        this.direction = dir;
+        this.speed = speed;
+    }
+
+
+
+    public Game.Direction getDirection(RectangleMapObject conveyorFromTile) {
+
+        String directionProperty = (String) conveyorFromTile.getProperties().get("direction");
+
+        switch (directionProperty) {
+            case "north": return Game.Direction.North;
+            case "east": return Game.Direction.East;
+            case "south": return Game.Direction.South;
+            case "west": return Game.Direction.West;
+        }
+
+        return null;
+    }
+
     public void handleCollision(Player player, TileGrid grid){
-        Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
         int moveDistance = grid.tileSizeInPx;
 
-        Game.Direction originDirection = player.currentDirection;
-        Game.Direction temporaryDirection = Game.Direction.East;
-        player.currentDirection = temporaryDirection;
+        Game.Direction originalDirection = player.currentDirection;
+        player.currentDirection = direction;
         player.moveStraight(speed, moveDistance, grid);
-        player.currentDirection = originDirection;
+        player.currentDirection = originalDirection;
     }
 
 

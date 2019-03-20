@@ -190,7 +190,6 @@ public class Player implements IGameObject {
         grid.getTileFromCoordinates(y, x).addGameObject(this);
        // checkCollision(grid);
     }
-
 }
 
 

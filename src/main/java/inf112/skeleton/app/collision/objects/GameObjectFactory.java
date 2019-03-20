@@ -19,10 +19,9 @@ public class GameObjectFactory {
     public Player player;
     public List<IGameObject> flags;
     public TeleportObstacle teleportObstacle;
-    public List<ConveyorObjectWest> oneForwardBeltsWest;
-    public List<ConveyorBeltObject> oneForwardBeltsEast;
-    public List<ConveyorObjectNorth> oneForwardBeltsNorth;
-    public List<ConveyorObjectSouth> oneForwardBeltsSouth;
+
+    public List<ConveyorBeltObject> oneForwardBelts;
+
 
     public GameObjectFactory(GameMap map, TileGrid grid) {
         this.map = map;
@@ -56,33 +55,14 @@ public class GameObjectFactory {
     }
 
     private void createNormalBelts() {
+        this.oneForwardBelts = new ArrayList<>();
         int speed = 1;
-        oneForwardBeltsWest = new ArrayList<>();
-        oneForwardBeltsEast = new ArrayList<>();
-        oneForwardBeltsNorth = new ArrayList<>();
-        oneForwardBeltsSouth = new ArrayList<>();
-
-        MapLayer beltWest = map.getMapLayerByName("OneForwardBeltsWest");
-        MapLayer beltEast = map.getMapLayerByName("OneForwardBeltsEast");
-        MapLayer beltNorth = map.getMapLayerByName("OneForwardBeltsNorth");
-        MapLayer beltSouth = map.getMapLayerByName("OneForwardBeltsSouth");
+        MapLayer belts = map.getMapLayerByName("Belts");
 
 
-        for (MapObject belt : beltWest.getObjects()) {
+       for (MapObject belt: belts.getObjects()) {
             RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
-            oneForwardBeltsWest.add(new ConveyorObjectWest(beltRectangleObject, grid, speed));
-        }
-       for (MapObject belt: beltEast.getObjects()) {
-            RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
-            oneForwardBeltsEast.add(new ConveyorBeltObject(beltRectangleObject, grid, speed));
-        }
-       for (MapObject belt: beltNorth.getObjects()) {
-            RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
-            oneForwardBeltsNorth.add(new ConveyorObjectNorth(beltRectangleObject, grid, speed));
-        }
-        for (MapObject belt: beltSouth.getObjects()) {
-            RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
-            oneForwardBeltsSouth.add(new ConveyorObjectSouth(beltRectangleObject, grid, speed));
+            oneForwardBelts.add(new ConveyorBeltObject(beltRectangleObject, grid, speed));
         }
     }
 

@@ -8,8 +8,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.collision.objects.ConveyorBeltObject;
 import inf112.skeleton.app.collision.objects.FlagObject;
 import inf112.skeleton.app.collision.objects.TeleportObstacle;
+import inf112.skeleton.app.game.Game;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 import org.mockito.Mockito;
@@ -22,6 +24,7 @@ public class SetupVariables {
     public Player player;
     public int TILESIZE_IN_PX;
     public FlagObject flag;
+    public ConveyorBeltObject belt;
 
 
     public SetupVariables() {
@@ -32,6 +35,7 @@ public class SetupVariables {
         this.player = new Player();
         this.TILESIZE_IN_PX = gameMap.getTileSize();
         this.flag = new FlagObject(2,4,grid);
+        this.belt = new ConveyorBeltObject(4, 4, grid, 1, Game.Direction.West);
     }
 
     public SetupVariables renew() {
