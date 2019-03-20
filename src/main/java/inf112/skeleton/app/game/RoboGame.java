@@ -236,7 +236,7 @@ public class RoboGame extends Game implements InputProcessor {
         return false;
     }
 
-    private void movePlayer(int index, int moveDistance, Tile currentTile) {
+    public void movePlayer(int index, int moveDistance, Tile currentTile) {
         temp = listt[index];
         MoveCard.Type type = temp.getType();
         switch (type) {
