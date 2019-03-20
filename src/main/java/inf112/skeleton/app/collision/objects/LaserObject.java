@@ -26,5 +26,10 @@ public class LaserObject implements IGameObject {
         laserTile.addGameObject(this);
     }
 
+    public void handleCollision(Player player, TileGrid grid) {
+        Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
+
+        //if (laserTile.equals(playerTile)) { }
+    }
 
 }
