@@ -40,10 +40,10 @@ public class Player implements IGameObject {
         collisionHandler.checkCollision();
     }
 
-    public void takeDmg(int amount){
+    public void takeDmg(int amount, TileGrid grid){
         HP-=amount;
-        if(HP <= 3){
-            System.out.println("take dmg");
+        if(HP == 0){
+            handleDeath(grid);
         }
     }
 
@@ -51,6 +51,7 @@ public class Player implements IGameObject {
         if (backupLocation != null) {
             resetToBackupLocation(grid);
             deleteBackupLocation();
+            HP=3;
         }
     }
 
