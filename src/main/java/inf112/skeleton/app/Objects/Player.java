@@ -14,7 +14,7 @@ public class Player implements IGameObject {
     float x;
     float y;
 
-    public int HP = 3;
+    private int HP = 3;
 
     //Constructor used for testing purposes only
     public Player() {
