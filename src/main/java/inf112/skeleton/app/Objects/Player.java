@@ -42,7 +42,7 @@ public class Player implements IGameObject {
 
     public void takeDmg(int amount, TileGrid grid){
         HP-=amount;
-        if(HP == 0){
+        if(HP <= 0){
             handleDeath(grid);
         }
     }
