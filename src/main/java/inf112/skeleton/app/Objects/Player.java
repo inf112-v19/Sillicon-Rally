@@ -54,6 +54,10 @@ public class Player implements IGameObject {
             deleteBackupLocation();
             currentHP=maxHP;
         }
+        else if(backupLocation == null){
+            //TODO implement logic, don't want this to simply end the program while we are still testing stuff
+            System.out.println("game over");
+        }
     }
 
     private void moveStraight(int moveDistance, TileGrid grid) {
