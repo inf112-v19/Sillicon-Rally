@@ -14,7 +14,8 @@ public class Player implements IGameObject {
     float x;
     float y;
 
-    private int HP = 3;
+    private int maxHP = 5;
+    private int currentHP = maxHP;
 
     //Constructor used for testing purposes only
     public Player() {
@@ -41,8 +42,8 @@ public class Player implements IGameObject {
     }
 
     public void takeDmg(int amount, TileGrid grid){
-        HP-=amount;
-        if(HP <= 0){
+        currentHP-=amount;
+        if(currentHP <= 0){
             handleDeath(grid);
         }
     }
@@ -51,7 +52,7 @@ public class Player implements IGameObject {
         if (backupLocation != null) {
             resetToBackupLocation(grid);
             deleteBackupLocation();
-            HP=3;
+            currentHP=maxHP;
         }
     }
 
