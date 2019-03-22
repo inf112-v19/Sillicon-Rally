@@ -24,6 +24,7 @@ public class CollisionHandler {
 
         for (IGameObject object : spritesOnTile) {
             object.handleCollision(player, grid);
+
         }
 
     }
