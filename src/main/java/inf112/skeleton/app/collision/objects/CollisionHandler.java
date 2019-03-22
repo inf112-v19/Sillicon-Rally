@@ -21,7 +21,7 @@ public class CollisionHandler {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
         List<IGameObject> spritesOnTile = playerTile.getGameObjects();
         System.out.println(spritesOnTile);
-        
+
         for (IGameObject object : spritesOnTile) {
             object.handleCollision(player, grid);
         }
