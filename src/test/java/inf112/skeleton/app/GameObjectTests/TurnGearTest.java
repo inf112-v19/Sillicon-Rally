@@ -23,14 +23,14 @@ public class TurnGearTest {
         grid = setupVariable.grid;
         player = setupVariable.player;
         TILE_SIZE_IN_PIX = setupVariable.gameMap.getTileSize();
+        player = new Player();
+        player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
+        player.currentDirection = RoboGame.Direction.West;
     }
 
     @Test
     void turnGearClockwiseTest() {
         setup();
-        player = new Player();
-        player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
-        player.currentDirection = RoboGame.Direction.West;
         turnGear = new TurnGearObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, TurnGearObject.RotateDirection.CLOCKWISE);
 
         turnGear.handleCollision(player, grid);
@@ -41,8 +41,6 @@ public class TurnGearTest {
     void turnGearCounterClockwiseTest(){
         setup();
         player = new Player();
-        player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
-        player.currentDirection = RoboGame.Direction.West;
         turnGear = new TurnGearObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, TurnGearObject.RotateDirection.COUNTER_CLOCKWISE);
         turnGear.handleCollision(player, grid);
         assertEquals(RoboGame.Direction.South, player.currentDirection);

@@ -15,8 +15,8 @@ public class Player implements IGameObject {
     Sprite sprite;
     float x;
     float y;
-    public int maxHP = 6;
-    private int currentHP = maxHP;
+    public int playerHP = getPlayerHP();
+    public final int MAX_HP = getPlayerHP();
 
     //Constructor used for testing purposes only
     public Player() {
@@ -43,23 +43,11 @@ public class Player implements IGameObject {
         collisionHandler.checkCollision();
     }
 
-    public void takeDmg(int amount, TileGrid grid){
-        currentHP-=amount;
-        if(currentHP <= 0){
-            handleDeath(grid);
-        }
-        System.out.println("current hp:" + currentHP);
+
+    private int getPlayerHP(){
+        return 6;
     }
-    public void healDmg(int amount){
-        currentHP+=amount;
-        if(currentHP > maxHP){
-            currentHP=maxHP;
-        }
-        System.out.println("current hp:" + currentHP);
-    }
-    public int getCurrentHP(){
-        return currentHP;
-    }
+
 
     private void handleDeath(TileGrid grid) {
         if (backupLocation != null) {
@@ -67,7 +55,7 @@ public class Player implements IGameObject {
             deleteBackupLocation();
         }
         System.out.println("You died");
-        currentHP=maxHP;
+        playerHP = MAX_HP;
     }
 
     private void moveStraight(int moveDistance, TileGrid grid) {
