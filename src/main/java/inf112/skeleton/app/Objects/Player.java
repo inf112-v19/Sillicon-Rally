@@ -29,6 +29,7 @@ public class Player implements IGameObject, InputProcessor {
         this.currentDirection = RoboGame.Direction.West;
         backupLocation = null;
         this.cardsToBePlayed = new MoveCard[5];
+        playerMovements = new PlayerMovements(this);
     }
 
     public Player(Texture texture, RoboGame.Direction startDirection, RoboGame game) {
@@ -89,6 +90,9 @@ public class Player implements IGameObject, InputProcessor {
 
     @Override
     public Sprite getSprite() {
+        if (this.sprite == null)
+            return null;
+        
         sprite.setX(this.x);
         sprite.setY(this.y);
         return this.sprite;
