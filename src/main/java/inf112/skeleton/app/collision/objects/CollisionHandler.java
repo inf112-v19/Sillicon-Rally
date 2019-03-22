@@ -38,6 +38,10 @@ public class CollisionHandler {
             if(spritesOnTile.get(i) instanceof LaserObject){
                 ((LaserObject) spritesOnTile.get(i)).handleCollision(player, grid);
             }
+            if(spritesOnTile.get(i) instanceof RepairObject){
+                ((RepairObject) spritesOnTile.get(i)).handleCollision(player, grid);
+            }
+
         }
 
     }

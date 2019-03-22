@@ -14,7 +14,7 @@ public class Player implements IGameObject {
     float x;
     float y;
 
-    private int maxHP = 5;
+    private int maxHP = 6;
     private int currentHP = maxHP;
 
     //Constructor used for testing purposes only
@@ -46,6 +46,14 @@ public class Player implements IGameObject {
         if(currentHP <= 0){
             handleDeath(grid);
         }
+        System.out.println("current hp:" + currentHP);
+    }
+    public void healDmg(int amount){
+        currentHP+=amount;
+        if(currentHP > maxHP){
+            currentHP=maxHP;
+        }
+        System.out.println("current hp:" + currentHP);
     }
 
     private void handleDeath(TileGrid grid) {
