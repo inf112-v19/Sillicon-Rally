@@ -18,10 +18,10 @@ public class GameObjectFactory {
     public TileGrid grid;
     public Player player;
     public List<IGameObject> flags;
+    public List<IGameObject> lasers;
     public TeleportObstacle teleportObstacle;
 
     public List<ConveyorBeltObject> oneForwardBelts;
-    public List<TurnGearObject> turnGears;
 
 
     public GameObjectFactory(GameMap map, TileGrid grid) {
@@ -32,7 +32,7 @@ public class GameObjectFactory {
         createFlags();
         createTeleporter();
         createConveyorBelts();
-        createTurnGears();
+        createLasers();
     }
 
     private void createPlayer() {
@@ -52,6 +52,18 @@ public class GameObjectFactory {
 
     }
 
+    private void createLasers(){
+        lasers = new ArrayList<>();
+
+        MapLayer laserLayer = map.getMapLayerByName("Lasers");
+
+        for (MapObject laser : laserLayer.getObjects() ) {
+            RectangleMapObject laserRectangleObject = (RectangleMapObject) laser;
+            lasers.add(new LaserObject(laserRectangleObject, grid));
+        }
+
+    }
+
     private void createConveyorBelts() {
         createNormalBelts();
     }
@@ -65,17 +77,6 @@ public class GameObjectFactory {
        for (MapObject belt: belts.getObjects()) {
             RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
             oneForwardBelts.add(new ConveyorBeltObject(beltRectangleObject, grid, speed));
-        }
-    }
-
-    private void createTurnGears(){
-        this.turnGears = new ArrayList<>();
-
-        MapLayer mapLayer = map.getMapLayerByName("turnGears");
-
-        for (MapObject turnGear: mapLayer.getObjects()) {
-            RectangleMapObject turnGearObject = (RectangleMapObject) turnGear;
-            turnGears.add(new TurnGearObject(turnGearObject, grid));
         }
     }
 

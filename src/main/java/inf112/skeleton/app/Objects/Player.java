@@ -14,6 +14,9 @@ public class Player implements IGameObject {
     float x;
     float y;
 
+    private int maxHP = 5;
+    private int currentHP = maxHP;
+
     //Constructor used for testing purposes only
     public Player() {
         this.currentDirection = RoboGame.Direction.West;
@@ -38,10 +41,22 @@ public class Player implements IGameObject {
         collisionHandler.checkCollision();
     }
 
+    public void takeDmg(int amount, TileGrid grid){
+        currentHP-=amount;
+        if(currentHP <= 0){
+            handleDeath(grid);
+        }
+    }
+
     private void handleDeath(TileGrid grid) {
         if (backupLocation != null) {
             resetToBackupLocation(grid);
             deleteBackupLocation();
+            currentHP=maxHP;
+        }
+        else if(backupLocation == null){
+            //TODO implement logic, don't want this to simply end the program while we are still testing stuff
+            System.out.println("game over");
         }
     }
 
