@@ -15,7 +15,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.Screen.GameScreen;
+import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
@@ -127,11 +127,7 @@ public class RoboGame extends Game implements InputProcessor {
          super.render();
     }
 
-<<<<<<< HEAD
     public void drawHUD() {
-=======
-    public void drawSpritesFromGrid() {
->>>>>>> master
         sb.end();
         sb.begin();
         backboard.draw(sb);
