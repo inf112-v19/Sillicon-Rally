@@ -56,7 +56,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         gameMap = new GameMap("map.v.01.tmx");
-        player = new Player(new Texture("car.jpg"), startDirection);
+        player = new Player(new Texture("car.jpg"), startDirection, this.game);
 
     }
 

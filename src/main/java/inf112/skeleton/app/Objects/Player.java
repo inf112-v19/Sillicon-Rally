@@ -1,14 +1,17 @@
 package inf112.skeleton.app.Objects;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
+import inf112.skeleton.app.game.PlayerMovements;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
-public class Player implements IGameObject {
+public class Player implements IGameObject, InputProcessor {
     public MoveCard[] cardsToBePlayed;
     public RoboGame.Direction currentDirection;
     Tile backupLocation;
@@ -17,6 +20,9 @@ public class Player implements IGameObject {
     float y;
     public int playerHP = getPlayerHP();
     public final int MAX_HP = getPlayerHP();
+    private RoboGame game;
+    private PlayerMovements playerMovements;
+
 
     //Constructor used for testing purposes only
     public Player() {
@@ -25,18 +31,14 @@ public class Player implements IGameObject {
         this.cardsToBePlayed = new MoveCard[5];
     }
 
-    public Player(Texture texture, RoboGame.Direction startDirection) {
+    public Player(Texture texture, RoboGame.Direction startDirection, RoboGame game) {
         this.sprite = new Sprite(texture);
         this.currentDirection = startDirection;
         this.backupLocation = null;
+        this.game = game;
+        playerMovements = new PlayerMovements(this);
     }
 
-    public void moveStraight(int steps, int moveDistance, TileGrid grid) {
-        for (int i = 0; i < steps; i++) {
-            moveStraight(moveDistance, grid);
-        }
-    //    checkCollision(grid);
-    }
 
     public void checkCollision(TileGrid grid) {
         CollisionHandler collisionHandler = new CollisionHandler(grid, this);
@@ -49,7 +51,7 @@ public class Player implements IGameObject {
     }
 
 
-    private void handleDeath(TileGrid grid) {
+    public void handleDeath(TileGrid grid) {
         if (backupLocation != null) {
             resetToBackupLocation(grid);
             deleteBackupLocation();
@@ -58,84 +60,14 @@ public class Player implements IGameObject {
         playerHP = MAX_HP;
     }
 
-    private void moveStraight(int moveDistance, TileGrid grid) {
-
-        switch (currentDirection) {
-            case North:
-                this.setPosition((int) getY()+moveDistance, (int) getX(), grid);
-                break;
-            case East:
-                this.setPosition((int) getY(), (int) getX() + moveDistance, grid);
-                break;
-            case South:
-                this.setPosition((int) getY()- moveDistance, (int) getX(), grid);
-                break;
-            case West:
-                this.setPosition((int) getY(), (int) getX() - moveDistance, grid);
-                break;
-        }
+    public void moveStraight(int speed, int moveDistance, TileGrid grid) {
+        playerMovements.moveStraight(speed, moveDistance, grid);
     }
 
-    public void rotateClockwise() {
-        if (sprite != null)
-            sprite.rotate(-90);
-
-        switch (currentDirection) {
-            case North:
-                currentDirection = RoboGame.Direction.East;
-                break;
-            case East:
-                currentDirection = RoboGame.Direction.South;
-                break;
-            case South:
-                currentDirection = RoboGame.Direction.West;
-                break;
-            case West:
-                currentDirection = RoboGame.Direction.North;
-        }
-
-    }
-
-    public void rotateCounterClockwise() {
-        if (sprite != null)
-            sprite.rotate(90);
-
-        switch (currentDirection) {
-            case North:
-                currentDirection = RoboGame.Direction.West;
-                break;
-            case East:
-                currentDirection = RoboGame.Direction.North;
-                break;
-            case South:
-                currentDirection = RoboGame.Direction.East;
-                break;
-            case West:
-                currentDirection = RoboGame.Direction.South;
-        }
-
-    }
+    public void rotateClockwise(){playerMovements.rotateClockwise();}
+    public void rotateCounterClockwise() {playerMovements.rotateCounterClockwise();}
 
 
-
-    public void uTurn() {
-        sprite.rotate(180);
-
-        switch (currentDirection) {
-            case North:
-                currentDirection = RoboGame.Direction.South;
-                break;
-            case East:
-                currentDirection = RoboGame.Direction.West;
-                break;
-            case South:
-                currentDirection = RoboGame.Direction.North;
-                break;
-            case West:
-                currentDirection = RoboGame.Direction.East;
-        }
-
-    }
 
     public void setBackupLocation(Tile backupLocation) {
         this.backupLocation = backupLocation;
@@ -150,7 +82,7 @@ public class Player implements IGameObject {
     public void resetToBackupLocation(TileGrid grid) {
         int tileSizeInPx = grid.tileSizeInPx;
         if (this.backupLocation != null) {
-            setPosition(backupLocation.y * tileSizeInPx, backupLocation.x *tileSizeInPx, grid);
+            playerMovements.setPosition(backupLocation.y * tileSizeInPx, backupLocation.x *tileSizeInPx, grid);
             System.out.println(grid.getTileFromCoordinates(this.getY(), this.getX()));
         }
     }
@@ -163,53 +95,25 @@ public class Player implements IGameObject {
     }
 
     @Override
-    public void handleCollision(Player player, TileGrid grid) {
+    public void handleCollision(Player player, TileGrid grid) { }
 
-    }
+    public void setX(float x) { this.x = x; }
 
-    public void setX(float x) {
-        this.x = x;
-    }
+    public void setY(float y) { this.y = y; }
 
-    public void setY(float y) {
-        this.y = y;
-    }
+    public float getY() { return this.y; }
 
-    public float getY() {
-        return this.y;
-    }
-
-    public float getX() {
-        return this.x;
-    }
+    public float getX() { return this.x; }
 
     public boolean checkIfMoveIsOutOfBounds(int y, int x, TileGrid grid) {
-        if (y < 0 || x < 0)
-            return true;
-
-        int yTile = y /grid.tileSizeInPx;
-        int xTile = x/grid.tileSizeInPx;
-        if (yTile >= grid.rows || xTile >= grid.columns)
-            return true;
-
-        return false;
+        return playerMovements.checkIfMoveIsOutOfBounds(y, x, grid);
     }
 
 
     public void setPosition(int y, int x, TileGrid grid) {
-        if (checkIfMoveIsOutOfBounds(y, x, grid)) {
-            handleDeath(grid);
-            return;
-        }
-
-        Tile currentTile = grid.getTileFromCoordinates(getY(), getX());
-        setX(x);
-        setY(y);
-
-        currentTile.getGameObjects().remove(this);
-        grid.getTileFromCoordinates(y, x).addGameObject(this);
-       // checkCollision(grid);
+        playerMovements.setPosition(y, x, grid);
     }
+
 
     public void emptyList() {
         for (int i = 0; i < cardsToBePlayed.length; i++) {
@@ -230,6 +134,146 @@ public class Player implements IGameObject {
         return true;
     }
 
+    @Override
+    public boolean keyDown(int keycode) {
+        int moveDistance = game.TILE_SIZE_IN_PX;
+
+        if (keycode == Input.Keys.RIGHT) {
+            playerMovements.rotateClockwise();
+        }
+
+        if (keycode == Input.Keys.LEFT) {
+            playerMovements.rotateCounterClockwise();
+        }
+
+        if (keycode == Input.Keys.valueOf("1")) {
+            int index = 0;
+            if (game.list[index] != null) {
+                game.list[index].translateY(75);
+                //movePlayer(index, moveDistance, currentTile);
+                //list[index] = null;
+                game.booList[index] = true;
+            }
+        }
+
+        if (keycode == Input.Keys.valueOf("2")) {
+            int index = 1;
+            if (game.list[index] != null) {
+                game.list[index].translateY(75);
+                //movePlayer(index, moveDistance, currentTile);
+                //list[index] = null;
+                game.booList[index] = true;
+            }
+        }
+
+        if (keycode == Input.Keys.valueOf("3")) {
+            int index = 2;
+            if (game.list[index] != null) {
+                game.list[index].translateY(75);
+                //movePlayer(index, moveDistance, currentTile);
+                //list[index] = null;
+                game.booList[index] = true;
+            }
+        }
+
+        if (keycode == Input.Keys.valueOf("4")) {
+            int index = 3;
+            if (game.list[index] != null) {
+                game.list[index].translateY(75);
+                //movePlayer(index, moveDistance, currentTile);
+                //list[index] = null;
+                game.booList[index] = true;
+            }
+        }
+
+        if (keycode == Input.Keys.valueOf("5")) {
+            int index = 4;
+            if (game.list[index] != null) {
+                game.list[index].translateY(75);
+                //movePlayer(index, moveDistance, currentTile);
+                //list[index] = null;
+                game.booList[index] = true;
+            }
+        }
+
+        if (keycode == Input.Keys.valueOf("6")) {
+            int index = 5;
+            game.list[index].translateY(75);
+            game.booList[index] = true;
+        }
+
+        if (keycode == Input.Keys.valueOf("7")) {
+            int index = 6;
+            game.list[index].translateY(75);
+            game.booList[index] = true;
+        }
+
+        if (keycode == Input.Keys.valueOf("8")) {
+            int index = 7;
+            game.list[index].translateY(75);
+            game.booList[index] = true;
+        }
+
+        if (keycode == Input.Keys.valueOf("9")) {
+            int index = 8;
+            game.list[index].translateY(75);
+            game.booList[index] = true;
+        }
+
+        if (keycode == Input.Keys.U) {
+            playerMovements.uTurn();
+        }
+        if (keycode == Input.Keys.UP) {
+            playerMovements.moveStraight(1, moveDistance, game.grid);
+        }
+
+        if (keycode == Input.Keys.DOWN) {
+            playerMovements.moveStraight(1,moveDistance * (-1),game.grid);
+        }
+
+        if (keycode == Input.Keys.R) {
+            game.drawNineCards();
+        }
+
+        checkCollision(game.grid);
+
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int i) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char c) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int i, int i1, int i2, int i3) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int i, int i1, int i2, int i3) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int i, int i1, int i2) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int i, int i1) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int i) {
+        return false;
+    }
 }
 
 
