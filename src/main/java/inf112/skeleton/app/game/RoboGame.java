@@ -47,7 +47,7 @@ public class RoboGame extends Game implements InputProcessor {
     @Override
     public void create() {
 
-        this.setScreen(new GameScreen(this));
+        this.setScreen(new MainMenuScreen(this));
         gameMap = new GameMap("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
@@ -105,7 +105,7 @@ public class RoboGame extends Game implements InputProcessor {
     }
 
 
-    
+
     public TileGrid makeGrid() {
         TiledMapTileLayer layer = (TiledMapTileLayer)gameMap.getMapLayerByIndex(0);
 
@@ -127,7 +127,11 @@ public class RoboGame extends Game implements InputProcessor {
          super.render();
     }
 
+<<<<<<< HEAD
     public void drawHUD() {
+=======
+    public void drawSpritesFromGrid() {
+>>>>>>> master
         sb.end();
         sb.begin();
         backboard.draw(sb);

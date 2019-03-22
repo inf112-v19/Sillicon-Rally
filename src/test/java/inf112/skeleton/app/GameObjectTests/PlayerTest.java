@@ -5,10 +5,11 @@ import inf112.skeleton.app.SetupVariables.SetupVariables;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
-//import jdk.internal.util.xml.impl.Input;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+//import jdk.internal.util.xml.impl.Input;
 
 
 public class PlayerTest {

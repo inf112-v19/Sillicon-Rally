@@ -18,6 +18,9 @@ public class GameObjectFactory {
     public TileGrid grid;
     public Player player;
     public List<IGameObject> flags;
+    public List<IGameObject> lasers;
+    public List<IGameObject> pitfalls;
+    public List<IGameObject> repairs;
     public TeleportObstacle teleportObstacle;
 
     public List<ConveyorBeltObject> oneForwardBelts;
@@ -32,7 +35,13 @@ public class GameObjectFactory {
         createFlags();
         createTeleporter();
         createConveyorBelts();
+
+        createLasers();
+        createRepairs();
         createTurnGears();
+        createPits();
+
+
     }
 
     private void createPlayer() {
@@ -51,6 +60,42 @@ public class GameObjectFactory {
         }
 
     }
+
+    private void createLasers(){
+        lasers = new ArrayList<>();
+
+        MapLayer laserLayer = map.getMapLayerByName("Lasers");
+
+        for (MapObject laser : laserLayer.getObjects() ) {
+            RectangleMapObject laserRectangleObject = (RectangleMapObject) laser;
+            lasers.add(new LaserObject(laserRectangleObject, grid));
+        }
+
+    }
+    private void createRepairs(){
+        repairs = new ArrayList<>();
+
+        MapLayer repairLayer = map.getMapLayerByName("Repairs");
+
+        for (MapObject repair : repairLayer.getObjects() ) {
+            RectangleMapObject repairRectangleObject = (RectangleMapObject) repair;
+            repairs.add(new RepairObject(repairRectangleObject, grid));
+        }
+
+    }
+
+    private void createPits(){
+        pitfalls = new ArrayList<>();
+
+        MapLayer pitLayer = map.getMapLayerByName("Pits");
+
+        for (MapObject pit : pitLayer.getObjects() ) {
+            RectangleMapObject pitRectangleObject = (RectangleMapObject) pit;
+            pitfalls.add(new PitObject(pitRectangleObject, grid));
+        }
+
+    }
+
 
     private void createConveyorBelts() {
         createNormalBelts();

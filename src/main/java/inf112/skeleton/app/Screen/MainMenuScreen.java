@@ -27,8 +27,8 @@ public class MainMenuScreen extends RoboGame implements Screen {
 
     @Override
     public void show() {
-        startActive = new Texture("startActive.png");
-        startInactive = new Texture("startInactive.png");
+        startActive = new Texture("Buttons/startActive.png");
+        startInactive = new Texture("Buttons/startInactive.png");
     }
 
     @Override
