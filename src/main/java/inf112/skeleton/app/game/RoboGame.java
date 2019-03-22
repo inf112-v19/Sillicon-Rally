@@ -15,7 +15,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.Screen.MainMenuScreen;
+import inf112.skeleton.app.Screen.GameScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
@@ -34,9 +34,8 @@ public class RoboGame extends Game implements InputProcessor {
     public GameMap gameMap;
     private StackOfCards deck;
     private MoveCard temp;
-    private MoveCard[] listt;
+    private MoveCard[] list;
     private Boolean[] booList;
-    private int cardXPos;
     private Sprite backboard;
     private Sprite lives;
     private Texture texture;
@@ -48,7 +47,7 @@ public class RoboGame extends Game implements InputProcessor {
     @Override
     public void create() {
 
-        this.setScreen(new MainMenuScreen(this));
+        this.setScreen(new GameScreen(this));
         gameMap = new GameMap("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
@@ -65,42 +64,42 @@ public class RoboGame extends Game implements InputProcessor {
 
         texture = new Texture("cardLayouts/mech.jpg");
         backboard = new Sprite(texture);
-        backboard.setSize(1250,680);
-        backboard.setPosition(-140,-700);
+        backboard.setSize(1950,1600);
+        backboard.setPosition(-480,-700);
 
         texture = new Texture("sprites/exmplLife.png");
         lives = new Sprite(texture);
         lives.setSize(300,150);
-        lives.setPosition(750, -180);
+        lives.setPosition(1050, 600);
 
         deck = new StackOfCards();
-        listt = new MoveCard[5];
-        booList = new Boolean[5];
+        list = new MoveCard[9];
+        booList = new Boolean[9];
 
         GameObjectFactory constructor = new GameObjectFactory(gameMap, grid);
         player = constructor.player;
         grid.getTile(0,0).addGameObject(player);
 
-        drawFiveCards();
+        drawNineCards();
 
     }
 
     //"draw", as in drawing cards from a deck of cards.
     //not "draw", as in drawing the picture of a card in the application.
     //#tricky #difference #notTheSame ##
-    private void drawFiveCards() {
-        int cardYPos = -800;
-        cardXPos = -235;
+    private void drawNineCards() {
+        int cardYPos = -770;
+        int cardXPos = -550;
         MoveCard card;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < list.length; i++) {
             card = deck.nextCard();
             if (card != null) {
-                card.setSize(470, 670);
+                card.setSize(400, 520);
                 card.setPosition(cardXPos, cardYPos);
                 booList[i] = false;
             }
-            listt[i] = card;
-            cardXPos += 240;
+            list[i] = card;
+            cardXPos += 205;
 
         }
     }
@@ -127,9 +126,22 @@ public class RoboGame extends Game implements InputProcessor {
     public void render() {
          super.render();
     }
-    
-    public void drawSpritesFromGrid() {
+
+    public void drawHUD() {
         sb.end();
+        sb.begin();
+        backboard.draw(sb);
+        for (int i = 0; i < list.length; i++) {
+            //if (booList[i] != true) {
+                list[i].draw(sb);
+            //}
+        }
+        lives.draw(sb);
+
+        sb.end();
+    }
+
+    public void drawSpritesFromGrid() {
         sb.begin();
         for (IGameObject gameObject : grid.getAllSpritesOnMap()) {
             //Not all GameObjects have sprites
@@ -139,19 +151,7 @@ public class RoboGame extends Game implements InputProcessor {
         sb.end();
     }
 
-    //draws sprites in spritebatch
-    public void drawHUD() {
-        sb.begin();
-        backboard.draw(sb);
-        for (int i = 0; i < 5; i++) {
-            if (booList[i] != true) {
-                listt[i].draw(sb);
-            }
-        }
-        lives.draw(sb);
 
-        sb.end();
-    }
 
     @Override
     public boolean keyDown(int keycode) {
@@ -164,56 +164,85 @@ public class RoboGame extends Game implements InputProcessor {
         int moveDistance = TILE_SIZE_IN_PX;
 
         if (keycode == Input.Keys.RIGHT) {
-            player.turnRight();
+            player.rotateClockwise();
         }
 
         if (keycode == Input.Keys.LEFT) {
-            player.turnLeft();
+            player.rotateCounterClockwise();
         }
 
         if (keycode == Input.Keys.valueOf("1")) {
             int index = 0;
-            if (listt[index] != null) {
-                movePlayer(index, moveDistance, currentTile);
-                listt[index] = null;
+            if (list[index] != null) {
+                list[index].translateY(75);
+                //movePlayer(index, moveDistance, currentTile);
+                //list[index] = null;
                 booList[index] = true;
             }
         }
 
         if (keycode == Input.Keys.valueOf("2")) {
             int index = 1;
-            if (listt[index] != null) {
-                movePlayer(index, moveDistance, currentTile);
-                listt[index] = null;
+            if (list[index] != null) {
+                list[index].translateY(75);
+                //movePlayer(index, moveDistance, currentTile);
+                //list[index] = null;
                 booList[index] = true;
             }
         }
 
         if (keycode == Input.Keys.valueOf("3")) {
             int index = 2;
-            if (listt[index] != null) {
-                movePlayer(index, moveDistance, currentTile);
-                listt[index] = null;
+            if (list[index] != null) {
+                list[index].translateY(75);
+                //movePlayer(index, moveDistance, currentTile);
+                //list[index] = null;
                 booList[index] = true;
             }
         }
 
         if (keycode == Input.Keys.valueOf("4")) {
             int index = 3;
-            if (listt[index] != null) {
-                movePlayer(index, moveDistance, currentTile);
-                listt[index] = null;
+            if (list[index] != null) {
+                list[index].translateY(75);
+                //movePlayer(index, moveDistance, currentTile);
+                //list[index] = null;
                 booList[index] = true;
             }
         }
 
         if (keycode == Input.Keys.valueOf("5")) {
             int index = 4;
-            if (listt[index] != null) {
-                movePlayer(index, moveDistance, currentTile);
-                listt[index] = null;
+            if (list[index] != null) {
+                list[index].translateY(75);
+                //movePlayer(index, moveDistance, currentTile);
+                //list[index] = null;
                 booList[index] = true;
             }
+        }
+
+        if (keycode == Input.Keys.valueOf("6")) {
+            int index = 5;
+                list[index].translateY(75);
+                booList[index] = true;
+        }
+
+        if (keycode == Input.Keys.valueOf("7")) {
+            int index = 6;
+            list[index].translateY(75);
+            booList[index] = true;
+        }
+
+        if (keycode == Input.Keys.valueOf("8")) {
+            int index = 7;
+            list[index].translateY(75);
+            booList[index] = true;
+        }
+
+        if (keycode == Input.Keys.valueOf("9")) {
+            int index = 8;
+            list[index].translateY(75);
+            booList[index] = true;
         }
 
         if (keycode == Input.Keys.U) {
@@ -228,7 +257,7 @@ public class RoboGame extends Game implements InputProcessor {
         }
 
         if (keycode == Input.Keys.R) {
-            drawFiveCards();
+            drawNineCards();
         }
 
         player.checkCollision(grid);
@@ -237,7 +266,7 @@ public class RoboGame extends Game implements InputProcessor {
     }
 
     public void movePlayer(int index, int moveDistance, Tile currentTile) {
-        temp = listt[index];
+        temp = list[index];
         MoveCard.Type type = temp.getType();
         switch (type) {
             case move1:
@@ -253,11 +282,11 @@ public class RoboGame extends Game implements InputProcessor {
                 player.uTurn();
                 break;
             case turnleft:
-                player.turnLeft();
+                player.rotateCounterClockwise();
 
                 break;
             case turnright:
-                player.turnRight();
+                player.rotateClockwise();
                 break;
             case reverse:
                 player.moveStraight(1,moveDistance * (-1),grid);

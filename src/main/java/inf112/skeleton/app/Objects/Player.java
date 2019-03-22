@@ -2,12 +2,14 @@ package inf112.skeleton.app.Objects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class Player implements IGameObject {
+    public MoveCard[] cardsToBePlayed;
     public RoboGame.Direction currentDirection;
     Tile backupLocation;
     Sprite sprite;
@@ -18,6 +20,7 @@ public class Player implements IGameObject {
     public Player() {
         this.currentDirection = RoboGame.Direction.West;
         backupLocation = null;
+        this.cardsToBePlayed = new MoveCard[5];
     }
 
     public Player(Texture texture, RoboGame.Direction startDirection) {
@@ -63,8 +66,9 @@ public class Player implements IGameObject {
         }
     }
 
-    public void turnRight() {
-        sprite.rotate(-90);
+    public void rotateClockwise() {
+        if (sprite != null)
+            sprite.rotate(-90);
 
         switch (currentDirection) {
             case North:
@@ -82,8 +86,9 @@ public class Player implements IGameObject {
 
     }
 
-    public void turnLeft() {
-        sprite.rotate(90);
+    public void rotateCounterClockwise() {
+        if (sprite != null)
+            sprite.rotate(90);
 
         switch (currentDirection) {
             case North:
@@ -147,6 +152,11 @@ public class Player implements IGameObject {
         return this.sprite;
     }
 
+    @Override
+    public void handleCollision(Player player, TileGrid grid) {
+
+    }
+
     public void setX(float x) {
         this.x = x;
     }
@@ -190,6 +200,26 @@ public class Player implements IGameObject {
         grid.getTileFromCoordinates(y, x).addGameObject(this);
        // checkCollision(grid);
     }
+
+    public void emptyList() {
+        for (int i = 0; i < cardsToBePlayed.length; i++) {
+            cardsToBePlayed[i] = null;
+        }
+    }
+
+    public void addToList(int index, MoveCard card) {
+        cardsToBePlayed[index] = card;
+    }
+
+    public boolean listIsFull() {
+        for (int i = 0; i < cardsToBePlayed.length; i++) {
+            if (cardsToBePlayed[i] == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
 
 

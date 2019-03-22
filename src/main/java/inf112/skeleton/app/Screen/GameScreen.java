@@ -41,13 +41,14 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.sb.begin();
+        game.drawHUD();
         RoboGame.camera.update();
         RoboGame.tiledMapRenderer.setView(RoboGame.camera);
         RoboGame.tiledMapRenderer.render();
 
         game.sb.setProjectionMatrix(RoboGame.camera.combined);
+
         game.drawSpritesFromGrid();
-        game.drawHUD();
         //game.sb.end();
     }
 
