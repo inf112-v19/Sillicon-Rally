@@ -21,10 +21,10 @@ public class LaserObject implements IGameObject {
 
         Texture texture = new Texture("TileSprites/tile-laser-1-start.png");
         sprite = new Sprite(texture);
-        sprite.setSize(0, 0);
+        sprite.setSize(50, 50); //50 for testing purposes only, change to 0 once bug is fixed.
 
 
-        laserTile = grid.getTileFromCoordinates(xLocation, yLocation);
+        laserTile = grid.getTileFromCoordinates(yLocation, xLocation);
         laserTile.addGameObject(this);
     }
 
