@@ -57,7 +57,9 @@ public class Player implements IGameObject {
         }
         System.out.println("current hp:" + currentHP);
     }
-
+    public int getCurrentHP(){
+        return currentHP;
+    }
 
     private void handleDeath(TileGrid grid) {
         if (backupLocation != null) {
