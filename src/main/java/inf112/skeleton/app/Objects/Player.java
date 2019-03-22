@@ -13,7 +13,6 @@ public class Player implements IGameObject {
     Sprite sprite;
     float x;
     float y;
-
     private int maxHP = 6;
     private int currentHP = maxHP;
 
@@ -56,15 +55,11 @@ public class Player implements IGameObject {
         System.out.println("current hp:" + currentHP);
     }
 
+
     private void handleDeath(TileGrid grid) {
         if (backupLocation != null) {
             resetToBackupLocation(grid);
             deleteBackupLocation();
-            currentHP=maxHP;
-        }
-        else if(backupLocation == null){
-            //TODO implement logic, don't want this to simply end the program while we are still testing stuff
-            System.out.println("game over");
         }
     }
 

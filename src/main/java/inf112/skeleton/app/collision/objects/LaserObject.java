@@ -8,6 +8,10 @@ import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
+/**
+ * Created by Jørgen
+ */
+
 public class LaserObject implements IGameObject {
 
     public int xLocation;
