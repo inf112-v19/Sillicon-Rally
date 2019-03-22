@@ -27,11 +27,11 @@ public class GameObjectFactory {
     public List<TurnGearObject> turnGears;
 
 
-    public GameObjectFactory(GameMap map, TileGrid grid) {
+    public GameObjectFactory(GameMap map, TileGrid grid, RoboGame game) {
         this.map = map;
         this.grid = grid;
 
-        createPlayer();
+        createPlayer(game);
         createFlags();
         createTeleporter();
         createConveyorBelts();
@@ -44,9 +44,9 @@ public class GameObjectFactory {
 
     }
 
-    private void createPlayer() {
+    private void createPlayer(RoboGame game) {
         RoboGame.Direction startDirection = RoboGame.Direction.North;
-        player = new Player(new Texture("robot1.png"), startDirection);
+        player = new Player(new Texture("robot1.png"), startDirection,game);
     }
 
     private void createFlags() {
