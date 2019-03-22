@@ -21,8 +21,7 @@ public class LaserObject implements IGameObject {
 
         Texture texture = new Texture("TileSprites/tile-laser-1-start.png");
         sprite = new Sprite(texture);
-        sprite.setSize(50, 50); //50 for testing purposes only, change to 0 once bug is fixed.
-
+        sprite.setSize(0, 0); //hiding sprite, not having a sprite throws error.
 
         laserTile = grid.getTileFromCoordinates(yLocation, xLocation);
         laserTile.addGameObject(this);
