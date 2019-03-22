@@ -13,7 +13,7 @@ public class Player implements IGameObject {
     Sprite sprite;
     float x;
     float y;
-    private int maxHP = 6;
+    public int maxHP = 6;
     private int currentHP = maxHP;
 
     //Constructor used for testing purposes only
@@ -44,6 +44,7 @@ public class Player implements IGameObject {
         currentHP-=amount;
         if(currentHP <= 0){
             handleDeath(grid);
+            currentHP=maxHP;
         }
         System.out.println("current hp:" + currentHP);
     }
