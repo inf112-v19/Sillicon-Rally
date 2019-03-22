@@ -44,7 +44,6 @@ public class Player implements IGameObject {
         currentHP-=amount;
         if(currentHP <= 0){
             handleDeath(grid);
-            currentHP=maxHP;
         }
         System.out.println("current hp:" + currentHP);
     }
@@ -62,6 +61,8 @@ public class Player implements IGameObject {
             resetToBackupLocation(grid);
             deleteBackupLocation();
         }
+        System.out.println("You died");
+        currentHP=maxHP;
     }
 
     private void moveStraight(int moveDistance, TileGrid grid) {
