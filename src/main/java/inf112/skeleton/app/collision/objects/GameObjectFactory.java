@@ -19,6 +19,7 @@ public class GameObjectFactory {
     public Player player;
     public List<IGameObject> flags;
     public List<IGameObject> lasers;
+    public List<IGameObject> repairs;
     public TeleportObstacle teleportObstacle;
 
     public List<ConveyorBeltObject> oneForwardBelts;
@@ -33,6 +34,7 @@ public class GameObjectFactory {
         createTeleporter();
         createConveyorBelts();
         createLasers();
+        createRepairs();
     }
 
     private void createPlayer() {
@@ -63,7 +65,17 @@ public class GameObjectFactory {
         }
 
     }
+    private void createRepairs(){
+        repairs = new ArrayList<>();
 
+        MapLayer repairLayer = map.getMapLayerByName("Repairs");
+
+        for (MapObject repair : repairLayer.getObjects() ) {
+            RectangleMapObject repairRectangleObject = (RectangleMapObject) repair;
+            repairs.add(new RepairObject(repairRectangleObject, grid));
+        }
+
+    }
     private void createConveyorBelts() {
         createNormalBelts();
     }
