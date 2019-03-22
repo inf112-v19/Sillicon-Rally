@@ -19,6 +19,7 @@ public class GameObjectFactory {
     public Player player;
     public List<IGameObject> flags;
     public List<IGameObject> lasers;
+    public List<IGameObject> pitfalls;
     public List<IGameObject> repairs;
     public TeleportObstacle teleportObstacle;
 
@@ -35,6 +36,8 @@ public class GameObjectFactory {
         createConveyorBelts();
         createLasers();
         createRepairs();
+        createPits();
+
     }
 
     private void createPlayer() {
@@ -76,6 +79,19 @@ public class GameObjectFactory {
         }
 
     }
+
+    private void createPits(){
+        pitfalls = new ArrayList<>();
+
+        MapLayer pitLayer = map.getMapLayerByName("Pits");
+
+        for (MapObject pit : pitLayer.getObjects() ) {
+            RectangleMapObject pitRectangleObject = (RectangleMapObject) pit;
+            pitfalls.add(new PitObject(pitRectangleObject, grid));
+        }
+
+    }
+
     private void createConveyorBelts() {
         createNormalBelts();
     }
