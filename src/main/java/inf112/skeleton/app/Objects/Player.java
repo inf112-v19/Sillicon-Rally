@@ -92,7 +92,7 @@ public class Player implements IGameObject, InputProcessor {
     public Sprite getSprite() {
         if (this.sprite == null)
             return null;
-        
+
         sprite.setX(this.x);
         sprite.setY(this.y);
         return this.sprite;
