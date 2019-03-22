@@ -18,8 +18,8 @@ public class Player implements IGameObject, InputProcessor {
     Sprite sprite;
     float x;
     float y;
-    public int playerHP = getPlayerHP();
-    public final int MAX_HP = getPlayerHP();
+    public int playerHP ;//= getPlayerHP();
+    public final int MAX_HP = 6;
     private RoboGame game;
     private PlayerMovements playerMovements;
 
@@ -30,6 +30,7 @@ public class Player implements IGameObject, InputProcessor {
         backupLocation = null;
         this.cardsToBePlayed = new MoveCard[5];
         playerMovements = new PlayerMovements(this);
+        this.playerHP = MAX_HP;
     }
 
     public Player(Texture texture, RoboGame.Direction startDirection, RoboGame game) {
@@ -38,6 +39,7 @@ public class Player implements IGameObject, InputProcessor {
         this.backupLocation = null;
         this.game = game;
         playerMovements = new PlayerMovements(this);
+        this.playerHP = MAX_HP;
     }
 
 
@@ -47,9 +49,6 @@ public class Player implements IGameObject, InputProcessor {
     }
 
 
-    private int getPlayerHP(){
-        return 6;
-    }
 
 
     public void handleDeath(TileGrid grid) {

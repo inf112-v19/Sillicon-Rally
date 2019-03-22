@@ -34,6 +34,8 @@ public class PitObject implements IGameObject {
 
         if (pitTile.equals(playerTile)) {
             effectOfPit(player);
+            if (player.playerHP <= 0)
+                player.handleDeath(grid);
         }
     }
 

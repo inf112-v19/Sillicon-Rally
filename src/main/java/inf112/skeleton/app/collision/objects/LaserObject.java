@@ -45,6 +45,8 @@ public class LaserObject implements IGameObject {
 
         if (laserTile.equals(playerTile)) {
             handleDamage(player);
+            if (player.playerHP <= 0)
+                player.handleDeath(grid);
         }
     }
 

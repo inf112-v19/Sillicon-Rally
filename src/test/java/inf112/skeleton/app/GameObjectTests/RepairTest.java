@@ -7,7 +7,6 @@ import inf112.skeleton.app.grid.TileGrid;
 import org.junit.jupiter.api.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
 
 public class RepairTest {
     private TileGrid grid;
