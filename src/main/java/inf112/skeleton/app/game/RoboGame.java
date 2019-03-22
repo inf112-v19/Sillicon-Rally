@@ -52,16 +52,14 @@ public class RoboGame extends Game {
         gameMap = new GameMap("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
-        camera = new CustomCamera(gameMap.getTiledMap());
+
         tiledMap = new TmxMapLoader().load("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         camera = new CustomCamera(tiledMap);
         camera.translate( -470, -700);
 
         this.grid = makeGrid();
-       // Gdx.input.setInputProcessor(this);
         sb = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("sprites/car.jpg"));
 
         texture = new Texture("cardLayouts/mech.jpg");
         backboard = new Sprite(texture);
@@ -153,9 +151,6 @@ public class RoboGame extends Game {
         }
         sb.end();
     }
-
-
-
 
 
     @Override
