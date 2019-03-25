@@ -17,13 +17,14 @@ public class GameObjectFactory {
     public GameMap map;
     public TileGrid grid;
     public Player player;
+    public ConveyorBeltObject conveyorBeltObject;
     public List<IGameObject> flags;
     public List<IGameObject> lasers;
     public List<IGameObject> pitfalls;
     public List<IGameObject> repairs;
     public TeleportObstacle teleportObstacle;
 
-    public List<ConveyorBeltObject> oneForwardBelts;
+    public List<ConveyorBeltObject> ForwardBelts;
     public List<TurnGearObject> turnGears;
 
 
@@ -40,8 +41,6 @@ public class GameObjectFactory {
         createRepairs();
         createTurnGears();
         createPits();
-
-
     }
 
     private void createPlayer(RoboGame game) {
@@ -98,20 +97,16 @@ public class GameObjectFactory {
 
 
     private void createConveyorBelts() {
-        createNormalBelts();
-    }
-
-    private void createNormalBelts() {
-        this.oneForwardBelts = new ArrayList<>();
-        int speed = 1;
+        this.ForwardBelts = new ArrayList<>();
         MapLayer belts = map.getMapLayerByName("Belts");
 
 
-       for (MapObject belt: belts.getObjects()) {
+        for (MapObject belt: belts.getObjects()) {
             RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
-            oneForwardBelts.add(new ConveyorBeltObject(beltRectangleObject, grid, speed));
+            ForwardBelts.add(new ConveyorBeltObject(beltRectangleObject, grid));
         }
     }
+
 
     private void createTurnGears(){
         this.turnGears = new ArrayList<>();

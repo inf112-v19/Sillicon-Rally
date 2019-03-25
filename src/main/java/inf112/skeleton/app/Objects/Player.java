@@ -18,7 +18,7 @@ public class Player implements IGameObject, InputProcessor {
     Sprite sprite;
     float x;
     float y;
-    public int playerHP ;//= getPlayerHP();
+    public int playerHP ;
     public final int MAX_HP = 6;
     private RoboGame game;
     private PlayerMovements playerMovements;
@@ -47,7 +47,6 @@ public class Player implements IGameObject, InputProcessor {
         CollisionHandler collisionHandler = new CollisionHandler(grid, this);
         collisionHandler.checkCollision();
     }
-
 
 
 
@@ -229,13 +228,16 @@ public class Player implements IGameObject, InputProcessor {
         if (keycode == Input.Keys.UP) {
             playerMovements.moveStraight(1, moveDistance, game.grid);
         }
+        if (keycode == Input.Keys.W) {
+            playerMovements.moveStraight(2, moveDistance, game.grid);
+        }
 
         if (keycode == Input.Keys.DOWN) {
             playerMovements.moveStraight(1,moveDistance * (-1),game.grid);
         }
 
         if (keycode == Input.Keys.R) {
-            game.drawNineCards();
+            game.drawNineCardsFromDeck();
         }
 
         checkCollision(game.grid);

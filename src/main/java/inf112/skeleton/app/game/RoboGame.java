@@ -2,8 +2,6 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,12 +13,10 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.Screen.GameScreen;
 import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
-import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
@@ -80,14 +76,14 @@ public class RoboGame extends Game {
         grid.getTile(0,0).addGameObject(player);
         Gdx.input.setInputProcessor(player);
 
-        drawNineCards();
+        drawNineCardsFromDeck();
 
     }
 
     //"draw", as in drawing cards from a deck of cards.
     //not "draw", as in drawing the picture of a card in the application.
     //#tricky #difference #notTheSame ##
-    public void drawNineCards() {
+    public void drawNineCardsFromDeck() {
         int cardYPos = -770;
         int cardXPos = -550;
         MoveCard card;

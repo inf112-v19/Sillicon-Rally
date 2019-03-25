@@ -1,13 +1,20 @@
 package inf112.skeleton.app.game;
 
+import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.collision.objects.CollisionHandler;
+import inf112.skeleton.app.collision.objects.ConveyorBeltObject;
+import inf112.skeleton.app.collision.objects.GameObjectFactory;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
+
+import java.util.List;
 
 public class PlayerMovements {
     Player player;
     float yLoc;
     float xLoc;
+    CollisionHandler collisionHandler;
 
     public PlayerMovements(Player player) {
         this.player = player;
@@ -15,11 +22,15 @@ public class PlayerMovements {
         xLoc = player.getX();
     }
 
+
     public void moveStraight(int steps, int moveDistance, TileGrid grid) {
         for (int i = 0; i < steps; i++) {
             moveStraight(moveDistance, grid);
+            //collisionHandler.doubleCheck(grid, player);
         }
     }
+
+
 
     private void moveStraight(int moveDistance, TileGrid grid) {
         switch (player.currentDirection) {
