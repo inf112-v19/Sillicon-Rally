@@ -10,14 +10,14 @@ import inf112.skeleton.app.grid.TileGrid;
 
 
 public class ConveyorBeltObject implements IGameObject {
-    private int speed;
+    public int speed;
     public int yLocation;
     public int xLocation;
     Tile conveyorTile;
     public RoboGame.Direction direction;
 
-    public ConveyorBeltObject(RectangleMapObject conveyorFromTile, TileGrid grid, int speed){
-        this.speed = speed;
+    public ConveyorBeltObject(RectangleMapObject conveyorFromTile, TileGrid grid){
+        speed = getConveyorSpeed(conveyorFromTile);
         yLocation = (int) conveyorFromTile.getRectangle().getY();
         xLocation = (int) conveyorFromTile.getRectangle().getX();
         //System.out.println(conveyorFromTile.getProperties().get("east"));
@@ -55,11 +55,26 @@ public class ConveyorBeltObject implements IGameObject {
         return null;
     }
 
+
+
+    public int getConveyorSpeed(RectangleMapObject conveyorFromTile){
+        String speedProperty = (String) conveyorFromTile.getProperties().get("speed");
+        int integer = 0;
+        switch (speedProperty){
+            case "1" : return integer = 1;
+            case "2" : return integer= 2;
+        }
+        return integer;
+    }
+
+
+
     public void handleCollision(Player player, TileGrid grid){
         int moveDistance = grid.tileSizeInPx;
 
         RoboGame.Direction originalDirection = player.currentDirection;
         player.currentDirection = direction;
+
         player.moveStraight(speed, moveDistance, grid);
         player.currentDirection = originalDirection;
     }

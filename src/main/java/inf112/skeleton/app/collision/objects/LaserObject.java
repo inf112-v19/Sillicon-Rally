@@ -16,6 +16,7 @@ public class LaserObject implements IGameObject {
 
     public int xLocation;
     public int yLocation;
+    public final int LASER_DAMAGE = 1;
     Sprite sprite;
     Tile laserTile;
 
@@ -31,13 +32,29 @@ public class LaserObject implements IGameObject {
         laserTile.addGameObject(this);
     }
 
+    //for testing
+    public LaserObject(int y, int x, TileGrid grid){
+        this.yLocation = y;
+        this.xLocation = x;
+        laserTile = grid.getTileFromCoordinates(yLocation, xLocation);
+        laserTile.addGameObject(this);
+    }
+
     public void handleCollision(Player player, TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
         if (laserTile.equals(playerTile)) {
-            player.takeDmg(1, grid);
+            handleDamage(player);
+            if (player.playerHP <= 0)
+                player.handleDeath(grid);
         }
     }
+
+    public void handleDamage(Player player){
+        player.playerHP -= LASER_DAMAGE;
+        System.out.println(player.playerHP);
+    }
+
 
     @Override
     public Sprite getSprite() {

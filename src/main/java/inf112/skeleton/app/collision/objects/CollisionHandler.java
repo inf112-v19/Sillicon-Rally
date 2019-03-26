@@ -2,7 +2,6 @@ package inf112.skeleton.app.collision.objects;
 
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.demo.Savestate;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
@@ -11,6 +10,7 @@ import java.util.List;
 public class CollisionHandler {
     Player player;
     TileGrid grid;
+
 
     public CollisionHandler(TileGrid grid, Player player) {
         this.player = player;
@@ -25,6 +25,6 @@ public class CollisionHandler {
         for (IGameObject object : spritesOnTile) {
             object.handleCollision(player, grid);
         }
-
     }
+
 }

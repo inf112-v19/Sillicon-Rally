@@ -12,6 +12,7 @@ public class RepairObject implements IGameObject {
 
     public int xLocation;
     public int yLocation;
+    public final int REPAIR_REGENERATE = 2;
     Sprite sprite;
     Tile repairTile;
 
@@ -31,8 +32,13 @@ public class RepairObject implements IGameObject {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
         if (repairTile.equals(playerTile)) {
-            player.healDmg(2);
+            healDamage(player);
         }
+    }
+
+    public void healDamage(Player player){
+        player.playerHP += REPAIR_REGENERATE;
+        System.out.println(player.playerHP);
     }
 
     @Override
@@ -41,5 +47,18 @@ public class RepairObject implements IGameObject {
         sprite.setY(yLocation);
 
         return sprite;
+    }
+
+
+    /*
+    For Testing
+     */
+
+    public RepairObject(int y, int x, TileGrid grid){
+        this.yLocation = y;
+        this.xLocation = x;
+        repairTile = grid.getTileFromCoordinates(yLocation, xLocation);
+        repairTile.addGameObject(this);
+
     }
 }

@@ -13,6 +13,7 @@ public class PitObject implements IGameObject {
 
     public int xLocation;
     public int yLocation;
+    public final int PIT_DAMAGE = 2;
     Sprite sprite;
     Tile pitTile;
 
@@ -32,8 +33,14 @@ public class PitObject implements IGameObject {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
         if (pitTile.equals(playerTile)) {
-            player.takeDmg(player.maxHP, grid);
+            effectOfPit(player);
+            if (player.playerHP <= 0)
+                player.handleDeath(grid);
         }
+    }
+
+    public void effectOfPit(Player player){
+        player.playerHP -= PIT_DAMAGE;
     }
 
     @Override

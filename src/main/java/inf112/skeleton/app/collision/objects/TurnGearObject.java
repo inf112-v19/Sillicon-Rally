@@ -22,14 +22,6 @@ public class TurnGearObject implements IGameObject {
         turnGearTile = grid.getTileFromCoordinates(yLocation, xLocation);
         turnGearTile.addGameObject(this);
     }
-    //for testing
-    public TurnGearObject(int y, int x, TileGrid grid, RotateDirection direction){
-        this.yLocation = y;
-        this.xLocation = x;
-        turnGearTile = grid.getTileFromCoordinates(yLocation, xLocation);
-        turnGearTile.addGameObject(this);
-        this.rotateDirection = direction;
-    }
 
     public RotateDirection getRotateDirection(RectangleMapObject turnGearFromTiled) {
         String turnDirectionProperty = (String) turnGearFromTiled.getProperties().get("rotationDirection");
@@ -57,5 +49,18 @@ public class TurnGearObject implements IGameObject {
 
     public enum RotateDirection{
         CLOCKWISE, COUNTER_CLOCKWISE
+    }
+
+
+
+    /*
+    For testing
+     */
+    public TurnGearObject(int y, int x, TileGrid grid, RotateDirection direction){
+        this.yLocation = y;
+        this.xLocation = x;
+        turnGearTile = grid.getTileFromCoordinates(yLocation, xLocation);
+        turnGearTile.addGameObject(this);
+        this.rotateDirection = direction;
     }
 }

@@ -2,8 +2,6 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -19,11 +17,10 @@ import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
-import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
-public class RoboGame extends Game implements InputProcessor {
+public class RoboGame extends Game {
     public static OrthographicCamera camera;
     public int TILE_SIZE_IN_PX;
     public TiledMap tiledMap;
@@ -34,8 +31,8 @@ public class RoboGame extends Game implements InputProcessor {
     public GameMap gameMap;
     private StackOfCards deck;
     private MoveCard temp;
-    private MoveCard[] list;
-    private Boolean[] booList;
+    public MoveCard[] list;
+    public Boolean[] booList;
     private Sprite backboard;
     private Sprite lives;
     private Texture texture;
@@ -51,16 +48,14 @@ public class RoboGame extends Game implements InputProcessor {
         gameMap = new GameMap("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
-        camera = new CustomCamera(gameMap.getTiledMap());
+
         tiledMap = new TmxMapLoader().load("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         camera = new CustomCamera(tiledMap);
         camera.translate( -470, -700);
 
         this.grid = makeGrid();
-        Gdx.input.setInputProcessor(this);
         sb = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("sprites/car.jpg"));
 
         texture = new Texture("cardLayouts/mech.jpg");
         backboard = new Sprite(texture);
@@ -76,18 +71,19 @@ public class RoboGame extends Game implements InputProcessor {
         list = new MoveCard[9];
         booList = new Boolean[9];
 
-        GameObjectFactory constructor = new GameObjectFactory(gameMap, grid);
+        GameObjectFactory constructor = new GameObjectFactory(gameMap, grid, this);
         player = constructor.player;
         grid.getTile(0,0).addGameObject(player);
+        Gdx.input.setInputProcessor(player);
 
-        drawNineCards();
+        drawNineCardsFromDeck();
 
     }
 
     //"draw", as in drawing cards from a deck of cards.
     //not "draw", as in drawing the picture of a card in the application.
     //#tricky #difference #notTheSame ##
-    private void drawNineCards() {
+    public void drawNineCardsFromDeck() {
         int cardYPos = -770;
         int cardXPos = -550;
         MoveCard card;
@@ -127,6 +123,7 @@ public class RoboGame extends Game implements InputProcessor {
          super.render();
     }
 
+
     public void drawHUD() {
         sb.end();
         sb.begin();
@@ -152,157 +149,6 @@ public class RoboGame extends Game implements InputProcessor {
     }
 
 
-
-    @Override
-    public boolean keyDown(int keycode) {
-        float x = player.getX();
-        float y = player.getY();
-
-        //Viktig å fjerne spilleren fra sin nåværende tile
-        Tile currentTile = grid.getTileFromCoordinates(y, x);
-
-        int moveDistance = TILE_SIZE_IN_PX;
-
-        if (keycode == Input.Keys.RIGHT) {
-            player.rotateClockwise();
-        }
-
-        if (keycode == Input.Keys.LEFT) {
-            player.rotateCounterClockwise();
-        }
-
-        if (keycode == Input.Keys.valueOf("1")) {
-            int index = 0;
-            if (list[index] != null) {
-                list[index].translateY(75);
-                //movePlayer(index, moveDistance, currentTile);
-                //list[index] = null;
-                booList[index] = true;
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("2")) {
-            int index = 1;
-            if (list[index] != null) {
-                list[index].translateY(75);
-                //movePlayer(index, moveDistance, currentTile);
-                //list[index] = null;
-                booList[index] = true;
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("3")) {
-            int index = 2;
-            if (list[index] != null) {
-                list[index].translateY(75);
-                //movePlayer(index, moveDistance, currentTile);
-                //list[index] = null;
-                booList[index] = true;
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("4")) {
-            int index = 3;
-            if (list[index] != null) {
-                list[index].translateY(75);
-                //movePlayer(index, moveDistance, currentTile);
-                //list[index] = null;
-                booList[index] = true;
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("5")) {
-            int index = 4;
-            if (list[index] != null) {
-                list[index].translateY(75);
-                //movePlayer(index, moveDistance, currentTile);
-                //list[index] = null;
-                booList[index] = true;
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("6")) {
-            int index = 5;
-                list[index].translateY(75);
-                booList[index] = true;
-        }
-
-        if (keycode == Input.Keys.valueOf("7")) {
-            int index = 6;
-            list[index].translateY(75);
-            booList[index] = true;
-        }
-
-        if (keycode == Input.Keys.valueOf("8")) {
-            int index = 7;
-            list[index].translateY(75);
-            booList[index] = true;
-        }
-
-        if (keycode == Input.Keys.valueOf("9")) {
-            int index = 8;
-            list[index].translateY(75);
-            booList[index] = true;
-        }
-
-        if (keycode == Input.Keys.U) {
-            player.uTurn();
-        }
-        if (keycode == Input.Keys.UP) {
-            player.moveStraight(1, moveDistance, grid);
-        }
-
-        if (keycode == Input.Keys.DOWN) {
-            player.moveStraight(1,moveDistance * (-1),grid);
-        }
-
-        if (keycode == Input.Keys.R) {
-            drawNineCards();
-        }
-
-        player.checkCollision(grid);
-
-        return false;
-    }
-
-    public void movePlayer(int index, int moveDistance, Tile currentTile) {
-        temp = list[index];
-        MoveCard.Type type = temp.getType();
-        switch (type) {
-            case move1:
-                player.moveStraight(1, moveDistance, grid);
-                break;
-            case move2:
-                player.moveStraight(2, moveDistance, grid);
-                break;
-            case move3:
-                player.moveStraight(3, moveDistance, grid);
-                break;
-            case uturn:
-                player.uTurn();
-                break;
-            case turnleft:
-                player.rotateCounterClockwise();
-
-                break;
-            case turnright:
-                player.rotateClockwise();
-                break;
-            case reverse:
-                player.moveStraight(1,moveDistance * (-1),grid);
-            default:
-                System.out.println("did nothing");
-        }
-
-    }
-
-    /*
-    public void checkCollision() {
-        CollisionHandler collisionHandler = new CollisionHandler(this);
-        collisionHandler.checkCollision();
-    }
-    */
-
     @Override
     public void dispose() {
         sb.dispose();
@@ -310,40 +156,6 @@ public class RoboGame extends Game implements InputProcessor {
         tiledMap.dispose();
     }
 
-    @Override
-    public boolean keyUp(int i) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char c) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int i, int i1, int i2, int i3) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int i, int i1, int i2, int i3) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int i, int i1, int i2) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int i, int i1) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int i) {
-        return false;
-    }
 
     public enum Direction{
         North, East, South, West

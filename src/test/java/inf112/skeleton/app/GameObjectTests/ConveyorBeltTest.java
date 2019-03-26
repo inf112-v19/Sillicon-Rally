@@ -74,4 +74,13 @@ private ConveyorBeltObject belt;
        assertEquals(0, (int) (player.getX()));
     }
 
+    @Test
+    void conveyorDoesNotRotatePlayer(){
+       setup();
+       player = new Player();
+       player.setPosition(0,0,grid);
+       belt = new ConveyorBeltObject(0,0, grid, 1, RoboGame.Direction.North);
+       belt.handleCollision(player, grid);
+       assertEquals(RoboGame.Direction.West, player.currentDirection);
+    }
 }
