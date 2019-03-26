@@ -14,7 +14,6 @@ public class PlayerMovements {
     Player player;
     float yLoc;
     float xLoc;
-    CollisionHandler collisionHandler;
 
     public PlayerMovements(Player player) {
         this.player = player;
@@ -26,7 +25,7 @@ public class PlayerMovements {
     public void moveStraight(int steps, int moveDistance, TileGrid grid) {
         for (int i = 0; i < steps; i++) {
             moveStraight(moveDistance, grid);
-            //collisionHandler.doubleCheck(grid, player);
+            player.checkForDamageTaken(grid);
         }
     }
 

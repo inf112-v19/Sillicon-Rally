@@ -22,6 +22,7 @@ public class Player implements IGameObject, InputProcessor {
     public final int MAX_HP = 6;
     private RoboGame game;
     private PlayerMovements playerMovements;
+    TileGrid grid;
 
 
     //Constructor used for testing purposes only
@@ -40,12 +41,18 @@ public class Player implements IGameObject, InputProcessor {
         this.game = game;
         playerMovements = new PlayerMovements(this);
         this.playerHP = MAX_HP;
+        this.grid = game.grid;
     }
 
 
     public void checkCollision(TileGrid grid) {
         CollisionHandler collisionHandler = new CollisionHandler(grid, this);
         collisionHandler.checkCollision();
+    }
+
+    public void checkForDamageTaken(TileGrid grid) {
+        CollisionHandler collisionHandler = new CollisionHandler(grid, this);
+        collisionHandler.checkForDamageDealer();
     }
 
 
@@ -94,6 +101,14 @@ public class Player implements IGameObject, InputProcessor {
         sprite.setX(this.x);
         sprite.setY(this.y);
         return this.sprite;
+    }
+
+    public void damagePlayer(int damage, TileGrid grid) {
+        this.playerHP -= damage;
+        System.out.println("you took " + damage + " damage");
+
+        if (playerHP <= 0)
+            handleDeath(grid);
     }
 
     @Override
