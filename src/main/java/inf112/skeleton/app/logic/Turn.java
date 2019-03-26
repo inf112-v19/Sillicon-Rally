@@ -1,5 +1,6 @@
 package inf112.skeleton.app.logic;
 
+import com.badlogic.gdx.Game;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.grid.Tile;
@@ -16,6 +17,8 @@ public class Turn {
 	private int getNumberOfPlayer;
 	RoboGame game;
 	Tile tile;
+	Player player;
+
 
 	public Turn(RoboGame game){ //TODO fjern hardkodingen
 		this.game = game;
@@ -32,10 +35,26 @@ public class Turn {
 	}
 
 	private void doTurn(Player player) {
-		Scanner in = new Scanner(System.in);
-		int choose = in.nextInt()-1;
-		game.movePlayer(choose, game.TILE_SIZE_IN_PX, game.grid.getTileFromCoordinates(player.getY(), player.getX()));
+		if(checkList(booList)){
+			return;
+		}
+	}
+	private void chooseFive(Player player){
 
+	}
+
+	public boolean checkList(boolean[] bool){
+		int counter = 0;
+		boolean temp = false;
+		for (int i = 0; i < bool.length; i++) {
+			if (bool[i]){
+				counter++;
+			}
+		}
+		if (counter==5){
+			temp=true;
+		}
+		return temp;
 	}
 
 

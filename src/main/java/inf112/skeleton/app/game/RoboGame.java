@@ -17,6 +17,7 @@ import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
+import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
@@ -155,6 +156,8 @@ public class RoboGame extends Game {
         texture.dispose();
         tiledMap.dispose();
     }
+
+
 
 
     public enum Direction{

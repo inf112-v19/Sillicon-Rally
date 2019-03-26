@@ -22,6 +22,8 @@ public class Player implements IGameObject, InputProcessor {
     public final int MAX_HP = 6;
     private RoboGame game;
     private PlayerMovements playerMovements;
+    public MoveCard[] movecardArray;
+    boolean[] boolist;
 
 
     //Constructor used for testing purposes only
@@ -40,6 +42,10 @@ public class Player implements IGameObject, InputProcessor {
         this.game = game;
         playerMovements = new PlayerMovements(this);
         this.playerHP = MAX_HP;
+
+        movecardArray = new MoveCard[5];
+        
+
     }
 
 
@@ -134,6 +140,37 @@ public class Player implements IGameObject, InputProcessor {
             }
         }
         return true;
+    }
+
+    public void movePlayer(MoveCard.Type type, int tile_size_in_px, TileGrid grid) {
+
+        switch (type) {
+            case move1:
+                playerMovements.moveStraight(1, tile_size_in_px, grid);
+                break;
+            case move2:
+                playerMovements.moveStraight(2, tile_size_in_px, grid);
+                break;
+            case move3:
+                playerMovements.moveStraight(3, tile_size_in_px, grid);
+                break;
+            case reverse:
+                playerMovements.moveStraight(1, tile_size_in_px*-1, grid);
+                break;
+            case uturn:
+                playerMovements.uTurn();
+                break;
+            case turnleft:
+                playerMovements.rotateCounterClockwise();
+                break;
+            case turnright:
+                playerMovements.rotateClockwise();
+                break;
+
+                default:
+                    System.out.println("Invalid movement");
+                    break;
+        }
     }
 
     @Override
