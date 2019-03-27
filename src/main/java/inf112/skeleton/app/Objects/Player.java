@@ -24,6 +24,8 @@ public class Player implements IGameObject, InputProcessor {
     private PlayerMovements playerMovements;
     TileGrid grid;
 
+    public int flagNr; //logs flag progress
+
 
     //Constructor used for testing purposes only
     public Player() {
@@ -42,6 +44,7 @@ public class Player implements IGameObject, InputProcessor {
         playerMovements = new PlayerMovements(this);
         this.playerHP = MAX_HP;
         this.grid = game.grid;
+        this.flagNr=1;
     }
 
 
