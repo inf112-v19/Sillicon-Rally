@@ -17,7 +17,6 @@ import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
-import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
@@ -32,8 +31,8 @@ public class RoboGame extends Game {
     public GameMap gameMap;
     private StackOfCards deck;
     private MoveCard temp;
-    public MoveCard[] list;
-    public Boolean[] booList;
+    public MoveCard[] listOfNine;
+    public MoveCard[] chosenFive;
     private Sprite backboard;
     private Sprite lives;
     private Texture texture;
@@ -69,8 +68,9 @@ public class RoboGame extends Game {
         lives.setPosition(1050, 600);
 
         deck = new StackOfCards();
-        list = new MoveCard[9];
-        booList = new Boolean[9];
+        listOfNine = new MoveCard[9];
+
+        chosenFive = new MoveCard[5];
 
         GameObjectFactory constructor = new GameObjectFactory(gameMap, grid, this);
         player = constructor.player;
@@ -81,24 +81,43 @@ public class RoboGame extends Game {
 
     }
 
-    //"draw", as in drawing cards from a deck of cards.
-    //not "draw", as in drawing the picture of a card in the application.
-    //#tricky #difference #notTheSame ##
+    public void chooseCard(int index) {
+        temp = listOfNine[index];
+        for (int i = 0; i < chosenFive.length; i++) {
+            if (chosenFive[i] == null) {
+                chosenFive[i] = alignCard(temp, i);
+
+                listOfNine[index] = null;
+                i = 6;
+            }
+        }
+    }
+
+    private MoveCard alignCard(MoveCard temp, int index) {
+        int x = 0 + 170*(index);
+        int y = - 370;
+        temp.setPosition(x,y);
+        temp.setSize(300,400);
+        return temp;
+    }
+
     public void drawNineCardsFromDeck() {
         int cardYPos = -770;
         int cardXPos = -550;
         MoveCard card;
-        for (int i = 0; i < list.length; i++) {
+        for (int i = 0; i < listOfNine.length; i++) {
             card = deck.nextCard();
             if (card != null) {
                 card.setSize(400, 520);
                 card.setPosition(cardXPos, cardYPos);
-                booList[i] = false;
             }
-            list[i] = card;
+            listOfNine[i] = card;
             cardXPos += 205;
-
         }
+        for (int i = 0; i < chosenFive.length; i++) {
+            chosenFive[i] = null;
+        }
+
     }
 
 
@@ -129,10 +148,15 @@ public class RoboGame extends Game {
         sb.end();
         sb.begin();
         backboard.draw(sb);
-        for (int i = 0; i < list.length; i++) {
-            //if (booList[i] != true) {
-                list[i].draw(sb);
-            //}
+        for (int i = 0; i < listOfNine.length; i++) {
+            if (listOfNine[i] != null) {
+                listOfNine[i].draw(sb);
+            }
+        }
+        for (int i = 0; i < chosenFive.length; i++) {
+            if (chosenFive[i] != null) {
+                chosenFive[i].draw(sb);
+            }
         }
         lives.draw(sb);
 
@@ -157,7 +181,9 @@ public class RoboGame extends Game {
         tiledMap.dispose();
     }
 
+    public void putCardsBackInDeck() {
 
+    }
 
 
     public enum Direction{

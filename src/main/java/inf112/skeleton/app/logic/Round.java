@@ -16,19 +16,19 @@ public class Round {
     private ArrayList<MoveCard> listToChooseFrom;
     private ArrayList<Player> players;
     private StackOfCards deck;
-    private boolean[] booList;
+
+
 
 
     public Round(StackOfCards deck, ArrayList<Player> playerList) {
         this.deck = deck;
-        players = playerList;
+        this.players = playerList;
 
-        drawNineCards(deck);
 
         for (Player p : players) {
+            drawNineCards(deck, p);
             chooseFiveCards();
         }
-
 
         doTurn();
 
@@ -36,17 +36,14 @@ public class Round {
     }
 
     private void chooseFiveCards() {
-        //booList = new Boolean[9];
-        for (int i = 0; i < 5; i++) {
-            
-        }
+        int count  = 0;
+
     }
 
-    private ArrayList<MoveCard> drawNineCards(StackOfCards deck) {
+    private ArrayList<MoveCard> drawNineCards(StackOfCards deck, Player player) {
         listToChooseFrom = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             card = deck.nextCard();
-            //card.setPosition, setSize;
             listToChooseFrom.add(card);
         }
         return listToChooseFrom;

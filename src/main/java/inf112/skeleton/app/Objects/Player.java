@@ -23,7 +23,7 @@ public class Player implements IGameObject, InputProcessor {
     private RoboGame game;
     private PlayerMovements playerMovements;
     public MoveCard[] movecardArray;
-    boolean[] boolist;
+    boolean[] booList;
 
 
     //Constructor used for testing purposes only
@@ -33,6 +33,10 @@ public class Player implements IGameObject, InputProcessor {
         this.cardsToBePlayed = new MoveCard[5];
         playerMovements = new PlayerMovements(this);
         this.playerHP = MAX_HP;
+
+        this.movecardArray = new MoveCard[5];
+
+
     }
 
     public Player(Texture texture, RoboGame.Direction startDirection, RoboGame game) {
@@ -43,7 +47,7 @@ public class Player implements IGameObject, InputProcessor {
         playerMovements = new PlayerMovements(this);
         this.playerHP = MAX_HP;
 
-        movecardArray = new MoveCard[5];
+        this.movecardArray = new MoveCard[5];
 
 
     }
@@ -187,76 +191,65 @@ public class Player implements IGameObject, InputProcessor {
 
         if (keycode == Input.Keys.valueOf("1")) {
             int index = 0;
-            if (game.list[index] != null) {
-                game.list[index].translateY(75);
-                //movePlayer(index, moveDistance, currentTile);
-                //list[index] = null;
-                game.booList[index] = true;
+            if (game.listOfNine[index] != null) {
+                game.chooseCard(index);
             }
         }
 
         if (keycode == Input.Keys.valueOf("2")) {
             int index = 1;
-            if (game.list[index] != null) {
-                game.list[index].translateY(75);
-                //movePlayer(index, moveDistance, currentTile);
-                //list[index] = null;
-                game.booList[index] = true;
+            if (game.listOfNine[index] != null) {
+                game.chooseCard(index);
             }
         }
 
         if (keycode == Input.Keys.valueOf("3")) {
             int index = 2;
-            if (game.list[index] != null) {
-                game.list[index].translateY(75);
-                //movePlayer(index, moveDistance, currentTile);
-                //list[index] = null;
-                game.booList[index] = true;
+            if (game.listOfNine[index] != null) {
+                game.chooseCard(index);
             }
         }
 
         if (keycode == Input.Keys.valueOf("4")) {
             int index = 3;
-            if (game.list[index] != null) {
-                game.list[index].translateY(75);
-                //movePlayer(index, moveDistance, currentTile);
-                //list[index] = null;
-                game.booList[index] = true;
+            if (game.listOfNine[index] != null) {
+                game.chooseCard(index);
             }
         }
 
         if (keycode == Input.Keys.valueOf("5")) {
             int index = 4;
-            if (game.list[index] != null) {
-                game.list[index].translateY(75);
-                //movePlayer(index, moveDistance, currentTile);
-                //list[index] = null;
-                game.booList[index] = true;
+            if (game.listOfNine[index] != null) {
+                game.chooseCard(index);
             }
         }
 
         if (keycode == Input.Keys.valueOf("6")) {
             int index = 5;
-            game.list[index].translateY(75);
-            game.booList[index] = true;
+            if (game.listOfNine[index] != null) {
+                game.chooseCard(index);
+            }
         }
 
         if (keycode == Input.Keys.valueOf("7")) {
             int index = 6;
-            game.list[index].translateY(75);
-            game.booList[index] = true;
+            if (game.listOfNine[index] != null) {
+                game.chooseCard(index);
+            }
         }
 
         if (keycode == Input.Keys.valueOf("8")) {
             int index = 7;
-            game.list[index].translateY(75);
-            game.booList[index] = true;
+            if (game.listOfNine[index] != null) {
+                game.chooseCard(index);
+            }
         }
 
         if (keycode == Input.Keys.valueOf("9")) {
             int index = 8;
-            game.list[index].translateY(75);
-            game.booList[index] = true;
+            if (game.listOfNine[index] != null) {
+                game.chooseCard(index);
+            }
         }
 
         if (keycode == Input.Keys.U) {
@@ -274,6 +267,7 @@ public class Player implements IGameObject, InputProcessor {
         }
 
         if (keycode == Input.Keys.R) {
+            game.putCardsBackInDeck();
             game.drawNineCardsFromDeck();
         }
 
