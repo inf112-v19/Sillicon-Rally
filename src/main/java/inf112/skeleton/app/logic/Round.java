@@ -1,5 +1,6 @@
 package inf112.skeleton.app.logic;
 
+import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 
@@ -10,22 +11,32 @@ import java.util.ArrayList;
  */
 public class Round {
 
-    private int turnNumber;
+    //roundNumber (int) ?
     private MoveCard card;
     private ArrayList<MoveCard> listToChooseFrom;
+    private ArrayList<Player> players;
     private StackOfCards deck;
-    private Boolean[] booList;
+    private boolean[] booList;
 
-    public Round(StackOfCards deck123) {
-        this.deck = deck123;
+
+    public Round(StackOfCards deck, ArrayList<Player> playerList) {
+        this.deck = deck;
+        players = playerList;
+
         drawNineCards(deck);
-        chooseFiveCards();
+
+        for (Player p : players) {
+            chooseFiveCards();
+        }
+
+
+        doTurn();
 
 
     }
 
     private void chooseFiveCards() {
-        booList = new Boolean[9];
+        //booList = new Boolean[9];
         for (int i = 0; i < 5; i++) {
             
         }
@@ -39,6 +50,24 @@ public class Round {
             listToChooseFrom.add(card);
         }
         return listToChooseFrom;
+    }
+
+    public void doTurn() {
+
+    }
+
+    public boolean checkList(boolean[] bool){
+        int counter = 0;
+        boolean temp = false;
+        for (int i = 0; i < bool.length; i++) {
+            if (bool[i]){
+                counter++;
+            }
+        }
+        if (counter==5){
+            temp=true;
+        }
+        return temp;
     }
 
 

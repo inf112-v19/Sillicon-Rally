@@ -34,11 +34,6 @@ public class Turn {
 		}
 	}
 
-	private void doTurn(Player player) {
-		if(checkList(booList)){
-			return;
-		}
-	}
 	private void chooseFive(Player player){
 
 	}
