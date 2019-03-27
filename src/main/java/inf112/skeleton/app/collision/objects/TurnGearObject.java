@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.game.PlayerMovements;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
@@ -44,6 +45,7 @@ public class TurnGearObject implements IGameObject {
             player.rotateClockwise();
         if (rotateDirection.equals(RotateDirection.COUNTER_CLOCKWISE))
             player.rotateCounterClockwise();
+        player.checkForDamageTaken(grid);
     }
 
 
@@ -63,4 +65,5 @@ public class TurnGearObject implements IGameObject {
         turnGearTile.addGameObject(this);
         this.rotateDirection = direction;
     }
+
 }

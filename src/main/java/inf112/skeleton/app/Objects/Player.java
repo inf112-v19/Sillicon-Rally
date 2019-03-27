@@ -156,11 +156,13 @@ public class Player implements IGameObject, InputProcessor {
         int moveDistance = game.TILE_SIZE_IN_PX;
 
         if (keycode == Input.Keys.RIGHT) {
-            playerMovements.rotateClockwise(grid);
+            playerMovements.rotateClockwise(game.grid);
+            checkForDamageTaken(grid);
         }
 
         if (keycode == Input.Keys.LEFT) {
-            playerMovements.rotateCounterClockwise(grid);
+            playerMovements.rotateCounterClockwise(game.grid);
+            checkForDamageTaken(grid);
         }
 
         if (keycode == Input.Keys.valueOf("1")) {
@@ -238,7 +240,7 @@ public class Player implements IGameObject, InputProcessor {
         }
 
         if (keycode == Input.Keys.U) {
-            playerMovements.uTurn(grid);
+            playerMovements.uTurn(game.grid);
         }
         if (keycode == Input.Keys.UP) {
             playerMovements.moveStraight(1, moveDistance, game.grid);
