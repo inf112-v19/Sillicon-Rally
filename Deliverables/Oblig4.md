@@ -22,7 +22,7 @@
   * Reports from meetings since previous delivery
   *
 
-[link til trello] (https://trello.com/b/zOgCmmNW/silicon-rally)
+[link til trello](https://trello.com/b/zOgCmmNW/silicon-rally)
 
 
 
