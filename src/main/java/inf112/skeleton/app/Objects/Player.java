@@ -70,8 +70,8 @@ public class Player implements IGameObject, InputProcessor {
         playerMovements.moveStraight(speed, moveDistance, grid);
     }
 
-    public void rotateClockwise(){playerMovements.rotateClockwise();}
-    public void rotateCounterClockwise() {playerMovements.rotateCounterClockwise();}
+    public void rotateClockwise(){playerMovements.rotateClockwise(grid);}
+    public void rotateCounterClockwise() {playerMovements.rotateCounterClockwise(grid);}
 
 
 
@@ -156,11 +156,11 @@ public class Player implements IGameObject, InputProcessor {
         int moveDistance = game.TILE_SIZE_IN_PX;
 
         if (keycode == Input.Keys.RIGHT) {
-            playerMovements.rotateClockwise();
+            playerMovements.rotateClockwise(grid);
         }
 
         if (keycode == Input.Keys.LEFT) {
-            playerMovements.rotateCounterClockwise();
+            playerMovements.rotateCounterClockwise(grid);
         }
 
         if (keycode == Input.Keys.valueOf("1")) {
@@ -238,7 +238,7 @@ public class Player implements IGameObject, InputProcessor {
         }
 
         if (keycode == Input.Keys.U) {
-            playerMovements.uTurn();
+            playerMovements.uTurn(grid);
         }
         if (keycode == Input.Keys.UP) {
             playerMovements.moveStraight(1, moveDistance, game.grid);

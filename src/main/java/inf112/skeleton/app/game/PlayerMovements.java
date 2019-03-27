@@ -80,9 +80,10 @@ public class PlayerMovements {
         grid.getTileFromCoordinates(y, x).addGameObject(player);
     }
 
-    public void rotateClockwise() {
+    public void rotateClockwise(TileGrid grid) {
         if (player.getSprite() != null)
             player.getSprite().rotate(-90);
+        player.checkForDamageTaken(grid);
 
         switch (player.currentDirection) {
             case North:
@@ -100,9 +101,11 @@ public class PlayerMovements {
     }
 
 
-    public void rotateCounterClockwise() {
+    public void rotateCounterClockwise(TileGrid grid) {
         if (player.getSprite() != null)
             player.getSprite().rotate(90);
+        player.checkForDamageTaken(grid);
+
 
         switch (player.currentDirection) {
             case North:
@@ -119,8 +122,9 @@ public class PlayerMovements {
         }
     }
 
-    public void uTurn() {
+    public void uTurn(TileGrid grid) {
         player.getSprite().rotate(180);
+        player.checkForDamageTaken(grid);
 
         switch (player.currentDirection) {
             case North:
