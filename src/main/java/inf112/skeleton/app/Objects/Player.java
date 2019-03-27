@@ -44,7 +44,7 @@ public class Player implements IGameObject, InputProcessor {
         this.playerHP = MAX_HP;
 
         movecardArray = new MoveCard[5];
-        
+
 
     }
 
