@@ -3,6 +3,8 @@ package inf112.skeleton.app.logic;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
+import inf112.skeleton.app.game.RoboGame;
+import inf112.skeleton.app.grid.TileGrid;
 
 import java.util.ArrayList;
 
@@ -14,11 +16,11 @@ public class Round {
     //roundNumber (int) ?
     private MoveCard card;
     private ArrayList<MoveCard> listToChooseFrom;
-    private ArrayList<Player> players;
+    public ArrayList<Player> players;
     private StackOfCards deck;
-
-
-
+    private Player player;
+    private TileGrid grid;
+    private RoboGame game;
 
     public Round(StackOfCards deck, ArrayList<Player> playerList) {
         this.deck = deck;
@@ -27,17 +29,28 @@ public class Round {
 
         for (Player p : players) {
             drawNineCards(deck, p);
-            chooseFiveCards();
+
         }
 
         doTurn();
-
-
     }
 
-    private void chooseFiveCards() {
-        int count  = 0;
+    public void doTurn() {
+       int numberOfPlayers = players.size();
+       int counter = 0;
+       ArrayList<MoveCard> cardList = new ArrayList<>();
+       for (int i = 0; i < cardList.size(); i++) {
+           int playerTurn = counter%numberOfPlayers;
+           switch (playerTurn){
+               case 0: players.get(0).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
+               case 1: players.get(1).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
+               case 2: players.get(2).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
+               case 3: players.get(3).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
+               default:
+                   System.out.println("fuck you kristian");
 
+           }
+       }
     }
 
     private ArrayList<MoveCard> drawNineCards(StackOfCards deck, Player player) {
@@ -47,10 +60,6 @@ public class Round {
             listToChooseFrom.add(card);
         }
         return listToChooseFrom;
-    }
-
-    public void doTurn() {
-
     }
 
     public boolean checkList(boolean[] bool){
