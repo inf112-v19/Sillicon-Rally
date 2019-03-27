@@ -20,9 +20,8 @@
   * Make a brief retrospective.
   * Agree on three improvements based on the retrospective
   * Reports from meetings since previous delivery
-  *
 
-[link til trello](https://trello.com/b/zOgCmmNW/silicon-rally)
+Oversikt over foredeling og status av oppgaver ligger på [trello](https://trello.com/b/zOgCmmNW/silicon-rally)
 
 
 
