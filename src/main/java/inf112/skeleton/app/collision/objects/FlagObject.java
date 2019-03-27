@@ -48,11 +48,12 @@ public class FlagObject implements IGameObject {
             player.flagNr++;
         }
         System.out.println("this is flag: " + flag);
-        System.out.println("player needs flag nr: " + player.flagNr);
 
         if(player.flagNr>maxFlags){
             System.out.println("you win"); //TODO victory screen
         }
+        else
+            System.out.println("player needs flag nr: " + player.flagNr);
     }
 
 
