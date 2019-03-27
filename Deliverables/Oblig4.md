@@ -10,7 +10,7 @@
 ## Obligatorisk Øvelse 4
 
 
-# Task 1: Project and project structure
+## Task 1: Project and project structure
   * Test role: Kristian. main responisbility for testing the application and can delegate both tasks to be implemented/excecuted,
                Find strategies for testing in collaboration with the rest of the team.
   * Have the choices made so far been good? Yes, especially starting with pair programming and the notion of "early/short" deadlines.

@@ -33,14 +33,6 @@ public class LaserObject implements IGameObject, IDamageDealer {
         laserTile.addGameObject(this);
     }
 
-    //for testing
-    public LaserObject(int y, int x, TileGrid grid){
-        this.yLocation = y;
-        this.xLocation = x;
-        laserTile = grid.getTileFromCoordinates(yLocation, xLocation);
-        laserTile.addGameObject(this);
-    }
-
     public void handleCollision(Player player, TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
@@ -60,5 +52,13 @@ public class LaserObject implements IGameObject, IDamageDealer {
     @Override
     public void dealDamage(Player player, TileGrid grid) {
         player.damagePlayer(LASER_DAMAGE, grid);
+    }
+
+    //for testing
+    public LaserObject(int y, int x, TileGrid grid){
+        this.yLocation = y;
+        this.xLocation = x;
+        laserTile = grid.getTileFromCoordinates(yLocation, xLocation);
+        laserTile.addGameObject(this);
     }
 }
