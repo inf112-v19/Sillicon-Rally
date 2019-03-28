@@ -7,6 +7,7 @@ import inf112.skeleton.app.collision.objects.LaserObject;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.TileGrid;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.notification.RunListener;
 
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
@@ -35,6 +36,17 @@ private LaserObject laser;
        belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, RoboGame.Direction.West);
        belt.handleCollision(player,grid);
        assertEquals(1 * TILE_SIZE_IN_PIX, (int) (player.getX()));
+   }
+
+   @Test
+   void conveyorMoveTwoWestTest(){
+       setup();
+       player = new Player();
+       player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
+       belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 2, RoboGame.Direction.West);
+       belt.handleCollision(player,grid);
+       assertEquals(0, (int) (player.getX()));
+
    }
     @Test
     void conveyorMoveEastTest(){
@@ -97,6 +109,6 @@ private LaserObject laser;
         player.setPosition(2 *TILE_SIZE_IN_PIX,2 * TILE_SIZE_IN_PIX,grid);
         belt.handleCollision(player,grid);
         assertEquals(player.playerHP , (player.MAX_HP - laser.LASER_DAMAGE));
-        System.out.println(player.playerHP + "..............");
+        System.out.println(player.playerHP);
     }
 }

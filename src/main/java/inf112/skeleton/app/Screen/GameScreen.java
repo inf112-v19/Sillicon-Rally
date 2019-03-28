@@ -17,21 +17,33 @@ import java.util.ArrayList;
 
 public class GameScreen implements Screen {
 
+    Texture ThreeLifeSprite;
+    Texture TwoLifeSprite;
+    Texture OneLifeSprite;
+    Texture NoLifeSprite;
     private RoboGame game;
     public GameMap gameMap;
     public MainMenuScreen mainMenu;
     public int TILE_SIZE_IN_PX;
     public TiledMap tiledMap;
     public SpriteBatch sb;
-    public Player player;
     RoboGame.Direction startDirection;
     public TileGrid grid;
     public StackOfCards deck;
     private ArrayList<MoveCard> cardsOnBoard;
+    Player player;
 
-    public GameScreen (RoboGame game){
+    private static final int upTopX = 1050;
+    private static final int upTopY = 700;
+    private static final int WidthButton = 240;
+    private static final int HeightButton = 100;
+
+
+    public GameScreen (RoboGame game, Player player){
         this.game = game;
+        this.player = player;
     }
+
 
 
     @Override
@@ -49,15 +61,34 @@ public class GameScreen implements Screen {
         game.sb.setProjectionMatrix(RoboGame.camera.combined);
 
         game.drawSpritesFromGrid();
-        //game.sb.end();
+
+        game.sb.begin();
+
+
+        if (player.playerTokens == 2){
+            game.sb.draw(TwoLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
+        }
+        else if (player.playerTokens == 1){
+            game.sb.draw(OneLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
+
+        }
+        else if (player.playerTokens == 0){
+            game.sb.draw(NoLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
+        }
+        else
+            game.sb.draw(ThreeLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
+
+        game.sb.end();
     }
 
 
     @Override
     public void show() {
         gameMap = new GameMap("map.v.01.tmx");
-        player = new Player(new Texture("car.jpg"), startDirection, this.game);
-
+        ThreeLifeSprite = new Texture("LifeSprites/exmpl3Life.png");
+        TwoLifeSprite = new Texture("LifeSprites/exmpl2Life.png");
+        OneLifeSprite = new Texture("LifeSprites/exmpl1Life.png");
+        NoLifeSprite = new Texture("LifeSprites/exmpl0Life.png");
     }
 
 

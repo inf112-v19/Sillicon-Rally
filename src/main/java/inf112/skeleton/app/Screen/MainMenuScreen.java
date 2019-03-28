@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.game.RoboGame;
 
 
@@ -11,6 +12,7 @@ public class MainMenuScreen extends RoboGame implements Screen {
     private  RoboGame game;
     Texture startActive;
     Texture startInactive;
+    Player player;
 
 
     public static final int WidthButton = 120;
@@ -19,8 +21,10 @@ public class MainMenuScreen extends RoboGame implements Screen {
     private static final int centralizedY = (RoboGame.ROBO_GAME_HEIGHT / 2) - (HeightButton /2);
 
 
-    public MainMenuScreen(RoboGame game){
+
+    public MainMenuScreen(RoboGame game, Player player){
         this.game = game;
+        this.player = player;
     }
 
 
@@ -29,6 +33,7 @@ public class MainMenuScreen extends RoboGame implements Screen {
     public void show() {
         startActive = new Texture("Buttons/startActive.png");
         startInactive = new Texture("Buttons/startInactive.png");
+
     }
 
     @Override
@@ -43,13 +48,14 @@ public class MainMenuScreen extends RoboGame implements Screen {
                 RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() < centralizedY + HeightButton && RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() > centralizedY){
             game.sb.draw(startActive, centralizedX, centralizedY, WidthButton, HeightButton);
             if (Gdx.input.isTouched()){
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new GameScreen(game, player));
             }
         }
         else{
             game.sb.draw(startInactive, centralizedX, centralizedY, WidthButton, HeightButton);
         }
         game.sb.end();
+
     }
 
     @Override
