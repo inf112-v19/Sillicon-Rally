@@ -14,25 +14,20 @@ import inf112.skeleton.app.grid.TileGrid;
 public class Player implements IGameObject, InputProcessor {
     public MoveCard[] cardsToBePlayed;
     public RoboGame.Direction currentDirection;
+    TileGrid grid;
     Tile backupLocation;
     Sprite sprite;
+    private RoboGame game;
+    private PlayerMovements playerMovements;
+
     float x;
     float y;
     public int playerHP;
+    public int playerTokens;
     public final int MAX_HP = 6;
-    private RoboGame game;
-    private PlayerMovements playerMovements;
-    TileGrid grid;
+    public final int MAX_DAMAGE_TOKENS = 3;
 
 
-    //Constructor used for testing purposes only
-    public Player() {
-        this.currentDirection = RoboGame.Direction.West;
-        backupLocation = null;
-        this.cardsToBePlayed = new MoveCard[5];
-        playerMovements = new PlayerMovements(this);
-        this.playerHP = MAX_HP;
-    }
 
     public Player(Texture texture, RoboGame.Direction startDirection, RoboGame game) {
         this.sprite = new Sprite(texture);
@@ -42,11 +37,9 @@ public class Player implements IGameObject, InputProcessor {
         playerMovements = new PlayerMovements(this);
         this.playerHP = MAX_HP;
         this.grid = game.grid;
+        this.playerTokens = MAX_DAMAGE_TOKENS;
     }
 
-    public Player getPlayer(){
-        return this;
-    }
 
 
     public void checkCollision(TileGrid grid) {
@@ -66,8 +59,9 @@ public class Player implements IGameObject, InputProcessor {
             resetToBackupLocation(grid);
             deleteBackupLocation();
         }
-        System.out.println("You died");
+        playerTokens -= 1;
         playerHP = MAX_HP;
+        System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);
     }
 
     public void moveStraight(int speed, int moveDistance, TileGrid grid) {
@@ -75,8 +69,8 @@ public class Player implements IGameObject, InputProcessor {
     }
 
     public void rotateClockwise(){playerMovements.rotateClockwise(grid);}
-    public void rotateCounterClockwise() {playerMovements.rotateCounterClockwise(grid);}
 
+    public void rotateCounterClockwise() {playerMovements.rotateCounterClockwise(grid);}
 
 
     public void setBackupLocation(Tile backupLocation) {
@@ -108,12 +102,14 @@ public class Player implements IGameObject, InputProcessor {
     }
 
     public void damagePlayer(int damage, TileGrid grid) {
+
         this.playerHP -= damage;
-        System.out.println("you took " + damage + " damage. New HP: " + playerHP);
+        System.out.println("you took " + damage + " damage. New HP: " + playerHP +
+                " \n Player tokens: " + playerTokens + "Max damage Tokens" + MAX_DAMAGE_TOKENS);
 
         if (playerHP <= 0)
             handleDeath(grid);
-    }
+            }
 
     @Override
     public void handleCollision(Player player, TileGrid grid) { }
@@ -264,6 +260,16 @@ public class Player implements IGameObject, InputProcessor {
         checkCollision(game.grid);
 
         return false;
+    }
+
+    //Constructor used for testing purposes only
+    public Player() {
+        this.currentDirection = RoboGame.Direction.West;
+        backupLocation = null;
+        this.cardsToBePlayed = new MoveCard[5];
+        playerMovements = new PlayerMovements(this);
+        this.playerHP = MAX_HP;
+        this.playerTokens = MAX_DAMAGE_TOKENS;
     }
 
     @Override

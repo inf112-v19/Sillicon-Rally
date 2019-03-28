@@ -41,13 +41,9 @@ public class GameScreen implements Screen {
 
     public GameScreen (RoboGame game, Player player){
         this.game = game;
-        //this.player = player;
+        this.player = player;
     }
-    public Player ThisPlayer(Player player){
-        this.player = player.getPlayer();
-        return this.player;
 
-    }
 
 
     @Override
@@ -68,16 +64,15 @@ public class GameScreen implements Screen {
 
         game.sb.begin();
 
-        System.out.println(ThisPlayer(player));
-        int HP = game.getPlayer(player).playerHP;
-        if (HP == 5){
+
+        if (player.playerTokens == 2){
             game.sb.draw(TwoLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
         }
-        else if (player.playerHP == player.MAX_HP -2){
+        else if (player.playerTokens == 1){
             game.sb.draw(OneLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
 
         }
-        else if (player.playerHP == 0){
+        else if (player.playerTokens == 0){
             game.sb.draw(NoLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
         }
         else
@@ -90,9 +85,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         gameMap = new GameMap("map.v.01.tmx");
-        player = new Player(new Texture("car.jpg"), startDirection, this.game);
         ThreeLifeSprite = new Texture("LifeSprites/exmpl3Life.png");
-
         TwoLifeSprite = new Texture("LifeSprites/exmpl2Life.png");
         OneLifeSprite = new Texture("LifeSprites/exmpl1Life.png");
         NoLifeSprite = new Texture("LifeSprites/exmpl0Life.png");
