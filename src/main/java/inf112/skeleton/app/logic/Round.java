@@ -1,5 +1,6 @@
 package inf112.skeleton.app.logic;
 
+import com.badlogic.gdx.backends.headless.mock.audio.MockAudio;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
@@ -32,24 +33,27 @@ public class Round {
 
         }
 
-        doTurn();
+       // doTurn();
     }
 
-    public void doTurn() {
+    public void doTurn(ArrayList<MoveCard> cardList1, ArrayList<Player> playas, TileGrid grid_) {
+       ArrayList<Player> playerList = playas;
        int numberOfPlayers = players.size();
        int counter = 0;
        ArrayList<MoveCard> cardList = new ArrayList<>();
        for (int i = 0; i < cardList.size(); i++) {
            int playerTurn = counter%numberOfPlayers;
+           card = cardList.get(i);
            switch (playerTurn){
-               case 0: players.get(0).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
-               case 1: players.get(1).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
-               case 2: players.get(2).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
-               case 3: players.get(3).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
+               case 0: players.get(0).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid_);
+               case 1: players.get(1).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid_);
+               case 2: players.get(2).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid_);
+               case 3: players.get(3).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid_);
                default:
                    System.out.println("fuck you kristian");
 
            }
+           counter++;
        }
     }
 

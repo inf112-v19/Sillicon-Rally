@@ -17,40 +17,44 @@ import static org.testng.AssertJUnit.assertEquals;
 
 
 public class PlayerTurnTest {
-	private Round round;
+
 	private Player player;
+	private ArrayList<Player> playerlist;
+	private ArrayList<MoveCard> testDeck;
 	private MoveCard card;
 	private RoboGame game;
 	private TileGrid grid;
 	private StackOfCards deck;
 
 
-
-
-	//Player default position (4 ,4)
+	//Player default position (0 ,4)
 	@Test
 	public void doTurnTestAndMoveTest(){
 		SetupVariables setup = new SetupVariables();
-		this.round = setup.round;
+
+		this.playerlist=setup.playerList;
 		this.player = setup.player;
-		this.card = setup.card;
 		this.grid = setup.grid;
-		this.deck = setup.deck;
+		this.testDeck = setup.cardList;
+
+		for(Player p: playerlist){
+			setup.playerDefaultPosition(p);
+		}
+		Player player1 = playerlist.get(0);
+		Player player2 = playerlist.get(1);
 
 
-		ArrayList<MoveCard> testDeck = new ArrayList<>();
+
+		Round.doTurn(testDeck, playerlist, grid);
+		assertEquals(4*grid.tileSizeInPx, player1.getY());
+		assertEquals(4*grid.tileSizeInPx, player1.getX());
+		assertEquals(2*grid.tileSizeInPx, player2.getY());
+		assertEquals(4*grid.tileSizeInPx, player2.getX());
 
 
 
-		Player p1 = new Player();
-		//player.setX(3*grid.tileSizeInPx);
-		//player.setY(3*grid.tileSizeInPx);
-		round.players.add(p1);
-
-		setup.playerDefaultPosition(p1);
-
-		round.doTurn();
-		assertEquals(grid.getTile(1*grid.tileSizeInPx,4*grid.tileSizeInPx),     player.getY());
+		assertEquals(RoboGame.Direction.North, player1.currentDirection);
+		assertEquals(RoboGame.Direction.East, player2.currentDirection);
 
 
 	}

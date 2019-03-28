@@ -37,8 +37,8 @@ public class SetupVariables {
     public StackOfCards deck;
     public MoveCard card;
     public Texture texture;
-    public ArrayList<Player> playerList = new ArrayList<Player>();
-
+    public ArrayList<Player> playerList = new ArrayList<>();
+    public ArrayList<MoveCard> cardList = new ArrayList<MoveCard>();
 
     public SetupVariables() {
         setup();
@@ -53,40 +53,56 @@ public class SetupVariables {
         this.repairObject = new RepairObject(2,2,grid);
 
 
-        getDeck(deck);getPlayers(playerList);
 
-        this.round = new Round(deck, playerList);
-        card.getType();
-        this.card = new MoveCard(card.getType(), texture);
+
+        //this.round = new Round(deck, playerList);
+
+        this.cardList = getDeck();
+        playerList = getPlayers();
+
     }
 
     public void playerDefaultPosition(Player player){
         SetupVariables setup = new SetupVariables();
-        Tile playerTile = grid.getTile(4,4);
+        Tile playerTile = grid.getTile(0,4);
         Player otherPlayer = setup.player;
         playerTile.addGameObject(otherPlayer);
-        otherPlayer.currentDirection = RoboGame.Direction.South;
+        otherPlayer.currentDirection = RoboGame.Direction.North;
         int y = grid.rows;
         int x = grid.columns;
         otherPlayer.setX(3*grid.tileSizeInPx);
         otherPlayer.setY(3*grid.tileSizeInPx);
     }
 
-    public ArrayList getPlayers (ArrayList<Player> playerList){
-        this.playerList = playerList;
+    public ArrayList<Player> getPlayers(){
+        ArrayList<Player> playerList = new ArrayList<>();
         Player player = new Player();
+        player.setName("Vegard");
+        Player player2 = new Player();
+        player2.setName("Martin");
         playerList.add(player);
+        playerList.add(player2);
         return playerList;
     }
 
-    public StackOfCards getDeck(StackOfCards deck){
-        this.deck = new StackOfCards();
+    public ArrayList<MoveCard> getDeck(){
+
         ArrayList<MoveCard> cards = new ArrayList<>();
         Texture textureMove1 = new Texture("cardLayouts/Move1.png");
+        Texture textureMove2 = new Texture("cardLayouts/Move2.png");
+        Texture textureRightTurn = new Texture("cardLayouts/RightTurn.png");
+
         MoveCard card1 = new MoveCard(MoveCard.Type.move1, textureMove1);
+        MoveCard card2 = new MoveCard(MoveCard.Type.move2, textureMove2);
+        MoveCard card3 = new MoveCard(MoveCard.Type.turnright, textureRightTurn);
 
         cards.add(card1);
-        return deck;
+        cards.add(card2);
+        cards.add(card2);
+        cards.add(card3);
+        cards.add(card1);
+
+        return cards;
     }
 
     public SetupVariables renew() {

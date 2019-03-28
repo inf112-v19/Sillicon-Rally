@@ -20,7 +20,7 @@ public class MoveCardTest {
 	private TileGrid grid;
 	private StackOfCards deck;
 	private int TILE_SIZE_IN_PIX;
-
+/*
 	@Test
 	void MoveCardTest(){
 		SetupVariables setup = new SetupVariables();
@@ -36,5 +36,5 @@ public class MoveCardTest {
 		grid = setupVariable.grid;
 		player = setupVariable.player;
 		TILE_SIZE_IN_PIX = setupVariable.gameMap.getTileSize();
-	}
+	}*/
 }
