@@ -5,9 +5,11 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.*;
 import inf112.skeleton.app.game.RoboGame;
@@ -15,7 +17,10 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.logic.Round;
 import inf112.skeleton.app.map.GameMap;
+import jdk.internal.dynalink.beans.StaticClass;
 import org.mockito.Mockito;
+
+import java.util.ArrayList;
 
 public class SetupVariables {
     private Application application;
@@ -30,7 +35,9 @@ public class SetupVariables {
     public RepairObject repairObject;
     public Round round;
     public StackOfCards deck;
-
+    public MoveCard card;
+    public Texture texture;
+    public ArrayList<Player> playerList;
 
 
     public SetupVariables() {
@@ -44,21 +51,32 @@ public class SetupVariables {
         this.belt = new ConveyorBeltObject(4, 4, grid, 1, RoboGame.Direction.West);
         this.laser = new LaserObject(2,2, grid);
         this.repairObject = new RepairObject(2,2,grid);
-        this.round = new Round(deck, round.players);
+        this.round = new Round(getDeck(deck), getPlayers(playerList));
+        this.card = new MoveCard(card.getType(), texture);
     }
 
     public void playerDefaultPosition(Player player){
         SetupVariables setup = new SetupVariables();
-        Tile playerTile = grid.getTile(3,3);
+        Tile playerTile = grid.getTile(4,4);
         Player otherPlayer = setup.player;
         playerTile.addGameObject(otherPlayer);
-        otherPlayer.currentDirection = RoboGame.Direction.North;
+        otherPlayer.currentDirection = RoboGame.Direction.South;
         int y = grid.rows;
         int x = grid.columns;
         otherPlayer.setX(3*grid.tileSizeInPx);
         otherPlayer.setY(3*grid.tileSizeInPx);
+    }
 
+    public ArrayList getPlayers (ArrayList<Player> playerlist){
 
+        Player player = new Player();
+        playerlist.add(player);
+        return playerlist;
+    }
+
+    public StackOfCards getDeck(StackOfCards deck){
+        this.deck = new StackOfCards();
+        return deck;
     }
 
     public SetupVariables renew() {

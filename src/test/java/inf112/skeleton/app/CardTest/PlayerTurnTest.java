@@ -23,14 +23,21 @@ public class PlayerTurnTest {
 	private RoboGame game;
 	private TileGrid grid;
 	private StackOfCards deck;
-	private Tile tile;
 
 
 
-	//Player default position (3 ,3)
+
+	//Player default position (4 ,4)
 	@Test
-	public void doTurnTest(){
+	public void doTurnTestAndMoveTest(){
 		SetupVariables setup = new SetupVariables();
+		this.round = setup.round;
+		this.player = setup.player;
+		this.card = setup.card;
+		this.grid = setup.grid;
+		this.deck = setup.deck;
+
+
 		Texture textureMove1 = new Texture("cardLayouts/Move1.png");
 		Texture textureMove2 = new Texture("cardLayouts/Move2.png");
 
@@ -48,9 +55,8 @@ public class PlayerTurnTest {
 
 		setup.playerDefaultPosition(p1);
 
-
 		round.doTurn();
-		assertEquals(grid.getTile(6,3),player.getY());
+		assertEquals(grid.getTile(1*grid.tileSizeInPx,4*grid.tileSizeInPx),     player.getY());
 
 
 	}
