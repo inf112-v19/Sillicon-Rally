@@ -37,7 +37,7 @@ public class SetupVariables {
     public StackOfCards deck;
     public MoveCard card;
     public Texture texture;
-    public ArrayList<Player> playerList;
+    public ArrayList<Player> playerList = new ArrayList<Player>();
 
 
     public SetupVariables() {
@@ -51,7 +51,12 @@ public class SetupVariables {
         this.belt = new ConveyorBeltObject(4, 4, grid, 1, RoboGame.Direction.West);
         this.laser = new LaserObject(2,2, grid);
         this.repairObject = new RepairObject(2,2,grid);
-        this.round = new Round(getDeck(deck), getPlayers(playerList));
+
+
+        getDeck(deck);getPlayers(playerList);
+
+        this.round = new Round(deck, playerList);
+        card.getType();
         this.card = new MoveCard(card.getType(), texture);
     }
 
@@ -67,15 +72,20 @@ public class SetupVariables {
         otherPlayer.setY(3*grid.tileSizeInPx);
     }
 
-    public ArrayList getPlayers (ArrayList<Player> playerlist){
-
+    public ArrayList getPlayers (ArrayList<Player> playerList){
+        this.playerList = playerList;
         Player player = new Player();
-        playerlist.add(player);
-        return playerlist;
+        playerList.add(player);
+        return playerList;
     }
 
     public StackOfCards getDeck(StackOfCards deck){
         this.deck = new StackOfCards();
+        ArrayList<MoveCard> cards = new ArrayList<>();
+        Texture textureMove1 = new Texture("cardLayouts/Move1.png");
+        MoveCard card1 = new MoveCard(MoveCard.Type.move1, textureMove1);
+
+        cards.add(card1);
         return deck;
     }
 

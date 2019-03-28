@@ -38,15 +38,9 @@ public class PlayerTurnTest {
 		this.deck = setup.deck;
 
 
-		Texture textureMove1 = new Texture("cardLayouts/Move1.png");
-		Texture textureMove2 = new Texture("cardLayouts/Move2.png");
-
-		MoveCard card1 = new MoveCard(MoveCard.Type.move1, textureMove1);
-		MoveCard card2 = new MoveCard(MoveCard.Type.move2, textureMove2);
 		ArrayList<MoveCard> testDeck = new ArrayList<>();
 
-		testDeck.add(card1);
-		testDeck.add(card2);
+
 
 		Player p1 = new Player();
 		//player.setX(3*grid.tileSizeInPx);
