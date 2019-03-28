@@ -267,13 +267,17 @@ public class Player implements IGameObject, InputProcessor {
         }
 
         if (keycode == Input.Keys.R) {
-            game.putCardsBackInDeck();
-            game.drawNineCardsFromDeck();
+            nextRound();
         }
 
         checkCollision(game.grid);
 
         return false;
+    }
+
+    public void nextRound() {
+            game.putCardsBackInDeck();
+            game.drawNineCardsFromDeck();
     }
 
     @Override

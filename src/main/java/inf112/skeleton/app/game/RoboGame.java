@@ -13,7 +13,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.Screen.MainMenuScreen;
+import inf112.skeleton.app.Screen.GameScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
@@ -44,7 +44,7 @@ public class RoboGame extends Game {
     @Override
     public void create() {
 
-        this.setScreen(new MainMenuScreen(this));
+        this.setScreen(new GameScreen(this));
         gameMap = new GameMap("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
@@ -117,10 +117,7 @@ public class RoboGame extends Game {
         for (int i = 0; i < chosenFive.length; i++) {
             chosenFive[i] = null;
         }
-
     }
-
-
 
     public TileGrid makeGrid() {
         TiledMapTileLayer layer = (TiledMapTileLayer)gameMap.getMapLayerByIndex(0);
@@ -182,7 +179,11 @@ public class RoboGame extends Game {
     }
 
     public void putCardsBackInDeck() {
-
+        for (int i = 0; i < listOfNine.length; i++) {
+            if(listOfNine[i] != null) {
+                deck.stack.push(listOfNine[i]);
+            }
+        }
     }
 
 

@@ -26,7 +26,6 @@ public class Round {
         this.deck = deck;
         this.players = playerList;
 
-
         for (Player p : players) {
             drawNineCards(deck, p);
 
