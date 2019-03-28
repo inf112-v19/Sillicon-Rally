@@ -36,15 +36,20 @@ public class RoboGame extends Game {
     private Sprite backboard;
     private Sprite lives;
     private Texture texture;
+    private RoboGame game;
 
 
-    public static final int ROBO_GAME_WIDTH = 1080;
-    public static final int ROBO_GAME_HEIGHT = 720;
+    public static final int ROBO_GAME_WIDTH = 1400;
+    public static final int ROBO_GAME_HEIGHT = 800;
+
+    public Player getPlayer(Player player) {
+        return player;
+    }
 
     @Override
     public void create() {
 
-        this.setScreen(new MainMenuScreen(this));
+
         gameMap = new GameMap("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
@@ -62,10 +67,31 @@ public class RoboGame extends Game {
         backboard.setSize(1950,1600);
         backboard.setPosition(-480,-700);
 
-        texture = new Texture("sprites/exmplLife.png");
+        /*if (player.playerHP == player.MAX_HP) {
+            texture = new Texture("LifeSprites/exmpl3Life.png");
+            lives = new Sprite(texture);
+            lives.setSize(300, 150);
+            lives.setPosition(1050, 600);
+        }
+        if (player.playerHP == player.MAX_HP-1){
+            texture = new Texture("LifeSprites/exmpl2Life.png");
         lives = new Sprite(texture);
         lives.setSize(300,150);
-        lives.setPosition(1050, 600);
+        lives.setPosition(1050, 600);}
+
+        if (player.playerHP == player.MAX_HP-2){
+            texture = new Texture("LifeSprites/exmpl1Life.png");
+            lives = new Sprite(texture);
+            lives.setSize(300, 150);
+            lives.setPosition(1050, 600);
+        }
+
+        if (player.playerHP == player.MAX_HP -3) {
+            texture = new Texture("LifeSprites/exmpl0Life.png");
+            lives = new Sprite(texture);
+            lives.setSize(300, 150);
+            lives.setPosition(1050, 600);
+        }*/
 
         deck = new StackOfCards();
         list = new MoveCard[9];
@@ -75,6 +101,8 @@ public class RoboGame extends Game {
         player = constructor.player;
         grid.getTile(0,0).addGameObject(player);
         Gdx.input.setInputProcessor(player);
+
+        this.setScreen(new MainMenuScreen(this, getPlayer(player)));
 
         drawNineCardsFromDeck();
 
@@ -133,7 +161,7 @@ public class RoboGame extends Game {
                 list[i].draw(sb);
             //}
         }
-        lives.draw(sb);
+        //lives.draw(sb);
 
         sb.end();
     }

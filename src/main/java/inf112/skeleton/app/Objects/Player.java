@@ -18,7 +18,7 @@ public class Player implements IGameObject, InputProcessor {
     Sprite sprite;
     float x;
     float y;
-    public int playerHP ;
+    public int playerHP;
     public final int MAX_HP = 6;
     private RoboGame game;
     private PlayerMovements playerMovements;
@@ -42,6 +42,10 @@ public class Player implements IGameObject, InputProcessor {
         playerMovements = new PlayerMovements(this);
         this.playerHP = MAX_HP;
         this.grid = game.grid;
+    }
+
+    public Player getPlayer(){
+        return this;
     }
 
 
@@ -105,7 +109,7 @@ public class Player implements IGameObject, InputProcessor {
 
     public void damagePlayer(int damage, TileGrid grid) {
         this.playerHP -= damage;
-        System.out.println("you took " + damage + " damage");
+        System.out.println("you took " + damage + " damage. New HP: " + playerHP);
 
         if (playerHP <= 0)
             handleDeath(grid);
