@@ -1,12 +1,3 @@
-### To get the assignment appproved, the grup must
-* Write sensible commit messages when changes are uploaded in the group's repo.
-* Upload the requested results in repo.
-* Take a commit of the source code that is the delivery of each assigment.
-
-
-
-
-
 ## Obligatorisk Øvelse 4
 
 
@@ -21,8 +12,8 @@
   Mesteparten at gruppen leser på samme lesesal, selvom vi kanskje jobber med andre fag så er vi alltid villig til å svare på spørsmål eller jobbe med problemer relatert til Robo Rally prosjektet.
   * Et kort retroperspektiv.
   Vi er fornøyd med å ha innført parprogrammering. Parprogrammering det gjør det litt lettere å utføre oppgaver, samtidig som man får litt bedre innsikt i helheten av koden ettersom vi har satt sammen par utifra de som hadde minst felleskunnskap.
-  * Agree on three improvements based on the retrospective
-  * Reports from meetings since previous delivery
+  Ettersom det har vært litt kort tidsfrist fra den 4. obligatoriske oppgave ble opprettet til den skulle leveres inn, har vi ikke har ordentlig prioritert å sette opp arbeidsmetoder på grunnlag av et retropersketiv. Vi prioriterte bare å få gjort flest mulige av arbeidskravene.
+  * Referat fra møter ligger under mappen SiliconRally/Deliverables/Møtereferater som pdf filer.
 
 Oversikt over foredeling og status av oppgaver ligger på [trello](https://trello.com/b/zOgCmmNW/silicon-rally)
 
@@ -52,7 +43,18 @@ Prioritet av arbeidsoppgaver i følgende reggefølge
   
   
   ## Deloppgave 3: Kode
-    * Document how the project builds, tests, and runs so it's easy to test the code.
-    * The product should work on Linux
-    * Code quality and test coverage will be emphazised
+For å kjøre programmet må man sette working directory til core/assets, og så kjøre main-metoden i Main-klassen som ligger i packagen «RoboGame». For å kjøre alle testene i Intellij:
+
+Gå til run -> edit configurations
+Lag en ny junit tests configuration
+Gi den et valgfritt navn
+Velg «Test kind -> All in package»
+Velg «In whole project»
+Set working directory til «core/assets»
+apply
+Main klassen ligger i src -> main -> java -> inf112.skeleton.app -> game
   
+
+Testene:
+Testene ligger under src -> test -> java -> inf112.skeleton.app
+Klikk på pakken inf112.skeleton.app under tests og enten trykk ctrl+shift+F10, eller høyreklikk og run.
