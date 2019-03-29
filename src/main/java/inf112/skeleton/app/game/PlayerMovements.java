@@ -12,8 +12,8 @@ import java.util.List;
 
 public class PlayerMovements {
     Player player;
-    float yLoc;
-    float xLoc;
+    public float yLoc;
+    public float xLoc;
     CollisionHandler collisionHandler;
 
     public PlayerMovements(Player player) {

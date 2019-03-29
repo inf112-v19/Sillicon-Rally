@@ -114,9 +114,14 @@ public class Player implements IGameObject, InputProcessor {
     @Override
     public void handleCollision(Player player, TileGrid grid) { }
 
-    public void setX(float x) { this.x = x; }
+    public void setX(float x) {
+        this.x = x;
+        playerMovements.xLoc = x;}
 
-    public void setY(float y) { this.y = y; }
+    public void setY(float y) {
+        this.y = y;
+        playerMovements.yLoc = y;
+    }
 
     public float getY() { return this.y; }
 

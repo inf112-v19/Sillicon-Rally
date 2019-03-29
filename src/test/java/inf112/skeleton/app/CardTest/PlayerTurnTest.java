@@ -18,6 +18,7 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class PlayerTurnTest {
 
+	private Round round;
 	private Player player;
 	private ArrayList<Player> playerlist;
 	private ArrayList<MoveCard> testDeck;
@@ -36,6 +37,7 @@ public class PlayerTurnTest {
 		this.player = setup.player;
 		this.grid = setup.grid;
 		this.testDeck = setup.cardList;
+		this.round = setup.round;
 
 		for(Player p: playerlist){
 			setup.playerDefaultPosition(p);
@@ -45,11 +47,12 @@ public class PlayerTurnTest {
 
 
 
-		Round.doTurn(testDeck, playerlist, grid);
-		assertEquals(4*grid.tileSizeInPx, player1.getY());
-		assertEquals(4*grid.tileSizeInPx, player1.getX());
-		assertEquals(2*grid.tileSizeInPx, player2.getY());
-		assertEquals(4*grid.tileSizeInPx, player2.getX());
+		round.doTurn(testDeck, playerlist, grid);
+		System.out.println(grid.tileSizeInPx);
+		assertEquals((float) 4*grid.tileSizeInPx, player1.getY());
+		assertEquals((float) 4*grid.tileSizeInPx, player1.getX());
+		assertEquals((float) 2*grid.tileSizeInPx, player2.getY());
+		assertEquals((float) 4*grid.tileSizeInPx, player2.getX());
 
 
 
