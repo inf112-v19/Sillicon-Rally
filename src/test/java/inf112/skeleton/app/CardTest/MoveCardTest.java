@@ -26,5 +26,11 @@ public class MoveCardTest {
 	void MoveCardTest(){
 		SetupVariables setup = new SetupVariables();
 
+		this.player = new Player();
+		player.setPosition(2* TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
+		Texture textureMove1 = new Texture("cardLayouts/Move1.png");
+		card = new MoveCard(MoveCard.Type.move1, textureMove1);
+
+		assertEquals(3 * TILE_SIZE_IN_PIX, player.getY());
 	}
 }

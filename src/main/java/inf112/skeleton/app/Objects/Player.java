@@ -38,9 +38,9 @@ public class Player implements IGameObject, InputProcessor {
         this.movecardArray = new MoveCard[5];
         this.name = "";
     }
-    public void setName(String name){
-        this.name = name;
 
+    public void setName(String name) {
+        this.name = name;
     }
 
 
@@ -53,8 +53,6 @@ public class Player implements IGameObject, InputProcessor {
         this.playerHP = MAX_HP;
 
         this.movecardArray = new MoveCard[5];
-
-
     }
 
 
@@ -277,13 +275,17 @@ public class Player implements IGameObject, InputProcessor {
         }
 
         if (keycode == Input.Keys.R) {
-            game.putCardsBackInDeck();
-            game.drawNineCardsFromDeck();
+            nextRound();
         }
 
         checkCollision(game.grid);
 
         return false;
+    }
+
+    public void nextRound() {
+            game.putCardsBackInDeck();
+            game.drawNineCardsFromDeck();
     }
 
     @Override

@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
@@ -18,7 +17,6 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.logic.Round;
 import inf112.skeleton.app.map.GameMap;
-import jdk.internal.dynalink.beans.StaticClass;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -38,8 +36,8 @@ public class SetupVariables {
     public StackOfCards deck;
     public MoveCard card;
     public Texture texture;
-    public ArrayList<Player> playerList = new ArrayList<>();
-    public ArrayList<MoveCard> cardList = new ArrayList<>();
+    public ArrayList<Player> playerList;
+    public ArrayList<MoveCard> cardList;
 
     public SetupVariables() {
         setup();
@@ -56,6 +54,10 @@ public class SetupVariables {
         this.playerList = getPlayers();
         this.round = new Round(new StackOfCards(), playerList);
 
+        this.cardList = getDeck();
+        playerList = getPlayers();
+
+
     }
 
     public void playerDefaultPosition(Player player){
@@ -71,12 +73,15 @@ public class SetupVariables {
 
     public ArrayList<Player> getPlayers(){
         ArrayList<Player> playerList = new ArrayList<>();
-        Player player = new Player();
-        player.setName("Vegard");
+
+        Player player1 = new Player();
+        player1.setName("Vegard");
         Player player2 = new Player();
         player2.setName("Martin");
-        playerList.add(player);
+
+        playerList.add(player1);
         playerList.add(player2);
+
         return playerList;
     }
 

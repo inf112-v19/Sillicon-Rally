@@ -1,6 +1,5 @@
 package inf112.skeleton.app.logic;
 
-import com.badlogic.gdx.backends.headless.mock.audio.MockAudio;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
@@ -26,13 +25,13 @@ public class Round {
         this.deck = deck;
         this.players = playerList;
 
-
         for (Player p : players) {
             drawNineCards(deck, p);
 
         }
 
-       // doTurn();
+
+        //doTurn();
     }
 
     public void doTurn(ArrayList<MoveCard> cardList, ArrayList<Player> playas, TileGrid grid) {
@@ -44,6 +43,7 @@ public class Round {
            int playerTurn = counter%numberOfPlayers;
            card = cardList.get(i);
            switch (playerTurn){
+
                case 0: players.get(0).movePlayer(card.getType(), tilesize, grid);
                break;
                case 1: players.get(1).movePlayer(card.getType(), tilesize, grid);
