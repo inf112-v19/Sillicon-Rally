@@ -12,8 +12,11 @@ import java.util.List;
 
 public class PlayerMovements {
     Player player;
-    float yLoc;
-    float xLoc;
+
+    public float yLoc;
+    public float xLoc;
+    CollisionHandler collisionHandler;
+
 
     public PlayerMovements(Player player) {
         this.player = player;
@@ -144,7 +147,7 @@ public class PlayerMovements {
 
     /*
         For testing
-     */
+
     public void rotateClockWiseTest(TileGrid grid){
         switch (player.currentDirection) {
             case North:
@@ -177,6 +180,7 @@ public class PlayerMovements {
         }
         player.checkForDamageTaken(grid);
     }
+    */
 
 
 }

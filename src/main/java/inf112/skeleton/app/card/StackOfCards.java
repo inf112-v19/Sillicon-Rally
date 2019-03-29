@@ -11,7 +11,7 @@ import java.util.Collections;
 public class StackOfCards {
 
 
-    public static MyStack<MoveCard> stack = new MyStack<>();
+    public MyStack<MoveCard> stack = new MyStack<>();
 
     public StackOfCards() {
         ArrayList<MoveCard> cards = new ArrayList<>();
