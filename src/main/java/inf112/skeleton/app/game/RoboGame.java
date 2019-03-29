@@ -208,7 +208,7 @@ public class RoboGame extends Game {
     public void dispose() {
         sb.dispose();
         texture.dispose();
-        tiledMap.dispose();
+        gameMap.getTiledMap().dispose();
     }
 
     public void putCardsBackInDeck() {
