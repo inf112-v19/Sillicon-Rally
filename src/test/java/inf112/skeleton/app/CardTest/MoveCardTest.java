@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//TODO
+
 public class MoveCardTest {
 	private Round round;
 	private Player player;
@@ -21,21 +21,10 @@ public class MoveCardTest {
 	private TileGrid grid;
 	private StackOfCards deck;
 	private int TILE_SIZE_IN_PIX;
-/*
+
 	@Test
 	void MoveCardTest(){
 		SetupVariables setup = new SetupVariables();
-		this.player = new Player();
-		player.setPosition(2* TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
-		Texture textureMove1 = new Texture("cardLayouts/Move1.png");
-		card = new MoveCard(MoveCard.Type.move1, textureMove1);
-		round.doTurn();
-		assertEquals(3 * TILE_SIZE_IN_PIX, player.getY());
+
 	}
-	public void setup(){
-		SetupVariables setupVariable = new SetupVariables();
-		grid = setupVariable.grid;
-		player = setupVariable.player;
-		TILE_SIZE_IN_PIX = setupVariable.gameMap.getTileSize();
-	}*/
 }
