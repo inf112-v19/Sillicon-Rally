@@ -70,7 +70,7 @@ public class PlayerTest {
         player = new Player();
         player.setPosition(2* TILE_SIZE_IN_PX,2 * TILE_SIZE_IN_PX, grid);
         Tile testTile = grid.getTileFromCoordinates(player.getY(), player.getX());
-        assertEquals(RoboGame.Direction.West, player.currentDirection);
+        assertEquals(RoboGame.Direction.West, player.getDirection());
         assertEquals(true, testTile.getGameObjects().contains(player));
     }
 

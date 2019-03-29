@@ -2,6 +2,7 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -71,32 +72,6 @@ public class RoboGame extends Game {
         backboard = new Sprite(texture);
         backboard.setSize(1950,1600);
         backboard.setPosition(-480,-700);
-
-        /*if (player.playerHP == player.MAX_HP) {
-            texture = new Texture("LifeSprites/exmpl3Life.png");
-            lives = new Sprite(texture);
-            lives.setSize(300, 150);
-            lives.setPosition(1050, 600);
-        }
-        if (player.playerHP == player.MAX_HP-1){
-            texture = new Texture("LifeSprites/exmpl2Life.png");
-        lives = new Sprite(texture);
-        lives.setSize(300,150);
-        lives.setPosition(1050, 600);}
-
-        if (player.playerHP == player.MAX_HP-2){
-            texture = new Texture("LifeSprites/exmpl1Life.png");
-            lives = new Sprite(texture);
-            lives.setSize(300, 150);
-            lives.setPosition(1050, 600);
-        }
-
-        if (player.playerHP == player.MAX_HP -3) {
-            texture = new Texture("LifeSprites/exmpl0Life.png");
-            lives = new Sprite(texture);
-            lives.setSize(300, 150);
-            lives.setPosition(1050, 600);
-        }*/
 
         deck = new StackOfCards();
         listOfNine = new MoveCard[9];
@@ -170,8 +145,16 @@ public class RoboGame extends Game {
 
     @Override
     public void render() {
+        handleInput(Gdx.graphics.getDeltaTime());
          super.render();
     }
+
+    public void handleInput(float deltaTime) {
+        if (player != null) {
+            player.handleInput(deltaTime, this);
+            }
+        }
+
 
 
     public void drawHUD() {
@@ -217,6 +200,10 @@ public class RoboGame extends Game {
                 deck.stack.push(listOfNine[i]);
             }
         }
+    }
+
+    public void update(float deltaTime) {
+        player.update(deltaTime, grid);
     }
 
 

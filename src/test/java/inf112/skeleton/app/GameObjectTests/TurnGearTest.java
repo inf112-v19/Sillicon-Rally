@@ -25,7 +25,7 @@ TurnGearTest {
         TILE_SIZE_IN_PIX = setupVariable.gameMap.getTileSize();
         player = new Player();
         player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
-        player.currentDirection = RoboGame.Direction.West;
+        player.setDirection(RoboGame.Direction.West);
     }
 
     @Test
@@ -34,7 +34,7 @@ TurnGearTest {
         turnGear = new TurnGearObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, TurnGearObject.RotateDirection.CLOCKWISE);
         turnGear.handleCollision(player, grid);
 
-        assertEquals(RoboGame.Direction.North, player.currentDirection);
+        assertEquals(RoboGame.Direction.North, player.getDirection());
     }
 
     @Test
@@ -42,6 +42,6 @@ TurnGearTest {
         setup();
         turnGear = new TurnGearObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, TurnGearObject.RotateDirection.COUNTER_CLOCKWISE);
         turnGear.handleCollision(player, grid);
-        assertEquals(RoboGame.Direction.South, player.currentDirection);
+        assertEquals(RoboGame.Direction.South, player.getDirection());
     }
 }

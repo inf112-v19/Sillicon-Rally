@@ -1,28 +1,35 @@
 package inf112.skeleton.app.game;
 
-import inf112.skeleton.app.Objects.IGameObject;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.collision.objects.CollisionHandler;
-import inf112.skeleton.app.collision.objects.ConveyorBeltObject;
-import inf112.skeleton.app.collision.objects.GameObjectFactory;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
-import java.util.List;
-
 public class PlayerMovements {
     Player player;
+    public float y;
+    public float x;
+    RoboGame.Direction direction ;
+    float targetY;
+    float targetX;
+    float speed;
 
-    public float yLoc;
-    public float xLoc;
-    CollisionHandler collisionHandler;
-
-
-    public PlayerMovements(Player player) {
+    public PlayerMovements(Player player, float y, float x, RoboGame.Direction direction) {
         this.player = player;
-        yLoc = player.getY();
-        xLoc = player.getX();
+        this.y = y;
+        this.x = x;
+        this.direction = direction;
+        this.speed = 0;
     }
+
+    public void setY(float y){this.y = y;}
+    public void setX(float x) {this.x = x;}
+
+    public float getY() {return this.y;}
+    public float getX() {return this.x;}
+
+    public RoboGame.Direction getDirection() {return this.direction;}
 
 
     public void moveStraight(int steps, int moveDistance, TileGrid grid) {
@@ -33,32 +40,29 @@ public class PlayerMovements {
     }
 
 
-
     private void moveStraight(int moveDistance, TileGrid grid) {
-        switch (player.currentDirection) {
+        switch (direction) {
             case North:
-                setPosition((int) yLoc + moveDistance, (int) xLoc, grid);
+                setPosition((int) this.y + moveDistance, (int) this.x, grid);
                 break;
             case East:
-                setPosition((int) yLoc, (int) xLoc + moveDistance, grid);
+                setPosition((int) this.y, (int) this.x + moveDistance, grid);
                 break;
             case South:
-                setPosition((int) yLoc - moveDistance, (int) xLoc, grid);
+                setPosition((int) this.y - moveDistance, (int) this.x, grid);
                 break;
             case West:
-                setPosition((int) yLoc, (int) xLoc - moveDistance, grid);
+                setPosition((int) this.y, (int) this.x - moveDistance, grid);
                 break;
         }
-        yLoc = player.getY();
-        xLoc = player.getX();
     }
 
-    public boolean checkIfMoveIsOutOfBounds(int y, int x, TileGrid grid) {
+    public boolean checkIfMoveIsOutOfBounds(float y, float x, TileGrid grid) {
         if (y < 0 || x < 0)
             return true;
 
-        int yTile = y / grid.tileSizeInPx;
-        int xTile = x / grid.tileSizeInPx;
+        float yTile = y / grid.tileSizeInPx;
+        float xTile = x / grid.tileSizeInPx;
         if (yTile >= grid.rows || xTile >= grid.columns)
             return true;
 
@@ -66,21 +70,19 @@ public class PlayerMovements {
     }
 
 
-    public void setPosition(int y, int x, TileGrid grid) {
-        if (checkIfMoveIsOutOfBounds(y, x, grid)) {
+    public void setPosition(float yDest, float xDest, TileGrid grid) {
+        if (checkIfMoveIsOutOfBounds(yDest, xDest, grid)) {
             player.handleDeath(grid);
             return;
         }
 
-        Tile currentTile = grid.getTileFromCoordinates(yLoc, xLoc);
-        player.setX(x);
-        player.setY(y);
+        Tile currentTile = grid.getTileFromCoordinates(this.y, this.x);
 
-        yLoc = player.getY();
-        xLoc = player.getX();
+        setX(xDest);
+        setY(yDest);
 
         currentTile.getGameObjects().remove(player);
-        grid.getTileFromCoordinates(y, x).addGameObject(player);
+        grid.getTileFromCoordinates(yDest, xDest).addGameObject(player);
     }
 
     public void rotateClockwise(TileGrid grid) {
@@ -88,18 +90,18 @@ public class PlayerMovements {
         if (player.getSprite() != null)
             player.getSprite().rotate(-90);
 
-        switch (player.currentDirection) {
+        switch (this.direction) {
             case North:
-                player.currentDirection = RoboGame.Direction.East;
+                setDirection(RoboGame.Direction.East);
                 break;
             case East:
-                player.currentDirection = RoboGame.Direction.South;
+                setDirection(RoboGame.Direction.South);
                 break;
             case South:
-                player.currentDirection = RoboGame.Direction.West;
+                setDirection(RoboGame.Direction.West);
                 break;
             case West:
-                player.currentDirection = RoboGame.Direction.North;
+                setDirection(RoboGame.Direction.North);
         }
     }
 
@@ -110,18 +112,18 @@ public class PlayerMovements {
         //player.checkForDamageTaken(grid);
 
 
-        switch (player.currentDirection) {
+        switch (getDirection()) {
             case North:
-                player.currentDirection = RoboGame.Direction.West;
+                setDirection(RoboGame.Direction.West);
                 break;
             case East:
-                player.currentDirection = RoboGame.Direction.North;
+                setDirection(RoboGame.Direction.North);
                 break;
             case South:
-                player.currentDirection = RoboGame.Direction.East;
+                setDirection(RoboGame.Direction.East);
                 break;
             case West:
-                player.currentDirection = RoboGame.Direction.South;
+                setDirection(RoboGame.Direction.South);
         }
     }
 
@@ -129,18 +131,18 @@ public class PlayerMovements {
         player.getSprite().rotate(180);
         player.checkForDamageTaken(grid);
 
-        switch (player.currentDirection) {
+        switch (getDirection()) {
             case North:
-                player.currentDirection = RoboGame.Direction.South;
+                setDirection(RoboGame.Direction.South);
                 break;
             case East:
-                player.currentDirection = RoboGame.Direction.West;
+                setDirection(RoboGame.Direction.West);
                 break;
             case South:
-                player.currentDirection = RoboGame.Direction.North;
+                setDirection(RoboGame.Direction.North);
                 break;
             case West:
-                player.currentDirection = RoboGame.Direction.East;
+                setDirection(RoboGame.Direction.East);
         }
     }
 
@@ -149,7 +151,7 @@ public class PlayerMovements {
         For testing
 
     public void rotateClockWiseTest(TileGrid grid){
-        switch (player.currentDirection) {
+        switch (getDirection()) {
             case North:
                 player.currentDirection = RoboGame.Direction.East;
                 break;
@@ -182,5 +184,28 @@ public class PlayerMovements {
     }
     */
 
+
+    public void isKeyPressed(float deltaTime, RoboGame game) {
+
+    }
+
+
+
+    private void setMoveTowardTarget(float y, float x) {
+        if (y < 0 || x < 0)
+            return;
+        this.targetY = y;
+        this.targetX = x;
+
+
+    }
+
+    public void update(float deltaTime, TileGrid grid) {
+
+    }
+
+    public void setDirection(RoboGame.Direction dir) {
+        this.direction = dir;
+    }
 
 }

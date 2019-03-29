@@ -25,6 +25,7 @@ public class MoveCardTest {
 	@Test
 	void MoveCardTest(){
 		SetupVariables setup = new SetupVariables();
+		this.grid = setup.grid;
 
 		this.player = new Player();
 		player.setPosition(2* TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);

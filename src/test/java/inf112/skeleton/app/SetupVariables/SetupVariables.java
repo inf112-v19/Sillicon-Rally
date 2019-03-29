@@ -64,7 +64,7 @@ public class SetupVariables {
         int y = 0;
         int x = 4;
         int tileSize = grid.tileSizeInPx;
-        player.currentDirection = RoboGame.Direction.North;
+        player.setDirection(RoboGame.Direction.North);
         Tile playerTile = grid.getTile(y,x);
         playerTile.addGameObject(player);
         player.setY(y * grid.tileSizeInPx);
@@ -79,8 +79,12 @@ public class SetupVariables {
         Player player2 = new Player();
         player2.setName("Martin");
 
+
         playerList.add(player1);
         playerList.add(player2);
+
+        for (Player p : playerList)
+            playerDefaultPosition(p);
 
         return playerList;
     }

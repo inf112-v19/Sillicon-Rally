@@ -33,15 +33,20 @@ public class Round {
 
         //doTurn();
     }
-
+    
     public void doTurn(ArrayList<MoveCard> cardList, ArrayList<Player> playas, TileGrid grid) {
         int tilesize = grid.tileSizeInPx;
        ArrayList<Player> playerList = playas;
+       this.players = playas;
        int numberOfPlayers = players.size();
        int counter = 0;
        for (int i = 0; i < cardList.size(); i++) {
            int playerTurn = counter%numberOfPlayers;
            card = cardList.get(i);
+           float y1 = playas.get(0).getY();
+           float x1 = playas.get(0).getX();
+           float y2 = playas.get(1).getY();
+           float x2 = playas.get(1).getX();
            switch (playerTurn){
 
                case 0: players.get(0).movePlayer(card.getType(), tilesize, grid);
@@ -52,9 +57,6 @@ public class Round {
                break;
                case 3: players.get(3).movePlayer(card.getType(), tilesize, grid);
                break;
-               default:
-                   System.out.println("fuck you Kristian");
-
            }
            counter++;
        }
