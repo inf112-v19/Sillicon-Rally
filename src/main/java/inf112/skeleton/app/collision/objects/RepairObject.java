@@ -39,6 +39,9 @@ public class RepairObject implements IGameObject {
     public void healDamage(Player player){
         player.playerHP += REPAIR_REGENERATE;
         System.out.println(player.playerHP);
+        if(player.playerHP>player.MAX_HP){
+            player.playerHP=player.MAX_HP;
+        }
     }
 
     @Override

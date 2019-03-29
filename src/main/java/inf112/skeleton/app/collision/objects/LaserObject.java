@@ -3,6 +3,7 @@ package inf112.skeleton.app.collision.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import inf112.skeleton.app.Objects.IDamageDealer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.grid.Tile;
@@ -12,7 +13,7 @@ import inf112.skeleton.app.grid.TileGrid;
  * Created by Jørgen
  */
 
-public class LaserObject implements IGameObject {
+public class LaserObject implements IGameObject, IDamageDealer {
 
     public int xLocation;
     public int yLocation;
@@ -32,29 +33,13 @@ public class LaserObject implements IGameObject {
         laserTile.addGameObject(this);
     }
 
-    //for testing
-    public LaserObject(int y, int x, TileGrid grid){
-        this.yLocation = y;
-        this.xLocation = x;
-        laserTile = grid.getTileFromCoordinates(yLocation, xLocation);
-        laserTile.addGameObject(this);
-    }
-
     public void handleCollision(Player player, TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
         if (laserTile.equals(playerTile)) {
-            handleDamage(player);
-            if (player.playerHP <= 0)
-                player.handleDeath(grid);
+            dealDamage(player, grid);
         }
     }
-
-    public void handleDamage(Player player){
-        player.playerHP -= LASER_DAMAGE;
-        System.out.println(player.playerHP);
-    }
-
 
     @Override
     public Sprite getSprite() {
@@ -62,5 +47,18 @@ public class LaserObject implements IGameObject {
         sprite.setY(yLocation);
 
         return sprite;
+    }
+
+    @Override
+    public void dealDamage(Player player, TileGrid grid) {
+        player.damagePlayer(LASER_DAMAGE, grid);
+    }
+
+    //for testing
+    public LaserObject(int y, int x, TileGrid grid){
+        this.yLocation = y;
+        this.xLocation = x;
+        laserTile = grid.getTileFromCoordinates(yLocation, xLocation);
+        laserTile.addGameObject(this);
     }
 }

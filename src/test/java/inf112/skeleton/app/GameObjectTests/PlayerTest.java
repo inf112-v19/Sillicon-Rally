@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 //import jdk.internal.util.xml.impl.Input;
 
 
@@ -39,12 +40,28 @@ public class PlayerTest {
     }
 
     @Test
-    public void moveStraightTest() {
+    public void moveOneStraightTest() {
         setup();
         player = new Player();
         player.setPosition(2 * TILE_SIZE_IN_PX,2* TILE_SIZE_IN_PX,grid);
         player.moveStraight(1, grid.tileSizeInPx, grid);
         assertEquals(1 * TILE_SIZE_IN_PX, player.getX());
+    }
+
+    @Test
+    void moveTwoForwardStraightTest(){
+        setup();
+        player = new Player();
+        player.setPosition(2 * TILE_SIZE_IN_PX,2* TILE_SIZE_IN_PX,grid);
+        player.moveStraight(2, grid.tileSizeInPx, grid);
+        assertEquals(0, player.getX());
+    }
+    @Test
+    void MoveBackWardsOneTest(){
+        setup();
+        player.setPosition(2 * TILE_SIZE_IN_PX,2 * TILE_SIZE_IN_PX,grid);
+        player.moveStraight(1,grid.tileSizeInPx * (-1), grid);
+        assertEquals(3* TILE_SIZE_IN_PX, player.getX());
     }
 
     @Test
@@ -56,6 +73,7 @@ public class PlayerTest {
         assertEquals(RoboGame.Direction.West, player.currentDirection);
         assertEquals(true, testTile.getGameObjects().contains(player));
     }
+
 
 
     @Test
@@ -78,6 +96,36 @@ public class PlayerTest {
         setup();
         assertEquals(true, player.checkIfMoveIsOutOfBounds(-1, -1, grid));
         assertEquals(true, player.checkIfMoveIsOutOfBounds(max, max, grid));
+    }
+
+    @Test
+    void playerHasDamageTokens() {
+        setup();
+        assertEquals(player.MAX_DAMAGE_TOKENS, player.playerTokens);
+    }
+
+    @Test
+    void updatePlayerTokensAfterLosingOneLife(){
+        setup();
+        player.handleDeath(grid);
+        assertEquals(player.playerTokens, player.MAX_DAMAGE_TOKENS-1);
+    }
+
+    @Test
+    void updatePlayerTokensAfterLosingTwoLives(){
+        setup();
+        player.handleDeath(grid);
+        player.handleDeath(grid);
+        assertEquals(player.playerTokens, player.MAX_DAMAGE_TOKENS-2);
+    }
+
+    @Test
+    void PlayerTokensAreSetToZero(){
+        setup();
+        player.handleDeath(grid);
+        player.handleDeath(grid);
+        player.handleDeath(grid);
+        assertEquals(player.playerTokens, 0);
     }
 
 

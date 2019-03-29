@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.Screen.GameScreen;
 import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
@@ -31,30 +32,39 @@ public class RoboGame extends Game {
     public GameMap gameMap;
     private StackOfCards deck;
     private MoveCard temp;
-    public MoveCard[] list;
-    public Boolean[] booList;
+    public MoveCard[] listOfNine;
+    public MoveCard[] chosenFive;
     private Sprite backboard;
     private Sprite lives;
     private Texture texture;
+    private RoboGame game;
 
 
-    public static final int ROBO_GAME_WIDTH = 1080;
-    public static final int ROBO_GAME_HEIGHT = 720;
+    public static final int ROBO_GAME_WIDTH = 1400;
+    public static final int ROBO_GAME_HEIGHT = 800;
+
+    public Player getPlayer(Player player) {
+        return player;
+    }
 
     @Override
     public void create() {
-
-        this.setScreen(new MainMenuScreen(this));
         gameMap = new GameMap("map.v.01.tmx");
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.TILE_SIZE_IN_PX = getTileSize();
+       // tiledMap = new TmxMapLoader().load("map.v.01.tmx");
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
+        this.grid = makeGrid();
+        GameObjectFactory constructor = new GameObjectFactory(gameMap, grid, this);
+        this.setScreen(new GameScreen(this, player));
 
-        tiledMap = new TmxMapLoader().load("map.v.01.tmx");
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-        camera = new CustomCamera(tiledMap);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
+
+
+
+        camera = new CustomCamera(gameMap.getTiledMap());
         camera.translate( -470, -700);
 
-        this.grid = makeGrid();
+
         sb = new SpriteBatch();
 
         texture = new Texture("cardLayouts/mech.jpg");
@@ -62,45 +72,85 @@ public class RoboGame extends Game {
         backboard.setSize(1950,1600);
         backboard.setPosition(-480,-700);
 
-        texture = new Texture("sprites/exmplLife.png");
+        /*if (player.playerHP == player.MAX_HP) {
+            texture = new Texture("LifeSprites/exmpl3Life.png");
+            lives = new Sprite(texture);
+            lives.setSize(300, 150);
+            lives.setPosition(1050, 600);
+        }
+        if (player.playerHP == player.MAX_HP-1){
+            texture = new Texture("LifeSprites/exmpl2Life.png");
         lives = new Sprite(texture);
         lives.setSize(300,150);
-        lives.setPosition(1050, 600);
+        lives.setPosition(1050, 600);}
+
+        if (player.playerHP == player.MAX_HP-2){
+            texture = new Texture("LifeSprites/exmpl1Life.png");
+            lives = new Sprite(texture);
+            lives.setSize(300, 150);
+            lives.setPosition(1050, 600);
+        }
+
+        if (player.playerHP == player.MAX_HP -3) {
+            texture = new Texture("LifeSprites/exmpl0Life.png");
+            lives = new Sprite(texture);
+            lives.setSize(300, 150);
+            lives.setPosition(1050, 600);
+        }*/
 
         deck = new StackOfCards();
-        list = new MoveCard[9];
-        booList = new Boolean[9];
+        listOfNine = new MoveCard[9];
 
-        GameObjectFactory constructor = new GameObjectFactory(gameMap, grid, this);
+        chosenFive = new MoveCard[5];
+
+
         player = constructor.player;
         grid.getTile(0,0).addGameObject(player);
         Gdx.input.setInputProcessor(player);
+
+        this.setScreen(new GameScreen(this, getPlayer(player)));
 
         drawNineCardsFromDeck();
 
     }
 
-    //"draw", as in drawing cards from a deck of cards.
-    //not "draw", as in drawing the picture of a card in the application.
-    //#tricky #difference #notTheSame ##
+    public void chooseCard(int index) {
+        temp = listOfNine[index];
+        for (int i = 0; i < chosenFive.length; i++) {
+            if (chosenFive[i] == null) {
+                chosenFive[i] = alignCard(temp, i);
+
+                listOfNine[index] = null;
+                i = 6;
+            }
+        }
+    }
+
+    private MoveCard alignCard(MoveCard temp, int index) {
+        int x = 0 + 170*(index);
+        int y = - 370;
+        temp.setPosition(x,y);
+        temp.setSize(300,400);
+        return temp;
+    }
+
     public void drawNineCardsFromDeck() {
         int cardYPos = -770;
         int cardXPos = -550;
         MoveCard card;
-        for (int i = 0; i < list.length; i++) {
+        for (int i = 0; i < listOfNine.length; i++) {
             card = deck.nextCard();
             if (card != null) {
                 card.setSize(400, 520);
                 card.setPosition(cardXPos, cardYPos);
-                booList[i] = false;
             }
-            list[i] = card;
+            listOfNine[i] = card;
             cardXPos += 205;
-
+        }
+        for (int i = 0; i < chosenFive.length; i++) {
+            chosenFive[i] = null;
         }
     }
-
-
 
     public TileGrid makeGrid() {
         TiledMapTileLayer layer = (TiledMapTileLayer)gameMap.getMapLayerByIndex(0);
@@ -128,12 +178,17 @@ public class RoboGame extends Game {
         sb.end();
         sb.begin();
         backboard.draw(sb);
-        for (int i = 0; i < list.length; i++) {
-            //if (booList[i] != true) {
-                list[i].draw(sb);
-            //}
+        for (int i = 0; i < listOfNine.length; i++) {
+            if (listOfNine[i] != null) {
+                listOfNine[i].draw(sb);
+            }
         }
-        lives.draw(sb);
+        for (int i = 0; i < chosenFive.length; i++) {
+            if (chosenFive[i] != null) {
+                chosenFive[i].draw(sb);
+            }
+        }
+        //lives.draw(sb);
 
         sb.end();
     }
@@ -154,6 +209,14 @@ public class RoboGame extends Game {
         sb.dispose();
         texture.dispose();
         tiledMap.dispose();
+    }
+
+    public void putCardsBackInDeck() {
+        for (int i = 0; i < listOfNine.length; i++) {
+            if(listOfNine[i] != null) {
+                deck.stack.push(listOfNine[i]);
+            }
+        }
     }
 
 
