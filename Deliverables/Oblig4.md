@@ -11,13 +11,16 @@
 
 
 ## Task 1: Project and project structure
-  * Test role: Kristian. main responisbility for testing the application and can delegate both tasks to be implemented/excecuted,
-               Find strategies for testing in collaboration with the rest of the team.
-  * Have the choices made so far been good? Yes, especially starting with pair programming and the notion of "early/short" deadlines.
-  * How is the group dynamics? Good
-  * How does communication work for you? good.
-    The majority of the group study at the same reading room, even though we might be working on different subjects we are more than willing to answer questions or work on problems related to the Robo Rally project.
-  * Make a brief retrospective.
+  * Testrolle: Kristian. 
+  Hovedansvar for testing av roller, kan delegere oppgaver, og finne en strategi for testing. Vi har blitt enig om at testing helst skal komme i form av Junit tester, men det at programmet kjører og det at player tokens oppdaterers utføres manuelt.
+  Testing av player tokens blir gjort ved å flytte spiller til en laser-tile, og rotere spiller mens man følger med på System println og tokens representert på skjerm.
+  * Har valgene dere har tatt vært gode?
+  Vi er generelt fornøyd med valgene vi har tatt, espessielt det at vu startet med par programmering, og satte opp oppgave slik at man har en kortere deadline enn den man et tror man trenger. Korte deadlines gjør terskelen for å spørre om hjelp, dersom det skulle trengs, lavere.
+  * Gruppedynamikken er bra.
+  * Hvordan fungerer kommunikasjonen for dere?
+  Mesteparten at gruppen leser på samme lesesal, selvom vi kanskje jobber med andre fag så er vi alltid villig til å svare på spørsmål eller jobbe med problemer relatert til Robo Rally prosjektet.
+  * Et kort retroperspektiv.
+  Vi er fornøyd med å ha innført parprogrammering. Parprogrammering det gjør det litt lettere å utføre oppgaver, samtidig som man får litt bedre innsikt i helheten av koden ettersom vi har satt sammen par utifra de som hadde minst felleskunnskap.
   * Agree on three improvements based on the retrospective
   * Reports from meetings since previous delivery
 
@@ -26,7 +29,7 @@ Oversikt over foredeling og status av oppgaver ligger på [trello](https://trell
 
 
 
-## Deloppgave 2: Requirements
+## Deloppgave 2: Krav
 Prioritet av arbeidsoppgaver i følgende reggefølge
   1. Ability to play a complete round
   2. Lasers on the board
@@ -48,7 +51,7 @@ Prioritet av arbeidsoppgaver i følgende reggefølge
   
   
   
-  ## Deloppgave 3: Code
+  ## Deloppgave 3: Kode
     * Document how the project builds, tests, and runs so it's easy to test the code.
     * The product should work on Linux
     * Code quality and test coverage will be emphazised
