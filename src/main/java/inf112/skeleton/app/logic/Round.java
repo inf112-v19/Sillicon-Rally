@@ -31,24 +31,27 @@ public class Round {
 
         }
 
-        doTurn();
+        //doTurn();
     }
 
-    public void doTurn() {
-       int numberOfPlayers = players.size();
+    public void doTurn(ArrayList<MoveCard> cardList1,
+                       ArrayList<Player> playerss, TileGrid grid1) {
+       ArrayList<Player> playerList = playerss;
+       int numberOfPlayers = playerList.size();
        int counter = 0;
-       ArrayList<MoveCard> cardList = new ArrayList<>();
+       ArrayList<MoveCard> cardList = cardList1;
        for (int i = 0; i < cardList.size(); i++) {
            int playerTurn = counter%numberOfPlayers;
+           card = cardList.get(i);
            switch (playerTurn){
-               case 0: players.get(0).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
-               case 1: players.get(1).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
-               case 2: players.get(2).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
-               case 3: players.get(3).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid);
+               case 0: playerList.get(0).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid1);
+               case 1: playerList.get(1).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid1);
+               case 2: playerList.get(2).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid1);
+               case 3: playerList.get(3).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid1);
                default:
                    System.out.println("fuck you kristian");
-
            }
+           counter++;
        }
     }
 

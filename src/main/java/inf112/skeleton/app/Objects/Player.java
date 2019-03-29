@@ -24,6 +24,7 @@ public class Player implements IGameObject, InputProcessor {
     private PlayerMovements playerMovements;
     public MoveCard[] movecardArray;
     boolean[] booList;
+    public String name;
 
 
     //Constructor used for testing purposes only
@@ -35,8 +36,12 @@ public class Player implements IGameObject, InputProcessor {
         this.playerHP = MAX_HP;
 
         this.movecardArray = new MoveCard[5];
+        this.name = "";
 
+    }
 
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Player(Texture texture, RoboGame.Direction startDirection, RoboGame game) {

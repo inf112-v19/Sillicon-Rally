@@ -1,12 +1,10 @@
 package inf112.skeleton.app.CardTest;
 
-import com.badlogic.gdx.graphics.Texture;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.SetupVariables.SetupVariables;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.game.RoboGame;
-import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.logic.Round;
 import org.junit.jupiter.api.Test;
@@ -18,40 +16,51 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class PlayerTurnTest {
 	private Round round;
+	private ArrayList<Player> playerList;
+	private ArrayList<MoveCard> testDeck;
 	private Player player;
 	private MoveCard card;
-	private RoboGame game;
 	private TileGrid grid;
 	private StackOfCards deck;
-	private Tile tile;
+	private RoboGame game;
 
 
 
-	//Player default position (3 ,3)
+
+	//Player default position (0 ,4)
 	@Test
-	public void doTurnTest(){
+	public void doTurnTestAndMoveTest(){ //perfectTitle
 		SetupVariables setup = new SetupVariables();
-		Texture textureMove1 = new Texture("cardLayouts/Move1.png");
-		Texture textureMove2 = new Texture("cardLayouts/Move2.png");
+		this.playerList = setup.playerList;
+		this.grid = setup.grid;
+		this.testDeck = setup.cardList;
 
-		MoveCard card1 = new MoveCard(MoveCard.Type.move1, textureMove1);
-		MoveCard card2 = new MoveCard(MoveCard.Type.move2, textureMove2);
-		ArrayList<MoveCard> testDeck = new ArrayList<>();
+		for (Player p : playerList) {
+			setup.playerDefaultPosition(p);
+		}
 
-		testDeck.add(card1);
-		testDeck.add(card2);
-
-		Player p1 = new Player();
-		//player.setX(3*grid.tileSizeInPx);
-		//player.setY(3*grid.tileSizeInPx);
-		round.players.add(p1);
-
-		setup.playerDefaultPosition(p1);
+		Player player1 = playerList.get(0);   //Vegard
+		Player player2 = playerList.get(1);   //Martin
 
 
-		round.doTurn();
-		assertEquals(grid.getTile(6,3),player.getY());
+		round.doTurn(testDeck, playerList, grid);
+		assertEquals(4*grid.tileSizeInPx,     player1.getY());
+		assertEquals(4*grid.tileSizeInPx,     player1.getX());
 
+		assertEquals(2*grid.tileSizeInPx,     player2.getY());
+		assertEquals(4*grid.tileSizeInPx,     player2.getX());
+
+		assertEquals(RoboGame.Direction.East, player2.currentDirection);
+		assertEquals(RoboGame.Direction.North, player1.currentDirection);
+
+
+		/*					2play	3play	4play	5play
+		1. move1			p1		p1		p1		p1
+		2. move2			p2		p2		p2		p2
+		3. move2			p1		p3		p3		p3
+		4. turn right		p2		p1		p4		p4
+		5. move1			p1		p2		p1		"fuck you kristian!"
+		 */
 
 	}
 
