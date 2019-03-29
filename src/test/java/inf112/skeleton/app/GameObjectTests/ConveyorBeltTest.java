@@ -97,7 +97,7 @@ private LaserObject laser;
        player.setPosition(0,0,grid);
        belt = new ConveyorBeltObject(0,0, grid, 1, RoboGame.Direction.North);
        belt.handleCollision(player, grid);
-       assertEquals(RoboGame.Direction.West, player.currentDirection);
+       assertEquals(RoboGame.Direction.West, player.getDirection());
     }
 
     @Test

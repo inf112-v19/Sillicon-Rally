@@ -73,28 +73,28 @@ public class ConveyorBeltObject implements IGameObject {
         int moveDistance = grid.tileSizeInPx;
         boolean notAnotherConveyor=false;
 
-        RoboGame.Direction originalDirection = player.currentDirection;
-        player.currentDirection = direction;
+        RoboGame.Direction originalDirection = player.getDirection();
+        player.setDirection(direction);
 
         player.moveStraight(speed, moveDistance, grid);
-        player.currentDirection = originalDirection;
+        player.setDirection(originalDirection);
 
-        if(player.currentDirection == RoboGame.Direction.North){
+        if(player.getDirection() == RoboGame.Direction.North){
             if(grid.getTileFromCoordinates(player.getY()+1, player.getX()).equals(conveyorTile)){
                 notAnotherConveyor=false;
             }
         }
-        else if(player.currentDirection == RoboGame.Direction.South){
+        else if(player.getDirection() == RoboGame.Direction.South){
             if(grid.getTileFromCoordinates(player.getY()-1, player.getX()).equals(conveyorTile)){
                 notAnotherConveyor=false;
             }
         }
-        else if(player.currentDirection == RoboGame.Direction.East){
+        else if(player.getDirection() == RoboGame.Direction.East){
             if(grid.getTileFromCoordinates(player.getY(), player.getX()+1).equals(conveyorTile)){
                 notAnotherConveyor=false;
             }
         }
-        else if(player.currentDirection == RoboGame.Direction.West){
+        else if(player.getDirection() == RoboGame.Direction.West){
             if(grid.getTileFromCoordinates(player.getY(), player.getX()-1).equals(conveyorTile)){
                 notAnotherConveyor=false;
             }
