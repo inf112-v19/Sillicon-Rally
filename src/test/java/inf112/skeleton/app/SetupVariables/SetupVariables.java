@@ -2,6 +2,7 @@ package inf112.skeleton.app.SetupVariables;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.graphics.GL20;
@@ -38,7 +39,6 @@ public class SetupVariables {
     public ArrayList<Player> playerList;
     public ArrayList<MoveCard> cardList;
 
-
     public SetupVariables() {
         setup();
         this.gameMap = new GameMap("map.v.01.tmx");
@@ -50,26 +50,25 @@ public class SetupVariables {
         this.belt = new ConveyorBeltObject(4, 4, grid, 1, RoboGame.Direction.West);
         this.laser = new LaserObject(2,2, grid);
         this.repairObject = new RepairObject(2,2,grid);
-
+        this.cardList = getDeck();
+        this.playerList = getPlayers();
+        this.round = new Round(new StackOfCards(), playerList);
 
         this.cardList = getDeck();
         playerList = getPlayers();
 
 
-
-
     }
 
     public void playerDefaultPosition(Player player){
-        SetupVariables setup = new SetupVariables();
-        Tile playerTile = grid.getTile(4,4);
-        Player otherPlayer = setup.player;
-        playerTile.addGameObject(otherPlayer);
-        otherPlayer.currentDirection = RoboGame.Direction.South;
-        int y = grid.rows;
-        int x = grid.columns;
-        otherPlayer.setX(3*grid.tileSizeInPx);
-        otherPlayer.setY(3*grid.tileSizeInPx);
+        int y = 0;
+        int x = 4;
+        int tileSize = grid.tileSizeInPx;
+        player.currentDirection = RoboGame.Direction.North;
+        Tile playerTile = grid.getTile(y,x);
+        playerTile.addGameObject(player);
+        player.setY(y * grid.tileSizeInPx);
+        player.setX(x * grid.tileSizeInPx);
     }
 
     public ArrayList<Player> getPlayers(){
@@ -87,13 +86,15 @@ public class SetupVariables {
     }
 
     public ArrayList<MoveCard> getDeck(){
+
         ArrayList<MoveCard> cards = new ArrayList<>();
         Texture textureMove1 = new Texture("cardLayouts/Move1.png");
         Texture textureMove2 = new Texture("cardLayouts/Move2.png");
-        Texture texright = new Texture("cardLayouts/RightTurn.png");
+        Texture textureRightTurn = new Texture("cardLayouts/RightTurn.png");
+
         MoveCard card1 = new MoveCard(MoveCard.Type.move1, textureMove1);
         MoveCard card2 = new MoveCard(MoveCard.Type.move2, textureMove2);
-        MoveCard card3 = new MoveCard(MoveCard.Type.turnright, texright);
+        MoveCard card3 = new MoveCard(MoveCard.Type.turnright, textureRightTurn);
 
         cards.add(card1);
         cards.add(card2);

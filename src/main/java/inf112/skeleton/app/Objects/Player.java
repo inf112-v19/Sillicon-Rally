@@ -37,12 +37,12 @@ public class Player implements IGameObject, InputProcessor {
 
         this.movecardArray = new MoveCard[5];
         this.name = "";
-
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
 
     public Player(Texture texture, RoboGame.Direction startDirection, RoboGame game) {
         this.sprite = new Sprite(texture);
@@ -53,8 +53,6 @@ public class Player implements IGameObject, InputProcessor {
         this.playerHP = MAX_HP;
 
         this.movecardArray = new MoveCard[5];
-
-
     }
 
 
@@ -114,9 +112,14 @@ public class Player implements IGameObject, InputProcessor {
     @Override
     public void handleCollision(Player player, TileGrid grid) { }
 
-    public void setX(float x) { this.x = x; }
+    public void setX(float x) {
+        this.x = x;
+        playerMovements.xLoc = x;}
 
-    public void setY(float y) { this.y = y; }
+    public void setY(float y) {
+        this.y = y;
+        playerMovements.yLoc = y;
+    }
 
     public float getY() { return this.y; }
 

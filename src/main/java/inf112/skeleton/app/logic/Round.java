@@ -19,7 +19,6 @@ public class Round {
     public ArrayList<Player> players;
     private StackOfCards deck;
     private Player player;
-    private TileGrid grid;
     private RoboGame game;
 
     public Round(StackOfCards deck, ArrayList<Player> playerList) {
@@ -31,25 +30,31 @@ public class Round {
 
         }
 
+
         //doTurn();
     }
 
-    public void doTurn(ArrayList<MoveCard> cardList1,
-                       ArrayList<Player> playerss, TileGrid grid1) {
-       ArrayList<Player> playerList = playerss;
-       int numberOfPlayers = playerList.size();
+    public void doTurn(ArrayList<MoveCard> cardList, ArrayList<Player> playas, TileGrid grid) {
+        int tilesize = grid.tileSizeInPx;
+       ArrayList<Player> playerList = playas;
+       int numberOfPlayers = players.size();
        int counter = 0;
-       ArrayList<MoveCard> cardList = cardList1;
        for (int i = 0; i < cardList.size(); i++) {
            int playerTurn = counter%numberOfPlayers;
            card = cardList.get(i);
            switch (playerTurn){
-               case 0: playerList.get(0).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid1);
-               case 1: playerList.get(1).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid1);
-               case 2: playerList.get(2).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid1);
-               case 3: playerList.get(3).movePlayer(card.getType(), game.TILE_SIZE_IN_PX, grid1);
+
+               case 0: players.get(0).movePlayer(card.getType(), tilesize, grid);
+               break;
+               case 1: players.get(1).movePlayer(card.getType(), tilesize, grid);
+               break;
+               case 2: players.get(2).movePlayer(card.getType(), tilesize, grid);
+               break;
+               case 3: players.get(3).movePlayer(card.getType(), tilesize, grid);
+               break;
                default:
-                   System.out.println("fuck you kristian");
+                   System.out.println("fuck you Kristian");
+
            }
            counter++;
        }
