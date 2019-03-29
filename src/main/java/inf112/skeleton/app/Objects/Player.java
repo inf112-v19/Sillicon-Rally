@@ -377,7 +377,7 @@ public class Player implements IGameObject, InputProcessor {
             playerMovements.uTurn(game.grid);
         }
         if (keycode == Input.Keys.UP) {
-           // playerMovements.moveStraight(1, moveDistance, game.grid);
+            playerMovements.moveStraight(1, moveDistance, game.grid);
         }
         if (keycode == Input.Keys.W) {
             playerMovements.moveStraight(2, moveDistance, game.grid);

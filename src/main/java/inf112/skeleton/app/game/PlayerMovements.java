@@ -39,18 +39,6 @@ public class PlayerMovements {
         }
     }
 
-    public void animateTileMovement(float yStart, float xStart, float yDest, float xDest, int pixelSize) {
-        float dt = Gdx.graphics.getDeltaTime();
-
-        while (this.y < yDest) {
-            if (yDest > yStart) {
-                float newYloc = this.y + (10 * dt);
-                player.setY(newYloc);
-            }
-        }
-    }
-
-
 
     private void moveStraight(int moveDistance, TileGrid grid) {
         switch (direction) {
@@ -89,8 +77,6 @@ public class PlayerMovements {
         }
 
         Tile currentTile = grid.getTileFromCoordinates(this.y, this.x);
-
-        //animateTileMovement(this.y, this.x, yDest, xDest, grid.tileSizeInPx);
 
         setX(xDest);
         setY(yDest);
@@ -200,32 +186,10 @@ public class PlayerMovements {
 
 
     public void isKeyPressed(float deltaTime, RoboGame game) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            switch (getDirection()) {
-                case North:
-                    float northY = getY() + game.getTileSize();
-                    setMoveTowardTarget(northY, getX());
-                    break;
-                case East:
-                    float eastX = getX() + game.getTileSize();
-                    setMoveTowardTarget(getY(), eastX);
-                    break;
-                case South:
-                    float southY = getY() - game.getTileSize();
-                    setMoveTowardTarget(southY, getX());
-                    break;
-                case West:
-                    float westY = getY() - game.getTileSize();
-                    setMoveTowardTarget(getY(), westY);
-            }
 
-            if (checkIfMoveIsOutOfBounds(targetY, getX(), game.grid)) {
-                player.handleDeath(game.grid);
-                return;
-            }
-
-        }
     }
+
+
 
     private void setMoveTowardTarget(float y, float x) {
         if (y < 0 || x < 0)
@@ -237,37 +201,6 @@ public class PlayerMovements {
     }
 
     public void update(float deltaTime, TileGrid grid) {
-        if (getY() < targetY) {
-            setY(getY() + (200 * deltaTime));
-            if (getY() > targetY) {
-                setY(targetY);
-                player.checkCollision(grid);
-            }
-        }
-
-        if (getX() < targetX) {
-            setX(getX() + (200 * deltaTime));
-            if (getX() > targetX) {
-                setX(targetX);
-                player.checkCollision(grid);
-            }
-        }
-
-        if (getX() > targetX) {
-            setX(getX() - (200 * deltaTime));
-            if (getX() < targetX) {
-                setX(targetX);
-                player.checkCollision(grid);
-            }
-        }
-
-        if (getY() > targetY) {
-            setY(getY() - (200 * deltaTime));
-            if (getY() < targetY) {
-                setY(targetY);
-                player.checkCollision(grid);
-            }
-        }
 
     }
 
