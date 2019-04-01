@@ -53,7 +53,6 @@ public class Round {
                case 3: players.get(3).movePlayer(card.getType(), tilesize, grid);
                break;
                default:
-                   System.out.println("fuck you Kristian");
 
            }
            counter++;

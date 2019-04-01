@@ -40,6 +40,7 @@ public class Player implements IGameObject, InputProcessor {
         this.cardsToBePlayed = new MoveCard[5];
         playerMovements = new PlayerMovements(this);
         this.playerHP = MAX_HP;
+        this.playerTokens = MAX_DAMAGE_TOKENS;
 
         this.movecardArray = new MoveCard[5];
         this.name = "";
