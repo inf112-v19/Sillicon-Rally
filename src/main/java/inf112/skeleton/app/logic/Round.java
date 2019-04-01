@@ -33,7 +33,7 @@ public class Round {
 
         //doTurn();
     }
-    
+
     public void doTurn(ArrayList<MoveCard> cardList, ArrayList<Player> playas, TileGrid grid) {
         int tilesize = grid.tileSizeInPx;
        ArrayList<Player> playerList = playas;
