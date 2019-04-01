@@ -14,7 +14,7 @@ Testing av player tokens blir gjort ved å flytte spiller til en laser-tile, og 
 
 - Har valgene dere har tatt vært gode?
 
-Vi er generelt fornøyd med valgene vi har tatt, espessielt det at vi startet med parprogrammering, og satte opp oppgavene slik at man har en kortere deadline enn den man et tror man trenger. Korte deadlines gjør terskelen for å spørre om hjelp, dersom det skulle trengs, lavere.
+Vi er generelt fornøyd med valgene vi har tatt, spessielt det at vi startet med parprogrammering, og satte opp oppgavene slik at man har en kortere deadline enn den man et tror man trenger. Korte deadlines gjør terskelen for å spørre om hjelp, dersom det skulle trengs, lavere.
 
 Det er enkelte valg i koden vår som vi nå ser ikke er helt ideelt. For eksempel gjør logikken vår (flytting av spillere og håndtering av kollisjoner) at den visuelle koden enten stopper helt, eller oppdaterer seg så kjapt at det ikke er synlig for øyet. Resultatet er at brikkene teleporterer fra ett sted til et annet, heller enn å bevege seg dit i fornuftige intervaller.
 Vi har enda ikke klart å løse dette problemet, og vi mistenker at det har med grunnleggende oppsett av koden å gjøre.
@@ -47,7 +47,7 @@ Oversikt over foredeling og status av oppgaver ligger på [trello](https://trell
 
 ## Deloppgave 2: Krav
 
-Prioritet av arbeidsoppgaver i følgende reggefølge
+Prioritet av arbeidsoppgaver i følgende reggefølge, en del av disse har ikke blitt implentert i det endelige spillet enda.
 
 1. Ability to play a complete round
 2. Lasers on the board
@@ -62,7 +62,7 @@ Prioritet av arbeidsoppgaver i følgende reggefølge
 11. game mechanisms to shoot other players within reach
 12. game over after 3 lives lost
 13. place flags even before the game starts
-14. play agains AI
+14. play against AI
 15. Assemble different boards to larger spills
 16. Multiplayer over LAN or Internet
 
