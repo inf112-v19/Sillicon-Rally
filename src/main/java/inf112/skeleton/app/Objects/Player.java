@@ -127,7 +127,7 @@ public class Player implements IGameObject, InputProcessor {
         return this.sprite;
     }
 
-    public void shootLaser() {
+    public void shootLaser(TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(getY(), getX());
 
         List<Tile> path = grid.getDirectPath(playerTile, getDirection());
