@@ -196,8 +196,6 @@ public class PlayerMovements {
             return;
         this.targetY = y;
         this.targetX = x;
-
-
     }
 
     public void update(float deltaTime, TileGrid grid) {

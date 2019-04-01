@@ -43,10 +43,6 @@ public class Round {
        for (int i = 0; i < cardList.size(); i++) {
            int playerTurn = counter%numberOfPlayers;
            card = cardList.get(i);
-           float y1 = playas.get(0).getY();
-           float x1 = playas.get(0).getX();
-           float y2 = playas.get(1).getY();
-           float x2 = playas.get(1).getX();
            switch (playerTurn){
 
                case 0: players.get(0).movePlayer(card.getType(), tilesize, grid);
