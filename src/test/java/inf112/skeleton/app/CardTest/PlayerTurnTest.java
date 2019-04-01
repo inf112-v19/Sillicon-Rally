@@ -70,7 +70,7 @@ public class PlayerTurnTest {
 	}
 
 
-	/*@Test
+	@Test
 	void bothPlayerMovesOneForward(){
 		SetupVariables setup = new SetupVariables();
 
@@ -87,18 +87,16 @@ public class PlayerTurnTest {
 		Player player2 = playerlist.get(1);
 
 		player1.setPosition(2 * grid.tileSizeInPx, 2 * grid.tileSizeInPx, grid);
-		player1.currentDirection = RoboGame.Direction.West;
 		player2.setPosition(3 * grid.tileSizeInPx, 3 * grid.tileSizeInPx, grid);
-		player.currentDirection = RoboGame.Direction.West;
 
+		player1.setDirection(RoboGame.Direction.West);
+		player2.setDirection(RoboGame.Direction.West);
 		System.out.println(testDeck);
 		System.out.println(playerlist);
 		round.doTurn(testDeck, playerlist, grid);
-		assertEquals(1 * grid.tileSizeInPx, player1.getX());
-		assertEquals(2 * grid.tileSizeInPx, player2.getX());
+		assertEquals((float) 1 * grid.tileSizeInPx, player1.getX());
+		assertEquals((float) 2 * grid.tileSizeInPx, player2.getX());
 
-
-
-	}*/
+	}
 
 }
