@@ -165,20 +165,19 @@ public class PlayerTest {
         SetupVariables setup = new SetupVariables();
 
         Player player = setup.player;
+        player.setPosition(0,0, setup.grid);
+        player.setDirection(RoboGame.Direction.North);
+
         Player otherPlayer = new Player();
-        setup.grid.getTile(5, 0).addGameObject(otherPlayer);
-        setup.grid.getTile(0,0).addGameObject(player);
-        otherPlayer.setY(5 * setup.grid.tileSizeInPx);
+        otherPlayer.setPosition(5 * setup.grid.tileSizeInPx, 0, setup.grid);
+        otherPlayer.setDirection(RoboGame.Direction.South);
 
         assertEquals(6, otherPlayer.playerHP);
+
         player.shootLaser(setup.grid);
         assertEquals(5, otherPlayer.playerHP);
 
-        otherPlayer.setDirection(RoboGame.Direction.South);
         otherPlayer.shootLaser(setup.grid);
-
-        System.out.println(setup.grid.getTile(0,0).getGameObjects());
-
         assertEquals(5, player.playerHP);
     }
 
