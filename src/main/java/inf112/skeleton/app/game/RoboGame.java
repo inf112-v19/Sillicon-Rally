@@ -56,7 +56,7 @@ public class RoboGame extends Game {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.grid = makeGrid();
         GameObjectFactory constructor = new GameObjectFactory(gameMap, grid, this);
-        this.setScreen(new GameScreen(this, player));
+        this.setScreen(new MainMenuScreen(this, player));
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
 
@@ -72,6 +72,7 @@ public class RoboGame extends Game {
         backboard = new Sprite(texture);
         backboard.setSize(1950,1600);
         backboard.setPosition(-480,-700);
+
 
         deck = new StackOfCards();
         listOfNine = new MoveCard[9];

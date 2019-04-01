@@ -19,6 +19,7 @@ public class Player implements IGameObject, InputProcessor {
     private RoboGame game;
     private PlayerMovements playerMovements;
 
+
     public int playerHP;
     public int playerTokens;
     public final int MAX_HP = 6;
@@ -29,6 +30,20 @@ public class Player implements IGameObject, InputProcessor {
     boolean[] booList;
     public String name;
 
+
+
+    //Constructor used for testing purposes only
+    public Player() {
+        RoboGame.Direction currentDirection = RoboGame.Direction.West;
+        backupLocation = null;
+        this.cardsToBePlayed = new MoveCard[5];
+        playerMovements = new PlayerMovements(this, 0, 0, currentDirection);
+        this.playerHP = MAX_HP;
+        this.playerTokens = MAX_DAMAGE_TOKENS;
+
+        this.movecardArray = new MoveCard[5];
+        this.name = "";
+    }
 
 
     public void setName(String name) {
@@ -48,15 +63,6 @@ public class Player implements IGameObject, InputProcessor {
         this.movecardArray = new MoveCard[5];
     }
 
-    //Constructor used for testing purposes only
-    public Player() {
-        RoboGame.Direction direction = RoboGame.Direction.West;
-        backupLocation = null;
-        this.cardsToBePlayed = new MoveCard[5];
-        playerMovements = new PlayerMovements(this, 0 ,0, direction);
-        this.playerHP = MAX_HP;
-        this.playerTokens = MAX_DAMAGE_TOKENS;
-    }
 
 
 

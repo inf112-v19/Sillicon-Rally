@@ -128,8 +128,9 @@ public class PlayerMovements {
     }
 
     public void uTurn(TileGrid grid) {
-        player.getSprite().rotate(180);
-        player.checkForDamageTaken(grid);
+        if (player.getSprite() != null)
+            player.getSprite().rotate(180);
+        //player.checkForDamageTaken(grid);
 
         switch (getDirection()) {
             case North:

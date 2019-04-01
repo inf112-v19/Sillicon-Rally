@@ -36,23 +36,22 @@ public class Round {
 
     public void doTurn(ArrayList<MoveCard> cardList, ArrayList<Player> playas, TileGrid grid) {
         int tilesize = grid.tileSizeInPx;
-       ArrayList<Player> playerList = playas;
-       this.players = playas;
-       int numberOfPlayers = players.size();
+       int numberOfPlayers = playas.size();
        int counter = 0;
        for (int i = 0; i < cardList.size(); i++) {
            int playerTurn = counter%numberOfPlayers;
            card = cardList.get(i);
            switch (playerTurn){
 
-               case 0: players.get(0).movePlayer(card.getType(), tilesize, grid);
+               case 0: playas.get(0).movePlayer(card.getType(), tilesize, grid);
                break;
-               case 1: players.get(1).movePlayer(card.getType(), tilesize, grid);
+               case 1: playas.get(1).movePlayer(card.getType(), tilesize, grid);
                break;
-               case 2: players.get(2).movePlayer(card.getType(), tilesize, grid);
+               case 2: playas.get(2).movePlayer(card.getType(), tilesize, grid);
                break;
-               case 3: players.get(3).movePlayer(card.getType(), tilesize, grid);
+               case 3: playas.get(3).movePlayer(card.getType(), tilesize, grid);
                break;
+
            }
            counter++;
        }
