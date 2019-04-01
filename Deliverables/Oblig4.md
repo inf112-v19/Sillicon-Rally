@@ -13,7 +13,8 @@ dvs:
 Testing av player tokens blir gjort ved å flytte spiller til en laser-tile, og rotere spiller mens man følger med på System println og tokens representert på skjerm.
 
 - Har valgene dere har tatt vært gode?
-  Vi er generelt fornøyd med valgene vi har tatt, espessielt det at vi startet med parprogrammering, og satte opp oppgavene slik at man har en kortere deadline enn den man et tror man trenger. Korte deadlines gjør terskelen for å spørre om hjelp, dersom det skulle trengs, lavere.
+
+Vi er generelt fornøyd med valgene vi har tatt, espessielt det at vi startet med parprogrammering, og satte opp oppgavene slik at man har en kortere deadline enn den man et tror man trenger. Korte deadlines gjør terskelen for å spørre om hjelp, dersom det skulle trengs, lavere.
 
 Det er enkelte valg i koden vår som vi nå ser ikke er helt ideelt. For eksempel gjør logikken vår (flytting av spillere og håndtering av kollisjoner) at den visuelle koden enten stopper helt, eller oppdaterer seg så kjapt at det ikke er synlig for øyet. Resultatet er at brikkene teleporterer fra ett sted til et annet, heller enn å bevege seg dit i fornuftige intervaller.
 Vi har enda ikke klart å løse dette problemet, og vi mistenker at det har med grunnleggende oppsett av koden å gjøre.
