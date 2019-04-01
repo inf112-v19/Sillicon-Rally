@@ -57,6 +57,7 @@ public class Round {
                break;
                case 3: players.get(3).movePlayer(card.getType(), tilesize, grid);
                break;
+
            }
            counter++;
        }
