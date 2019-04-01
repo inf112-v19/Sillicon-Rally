@@ -11,6 +11,8 @@ import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
+import java.util.List;
+
 public class Player implements IGameObject, InputProcessor {
     public MoveCard[] cardsToBePlayed;
     TileGrid grid;
@@ -123,6 +125,21 @@ public class Player implements IGameObject, InputProcessor {
         sprite.setX(getX());
         sprite.setY(getY());
         return this.sprite;
+    }
+
+    public void shootLaser() {
+        Tile playerTile = grid.getTileFromCoordinates(getY(), getX());
+
+        List<Tile> path = grid.getDirectPath(playerTile, getDirection());
+
+        for (Tile tile : path) {
+            for (IGameObject object : tile.getGameObjects()) {
+                if (object instanceof Player && object != this) {
+                    Player otherPlayer = (Player) object;
+                    otherPlayer.damagePlayer(1, grid);
+                }
+            }
+        }
     }
 
     public void damagePlayer(int damage, TileGrid grid) {
