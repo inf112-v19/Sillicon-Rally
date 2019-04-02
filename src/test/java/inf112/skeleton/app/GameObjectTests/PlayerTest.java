@@ -24,7 +24,7 @@ public class PlayerTest {
     public void setup() {
         SetupVariables variables = new SetupVariables();
         grid = variables.grid;
-        player = variables.player;
+        player = new Player();
         TILE_SIZE_IN_PX = variables.gameMap.getTileSize();
     }
 
@@ -35,18 +35,50 @@ public class PlayerTest {
 
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
         Tile checkTile = grid.getTile(2, 1);
+        System.out.println(player.getX());
 
         assertEquals(true, playerTile.equals(checkTile));
     }
 
     @Test
-    public void moveOneStraightTest() {
+    public void moveOneWestForwardTest() {
         setup();
         player = new Player();
         player.setPosition(2 * TILE_SIZE_IN_PX,2* TILE_SIZE_IN_PX,grid);
         player.moveStraight(1, grid.tileSizeInPx, grid);
         assertEquals(1 * TILE_SIZE_IN_PX, player.getX());
     }
+
+    @Test
+    void moveOneNorthForwardTest(){
+        setup();
+        player.setPosition(0 * TILE_SIZE_IN_PX,0 * TILE_SIZE_IN_PX,grid);
+        player.setDirection(RoboGame.Direction.North);
+        player.moveStraight(1,grid.tileSizeInPx, grid);
+        assertEquals(1 * grid.tileSizeInPx,player.getY());
+    }
+
+    @Test
+    void moveOneEastForwardTest(){
+        setup();
+        player.setPosition(2 * TILE_SIZE_IN_PX, 2 * TILE_SIZE_IN_PX, grid);
+        player.setDirection(RoboGame.Direction.East);
+        player.moveStraight(1, grid.tileSizeInPx, grid);
+        assertEquals(3 * TILE_SIZE_IN_PX, player.getX());
+    }
+
+    @Test
+    void moveOneSouthForwardTest(){
+        setup();
+        player.setPosition(2 * TILE_SIZE_IN_PX, 2 *TILE_SIZE_IN_PX, grid);
+        player.setDirection(RoboGame.Direction.South);
+        player.moveStraight(1, grid.tileSizeInPx, grid);
+        assertEquals(1 *grid.tileSizeInPx, player.getY());
+    }
+
+
+
+
 
     @Test
     void moveTwoForwardStraightTest(){
@@ -70,7 +102,7 @@ public class PlayerTest {
         player = new Player();
         player.setPosition(2* TILE_SIZE_IN_PX,2 * TILE_SIZE_IN_PX, grid);
         Tile testTile = grid.getTileFromCoordinates(player.getY(), player.getX());
-        assertEquals(RoboGame.Direction.West, player.currentDirection);
+        assertEquals(RoboGame.Direction.West, player.getDirection());
         assertEquals(true, testTile.getGameObjects().contains(player));
     }
 
@@ -126,6 +158,27 @@ public class PlayerTest {
         player.handleDeath(grid);
         player.handleDeath(grid);
         assertEquals(player.playerTokens, 0);
+    }
+
+    @Test
+    void shootTest() {
+        SetupVariables setup = new SetupVariables();
+
+        Player player = setup.player;
+        player.setPosition(0,0, setup.grid);
+        player.setDirection(RoboGame.Direction.North);
+
+        Player otherPlayer = new Player();
+        otherPlayer.setPosition(5 * setup.grid.tileSizeInPx, 0, setup.grid);
+        otherPlayer.setDirection(RoboGame.Direction.South);
+
+        assertEquals(6, otherPlayer.playerHP);
+
+        player.shootLaser(setup.grid);
+        assertEquals(5, otherPlayer.playerHP);
+
+        otherPlayer.shootLaser(setup.grid);
+        assertEquals(5, player.playerHP);
     }
 
 

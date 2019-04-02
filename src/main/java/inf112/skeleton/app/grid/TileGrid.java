@@ -2,6 +2,7 @@ package inf112.skeleton.app.grid;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Objects.IGameObject;
+import inf112.skeleton.app.game.RoboGame;
 
 import java.util.ArrayList;
 
@@ -86,6 +87,71 @@ public class TileGrid {
             }
         }
 
+        return list;
+    }
+
+    public ArrayList<Tile> getDirectPath(Tile tile, RoboGame.Direction dir) {
+        ArrayList<Tile> list = new ArrayList<>();
+
+        switch (dir) {
+            case North:
+                return getAllNorthTiles(tile);
+            case South:
+                return getAllSouthTiles(tile);
+            case West:
+                return getAllWestTiles(tile);
+            case East:
+                return getAllEastTiles(tile);
+        }
+
+        return list;
+    }
+
+    private ArrayList<Tile> getAllEastTiles(Tile tile) {
+        ArrayList<Tile> list = new ArrayList<>();
+        if (tile.x == columns-1)
+            return list;
+
+        for (int i = tile.x+1; i < columns; i++) {
+            list.add(getTile(tile.y, i));
+        }
+
+        return list;
+
+    }
+
+    private ArrayList<Tile> getAllWestTiles(Tile tile) {
+        ArrayList<Tile> list = new ArrayList<>();
+        if (tile.x == 0)
+            return list;
+
+        for (int i = tile.x-1; i >= 0; i--) {
+            list.add(getTile(tile.x, i));
+        }
+
+        return list;
+    }
+
+    private ArrayList<Tile> getAllSouthTiles(Tile tile) {
+        ArrayList<Tile> list = new ArrayList<>();
+        if (tile.y == 0)
+            return list;
+
+        for (int i = tile.y-1; i >= 0; i--) {
+            list.add(getTile(i, tile.x));
+        }
+
+        return list;
+    }
+
+    private ArrayList<Tile> getAllNorthTiles(Tile tile) {
+        ArrayList<Tile> list = new ArrayList<>();
+        if (tile.y == rows-1)
+            return list;
+
+        for (int i = tile.y+1; i < rows; i++) {
+            list.add(getTile(i, tile.x));
+        }
         return list;
     }
 }

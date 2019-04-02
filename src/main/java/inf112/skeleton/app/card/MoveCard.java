@@ -2,6 +2,7 @@ package inf112.skeleton.app.card;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import inf112.skeleton.app.Objects.Player;
 
 import java.util.Random;
 
@@ -13,6 +14,7 @@ public class MoveCard extends Sprite{
     Random rand = new Random();
     private Type type;
     private int priority;
+    private Player player;
 
 
     public MoveCard(Type t, Texture texture) {
@@ -44,6 +46,25 @@ public class MoveCard extends Sprite{
     public String toString() {
         return type + "";
     }
+
+
+    /*
+        For testing
+     */
+
+    /*public void handleTestCollision(Type t, Player player, TileGrid grid){
+        int moveDistance = grid.tileSizeInPx;
+        this.type = t;
+        switch (t) {
+            case move1: player.moveStraight(1, moveDistance, grid);
+            case move2: player.moveStraight(2, moveDistance, grid);
+            case move3: player.moveStraight(3, moveDistance, grid);
+            case turnleft: player.rotateCounterClockwise();
+            case turnright: player.rotateClockwise();
+            case uturn: player.rotateClockwise();
+            case reverse: priority = rand.nextInt(480) + 430;
+        }
+    }*/
 }
 
 

@@ -60,6 +60,9 @@ public class GameScreen implements Screen {
 
         game.sb.setProjectionMatrix(RoboGame.camera.combined);
 
+        game.handleInput(Gdx.graphics.getDeltaTime());
+        game.update(Gdx.graphics.getDeltaTime());
+
         game.drawSpritesFromGrid();
 
         game.sb.begin();

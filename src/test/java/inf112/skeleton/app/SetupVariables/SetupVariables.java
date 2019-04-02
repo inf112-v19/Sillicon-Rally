@@ -38,6 +38,7 @@ public class SetupVariables {
     public Texture texture;
     public ArrayList<Player> playerList;
     public ArrayList<MoveCard> cardList;
+    public ArrayList<MoveCard> oneForwardCardList;
 
     public SetupVariables() {
         setup();
@@ -51,6 +52,8 @@ public class SetupVariables {
         this.laser = new LaserObject(2,2, grid);
         this.repairObject = new RepairObject(2,2,grid);
         this.cardList = getDeck();
+        this.oneForwardCardList = getOneForwardDeck();
+        this.oneForwardCardList = getOneForwardDeck();
         this.playerList = getPlayers();
         this.round = new Round(new StackOfCards(), playerList);
 
@@ -64,7 +67,7 @@ public class SetupVariables {
         int y = 0;
         int x = 4;
         int tileSize = grid.tileSizeInPx;
-        player.currentDirection = RoboGame.Direction.North;
+        player.setDirection(RoboGame.Direction.North);
         Tile playerTile = grid.getTile(y,x);
         playerTile.addGameObject(player);
         player.setY(y * grid.tileSizeInPx);
@@ -79,8 +82,12 @@ public class SetupVariables {
         Player player2 = new Player();
         player2.setName("Martin");
 
+
         playerList.add(player1);
         playerList.add(player2);
+
+        for (Player p : playerList)
+            playerDefaultPosition(p);
 
         return playerList;
     }
@@ -92,15 +99,26 @@ public class SetupVariables {
         Texture textureMove2 = new Texture("cardLayouts/Move2.png");
         Texture textureRightTurn = new Texture("cardLayouts/RightTurn.png");
 
-        MoveCard card1 = new MoveCard(MoveCard.Type.move1, textureMove1);
-        MoveCard card2 = new MoveCard(MoveCard.Type.move2, textureMove2);
-        MoveCard card3 = new MoveCard(MoveCard.Type.turnright, textureRightTurn);
+        MoveCard move1Card = new MoveCard(MoveCard.Type.move1, textureMove1);
+        MoveCard move2Card = new MoveCard(MoveCard.Type.move2, textureMove2);
+        MoveCard turnRightCard = new MoveCard(MoveCard.Type.turnright, textureRightTurn);
 
-        cards.add(card1);
-        cards.add(card2);
-        cards.add(card2);
-        cards.add(card3);
-        cards.add(card1);
+        cards.add(move1Card);
+        cards.add(move2Card);
+        cards.add(move2Card);
+        cards.add(turnRightCard);
+        cards.add(move1Card);
+
+        return cards;
+    }
+
+    private ArrayList<MoveCard> getOneForwardDeck() {
+        ArrayList<MoveCard> cards = new ArrayList<>();
+        Texture textureMove1 = new Texture("cardLayouts/Move1.png");
+        MoveCard moveOneCard = new MoveCard(MoveCard.Type.move1, textureMove1);
+
+        cards.add(moveOneCard);
+        cards.add(moveOneCard);
 
         return cards;
     }
