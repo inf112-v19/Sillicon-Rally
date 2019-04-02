@@ -16,7 +16,6 @@ public class MoveCard extends Sprite{
     private int priority;
     private Player player;
 
-
     public MoveCard(Type t, Texture texture) {
         super(texture);
         this.type = t;
@@ -33,6 +32,14 @@ public class MoveCard extends Sprite{
 
     public int getPriority() {
         return priority;
+    }
+
+    public void setPlayer(Player p) {
+        this.player = p;
+    }
+
+    public Player getPlayer() {
+        return this.player;
     }
 
     public Type getType() {

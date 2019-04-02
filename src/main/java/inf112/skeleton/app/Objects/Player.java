@@ -156,7 +156,6 @@ public class Player implements IGameObject, InputProcessor {
     public void handleCollision(Player player, TileGrid grid) { }
 
     public void setX(float x) {
-
         playerMovements.setX(x);
     }
 
@@ -436,9 +435,28 @@ public class Player implements IGameObject, InputProcessor {
             nextRound();
         }
 
+        if (keycode == Input.Keys.ENTER) {
+            moveBitch(this);
+        }
+
         checkCollision(game.grid);
 
         return false;
+    }
+
+
+    // flytter spiller når det trykkes på enter-knappen
+    private void moveBitch(Player player) {
+        MoveCard[] chosenFive = game.chosenFive;
+        int size = 0;
+        for (int i = 0; i < 5; i++) {
+            if (chosenFive[i] != null) {
+                size++;
+            }
+        }
+        for (int i = 0; i < size; i++) {
+            movePlayer(chosenFive[i].getType(), game.TILE_SIZE_IN_PX, grid);
+        }
     }
 
 
