@@ -33,6 +33,7 @@ public class Player implements IGameObject, InputProcessor {
     public String name;
 
 
+    public int flagNr=1;
 
     //Constructor used for testing purposes only
     public Player() {
