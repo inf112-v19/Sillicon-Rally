@@ -13,10 +13,12 @@ public class LaserAnimation implements IGameObject {
 
     public LaserAnimation(RoboGame game) {
         this.game = game;
-        Texture texture = new Texture("car.jpg");
+        Texture texture = new Texture("texture_laser_cutout.png");
         this.laserBeam = new Sprite(texture);
         this.laserBeam.setX(0);
         this.laserBeam.setY(0);
+
+        laserBeam.setSize(100,500);
     }
 
     public void animateLaser(Player player) {
@@ -25,13 +27,19 @@ public class LaserAnimation implements IGameObject {
 
         laserBeam.setY(playerY);
         laserBeam.setX(playerX);
+        laserBeam.setOrigin(50,50);
 
-        Tile playerTile = game.grid.getTileFromCoordinates(playerY, playerX);
-        playerTile.addGameObject(this);
+        setLaserDirection(player);
+
+        game.grid.getTile(0,0).addGameObject(this);
+    }
+
+    private void setLaserDirection(Player player) {
+        laserBeam.setRotation(player.getSprite().getRotation());
     }
 
     public void removeLaser() {
-        game.grid.getTileFromCoordinates(laserBeam.getY(),laserBeam.getX()).getGameObjects().remove(this);
+        game.grid.getTileFromCoordinates(0,0).getGameObjects().remove(this);
     }
 
     @Override

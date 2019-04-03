@@ -136,6 +136,8 @@ public class Player implements IGameObject, InputProcessor {
 
         List<Tile> path = grid.getDirectPath(playerTile, getDirection());
 
+        laserAnimation.animateLaser(this);
+
         for (Tile tile : path) {
             for (IGameObject object : tile.getGameObjects()) {
                 if (object instanceof Player && object != this) {
@@ -440,7 +442,7 @@ public class Player implements IGameObject, InputProcessor {
         }
 
         if (keycode == Input.Keys.L) {
-            laserAnimation.animateLaser(this);
+            shootLaser(grid);
         }
 
         if (keycode == Input.Keys.K) {
