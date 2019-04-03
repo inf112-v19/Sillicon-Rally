@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
+import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.Screen.GameScreen;
 import inf112.skeleton.app.Screen.MainMenuScreen;
@@ -39,6 +40,7 @@ public class RoboGame extends Game {
     private Sprite lives;
     private Texture texture;
     private RoboGame game;
+    public GameScreen gameScreen;
 
 
     public static final int ROBO_GAME_WIDTH = 1400;
@@ -180,9 +182,13 @@ public class RoboGame extends Game {
     public void drawSpritesFromGrid() {
         sb.begin();
         for (IGameObject gameObject : grid.getAllSpritesOnMap()) {
+            if (gameObject instanceof LaserAnimation)
+                System.out.println("Found laserAnimation");
+
             //Not all GameObjects have sprites
             if (gameObject.getSprite() != null)
                 gameObject.getSprite().draw(sb);
+
         }
         sb.end();
     }
@@ -210,6 +216,14 @@ public class RoboGame extends Game {
 
     public enum Direction{
         North, East, South, West
+    }
+
+    public GameScreen getGameScreen() {
+        return this.gameScreen;
+    }
+
+    public void setGameScreen(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
     }
 
 

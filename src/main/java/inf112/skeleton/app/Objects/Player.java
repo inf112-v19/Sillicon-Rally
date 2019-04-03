@@ -20,6 +20,7 @@ public class Player implements IGameObject, InputProcessor {
     Sprite sprite;
     private RoboGame game;
     private PlayerMovements playerMovements;
+    private LaserAnimation laserAnimation;
 
 
     public int playerHP;
@@ -63,6 +64,8 @@ public class Player implements IGameObject, InputProcessor {
         this.playerTokens = MAX_DAMAGE_TOKENS;
 
         this.movecardArray = new MoveCard[5];
+
+        this.laserAnimation = new LaserAnimation(game);
     }
 
 
@@ -434,6 +437,14 @@ public class Player implements IGameObject, InputProcessor {
 
         if (keycode == Input.Keys.R) {
             nextRound();
+        }
+
+        if (keycode == Input.Keys.L) {
+            laserAnimation.animateLaser(this);
+        }
+
+        if (keycode == Input.Keys.K) {
+            laserAnimation.removeLaser();
         }
 
         checkCollision(game.grid);

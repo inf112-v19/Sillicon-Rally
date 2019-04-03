@@ -29,6 +29,7 @@ public class MainMenuScreen extends RoboGame implements Screen {
 
 
 
+
     @Override
     public void show() {
         startActive = new Texture("Buttons/startActive.png");
@@ -48,7 +49,10 @@ public class MainMenuScreen extends RoboGame implements Screen {
                 RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() < centralizedY + HeightButton && RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() > centralizedY){
             game.sb.draw(startActive, centralizedX, centralizedY, WidthButton, HeightButton);
             if (Gdx.input.isTouched()){
-                game.setScreen(new GameScreen(game, player));
+                GameScreen gameScreen = new GameScreen(game, player);
+                game.setGameScreen(gameScreen);
+                game.setScreen(gameScreen);
+                //game.setScreen(new GameScreen(game, player));
             }
         }
         else{
