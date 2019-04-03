@@ -70,7 +70,9 @@ public class Player implements IGameObject, InputProcessor {
     }
 
 
-
+    public int getHP(){
+        return this.playerHP;
+    }
 
     public void checkCollision(TileGrid grid) {
         CollisionHandler collisionHandler = new CollisionHandler(grid, this);
@@ -155,6 +157,7 @@ public class Player implements IGameObject, InputProcessor {
         if (playerHP <= 0)
             handleDeath(grid);
             }
+
 
     @Override
     public void handleCollision(Player player, TileGrid grid) { }
