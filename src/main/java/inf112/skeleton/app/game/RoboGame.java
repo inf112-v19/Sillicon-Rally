@@ -2,7 +2,6 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -10,13 +9,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.Screen.GameScreen;
-import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
@@ -43,8 +40,8 @@ public class RoboGame extends Game {
     public GameScreen gameScreen;
 
 
-    public static final int ROBO_GAME_WIDTH = 1400;
-    public static final int ROBO_GAME_HEIGHT = 800;
+    public static final int ROBO_GAME_WIDTH = 1200;
+    public static final int ROBO_GAME_HEIGHT = 700;
 
     public Player getPlayer(Player player) {
         return player;
@@ -62,11 +59,8 @@ public class RoboGame extends Game {
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
 
-
-
         camera = new CustomCamera(gameMap.getTiledMap());
         camera.translate( -470, -700);
-
 
         sb = new SpriteBatch();
 
@@ -81,15 +75,13 @@ public class RoboGame extends Game {
 
         chosenFive = new MoveCard[5];
 
-
         player = constructor.player;
         grid.getTile(0,0).addGameObject(player);
         Gdx.input.setInputProcessor(player);
 
-        this.setScreen(new MainMenuScreen(this, getPlayer(player)));
+        this.setScreen(new GameScreen(this, getPlayer(player)));
 
         drawNineCardsFromDeck();
-
     }
 
     public void chooseCard(int index) {
@@ -225,6 +217,4 @@ public class RoboGame extends Game {
     public void setGameScreen(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
     }
-
-
 }

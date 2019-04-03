@@ -34,6 +34,7 @@ public class Player implements IGameObject, InputProcessor {
     public String name;
 
 
+    public int flagNr=1;
 
     //Constructor used for testing purposes only
     public Player() {
@@ -159,7 +160,6 @@ public class Player implements IGameObject, InputProcessor {
     public void handleCollision(Player player, TileGrid grid) { }
 
     public void setX(float x) {
-
         playerMovements.setX(x);
     }
 
@@ -446,10 +446,29 @@ public class Player implements IGameObject, InputProcessor {
         if (keycode == Input.Keys.K) {
             laserAnimation.removeLaser();
         }
+        if (keycode == Input.Keys.ENTER) {
+            moveBitch(this);
+        }
 
         checkCollision(game.grid);
 
         return false;
+    }
+
+
+
+    // flytter spiller når det trykkes på enter-knappen
+    private void moveBitch(Player player) {
+        MoveCard[] chosenFive = game.chosenFive;
+        int size = 0;
+        for (int i = 0; i < 5; i++) {
+            if (chosenFive[i] != null) {
+                size++;
+            }
+        }
+        for (int i = 0; i < size; i++) {
+            movePlayer(chosenFive[i].getType(), game.TILE_SIZE_IN_PX, grid);
+        }
     }
 
 
@@ -503,5 +522,6 @@ public class Player implements IGameObject, InputProcessor {
         playerMovements.update(deltaTime, grid);
     }
 }
+
 
 

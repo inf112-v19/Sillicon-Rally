@@ -3,7 +3,6 @@ package inf112.skeleton.app.card;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.grid.TileGrid;
 
 import java.util.Random;
 
@@ -15,7 +14,7 @@ public class MoveCard extends Sprite{
     Random rand = new Random();
     private Type type;
     private int priority;
-
+    private Player player;
 
     public MoveCard(Type t, Texture texture) {
         super(texture);
@@ -33,6 +32,14 @@ public class MoveCard extends Sprite{
 
     public int getPriority() {
         return priority;
+    }
+
+    public void setPlayer(Player p) {
+        this.player = p;
+    }
+
+    public Player getPlayer() {
+        return this.player;
     }
 
     public Type getType() {

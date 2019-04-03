@@ -7,7 +7,6 @@ import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.TileGrid;
-import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.logic.Round;
 import org.junit.jupiter.api.Test;
 
@@ -41,8 +40,6 @@ public class MoveCardTest {
 		TILE_SIZE_IN_PIX = variables.TILESIZE_IN_PX;
 		textureCard = new Texture("cardLayouts/Move1.png");
 	}
-
-
 
 	@Test
 	void moveCardOneForwardTest(){
