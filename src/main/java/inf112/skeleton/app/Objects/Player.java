@@ -396,22 +396,6 @@ public class Player implements IGameObject, InputProcessor {
     }
 
 
-    // flytter spiller når det trykkes på enter-knappen
-
-    /*private void executeCard(Player player) {
-        MoveCard[] chosenFive = game.chosenFive;
-        int size = 0;
-        for (int i = 0; i < chosenFive.length; i++) {
-            if (chosenFive[i] != null) {
-                size++;
-            }
-        }
-        for (int i = 0; i < size; i++) {
-            movePlayer(chosenFive[i].getType(), game.TILE_SIZE_IN_PX, grid);
-        }
-    }*/
-
-
     private void executeCard() {
         int cardsBeenPlayed = 0;
         for (int i = 0; i < movecardArray.length; i++) {

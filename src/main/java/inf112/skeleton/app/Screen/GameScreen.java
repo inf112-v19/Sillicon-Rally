@@ -14,6 +14,7 @@ import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen implements Screen {
 
@@ -34,7 +35,7 @@ public class GameScreen implements Screen {
     private ArrayList<MoveCard> cardsOnBoard;
     Player player;
 
-    private static final int upTopX = 1050;
+    private static final int upTopX = 1000;
     private static final int upTopY = 700;
     private static final int WidthButton = 240;
     private static final int HeightButton = 100;
@@ -72,21 +73,9 @@ public class GameScreen implements Screen {
         game.sb.begin();
 
 
-        if (player.playerTokens == 2){
-            game.sb.draw(TwoLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
-        }
-        else if (player.playerTokens == 1){
-            game.sb.draw(OneLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
+        drawLifeTokens(game.playerList);
 
-        }
-        else if (player.playerTokens == 0){
-            game.sb.draw(NoLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
-        }
-        else
-            game.sb.draw(ThreeLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
-
-
-           createHeart();
+        drawHearts();
 
 
 
@@ -94,12 +83,33 @@ public class GameScreen implements Screen {
         game.sb.end();
     }
 
-    public void createHeart(){
+    private void drawLifeTokens(List<Player> players) {
+        int xDrawLocation = upTopX;
+
+        for (Player player : players) {
+            if (player.playerTokens == 2) {
+                game.sb.draw(TwoLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
+            } else if (player.playerTokens == 1) {
+                game.sb.draw(OneLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
+
+            } else if (player.playerTokens == 0) {
+                game.sb.draw(NoLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
+            } else
+                game.sb.draw(ThreeLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
+        xDrawLocation = -400;
+        }
+    }
+
+    public void drawHearts(){
+        List<Player> playerList = game.playerList;
         int currentHeartPos = HeartCordX;
-        for (int i = 0; i < player.playerHP; i++) {
+
+        for (Player player : playerList) {
+            for (int i = 0; i < player.playerHP; i++) {
                 game.sb.draw(HeartSprite, currentHeartPos, HeartCordY, HeartWidth, HeartHeight);
                 currentHeartPos += 40;
-
+            }
+            currentHeartPos = -400;
         }
 
     }
