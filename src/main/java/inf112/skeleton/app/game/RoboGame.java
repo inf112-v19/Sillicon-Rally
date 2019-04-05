@@ -92,7 +92,7 @@ public class RoboGame extends Game {
 
         Gdx.input.setInputProcessor(playerList.get(currentPlayer));
 
-        this.setScreen(new GameScreen(this, getPlayer(player)));
+        this.setScreen(new GameScreen(this, playerList.get(currentPlayer)));
 
         drawNineCardsFromDeck();
     }

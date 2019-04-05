@@ -366,6 +366,8 @@ public class Player implements IGameObject, InputProcessor {
         else if (keycode == Input.Keys.ENTER) {
             executeCard();
             chosencards = 0;
+            movecardArray = null;
+            movecardArray = new MoveCard[MaxMoveCardLength];
         }
         else if (keycode == Input.Keys.SPACE){
             setPlayerInput();
@@ -378,12 +380,12 @@ public class Player implements IGameObject, InputProcessor {
 
     public void setPlayerInput() {
         if (game.currentPlayer == 0) {
-            Gdx.input.setInputProcessor(game.player);
+            Gdx.input.setInputProcessor(game.player2);
             game.currentPlayer = 1;
             return;
         }
         if (game.currentPlayer == 1){
-            Gdx.input.setInputProcessor(game.player2);
+            Gdx.input.setInputProcessor(game.player);
             game.currentPlayer = 0;
         }
         System.out.println(game.currentPlayer + ".......");
