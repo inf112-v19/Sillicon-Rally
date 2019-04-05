@@ -367,10 +367,8 @@ public class Player implements IGameObject, InputProcessor {
         else if (keycode == Input.Keys.ENTER) {
             executeCard();
             chosencards = 0;
+            movecardArray = null;
             movecardArray = new MoveCard[MaxMoveCardLength];
-        }
-        else if (keycode == Input.Keys.SPACE){
-            setPlayerInput();
         }
         else if (keycode == Input.Keys.SPACE){
             setPlayerInput();
