@@ -12,6 +12,7 @@ import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Player implements IGameObject, InputProcessor {
@@ -26,7 +27,7 @@ public class Player implements IGameObject, InputProcessor {
     public int playerTokens;
     public final int MAX_HP = 6;
     public final int MAX_DAMAGE_TOKENS = 3;
-    public int MaxMoveCardLength = 56;
+    public int MaxMoveCardLength = 5;
     public int chosencards = 0;
     private int intPlayerInput = 0;
 
@@ -268,7 +269,7 @@ public class Player implements IGameObject, InputProcessor {
             int index = 0;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
-                movecardArray[index] = game.temp;
+                movecardArray[chosencards-1] = game.temp;
             }
         }
 
@@ -276,7 +277,8 @@ public class Player implements IGameObject, InputProcessor {
             int index = 1;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
-                movecardArray[chosencards] = game.temp;
+                System.out.println(chosencards);
+                movecardArray[chosencards-1] = game.temp;
             }
 
         }
@@ -285,7 +287,7 @@ public class Player implements IGameObject, InputProcessor {
             int index = 2;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
-                movecardArray[chosencards] = game.temp;
+                movecardArray[chosencards-1] = game.temp;
             }
         }
 
@@ -293,7 +295,7 @@ public class Player implements IGameObject, InputProcessor {
             int index = 3;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
-                movecardArray[chosencards] = game.temp;
+                movecardArray[chosencards-1] = game.temp;
 
             }
         }
@@ -302,7 +304,7 @@ public class Player implements IGameObject, InputProcessor {
             int index = 4;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
-                movecardArray[chosencards] = game.temp;
+                movecardArray[chosencards-1] = game.temp;
             }
         }
 
@@ -310,7 +312,7 @@ public class Player implements IGameObject, InputProcessor {
             int index = 5;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
-                movecardArray[chosencards] = game.temp;
+                movecardArray[chosencards-1] = game.temp;
             }
         }
 
@@ -318,7 +320,7 @@ public class Player implements IGameObject, InputProcessor {
             int index = 6;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
-                movecardArray[chosencards] = game.temp;
+                movecardArray[chosencards-1] = game.temp;
             }
         }
 
@@ -326,7 +328,7 @@ public class Player implements IGameObject, InputProcessor {
             int index = 7;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
-                movecardArray[chosencards] = game.temp;
+                movecardArray[chosencards-1] = game.temp;
             }
         }
 
@@ -334,7 +336,7 @@ public class Player implements IGameObject, InputProcessor {
             int index = 8;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
-                movecardArray[chosencards] = game.temp;
+                movecardArray[chosencards-1] = game.temp;
             }
         }
 
@@ -377,6 +379,7 @@ public class Player implements IGameObject, InputProcessor {
         }
 
         checkCollision(game.grid);
+        System.out.println("Cards picked: " + Arrays.toString(movecardArray));
 
         return false;
     }
@@ -400,6 +403,7 @@ public class Player implements IGameObject, InputProcessor {
         int cardsBeenPlayed = 0;
         for (int i = 0; i < movecardArray.length; i++) {
             if (movecardArray[i] != null) {
+                MoveCard.Type type =  movecardArray[i].getType();
                 movePlayer(movecardArray[i].getType(), game.TILE_SIZE_IN_PX, grid);
                 cardsBeenPlayed++;
             }

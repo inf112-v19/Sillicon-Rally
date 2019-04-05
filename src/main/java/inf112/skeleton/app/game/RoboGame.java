@@ -107,10 +107,18 @@ public class RoboGame extends Game {
                 chosenFive[i] = alignCard(temp, i);
 
                 listOfNine[index] = null;
-                i = 6;
+                break;
             }
         }
-        player.chosencards++;
+        //Increments before being used in Player, so needs
+        //to use -1 when we use it in Player.
+        getCurrentPlayer().chosencards++;
+    }
+
+    public Player getCurrentPlayer() {
+        if (currentPlayer == 0)
+            return player;
+        return player2;
     }
 
     private boolean canChooseMoreCard() {
