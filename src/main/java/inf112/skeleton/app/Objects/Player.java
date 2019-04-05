@@ -372,6 +372,9 @@ public class Player implements IGameObject, InputProcessor {
         else if (keycode == Input.Keys.SPACE){
             setPlayerInput();
         }
+        else if (keycode == Input.Keys.SPACE){
+            setPlayerInput();
+        }
 
         checkCollision(game.grid);
 
@@ -384,6 +387,7 @@ public class Player implements IGameObject, InputProcessor {
             game.currentPlayer = 1;
             return;
         }
+        
         if (game.currentPlayer == 1){
             Gdx.input.setInputProcessor(game.player);
             game.currentPlayer = 0;
