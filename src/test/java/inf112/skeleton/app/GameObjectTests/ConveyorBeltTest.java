@@ -31,7 +31,7 @@ private LaserObject laser;
    @Test
     void conveyorMoveWestTest(){
        setup();
-       player = new Player();
+       player = new Player(grid);
        player.setPosition(2 * TILE_SIZE_IN_PIX, 2 *TILE_SIZE_IN_PIX, grid);
        belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, RoboGame.Direction.West);
        belt.handleCollision(player,grid);
@@ -41,7 +41,7 @@ private LaserObject laser;
    @Test
    void conveyorMoveTwoWestTest(){
        setup();
-       player = new Player();
+       player = new Player(grid);
        player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
        belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 2, RoboGame.Direction.West);
        belt.handleCollision(player,grid);
@@ -51,7 +51,7 @@ private LaserObject laser;
     @Test
     void conveyorMoveEastTest(){
         setup();
-        player = new Player();
+        player = new Player(grid);
         player.setPosition(2 * TILE_SIZE_IN_PIX, 2 *TILE_SIZE_IN_PIX, grid);
         belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, RoboGame.Direction.East);
         belt.handleCollision(player,grid);
@@ -62,7 +62,7 @@ private LaserObject laser;
     @Test
     void conveyorMoveNorthTest(){
         setup();
-        player = new Player();
+        player = new Player(grid);
         player.setPosition(2 * TILE_SIZE_IN_PIX, 2 *TILE_SIZE_IN_PIX, grid);
         belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, RoboGame.Direction.North);
         belt.handleCollision(player,grid);
@@ -72,7 +72,7 @@ private LaserObject laser;
     @Test
     void conveyorMoveSouthTest(){
         setup();
-        player = new Player();
+        player = new Player(grid);
         player.setPosition(2 * TILE_SIZE_IN_PIX, 2 *TILE_SIZE_IN_PIX, grid);
         belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, 1, RoboGame.Direction.South);
         belt.handleCollision(player,grid);
@@ -83,7 +83,7 @@ private LaserObject laser;
     @Test
     void conveyorDoesNotMovePlayerOutOfMap(){
        setup();
-       player = new Player();
+       player = new Player(grid);
        player.setPosition(0,0,grid);
        belt = new ConveyorBeltObject(0,0, grid, 1, RoboGame.Direction.West);
        belt.handleCollision(player,grid);
@@ -93,7 +93,7 @@ private LaserObject laser;
     @Test
     void conveyorDoesNotRotatePlayer(){
        setup();
-       player = new Player();
+       player = new Player(grid);
        player.setPosition(0,0,grid);
        belt = new ConveyorBeltObject(0,0, grid, 1, RoboGame.Direction.North);
        belt.handleCollision(player, grid);
@@ -103,7 +103,7 @@ private LaserObject laser;
     @Test
     void playerTakesDamageWhenMovedOverLaser(){
        setup();
-        player = new Player();
+        player = new Player(grid);
         belt = new ConveyorBeltObject(2 * TILE_SIZE_IN_PIX,2 * TILE_SIZE_IN_PIX, grid, 2, RoboGame.Direction.North);
         laser = new LaserObject(3 * TILE_SIZE_IN_PIX,2 * TILE_SIZE_IN_PIX,grid);
         player.setPosition(2 *TILE_SIZE_IN_PIX,2 * TILE_SIZE_IN_PIX,grid);

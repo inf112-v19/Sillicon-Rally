@@ -8,11 +8,9 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class LaserAnimation implements IGameObject {
-    RoboGame game;
     Sprite laserBeam;
 
-    public LaserAnimation(RoboGame game) {
-        this.game = game;
+    public LaserAnimation() {
         Texture texture = new Texture("texture_laser_cutout.png");
         this.laserBeam = new Sprite(texture);
         this.laserBeam.setX(0);
@@ -31,15 +29,16 @@ public class LaserAnimation implements IGameObject {
 
         setLaserDirection(player);
 
-        game.grid.getTile(0,0).addGameObject(this);
+        player.grid.getTile(0,0).addGameObject(this);
+
     }
 
     private void setLaserDirection(Player player) {
         laserBeam.setRotation(player.getSprite().getRotation());
     }
 
-    public void removeLaser() {
-        game.grid.getTileFromCoordinates(0,0).getGameObjects().remove(this);
+    public void removeLaser(Player player) {
+        player.grid.getTileFromCoordinates(0,0).getGameObjects().remove(this);
     }
 
     @Override

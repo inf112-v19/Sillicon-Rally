@@ -44,7 +44,7 @@ public class MoveCardTest {
 	@Test
 	void moveCardOneForwardTest(){
 		setup();
-		this.player = new Player();
+		this.player = new Player(grid);
 		player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
 		player.setDirection(RoboGame.Direction.North);
 
@@ -57,7 +57,7 @@ public class MoveCardTest {
 	@Test
 	void moveCardOneBackwardTest(){
 		setup();
-		this.player = new Player();
+		this.player = new Player(grid);
 		player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
 		player.setDirection(RoboGame.Direction.North);
 
@@ -72,7 +72,7 @@ public class MoveCardTest {
 	@Test
 	void moveCardTwoForwardTest(){
 		setup();
-		this.player = new Player();
+		this.player = new Player(grid);
 		player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
 		player.setDirection(RoboGame.Direction.North);
 
@@ -85,7 +85,7 @@ public class MoveCardTest {
 	@Test
 	void moveCardThreeForwardTest(){
 		setup();
-		this.player = new Player();
+		this.player = new Player(grid);
 		player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
 		player.setDirection(RoboGame.Direction.North);
 
@@ -101,7 +101,7 @@ public class MoveCardTest {
 	@Test
 	void turnCardClockwiseTest(){
 		setup();
-		this.player = new Player();
+		this.player = new Player(grid);
 		player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
 		player.setDirection(RoboGame.Direction.North);
 
@@ -125,7 +125,7 @@ public class MoveCardTest {
 	@Test
 	void uturnCardTest(){
 		setup();
-		this.player = new Player();
+		this.player = new Player(grid);
 		player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
 		card = new MoveCard(MoveCard.Type.uturn, textureCard);
 		player.setDirection(RoboGame.Direction.North);

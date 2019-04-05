@@ -22,7 +22,7 @@ public class LaserTest {
         player = setupVariable.player;
         TILE_SIZE_IN_PIX = setupVariable.gameMap.getTileSize();
 
-        player = new Player();
+        player = new Player(grid);
         player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
         laserObject = new LaserObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
     }

@@ -34,7 +34,8 @@ public class FlagTest {
        player.setPosition(flag.yLocation, flag.xLocation, grid);
         Tile flagtile = grid.getTileFromCoordinates(flag.yLocation, flag.xLocation);
        flag.handleCollision(player, grid);
-        assertEquals(false, flagtile.getGameObjects().contains(flag));
+
+        assertEquals(true, flagtile.getGameObjects().contains(flag));
 
 
         variables.stop();

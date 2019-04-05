@@ -45,7 +45,7 @@ public class SetupVariables {
         this.gameMap = new GameMap("map.v.01.tmx");
         this.grid = makeGrid(gameMap);
         this.teleport = new TeleportObstacle(gameMap, grid);
-        this.player = new Player();
+        this.player = new Player(grid);
         this.TILESIZE_IN_PX = gameMap.getTileSize();
         this.flag = new FlagObject(2,4,grid);
         this.belt = new ConveyorBeltObject(4, 4, grid, 1, RoboGame.Direction.West);
@@ -77,9 +77,9 @@ public class SetupVariables {
     public ArrayList<Player> getPlayers(){
         ArrayList<Player> playerList = new ArrayList<>();
 
-        Player player1 = new Player();
+        Player player1 = new Player(grid);
         player1.setName("Vegard");
-        Player player2 = new Player();
+        Player player2 = new Player(grid);
         player2.setName("Martin");
 
 

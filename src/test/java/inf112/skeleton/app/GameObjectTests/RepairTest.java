@@ -21,7 +21,7 @@ public class RepairTest {
         grid = setupVariable.grid;
         player = setupVariable.player;
         TILE_SIZE_IN_PIX = setupVariable.gameMap.getTileSize();
-        player = new Player();
+        player = new Player(grid);
         player.setPosition(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
         repairObject = new RepairObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid);
     }

@@ -43,6 +43,7 @@ public class FlagObject implements IGameObject {
     public void handleCollision(Player player, TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
+
         if (flagTile.equals(playerTile) && (player.flagNr==flag)) {
             player.setBackupLocation(flagTile);
             player.flagNr++;

@@ -21,23 +21,19 @@ public class Player implements IGameObject, InputProcessor {
     private RoboGame game;
     private PlayerMovements playerMovements;
     private LaserAnimation laserAnimation;
-
-
     public int playerHP;
     public int playerTokens;
     public final int MAX_HP = 6;
     public final int MAX_DAMAGE_TOKENS = 3;
 
-
     public MoveCard[] movecardArray;
     boolean[] booList;
     public String name;
 
-
     public int flagNr=1;
 
     //Constructor used for testing purposes only
-    public Player() {
+    public Player(TileGrid grid) {
         RoboGame.Direction currentDirection = RoboGame.Direction.West;
         backupLocation = null;
         this.cardsToBePlayed = new MoveCard[5];
@@ -47,6 +43,10 @@ public class Player implements IGameObject, InputProcessor {
 
         this.movecardArray = new MoveCard[5];
         this.name = "";
+        this.laserAnimation = new LaserAnimation();
+
+        this.grid = grid;
+        this.sprite = new Sprite(new Texture("robot1.png"));
     }
 
 
@@ -66,7 +66,7 @@ public class Player implements IGameObject, InputProcessor {
 
         this.movecardArray = new MoveCard[5];
 
-        this.laserAnimation = new LaserAnimation(game);
+        this.laserAnimation = new LaserAnimation();
     }
 
 
@@ -446,7 +446,7 @@ public class Player implements IGameObject, InputProcessor {
         }
 
         if (keycode == Input.Keys.K) {
-            laserAnimation.removeLaser();
+            laserAnimation.removeLaser(this);
         }
         if (keycode == Input.Keys.ENTER) {
             moveBitch(this);
