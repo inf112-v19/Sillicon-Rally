@@ -116,6 +116,7 @@ public class RoboGame extends Game {
     private boolean canChooseMoreCard() {
         if (player.chosencards == player.MaxMoveCardLength)
             return false;
+        
         return true;
     }
 

@@ -363,10 +363,10 @@ public class Player implements IGameObject, InputProcessor {
         if (keycode == Input.Keys.K) {
             laserAnimation.removeLaser(this);
         }
+
         else if (keycode == Input.Keys.ENTER) {
             executeCard();
             chosencards = 0;
-            movecardArray = null;
             movecardArray = new MoveCard[MaxMoveCardLength];
         }
         else if (keycode == Input.Keys.SPACE){
