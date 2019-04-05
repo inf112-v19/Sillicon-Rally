@@ -17,6 +17,7 @@ public class GameObjectFactory {
     public GameMap map;
     public TileGrid grid;
     public Player player;
+    public Player player2;
     public ConveyorBeltObject conveyorBeltObject;
     public List<IGameObject> flags;
     public List<IGameObject> lasers;
@@ -46,6 +47,7 @@ public class GameObjectFactory {
     private void createPlayer(RoboGame game) {
         RoboGame.Direction startDirection = RoboGame.Direction.North;
         player = new Player(new Texture("robot1.png"), startDirection,game);
+        player2 = new Player(new Texture("robot2.png"), startDirection, game);
     }
 
     private void createFlags() {

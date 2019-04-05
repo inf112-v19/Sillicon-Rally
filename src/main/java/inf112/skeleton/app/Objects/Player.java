@@ -1,5 +1,6 @@
 package inf112.skeleton.app.Objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,8 +26,9 @@ public class Player implements IGameObject, InputProcessor {
     public int playerTokens;
     public final int MAX_HP = 6;
     public final int MAX_DAMAGE_TOKENS = 3;
-    public int MaxMoveCardLength = 6;
+    public int MaxMoveCardLength = 56;
     public int chosencards = 0;
+    private int intPlayerInput = 0;
 
     public MoveCard[] movecardArray;
     boolean[] booList;
@@ -365,12 +367,27 @@ public class Player implements IGameObject, InputProcessor {
             executeCard();
             chosencards = 0;
         }
+        else if (keycode == Input.Keys.SPACE){
+            setPlayerInput();
+        }
 
         checkCollision(game.grid);
 
         return false;
     }
 
+    public void setPlayerInput() {
+        if (game.currentPlayer == 0) {
+            Gdx.input.setInputProcessor(game.player);
+            game.currentPlayer = 1;
+            return;
+        }
+        if (game.currentPlayer == 1){
+            Gdx.input.setInputProcessor(game.player2);
+            game.currentPlayer = 0;
+        }
+        System.out.println(game.currentPlayer + ".......");
+    }
 
 
     // flytter spiller når det trykkes på enter-knappen

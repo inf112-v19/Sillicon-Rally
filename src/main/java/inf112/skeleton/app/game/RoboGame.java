@@ -20,6 +20,8 @@ import inf112.skeleton.app.collision.objects.GameObjectFactory;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
+import java.util.ArrayList;
+
 public class RoboGame extends Game {
     public static OrthographicCamera camera;
     public int TILE_SIZE_IN_PX;
@@ -27,6 +29,7 @@ public class RoboGame extends Game {
     public static TiledMapRenderer tiledMapRenderer;
     public SpriteBatch sb;
     public Player player;
+    public Player player2;
     public TileGrid grid;
     public GameMap gameMap;
     private StackOfCards deck;
@@ -38,6 +41,9 @@ public class RoboGame extends Game {
     private Texture texture;
     private RoboGame game;
     public GameScreen gameScreen;
+    public ArrayList<Player> playerList;
+
+    public int currentPlayer;
 
 
     public static final int ROBO_GAME_WIDTH = 1200;
@@ -75,9 +81,16 @@ public class RoboGame extends Game {
 
         chosenFive = new MoveCard[5];
 
+        playerList = new ArrayList<>();
         player = constructor.player;
         grid.getTile(0,0).addGameObject(player);
-        Gdx.input.setInputProcessor(player);
+        playerList.add(player);
+
+        player2 = constructor.player2;
+        grid.getTile(0,0).addGameObject(player2);
+        playerList.add(player2);
+
+        Gdx.input.setInputProcessor(playerList.get(currentPlayer));
 
         this.setScreen(new GameScreen(this, getPlayer(player)));
 
@@ -85,6 +98,9 @@ public class RoboGame extends Game {
     }
 
     public void chooseCard(int index) {
+        if(!canChooseMoreCard())
+            return;
+
         temp = listOfNine[index];
         for (int i = 0; i < chosenFive.length; i++) {
             if (chosenFive[i] == null) {
@@ -94,8 +110,13 @@ public class RoboGame extends Game {
                 i = 6;
             }
         }
-        if (player.chosencards <= player.MaxMoveCardLength)
-            player.chosencards++;
+        player.chosencards++;
+    }
+
+    private boolean canChooseMoreCard() {
+        if (player.chosencards == player.MaxMoveCardLength)
+            return false;
+        return true;
     }
 
     public MoveCard getCard(int index){
