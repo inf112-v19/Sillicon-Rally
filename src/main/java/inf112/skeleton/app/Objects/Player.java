@@ -358,10 +358,12 @@ public class Player implements IGameObject, InputProcessor {
         
         if (keycode == Input.Keys.L) {
             shootLaser(grid);
+            return true;
         }
 
         if (keycode == Input.Keys.K) {
             laserAnimation.removeLaser(this);
+            return true;
         }
 
         else if (keycode == Input.Keys.ENTER) {
