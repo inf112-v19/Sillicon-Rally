@@ -46,8 +46,8 @@ public class GameObjectFactory {
 
     private void createPlayer(RoboGame game) {
         RoboGame.Direction startDirection = RoboGame.Direction.North;
-        player = new Player(new Texture("robot1.png"), startDirection,game);
-        player2 = new Player(new Texture("robot2.png"), startDirection, game);
+        player = new Player(new Texture("robot1.png"), startDirection,game, "Player 1");
+        player2 = new Player(new Texture("robot2.png"), startDirection, game, "Player 2");
     }
 
     private void createFlags() {

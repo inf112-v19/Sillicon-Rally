@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
+import inf112.skeleton.app.game.DrawCards;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
@@ -34,6 +35,7 @@ public class GameScreen implements Screen {
     public StackOfCards deck;
     private ArrayList<MoveCard> cardsOnBoard;
     Player player;
+    private DrawCards drawCards;
 
     private static final int upTopX = 1000;
     private static final int upTopY = 700;
@@ -47,6 +49,7 @@ public class GameScreen implements Screen {
     public GameScreen (RoboGame game, Player player){
         this.game = game;
         this.player = player;
+        this.drawCards = new DrawCards(game);
     }
 
 
@@ -72,15 +75,44 @@ public class GameScreen implements Screen {
 
         game.sb.begin();
 
-
         drawLifeTokens(game.playerList);
-
         drawHearts();
 
-
-
-
         game.sb.end();
+
+        drawCards.drawCards();
+    }
+
+    private void pickCards() {
+        List<Player> listOfPlayers = game.playerList;
+
+        int cardPicks = sumCardPicks(listOfPlayers);
+
+        for (Player player : game.playerList) {
+            Gdx.input.setInputProcessor(player);
+
+
+            if (player.chosenAllCards()) {
+                if (cardPicks % 5 == 0) {
+                    game.drawNineCardsFromDeck();
+                    cardPicks = 1;
+                }
+                continue;
+            }
+        }
+    }
+
+    private int sumCardPicks(List<Player> listOfPlayers) {
+        int sum = 0;
+        for (Player player : listOfPlayers) {
+            sum += player.chosencards;
+        }
+        return sum;
+    }
+
+    public void nextRound() {
+        game.putCardsBackInDeck();
+        game.drawNineCardsFromDeck();
     }
 
     private void drawLifeTokens(List<Player> players) {

@@ -97,8 +97,8 @@ public class RoboGame extends Game {
         drawNineCardsFromDeck();
     }
 
-    public void chooseCard(int index) {
-        if(!canChooseMoreCard())
+    public void chooseCard(int index, Player currentPlayer) {
+        if(!canChooseMoreCard(currentPlayer))
             return;
 
         temp = listOfNine[index];
@@ -110,19 +110,13 @@ public class RoboGame extends Game {
                 break;
             }
         }
-        //Increments before being used in Player, so needs
-        //to use -1 when we use it in Player.
-        getCurrentPlayer().chosencards++;
+
+        currentPlayer.chosencards++;
     }
 
-    public Player getCurrentPlayer() {
-        if (currentPlayer == 0)
-            return player;
-        return player2;
-    }
 
-    private boolean canChooseMoreCard() {
-        if (player.chosencards == player.MaxMoveCardLength)
+    private boolean canChooseMoreCard(Player currentPlayer) {
+        if (currentPlayer.chosencards == currentPlayer.MaxMoveCardLength)
             return false;
 
         return true;
