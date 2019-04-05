@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class GameScreen implements Screen {
 
+    Texture HeartSprite;
     Texture ThreeLifeSprite;
     Texture TwoLifeSprite;
     Texture OneLifeSprite;
@@ -37,7 +38,10 @@ public class GameScreen implements Screen {
     private static final int upTopY = 700;
     private static final int WidthButton = 240;
     private static final int HeightButton = 100;
-
+    private static final int HeartCordY = 600;
+    private int HeartCordX = 1000;
+    private static final int HeartHeight = 60;
+    private static final int HeartWidth = 45;
 
     public GameScreen (RoboGame game, Player player){
         this.game = game;
@@ -81,9 +85,24 @@ public class GameScreen implements Screen {
         else
             game.sb.draw(ThreeLifeSprite, upTopX, upTopY, WidthButton, HeightButton);
 
+
+           createHeart();
+
+
+
+
         game.sb.end();
     }
 
+    public void createHeart(){
+        int currentHeartPos = HeartCordX;
+        for (int i = 0; i < player.playerHP; i++) {
+                game.sb.draw(HeartSprite, currentHeartPos, HeartCordY, HeartWidth, HeartHeight);
+                currentHeartPos += 40;
+
+        }
+
+    }
 
     @Override
     public void show() {
@@ -92,6 +111,7 @@ public class GameScreen implements Screen {
         TwoLifeSprite = new Texture("LifeSprites/exmpl2Life.png");
         OneLifeSprite = new Texture("LifeSprites/exmpl1Life.png");
         NoLifeSprite = new Texture("LifeSprites/exmpl0Life.png");
+        HeartSprite = new Texture("LifeSprites/heart.png");
     }
 
 
