@@ -30,7 +30,7 @@ public class RoboGame extends Game {
     public TileGrid grid;
     public GameMap gameMap;
     private StackOfCards deck;
-    private MoveCard temp;
+    public MoveCard temp;
     public MoveCard[] listOfNine;
     public MoveCard[] chosenFive;
     private Sprite backboard;
@@ -94,6 +94,12 @@ public class RoboGame extends Game {
                 i = 6;
             }
         }
+        if (player.chosencards <= player.MaxMoveCardLength)
+            player.chosencards++;
+    }
+
+    public MoveCard getCard(int index){
+        return listOfNine[index];
     }
 
     private MoveCard alignCard(MoveCard temp, int index) {

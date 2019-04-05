@@ -14,7 +14,7 @@ import inf112.skeleton.app.grid.TileGrid;
 import java.util.List;
 
 public class Player implements IGameObject, InputProcessor {
-    public MoveCard[] cardsToBePlayed;
+    public MoveCard[] testCardsToBePlayed;
     TileGrid grid;
     Tile backupLocation;
     Sprite sprite;
@@ -25,6 +25,8 @@ public class Player implements IGameObject, InputProcessor {
     public int playerTokens;
     public final int MAX_HP = 6;
     public final int MAX_DAMAGE_TOKENS = 3;
+    public int MaxMoveCardLength = 6;
+    public int chosencards = 0;
 
     public MoveCard[] movecardArray;
     boolean[] booList;
@@ -36,7 +38,7 @@ public class Player implements IGameObject, InputProcessor {
     public Player(TileGrid grid) {
         RoboGame.Direction currentDirection = RoboGame.Direction.West;
         backupLocation = null;
-        this.cardsToBePlayed = new MoveCard[5];
+        this.testCardsToBePlayed = new MoveCard[5];
         playerMovements = new PlayerMovements(this, 0, 0, currentDirection);
         this.playerHP = MAX_HP;
         this.playerTokens = MAX_DAMAGE_TOKENS;
@@ -48,7 +50,6 @@ public class Player implements IGameObject, InputProcessor {
         this.grid = grid;
         this.sprite = new Sprite(new Texture("robot1.png"));
     }
-
 
     public void setName(String name) {
         this.name = name;
@@ -64,7 +65,7 @@ public class Player implements IGameObject, InputProcessor {
         this.grid = game.grid;
         this.playerTokens = MAX_DAMAGE_TOKENS;
 
-        this.movecardArray = new MoveCard[5];
+        this.movecardArray = new MoveCard[MaxMoveCardLength];
 
         this.laserAnimation = new LaserAnimation();
     }
@@ -194,18 +195,18 @@ public class Player implements IGameObject, InputProcessor {
 
 
     public void emptyList() {
-        for (int i = 0; i < cardsToBePlayed.length; i++) {
-            cardsToBePlayed[i] = null;
+        for (int i = 0; i < testCardsToBePlayed.length; i++) {
+            testCardsToBePlayed[i] = null;
         }
     }
 
     public void addToList(int index, MoveCard card) {
-        cardsToBePlayed[index] = card;
+        testCardsToBePlayed[index] = card;
     }
 
     public boolean listIsFull() {
-        for (int i = 0; i < cardsToBePlayed.length; i++) {
-            if (cardsToBePlayed[i] == null) {
+        for (int i = 0; i < testCardsToBePlayed.length; i++) {
+            if (testCardsToBePlayed[i] == null) {
                 return false;
             }
         }
@@ -247,8 +248,6 @@ public class Player implements IGameObject, InputProcessor {
     }
 
 
-    /*
->>>>>>> testAnimation
     @Override
     public boolean keyDown(int keycode) {
         int moveDistance = game.TILE_SIZE_IN_PX;
@@ -258,192 +257,103 @@ public class Player implements IGameObject, InputProcessor {
             checkForDamageTaken(grid);
         }
 
-        if (keycode == Input.Keys.LEFT) {
+        else if (keycode == Input.Keys.LEFT) {
             playerMovements.rotateCounterClockwise(game.grid);
             checkForDamageTaken(grid);
         }
 
-        if (keycode == Input.Keys.valueOf("1")) {
+        else if (keycode == Input.Keys.valueOf("1")) {
             int index = 0;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
+                movecardArray[index] = game.temp;
             }
         }
 
-        if (keycode == Input.Keys.valueOf("2")) {
+        else if (keycode == Input.Keys.valueOf("2")) {
             int index = 1;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
+                movecardArray[chosencards] = game.temp;
             }
+
         }
 
-        if (keycode == Input.Keys.valueOf("3")) {
+        else if (keycode == Input.Keys.valueOf("3")) {
             int index = 2;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
+                movecardArray[chosencards] = game.temp;
             }
         }
 
-        if (keycode == Input.Keys.valueOf("4")) {
+        else if (keycode == Input.Keys.valueOf("4")) {
             int index = 3;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
+                movecardArray[chosencards] = game.temp;
+
             }
         }
 
-        if (keycode == Input.Keys.valueOf("5")) {
+        else if (keycode == Input.Keys.valueOf("5")) {
             int index = 4;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
+                movecardArray[chosencards] = game.temp;
             }
         }
 
-        if (keycode == Input.Keys.valueOf("6")) {
+        else if (keycode == Input.Keys.valueOf("6")) {
             int index = 5;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
+                movecardArray[chosencards] = game.temp;
             }
         }
 
-        if (keycode == Input.Keys.valueOf("7")) {
+        else if (keycode == Input.Keys.valueOf("7")) {
             int index = 6;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
+                movecardArray[chosencards] = game.temp;
             }
         }
 
-        if (keycode == Input.Keys.valueOf("8")) {
+        else if (keycode == Input.Keys.valueOf("8")) {
             int index = 7;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
+                movecardArray[chosencards] = game.temp;
             }
         }
 
-        if (keycode == Input.Keys.valueOf("9")) {
+        else if (keycode == Input.Keys.valueOf("9")) {
             int index = 8;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index);
+                movecardArray[chosencards] = game.temp;
             }
         }
 
-        if (keycode == Input.Keys.U) {
+        else if (keycode == Input.Keys.U) {
             playerMovements.uTurn(game.grid);
         }
-        if (keycode == Input.Keys.UP) {
+        else if (keycode == Input.Keys.UP) {
             playerMovements.moveStraight(1, moveDistance, game.grid);
         }
-        if (keycode == Input.Keys.W) {
+        else if (keycode == Input.Keys.W) {
             playerMovements.moveStraight(2, moveDistance, game.grid);
         }
 
-        if (keycode == Input.Keys.DOWN) {
+        else if (keycode == Input.Keys.DOWN) {
             playerMovements.moveStraight(1,moveDistance * (-1),game.grid);
         }
 
-        if (keycode == Input.Keys.R) {
+        else if (keycode == Input.Keys.R) {
             nextRound();
         }
-
-        checkCollision(game.grid);
-
-        return false;
-    }*/
-
-    @Override
-    public boolean keyDown(int keycode) {
-        int moveDistance = game.TILE_SIZE_IN_PX;
-
-        if (keycode == Input.Keys.RIGHT) {
-            playerMovements.rotateClockwise(game.grid);
-            checkForDamageTaken(grid);
-        }
-
-        if (keycode == Input.Keys.LEFT) {
-            playerMovements.rotateCounterClockwise(game.grid);
-            checkForDamageTaken(grid);
-        }
-
-        if (keycode == Input.Keys.valueOf("1")) {
-            int index = 0;
-            if (game.listOfNine[index] != null) {
-                game.chooseCard(index);
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("2")) {
-            int index = 1;
-            if (game.listOfNine[index] != null) {
-                game.chooseCard(index);
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("3")) {
-            int index = 2;
-            if (game.listOfNine[index] != null) {
-                game.chooseCard(index);
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("4")) {
-            int index = 3;
-            if (game.listOfNine[index] != null) {
-                game.chooseCard(index);
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("5")) {
-            int index = 4;
-            if (game.listOfNine[index] != null) {
-                game.chooseCard(index);
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("6")) {
-            int index = 5;
-            if (game.listOfNine[index] != null) {
-                game.chooseCard(index);
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("7")) {
-            int index = 6;
-            if (game.listOfNine[index] != null) {
-                game.chooseCard(index);
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("8")) {
-            int index = 7;
-            if (game.listOfNine[index] != null) {
-                game.chooseCard(index);
-            }
-        }
-
-        if (keycode == Input.Keys.valueOf("9")) {
-            int index = 8;
-            if (game.listOfNine[index] != null) {
-                game.chooseCard(index);
-            }
-        }
-
-        if (keycode == Input.Keys.U) {
-            playerMovements.uTurn(game.grid);
-        }
-        if (keycode == Input.Keys.UP) {
-            playerMovements.moveStraight(1, moveDistance, game.grid);
-        }
-        if (keycode == Input.Keys.W) {
-            playerMovements.moveStraight(2, moveDistance, game.grid);
-        }
-
-        if (keycode == Input.Keys.DOWN) {
-            playerMovements.moveStraight(1,moveDistance * (-1),game.grid);
-        }
-
-        if (keycode == Input.Keys.R) {
-            nextRound();
-        }
-
+        
         if (keycode == Input.Keys.L) {
             shootLaser(grid);
         }
@@ -451,8 +361,9 @@ public class Player implements IGameObject, InputProcessor {
         if (keycode == Input.Keys.K) {
             laserAnimation.removeLaser(this);
         }
-        if (keycode == Input.Keys.ENTER) {
-            moveBitch(this);
+        else if (keycode == Input.Keys.ENTER) {
+            executeCard();
+            chosencards = 0;
         }
 
         checkCollision(game.grid);
@@ -463,10 +374,11 @@ public class Player implements IGameObject, InputProcessor {
 
 
     // flytter spiller når det trykkes på enter-knappen
-    private void moveBitch(Player player) {
+
+    /*private void executeCard(Player player) {
         MoveCard[] chosenFive = game.chosenFive;
         int size = 0;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < chosenFive.length; i++) {
             if (chosenFive[i] != null) {
                 size++;
             }
@@ -474,6 +386,19 @@ public class Player implements IGameObject, InputProcessor {
         for (int i = 0; i < size; i++) {
             movePlayer(chosenFive[i].getType(), game.TILE_SIZE_IN_PX, grid);
         }
+    }*/
+
+
+    private void executeCard() {
+        int cardsBeenPlayed = 0;
+        for (int i = 0; i < movecardArray.length; i++) {
+            if (movecardArray[i] != null) {
+                movePlayer(movecardArray[i].getType(), game.TILE_SIZE_IN_PX, grid);
+                cardsBeenPlayed++;
+            }
+        }
+            nextRound();
+
     }
 
 
@@ -525,6 +450,21 @@ public class Player implements IGameObject, InputProcessor {
 
     public void update(float deltaTime, TileGrid grid) {
         playerMovements.update(deltaTime, grid);
+    }
+
+    /*
+        For Testing only
+     */
+    public Player() {
+        RoboGame.Direction currentDirection = RoboGame.Direction.West;
+        backupLocation = null;
+        this.testCardsToBePlayed = new MoveCard[5];
+        playerMovements = new PlayerMovements(this, 0, 0, currentDirection);
+        this.playerHP = MAX_HP;
+        this.playerTokens = MAX_DAMAGE_TOKENS;
+
+        this.movecardArray = new MoveCard[5];
+        this.name = "";
     }
 }
 
