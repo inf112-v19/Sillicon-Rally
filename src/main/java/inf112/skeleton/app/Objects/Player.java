@@ -13,6 +13,7 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Player implements IGameObject, InputProcessor {
@@ -30,6 +31,7 @@ public class Player implements IGameObject, InputProcessor {
     public int MaxMoveCardLength = 5;
     public int chosencards = 0;
     private int intPlayerInput = 0;
+    public LinkedList<MoveCard> moveCardList;
 
     public MoveCard[] movecardArray;
     boolean[] booList;
@@ -52,6 +54,7 @@ public class Player implements IGameObject, InputProcessor {
 
         this.grid = grid;
         this.sprite = new Sprite(new Texture("robot1.png"));
+        this.moveCardList = new LinkedList<>();
     }
 
     public void setName(String name) {
@@ -71,6 +74,7 @@ public class Player implements IGameObject, InputProcessor {
         this.movecardArray = new MoveCard[MaxMoveCardLength];
         this.laserAnimation = new LaserAnimation();
         this.name = name;
+        this.moveCardList = new LinkedList<>();
     }
 
 
