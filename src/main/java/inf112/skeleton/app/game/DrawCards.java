@@ -1,7 +1,7 @@
 package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.Gdx;
-import com.sun.media.jfxmedia.events.PlayerStateListener;
+
 import inf112.skeleton.app.Objects.Player;
 
 import java.util.List;
