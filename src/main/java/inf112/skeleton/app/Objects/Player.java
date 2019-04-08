@@ -272,17 +272,14 @@ public class Player implements IGameObject, InputProcessor {
         else if (keycode == Input.Keys.valueOf("1")) {
             int index = 0;
             if (game.listOfNine[index] != null) {
-                game.chooseCard(index, this);
-                movecardArray[chosencards-1] = game.temp;
+                pickCard(index);
             }
         }
 
         else if (keycode == Input.Keys.valueOf("2")) {
             int index = 1;
             if (game.listOfNine[index] != null) {
-                game.chooseCard(index, this);
-                System.out.println(chosencards);
-                movecardArray[chosencards-1] = game.temp;
+                pickCard(index);
             }
 
         }
@@ -290,16 +287,14 @@ public class Player implements IGameObject, InputProcessor {
         else if (keycode == Input.Keys.valueOf("3")) {
             int index = 2;
             if (game.listOfNine[index] != null) {
-                game.chooseCard(index, this);
-                movecardArray[chosencards-1] = game.temp;
+                pickCard(index);
             }
         }
 
         else if (keycode == Input.Keys.valueOf("4")) {
             int index = 3;
             if (game.listOfNine[index] != null) {
-                game.chooseCard(index, this);
-                movecardArray[chosencards-1] = game.temp;
+                pickCard(index);
 
             }
         }
@@ -307,24 +302,21 @@ public class Player implements IGameObject, InputProcessor {
         else if (keycode == Input.Keys.valueOf("5")) {
             int index = 4;
             if (game.listOfNine[index] != null) {
-                game.chooseCard(index, this);
-                movecardArray[chosencards-1] = game.temp;
+                pickCard(index);
             }
         }
 
         else if (keycode == Input.Keys.valueOf("6")) {
             int index = 5;
             if (game.listOfNine[index] != null) {
-                game.chooseCard(index, this);
-                movecardArray[chosencards-1] = game.temp;
+                pickCard(index);
             }
         }
 
         else if (keycode == Input.Keys.valueOf("7")) {
             int index = 6;
             if (game.listOfNine[index] != null) {
-                game.chooseCard(index, this);
-                movecardArray[chosencards-1] = game.temp;
+                pickCard(index);
             }
         }
 
@@ -332,7 +324,7 @@ public class Player implements IGameObject, InputProcessor {
             int index = 7;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index, this);
-                movecardArray[chosencards-1] = game.temp;
+                movecardArray[chosencards-1] = game.cardPickedByPlayer;
             }
         }
 
@@ -340,7 +332,8 @@ public class Player implements IGameObject, InputProcessor {
             int index = 8;
             if (game.listOfNine[index] != null) {
                 game.chooseCard(index, this);
-                movecardArray[chosencards-1] = game.temp;
+                movecardArray[chosencards-1] = game.cardPickedByPlayer;
+                pickCard(index);
             }
         }
 
@@ -388,6 +381,21 @@ public class Player implements IGameObject, InputProcessor {
         return false;
     }
 
+    private void pickCard(int index) {
+        MoveCard cardPicked = game.chooseCard(index, this);
+
+        if (cardPicked != null)
+            moveCardList.add(cardPicked);
+        System.out.println(moveCardList);
+
+
+        //movecardArray[chosencards-1] = cardPicked;
+    }
+
+    public LinkedList<MoveCard> getPlayersDeck() {
+        return this.moveCardList;
+    }
+
     public void setPlayerInput() {
         if (game.currentPlayer == 0) {
             Gdx.input.setInputProcessor(game.player2);
@@ -406,21 +414,28 @@ public class Player implements IGameObject, InputProcessor {
     public void executeCard() {
         int cardsBeenPlayed = 0;
         for (int i = 0; i < movecardArray.length; i++) {
+            /*
             if (movecardArray[i] != null) {
                 MoveCard.Type type =  movecardArray[i].getType();
                 movePlayer(movecardArray[i].getType(), game.TILE_SIZE_IN_PX, grid);
                 cardsBeenPlayed++;
             }
+            */
+            if (!moveCardList.isEmpty()) {
+                MoveCard card = moveCardList.poll();
+                movePlayer(card.getType(), game.getTileSize(), grid);
+            }
         }
         chosencards = 0;
+        moveCardList.clear();
     }
 
     public boolean chosenAllCards() {
-        for (int i = 0; i < movecardArray.length; i++) {
+       /* for (int i = 0; i < movecardArray.length; i++) {
             if (movecardArray[i] == null)
                 return false;
-        }
-        return true;
+        }*/
+        return moveCardList.size() == 5;
     }
 
     /*
@@ -493,6 +508,10 @@ public class Player implements IGameObject, InputProcessor {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    public void increaseDeckCount() {
+        this.chosencards++;
     }
 }
 

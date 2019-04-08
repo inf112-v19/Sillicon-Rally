@@ -21,6 +21,7 @@ import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RoboGame extends Game {
     public static OrthographicCamera camera;
@@ -33,7 +34,7 @@ public class RoboGame extends Game {
     public TileGrid grid;
     public GameMap gameMap;
     private StackOfCards deck;
-    public MoveCard temp;
+    public MoveCard cardPickedByPlayer;
     public MoveCard[] listOfNine;
     public MoveCard[] chosenFive;
     private Sprite backboard;
@@ -97,21 +98,23 @@ public class RoboGame extends Game {
         drawNineCardsFromDeck();
     }
 
-    public void chooseCard(int index, Player currentPlayer) {
+    public MoveCard chooseCard(int index, Player currentPlayer) {
         if(!canChooseMoreCard(currentPlayer))
-            return;
+            return null;
 
-        temp = listOfNine[index];
+        cardPickedByPlayer = listOfNine[index];
         for (int i = 0; i < chosenFive.length; i++) {
             if (chosenFive[i] == null) {
-                chosenFive[i] = alignCard(temp, i);
+                chosenFive[i] = alignCard(cardPickedByPlayer, i);
 
                 listOfNine[index] = null;
                 break;
             }
         }
 
-        currentPlayer.chosencards++;
+        //currentPlayer.chosencards++;
+        currentPlayer.increaseDeckCount();
+        return cardPickedByPlayer;
     }
 
 
