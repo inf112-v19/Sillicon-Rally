@@ -168,6 +168,27 @@ public class Player implements IGameObject, InputProcessor {
         }
     }
 
+    public void shootLaser() {
+        Tile playerTile = grid.getTileFromCoordinates(getY(), getX());
+
+        List<Tile> path = grid.getDirectPath(playerTile, getDirection());
+
+       // laserAnimation.animateLaser(this);
+
+        for (Tile tile : path) {
+            for (IGameObject object : tile.getGameObjects()) {
+                if (object instanceof Player && object != this) {
+                    Player otherPlayer = (Player) object;
+                    otherPlayer.damagePlayer(1, grid);
+                }
+            }
+        }
+    }
+
+    public void removeLaser() {
+        laserAnimation.removeLaser(this);
+    }
+
     public void damagePlayer(int damage, TileGrid grid) {
 
         this.playerHP -= damage;

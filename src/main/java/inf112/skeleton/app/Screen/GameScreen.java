@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
@@ -37,6 +38,8 @@ public class GameScreen implements Screen {
     Player player;
     private DrawCards drawCards;
     private RoundExecutor roundExector;
+    LaserAnimation laserAnimation;
+    int laserTimer;
 
     private static final int upTopX = 1000;
     private static final int upTopY = 700;
@@ -52,6 +55,8 @@ public class GameScreen implements Screen {
         this.player = player;
         this.drawCards = new DrawCards(game);
         this.roundExector = new RoundExecutor(game.playerList);
+        this.laserAnimation = new LaserAnimation();
+        this.laserTimer = 0;
     }
 
 
@@ -69,19 +74,39 @@ public class GameScreen implements Screen {
         RoboGame.tiledMapRenderer.render();
 
         game.sb.setProjectionMatrix(RoboGame.camera.combined);
-
-        game.handleInput(Gdx.graphics.getDeltaTime());
-        game.update(Gdx.graphics.getDeltaTime());
-
         game.drawSpritesFromGrid();
 
         game.sb.begin();
-
         drawLifeTokens(game.playerList);
         drawHearts();
-
         game.sb.end();
 
+        playRound();
+        animateLaser();
+    }
+
+    private void animateLaser() {
+        if (roundExector.shootLaserNow) {
+            for (Player player : game.playerList) {
+                player.shootLaser(game.grid);
+                this.laserTimer++;
+            }
+            roundExector.shootLaserNow = false;
+        }
+
+        if (laserTimer >= 100) {
+            for (Player player : game.playerList) {
+                player.removeLaser();
+            }
+            laserTimer = 0;
+        }
+
+        if (laserTimer >= 0)
+            laserTimer++;
+
+    }
+
+    private void playRound() {
         if (!roundExector.isCurrentlyExecutingRound)
             drawCards.drawCards();
 
@@ -92,37 +117,6 @@ public class GameScreen implements Screen {
             roundExector.playPlayerNextCard();
     }
 
-    private void pickCards() {
-        List<Player> listOfPlayers = game.playerList;
-
-        int cardPicks = sumCardPicks(listOfPlayers);
-
-        for (Player player : game.playerList) {
-            Gdx.input.setInputProcessor(player);
-
-
-            if (player.chosenAllCards()) {
-                if (cardPicks % 5 == 0) {
-                    game.drawNineCardsFromDeck();
-                    cardPicks = 1;
-                }
-                continue;
-            }
-        }
-    }
-
-    private int sumCardPicks(List<Player> listOfPlayers) {
-        int sum = 0;
-        for (Player player : listOfPlayers) {
-            sum += player.chosencards;
-        }
-        return sum;
-    }
-
-    public void nextRound() {
-        game.putCardsBackInDeck();
-        game.drawNineCardsFromDeck();
-    }
 
     private void drawLifeTokens(List<Player> players) {
         int xDrawLocation = upTopX;
