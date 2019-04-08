@@ -14,6 +14,7 @@ import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.Screen.GameScreen;
+import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
@@ -56,6 +57,7 @@ public class RoboGame extends Game {
 
     @Override
     public void create() {
+        playerList = new ArrayList<>();
         gameMap = new GameMap("map.v.01.tmx");
         this.TILE_SIZE_IN_PX = getTileSize();
        // tiledMap = new TmxMapLoader().load("map.v.01.tmx");
@@ -82,20 +84,17 @@ public class RoboGame extends Game {
 
         chosenFive = new MoveCard[5];
 
-        playerList = new ArrayList<>();
-        player = constructor.player;
-        grid.getTile(0,0).addGameObject(player);
-        playerList.add(player);
-
-        player2 = constructor.player2;
-        grid.getTile(0,0).addGameObject(player2);
-        playerList.add(player2);
-
         Gdx.input.setInputProcessor(playerList.get(currentPlayer));
 
-        this.setScreen(new GameScreen(this, playerList.get(currentPlayer)));
+        this.setScreen(new MainMenuScreen(this, constructor));
 
         drawNineCardsFromDeck();
+    }
+
+    public Player getCurrentPlayer(){
+        if (currentPlayer == 0)
+            return player2;
+        return player;
     }
 
     public MoveCard chooseCard(int index, Player currentPlayer) {
@@ -235,7 +234,7 @@ public class RoboGame extends Game {
     }
 
     public void update(float deltaTime) {
-        player.update(deltaTime, grid);
+        getCurrentPlayer().update(deltaTime, grid);
     }
 
 

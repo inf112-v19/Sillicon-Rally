@@ -5,26 +5,39 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.collision.objects.GameObjectFactory;
 import inf112.skeleton.app.game.RoboGame;
+
+import java.awt.*;
 
 
 public class MainMenuScreen extends RoboGame implements Screen {
     private  RoboGame game;
+    private GameObjectFactory factory;
+
     Texture startActive;
     Texture startInactive;
+    Texture Player1Active;
+    Texture Player1InActive;
+    Texture Player2Active;
+    Texture Player2InActive;
+
     Player player;
+    Player player2;
 
 
     public static final int WidthButton = 120;
     public static final int HeightButton = 35;
     private static final int centralizedX = (RoboGame.ROBO_GAME_WIDTH/2) - (WidthButton / 2);
     private static final int centralizedY = (RoboGame.ROBO_GAME_HEIGHT / 2) - (HeightButton /2);
+    private static final int ButtonGap = 30;
 
 
-
-    public MainMenuScreen(RoboGame game, Player player){
+    public MainMenuScreen(RoboGame game, GameObjectFactory factory){
         this.game = game;
-        this.player = player;
+        this.factory = factory;
+
+        this.player2 = game.player2;
     }
 
 
@@ -35,6 +48,11 @@ public class MainMenuScreen extends RoboGame implements Screen {
         startActive = new Texture("Buttons/startActive.png");
         startInactive = new Texture("Buttons/startInactive.png");
 
+        Player1Active = new Texture("Buttons/Player1Active.png");
+        Player1InActive = new Texture("Buttons/Player1InActive.png");
+
+        Player2Active = new Texture("Buttons/Player2Active.png");
+        Player2InActive = new Texture("Buttons/Player2InActive.png");
     }
 
     @Override
@@ -45,20 +63,54 @@ public class MainMenuScreen extends RoboGame implements Screen {
         game.sb.begin();
 
         //checks if mouse is hovering over the button, opens gamescreen if then mouse is clicked
-        if (Gdx.input.getX() < centralizedX + WidthButton && Gdx.input.getX() > centralizedX &&
-                RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() < centralizedY + HeightButton && RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() > centralizedY){
-            game.sb.draw(startActive, centralizedX, centralizedY, WidthButton, HeightButton);
+        player1ButtonStatus();
+        player2ButtonStatus();
+        game.sb.end();
+
+    }
+
+    private void player1ButtonStatus(){
+        if (Gdx.input.getX() < centralizedX - ButtonGap + WidthButton && Gdx.input.getX() > centralizedX  &&
+                RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() < centralizedY - ButtonGap+ HeightButton && RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() > centralizedY - ButtonGap){
+            game.sb.draw(Player1Active, centralizedX, centralizedY - ButtonGap, WidthButton, HeightButton);
             if (Gdx.input.isTouched()){
-                GameScreen gameScreen = new GameScreen(game, player);
-                game.setGameScreen(gameScreen);
-                game.setScreen(gameScreen);
-                //game.setScreen(new GameScreen(game, player));
+                removePlayer();
+                setScreen();
             }
         }
         else{
-            game.sb.draw(startInactive, centralizedX, centralizedY, WidthButton, HeightButton);
+            game.sb.draw(Player1InActive, centralizedX , centralizedY - ButtonGap, WidthButton, HeightButton);
         }
-        game.sb.end();
+    }
+
+    private void player2ButtonStatus(){
+        if (Gdx.input.getX() < centralizedX + ButtonGap + WidthButton && Gdx.input.getX() > centralizedX + ButtonGap&&
+                RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() < centralizedY + ButtonGap + HeightButton && RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() > centralizedY + ButtonGap){
+            game.sb.draw(Player2Active, centralizedX , centralizedY + ButtonGap, WidthButton, HeightButton);
+            if (Gdx.input.isTouched()){
+               setScreen();
+            }
+        }
+        else{
+            game.sb.draw(Player2InActive, centralizedX, centralizedY + ButtonGap, WidthButton, HeightButton);
+        }
+
+    }
+
+    private void setScreen(){
+        GameScreen gameScreen = new GameScreen(game);
+        game.setGameScreen(gameScreen);
+        game.setScreen(gameScreen);
+    }
+
+    private void removePlayer(){
+        float y = player2.getY();
+        float x = player2.getX();
+        factory.removePlayerSprite(game, player2);
+        game.playerList.remove(player2);
+        player2.getSprite();
+
+        player2 = null;
 
     }
 

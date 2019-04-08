@@ -47,9 +47,9 @@ public class GameScreen implements Screen {
     private static final int HeartHeight = 60;
     private static final int HeartWidth = 45;
 
-    public GameScreen (RoboGame game, Player player){
+    public GameScreen (RoboGame game){
         this.game = game;
-        this.player = player;
+        //this.player = player;
         this.drawCards = new DrawCards(game);
         this.roundExector = new RoundExecutor(game.playerList);
     }

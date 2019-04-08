@@ -404,7 +404,7 @@ public class Player implements IGameObject, InputProcessor {
     }
 
     public void setPlayerInput() {
-        if (game.currentPlayer == 0) {
+        if (game.currentPlayer == 0 && game.player2 != null) {
             Gdx.input.setInputProcessor(game.player2);
             game.currentPlayer = 1;
             return;

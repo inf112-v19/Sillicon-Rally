@@ -28,12 +28,18 @@ public class GameObjectFactory {
     public List<ConveyorBeltObject> ForwardBelts;
     public List<TurnGearObject> turnGears;
 
+    private RoboGame.Direction startDirection = RoboGame.Direction.North;
+    public Texture player2Texture;
 
     public GameObjectFactory(GameMap map, TileGrid grid, RoboGame game) {
         this.map = map;
         this.grid = grid;
+        this.player = game.player;
+        this.player2 = game.player2;
 
-        createPlayer(game);
+
+        createPlayer1(game);
+        createPlayer2(game);
         createFlags();
         createTeleporter();
         createConveyorBelts();
@@ -46,8 +52,28 @@ public class GameObjectFactory {
 
     private void createPlayer(RoboGame game) {
         RoboGame.Direction startDirection = RoboGame.Direction.North;
-        player = new Player(new Texture("robot1.png"), startDirection,game, "Player 1");
-        player2 = new Player(new Texture("robot2.png"), startDirection, game, "Player 2");
+        createPlayer1(game);
+        //player = new Player(new Texture("robot1.png"), startDirection,game, "Player 1");
+        //player2 = new Player(new Texture("robot2.png"), startDirection, game, "Player 2");
+    }
+
+    public Player createPlayer1(RoboGame game){
+        player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
+        grid.getTile(0, 0).addGameObject(player);
+        game.playerList.add(player);
+        return player;
+    }
+
+    public Player createPlayer2(RoboGame game){
+        player2Texture = new Texture("robot2.png");
+        player2 = new Player((player2Texture), startDirection, game, "Player 2");
+        grid.getTile(0, 0).addGameObject(player2);
+        game.playerList.add(player2);
+        return player2;
+    }
+
+    public void removePlayerSprite(RoboGame game, Player thisPlayer){
+        grid.getTile(0,0).getGameObjects().remove(player2);
     }
 
     private void createFlags() {
