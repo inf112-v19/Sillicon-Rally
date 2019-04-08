@@ -393,10 +393,6 @@ public class Player implements IGameObject, InputProcessor {
 
         if (cardPicked != null)
             moveCardList.add(cardPicked);
-        System.out.println(moveCardList);
-
-
-        //movecardArray[chosencards-1] = cardPicked;
     }
 
     public LinkedList<MoveCard> getPlayersDeck() {
@@ -419,15 +415,7 @@ public class Player implements IGameObject, InputProcessor {
 
 
     public void executeCard() {
-        int cardsBeenPlayed = 0;
         for (int i = 0; i < movecardArray.length; i++) {
-            /*
-            if (movecardArray[i] != null) {
-                MoveCard.Type type =  movecardArray[i].getType();
-                movePlayer(movecardArray[i].getType(), game.TILE_SIZE_IN_PX, grid);
-                cardsBeenPlayed++;
-            }
-            */
             if (!moveCardList.isEmpty()) {
                 MoveCard card = moveCardList.poll();
                 movePlayer(card.getType(), game.getTileSize(), grid);
@@ -448,20 +436,8 @@ public class Player implements IGameObject, InputProcessor {
     }
 
     public boolean chosenAllCards() {
-       /* for (int i = 0; i < movecardArray.length; i++) {
-            if (movecardArray[i] == null)
-                return false;
-        }*/
         return moveCardList.size() == 5;
     }
-
-    /*
-    public void nextRound() {
-            game.putCardsBackInDeck();
-            game.drawNineCardsFromDeck();
-    }
-    */
-
 
     @Override
     public boolean keyUp(int i) {

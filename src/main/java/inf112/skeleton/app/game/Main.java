@@ -12,7 +12,6 @@ public class Main {
         cfg.height = RoboGame.ROBO_GAME_HEIGHT;
         cfg.resizable = false;
 
-
         new LwjglApplication(new RoboGame(), cfg);
     }
 }
