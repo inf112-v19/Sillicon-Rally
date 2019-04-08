@@ -87,7 +87,17 @@ public class Player implements IGameObject, InputProcessor {
         collisionHandler.checkCollision();
     }
 
+    public void checkCollision() {
+        CollisionHandler collisionHandler = new CollisionHandler(grid, this);
+        collisionHandler.checkCollision();
+    }
+
     public void checkForDamageTaken(TileGrid grid) {
+        CollisionHandler collisionHandler = new CollisionHandler(grid, this);
+        collisionHandler.checkForDamageDealer();
+    }
+
+    public void checkForDamageTaken() {
         CollisionHandler collisionHandler = new CollisionHandler(grid, this);
         collisionHandler.checkForDamageDealer();
     }
@@ -323,16 +333,13 @@ public class Player implements IGameObject, InputProcessor {
         else if (keycode == Input.Keys.valueOf("8")) {
             int index = 7;
             if (game.listOfNine[index] != null) {
-                game.chooseCard(index, this);
-                movecardArray[chosencards-1] = game.cardPickedByPlayer;
+                pickCard(index);
             }
         }
 
         else if (keycode == Input.Keys.valueOf("9")) {
             int index = 8;
             if (game.listOfNine[index] != null) {
-                game.chooseCard(index, this);
-                movecardArray[chosencards-1] = game.cardPickedByPlayer;
                 pickCard(index);
             }
         }
@@ -428,6 +435,16 @@ public class Player implements IGameObject, InputProcessor {
         }
         chosencards = 0;
         moveCardList.clear();
+    }
+
+    public void executeNextCard() {
+        if (moveCardList.isEmpty())
+            return;
+
+        MoveCard card = moveCardList.poll();
+        movePlayer(card.getType(), game.getTileSize(), grid);
+        chosencards--;
+        checkForDamageTaken();
     }
 
     public boolean chosenAllCards() {

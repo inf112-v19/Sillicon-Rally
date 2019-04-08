@@ -11,11 +11,13 @@ public class DrawCards {
     int playersTurn;
     RoboGame game;
     int cardsDrawByPlayer;
+    private boolean playersFinishedPickingCards;
 
     public DrawCards(RoboGame game) {
         this.playerList = game.playerList;
         this.game = game;
         this.playersTurn = 0;
+        this.playersFinishedPickingCards = false;
     }
 
     public void drawCards() {
@@ -34,7 +36,8 @@ public class DrawCards {
         cardsDrawByPlayer = 0;
 
         if (allPlayersDone()) {
-            executeAllMoves();
+            playersFinishedPickingCards = true;
+            //executeAllMoves();
             game.putCardsBackInDeck();
             game.drawNineCardsFromDeck();
         }
@@ -50,7 +53,7 @@ public class DrawCards {
         game.drawNineCardsFromDeck();
     }
 
-    private boolean allPlayersDone() {
+    public boolean allPlayersDone() {
 
         for (Player player : playerList) {
             if (player.moveCardList.size() != 5)
@@ -58,5 +61,13 @@ public class DrawCards {
         }
 
         return true;
+    }
+
+    public boolean playersFinishedPickingCards() {
+        return this.playersFinishedPickingCards;
+    }
+
+    public void startPickingCards() {
+        this.playersFinishedPickingCards = false;
     }
 }

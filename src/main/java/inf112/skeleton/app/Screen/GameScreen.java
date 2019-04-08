@@ -11,6 +11,7 @@ import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.game.DrawCards;
 import inf112.skeleton.app.game.RoboGame;
+import inf112.skeleton.app.game.RoundExecutor;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameScreen implements Screen {
-
     Texture HeartSprite;
     Texture ThreeLifeSprite;
     Texture TwoLifeSprite;
@@ -36,6 +36,7 @@ public class GameScreen implements Screen {
     private ArrayList<MoveCard> cardsOnBoard;
     Player player;
     private DrawCards drawCards;
+    private RoundExecutor roundExector;
 
     private static final int upTopX = 1000;
     private static final int upTopY = 700;
@@ -50,6 +51,7 @@ public class GameScreen implements Screen {
         this.game = game;
         this.player = player;
         this.drawCards = new DrawCards(game);
+        this.roundExector = new RoundExecutor(game.playerList);
     }
 
 
@@ -80,7 +82,14 @@ public class GameScreen implements Screen {
 
         game.sb.end();
 
-        drawCards.drawCards();
+        if (!roundExector.isCurrentlyExecutingRound)
+            drawCards.drawCards();
+
+        if (drawCards.allPlayersDone())
+            roundExector.isCurrentlyExecutingRound = true;
+
+        if (roundExector.isCurrentlyExecutingRound)
+            roundExector.playPlayerNextCard();
     }
 
     private void pickCards() {
