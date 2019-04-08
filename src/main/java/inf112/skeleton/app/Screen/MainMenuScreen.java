@@ -23,7 +23,7 @@ public class MainMenuScreen extends RoboGame implements Screen {
     Texture Player2InActive;
 
     Player player;
-    Player player2;
+
 
 
     public static final int WidthButton = 120;
@@ -37,7 +37,6 @@ public class MainMenuScreen extends RoboGame implements Screen {
         this.game = game;
         this.factory = factory;
 
-        this.player2 = game.player2;
     }
 
 
@@ -74,7 +73,7 @@ public class MainMenuScreen extends RoboGame implements Screen {
                 RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() < centralizedY - ButtonGap+ HeightButton && RoboGame.ROBO_GAME_HEIGHT - Gdx.input.getY() > centralizedY - ButtonGap){
             game.sb.draw(Player1Active, centralizedX, centralizedY - ButtonGap, WidthButton, HeightButton);
             if (Gdx.input.isTouched()){
-                removePlayer();
+                removePlayer(game.player2);
                 setScreen();
             }
         }
@@ -103,14 +102,11 @@ public class MainMenuScreen extends RoboGame implements Screen {
         game.setScreen(gameScreen);
     }
 
-    private void removePlayer(){
-        float y = player2.getY();
-        float x = player2.getX();
-        factory.removePlayerSprite(game, player2);
-        game.playerList.remove(player2);
-        player2.getSprite();
-
-        player2 = null;
+    private void removePlayer(Player thisPlayer){
+        float y = thisPlayer.getY();
+        float x = thisPlayer.getX();
+        factory.removePlayerSprite(game, thisPlayer);
+        game.playerList.remove(thisPlayer);
 
     }
 

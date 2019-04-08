@@ -16,8 +16,8 @@ import java.util.List;
 public class GameObjectFactory {
     public GameMap map;
     public TileGrid grid;
-    public Player player;
-    public Player player2;
+    //public Player player;
+    //public Player player2;
     public ConveyorBeltObject conveyorBeltObject;
     public List<IGameObject> flags;
     public List<IGameObject> lasers;
@@ -34,8 +34,7 @@ public class GameObjectFactory {
     public GameObjectFactory(GameMap map, TileGrid grid, RoboGame game) {
         this.map = map;
         this.grid = grid;
-        this.player = game.player;
-        this.player2 = game.player2;
+
 
 
         createPlayer1(game);
@@ -58,22 +57,23 @@ public class GameObjectFactory {
     }
 
     public Player createPlayer1(RoboGame game){
-        player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
-        grid.getTile(0, 0).addGameObject(player);
-        game.playerList.add(player);
-        return player;
+
+        game.player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
+        grid.getTile(0, 0).addGameObject(game.player);
+        game.playerList.add(game.player);
+        return game.player;
     }
 
     public Player createPlayer2(RoboGame game){
         player2Texture = new Texture("robot2.png");
-        player2 = new Player((player2Texture), startDirection, game, "Player 2");
-        grid.getTile(0, 0).addGameObject(player2);
-        game.playerList.add(player2);
-        return player2;
+        game.player2 = new Player((player2Texture), startDirection, game, "Player 2");
+        grid.getTile(0, 0).addGameObject(game.player2);
+        game.playerList.add(game.player2);
+        return game.player2;
     }
 
     public void removePlayerSprite(RoboGame game, Player thisPlayer){
-        grid.getTile(0,0).getGameObjects().remove(player2);
+        grid.getTile(0,0).getGameObjects().remove(thisPlayer);
     }
 
     private void createFlags() {
