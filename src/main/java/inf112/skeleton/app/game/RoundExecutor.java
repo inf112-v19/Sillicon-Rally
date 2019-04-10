@@ -8,6 +8,7 @@ public class RoundExecutor {
     List<Player> playerList;
     int playersTurn;
     public boolean isCurrentlyExecutingRound;
+    public int roundNr=1;
 
     public RoundExecutor(List<Player> playerList) {
         this.playerList = playerList;
@@ -28,8 +29,18 @@ public class RoundExecutor {
 
         }
         Player player = playerList.get(playersTurn);
-        player.executeNextCard();
-        setNextPlayersTurn();
+
+        if(player.powerDownOn==roundNr) {
+            player.moveCardList.clear();
+            player.powerDown();
+            setNextPlayersTurn();
+            player.powerDownOn=0;
+
+        }
+        else {
+            player.executeNextCard();
+            setNextPlayersTurn();
+        }
     }
 
     private void checkCollisions() {
@@ -40,6 +51,7 @@ public class RoundExecutor {
     }
 
     private boolean roundIsDone() {
+        roundNr++;
         for (Player player : playerList){
             if (!player.moveCardList.isEmpty())
                 return false;
@@ -47,7 +59,7 @@ public class RoundExecutor {
         return true;
     }
 
-    private void setNextPlayersTurn() {
+    private void setNextPlayersTurn(){
         int currentPlayer = playersTurn;
         this.playersTurn = (currentPlayer+1) % playerList.size();
 

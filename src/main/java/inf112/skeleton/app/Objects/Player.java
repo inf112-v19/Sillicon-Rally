@@ -9,6 +9,7 @@ import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.game.PlayerMovements;
 import inf112.skeleton.app.game.RoboGame;
+import inf112.skeleton.app.game.RoundExecutor;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
@@ -24,10 +25,12 @@ public class Player implements IGameObject, InputProcessor {
     private RoboGame game;
     private PlayerMovements playerMovements;
     private LaserAnimation laserAnimation;
+
     public int playerHP;
     public int playerTokens;
     public final int MAX_HP = 6;
     public final int MAX_DAMAGE_TOKENS = 3;
+
     public int MaxMoveCardLength = 5;
     public int chosencards = 0;
     private int intPlayerInput = 0;
@@ -38,6 +41,8 @@ public class Player implements IGameObject, InputProcessor {
     public String name;
 
     public int flagNr=1;
+
+    public int powerDownOn=0;
 
     //Constructor used for testing purposes only
     public Player(TileGrid grid) {
@@ -112,6 +117,12 @@ public class Player implements IGameObject, InputProcessor {
         playerTokens -= 1;
         playerHP = MAX_HP;
         System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);
+    }
+
+    public void powerDown(){
+        this.playerHP=MAX_HP;
+        System.out.println("player powering down");
+        this.powerDownOn=0;
     }
 
     public void moveStraight(int speed, int moveDistance, TileGrid grid) {
@@ -380,6 +391,13 @@ public class Player implements IGameObject, InputProcessor {
         }
         else if (keycode == Input.Keys.SPACE){
             setPlayerInput();
+        }
+
+        if (keycode==Input.Keys.P){
+            RoundExecutor roundExecutor = new RoundExecutor(game.playerList);
+            this.powerDownOn = (roundExecutor.roundNr)+1;
+            System.out.println("this player intends to power down next turn (turn: " + roundExecutor.roundNr +")");
+            //powerDown();
         }
 
         checkCollision(game.grid);
