@@ -126,7 +126,7 @@ public class TileGrid {
             return list;
 
         for (int i = tile.x-1; i >= 0; i--) {
-            list.add(getTile(tile.x, i));
+            list.add(getTile(tile.y, i));
         }
 
         return list;

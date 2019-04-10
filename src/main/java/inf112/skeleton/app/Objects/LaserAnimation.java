@@ -57,7 +57,7 @@ public class LaserAnimation implements IGameObject {
         player.grid.getTileFromCoordinates(0, 0).getGameObjects().remove(this);
         laserTimer = 0;
         return true;
-        
+
     }
 
     @Override

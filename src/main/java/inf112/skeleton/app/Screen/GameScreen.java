@@ -94,7 +94,7 @@ public class GameScreen implements Screen {
             roundExector.shootLaserNow = false;
         }
 
-        if (laserTimer >= 100) {
+        if (laserTimer >= 150) {
             for (Player player : game.playerList) {
                 player.removeLaser();
             }
