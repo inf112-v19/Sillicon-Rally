@@ -36,7 +36,6 @@ public class GameObjectFactory {
         this.grid = grid;
 
 
-
         createPlayer1(game);
         createPlayer2(game);
         createFlags();
