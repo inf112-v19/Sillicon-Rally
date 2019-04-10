@@ -29,6 +29,7 @@ public class RoundExecutor {
         }
         Player player = playerList.get(playersTurn);
         player.executeNextCard();
+        checkCollisions();
         setNextPlayersTurn();
     }
 

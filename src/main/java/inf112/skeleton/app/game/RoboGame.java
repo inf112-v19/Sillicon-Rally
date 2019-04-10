@@ -21,7 +21,6 @@ import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RoboGame extends Game {
     public static OrthographicCamera camera;
@@ -231,6 +230,7 @@ public class RoboGame extends Game {
             if(listOfNine[i] != null) {
                 deck.stack.push(listOfNine[i]);
             }
+
         }
     }
 
