@@ -6,12 +6,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import inf112.skeleton.app.game.RoboGame;
 
-public class EndGameScreen implements Screen {
+public class GameOverScreen implements Screen {
     Texture GameOver;
     Texture SilCon;
+    Texture YasQueen;
     RoboGame game;
 
-    public EndGameScreen(RoboGame game){
+    public GameOverScreen(RoboGame game){
         this.game = game;
     }
 
@@ -23,7 +24,7 @@ public class EndGameScreen implements Screen {
     public void show() {
         GameOver = new Texture("GAMEOVER.png");
         SilCon = new Texture("SiliconRallyOut.png");
-
+        YasQueen = new Texture("YasQueen.png");
     }
 
     @Override
@@ -32,8 +33,8 @@ public class EndGameScreen implements Screen {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) ;
         game.sb.begin();
-        game.sb.draw(GameOver,340,400,game.ROBO_GAME_WIDTH/2, game.ROBO_GAME_HEIGHT/2);
-        game.sb.draw(SilCon,420,320, game.ROBO_GAME_WIDTH/3, game.ROBO_GAME_HEIGHT/3 );
+        game.sb.draw(GameOver,240,400,game.ROBO_GAME_WIDTH/2, game.ROBO_GAME_HEIGHT/2);
+        game.sb.draw(YasQueen,280, 190, game.ROBO_GAME_WIDTH/2, game.ROBO_GAME_HEIGHT/2);
         game.sb.end();
     }
 

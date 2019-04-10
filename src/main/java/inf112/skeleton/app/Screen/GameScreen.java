@@ -90,6 +90,9 @@ public class GameScreen implements Screen {
 
         if (roundExector.isCurrentlyExecutingRound)
             roundExector.playPlayerNextCard();
+
+
+
     }
 
     private void pickCards() {
