@@ -1,6 +1,5 @@
 package inf112.skeleton.app.game;
 
-import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class RoundExecutor {
             playerShootLaser();
             return;
         }
-        sleep(0);
+        sleep(300);
 
         Player player = playerList.get(playersTurn);
         player.executeNextCard();
@@ -54,7 +53,7 @@ public class RoundExecutor {
 
     private boolean roundIsDone() {
         for (Player player : playerList){
-            if (!player.moveCardList.isEmpty())
+            if (!player.moveCardQueue.isEmpty())
                 return false;
         }
         return true;

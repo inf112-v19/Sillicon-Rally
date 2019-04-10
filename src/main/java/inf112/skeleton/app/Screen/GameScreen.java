@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import inf112.skeleton.app.Objects.LaserAnimation;
@@ -40,6 +41,7 @@ public class GameScreen implements Screen {
     private RoundExecutor roundExector;
     LaserAnimation laserAnimation;
     int laserTimer;
+    BitmapFont font;
 
     private static final int upTopX = 1000;
     private static final int upTopY = 700;
@@ -57,6 +59,7 @@ public class GameScreen implements Screen {
         this.roundExector = new RoundExecutor(game.playerList);
         this.laserAnimation = new LaserAnimation();
         this.laserTimer = 0;
+        this.font = new BitmapFont();
     }
 
 
@@ -79,10 +82,17 @@ public class GameScreen implements Screen {
         game.sb.begin();
         drawLifeTokens(game.playerList);
         drawHearts();
+        drawFlagsPickedUp();
         game.sb.end();
 
         playRound();
         animateLaser();
+    }
+
+    private void drawFlagsPickedUp() {
+        font.getData().setScale(3);
+        font.draw(game.sb, "1", -300, 600);
+        font.draw(game.sb, "1", 1000, 600);
     }
 
     private void animateLaser() {
