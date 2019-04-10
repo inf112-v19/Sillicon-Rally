@@ -23,7 +23,7 @@ public class DrawCards {
     public void drawCards() {
         Player playerToDraw = playerList.get(playersTurn);
         Gdx.input.setInputProcessor(playerToDraw);
-        this.cardsDrawByPlayer = playerList.get(playersTurn).moveCardList.size();
+        this.cardsDrawByPlayer = playerList.get(playersTurn).moveCardQueue.size();
 
         if ((cardsDrawByPlayer != 0) && cardsDrawByPlayer % 5 == 0)
             setNextPlayersTurn();
@@ -56,7 +56,7 @@ public class DrawCards {
     public boolean allPlayersDone() {
 
         for (Player player : playerList) {
-            if (player.moveCardList.size() != 5)
+            if (player.moveCardQueue.size() != 5)
                 return false;
         }
 

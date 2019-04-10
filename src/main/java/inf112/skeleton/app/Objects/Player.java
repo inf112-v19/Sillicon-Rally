@@ -31,7 +31,7 @@ public class Player implements IGameObject, InputProcessor {
     public int MaxMoveCardLength = 5;
     public int chosencards = 0;
     private int intPlayerInput = 0;
-    public LinkedList<MoveCard> moveCardList;
+    public LinkedList<MoveCard> moveCardQueue;
 
     public MoveCard[] movecardArray;
     boolean[] booList;
@@ -54,7 +54,7 @@ public class Player implements IGameObject, InputProcessor {
 
         this.grid = grid;
         this.sprite = new Sprite(new Texture("robot1.png"));
-        this.moveCardList = new LinkedList<>();
+        this.moveCardQueue = new LinkedList<>();
     }
 
     public void setName(String name) {
@@ -74,7 +74,7 @@ public class Player implements IGameObject, InputProcessor {
         this.movecardArray = new MoveCard[MaxMoveCardLength];
         this.laserAnimation = new LaserAnimation();
         this.name = name;
-        this.moveCardList = new LinkedList<>();
+        this.moveCardQueue = new LinkedList<>();
     }
 
 
@@ -166,6 +166,27 @@ public class Player implements IGameObject, InputProcessor {
                 }
             }
         }
+    }
+
+    public void shootLaser() {
+        Tile playerTile = grid.getTileFromCoordinates(getY(), getX());
+
+        List<Tile> path = grid.getDirectPath(playerTile, getDirection());
+
+       // laserAnimation.animateLaser(this);
+
+        for (Tile tile : path) {
+            for (IGameObject object : tile.getGameObjects()) {
+                if (object instanceof Player && object != this) {
+                    Player otherPlayer = (Player) object;
+                    otherPlayer.damagePlayer(1, grid);
+                }
+            }
+        }
+    }
+
+    public void removeLaser() {
+        laserAnimation.removeLaser(this);
     }
 
     public void damagePlayer(int damage, TileGrid grid) {
@@ -392,15 +413,11 @@ public class Player implements IGameObject, InputProcessor {
         MoveCard cardPicked = game.chooseCard(index, this);
 
         if (cardPicked != null)
-            moveCardList.add(cardPicked);
-        System.out.println(moveCardList);
-
-
-        //movecardArray[chosencards-1] = cardPicked;
+            moveCardQueue.add(cardPicked);
     }
 
     public LinkedList<MoveCard> getPlayersDeck() {
-        return this.moveCardList;
+        return this.moveCardQueue;
     }
 
     public void setPlayerInput() {
@@ -419,49 +436,29 @@ public class Player implements IGameObject, InputProcessor {
 
 
     public void executeCard() {
-        int cardsBeenPlayed = 0;
         for (int i = 0; i < movecardArray.length; i++) {
-            /*
-            if (movecardArray[i] != null) {
-                MoveCard.Type type =  movecardArray[i].getType();
-                movePlayer(movecardArray[i].getType(), game.TILE_SIZE_IN_PX, grid);
-                cardsBeenPlayed++;
-            }
-            */
-            if (!moveCardList.isEmpty()) {
-                MoveCard card = moveCardList.poll();
+            if (!moveCardQueue.isEmpty()) {
+                MoveCard card = moveCardQueue.poll();
                 movePlayer(card.getType(), game.getTileSize(), grid);
             }
         }
         chosencards = 0;
-        moveCardList.clear();
+        moveCardQueue.clear();
     }
 
     public void executeNextCard() {
-        if (moveCardList.isEmpty())
+        if (moveCardQueue.isEmpty())
             return;
 
-        MoveCard card = moveCardList.poll();
+        MoveCard card = moveCardQueue.poll();
         movePlayer(card.getType(), game.getTileSize(), grid);
         chosencards--;
         checkForDamageTaken();
     }
 
     public boolean chosenAllCards() {
-       /* for (int i = 0; i < movecardArray.length; i++) {
-            if (movecardArray[i] == null)
-                return false;
-        }*/
-        return moveCardList.size() == 5;
+        return moveCardQueue.size() == 5;
     }
-
-    /*
-    public void nextRound() {
-            game.putCardsBackInDeck();
-            game.drawNineCardsFromDeck();
-    }
-    */
-
 
     @Override
     public boolean keyUp(int i) {
