@@ -93,8 +93,8 @@ public class MainMenuScreen extends RoboGame implements Screen {
         else{
             game.sb.draw(Player2InActive, centralizedX, centralizedY + ButtonGap, WidthButton, HeightButton);
         }
-
     }
+
 
     private void setScreen(){
         GameScreen gameScreen = new GameScreen(game);

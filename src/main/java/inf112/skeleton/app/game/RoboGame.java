@@ -13,8 +13,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.Screen.GameOverScreen;
 import inf112.skeleton.app.Screen.GameScreen;
-import inf112.skeleton.app.Screen.MainMenuScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
@@ -22,7 +22,6 @@ import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RoboGame extends Game {
     public static OrthographicCamera camera;
@@ -59,6 +58,7 @@ public class RoboGame extends Game {
 
     @Override
     public void create() {
+
         playerList = new ArrayList<>();
         gameMap = new GameMap("map.v.01.tmx");
         this.TILE_SIZE_IN_PX = getTileSize();
@@ -86,7 +86,7 @@ public class RoboGame extends Game {
 
         Gdx.input.setInputProcessor(playerList.get(currentPlayer));
 
-        this.setScreen(new MainMenuScreen(this, constructor));
+        this.setScreen(new GameScreen(this));
 
         drawNineCardsFromDeck();
     }

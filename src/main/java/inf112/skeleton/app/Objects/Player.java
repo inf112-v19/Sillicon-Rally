@@ -3,8 +3,10 @@ package inf112.skeleton.app.Objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import inf112.skeleton.app.Screen.GameOverScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.game.PlayerMovements;
@@ -30,6 +32,7 @@ public class Player implements IGameObject, InputProcessor {
     public final int MAX_DAMAGE_TOKENS = 3;
     public int MaxMoveCardLength = 5;
     public int chosencards = 0;
+    public boolean playerIsDead = false;
     private int intPlayerInput = 0;
     public LinkedList<MoveCard> moveCardQueue;
 
@@ -111,8 +114,14 @@ public class Player implements IGameObject, InputProcessor {
         }
         playerTokens -= 1;
         playerHP = MAX_HP;
-        System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);
-    }
+
+        if (playerTokens == 0) {
+            System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);
+
+            game.setScreen(new GameOverScreen(game));
+        }
+        }
+
 
     public void moveStraight(int speed, int moveDistance, TileGrid grid) {
         playerMovements.moveStraight(speed, moveDistance, grid);

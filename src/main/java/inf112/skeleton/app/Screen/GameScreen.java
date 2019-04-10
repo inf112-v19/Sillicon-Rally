@@ -100,6 +100,7 @@ public class GameScreen implements Screen {
             playersFlags[i] = player.flagNr;
         }
 
+
         String playerOneFlags = "Next flag: " + Integer.toString(playersFlags[0]);
         String playerTwoFlags = "Next Flag: " + Integer.toString(playersFlags[1]);
 
