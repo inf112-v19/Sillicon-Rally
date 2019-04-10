@@ -43,6 +43,8 @@ public class GameScreen implements Screen {
     LaserAnimation laserAnimation;
     int laserTimer;
     BitmapFont font;
+    List<PlayerStatus> playerStatusList;
+    Point[] statusScreenPoints;
 
     private static final int upTopX = 1000;
     private static final int upTopY = 700;
@@ -61,6 +63,15 @@ public class GameScreen implements Screen {
         this.laserAnimation = new LaserAnimation();
         this.laserTimer = 0;
         this.font = new BitmapFont();
+        statusScreenPoints = createSixPoints();
+        playerStatusList = new ArrayList<>();
+
+        for (int i = 0; i < game.playerList.size(); i++) {
+            Player pl = game.playerList.get(i);
+            Point point = statusScreenPoints[i];
+            PlayerStatus status = new PlayerStatus(pl, point);
+            playerStatusList.add(status);
+        }
     }
 
 
@@ -70,6 +81,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 
         game.sb.begin();
         game.drawHUD();
@@ -81,13 +93,22 @@ public class GameScreen implements Screen {
         game.drawSpritesFromGrid();
 
         game.sb.begin();
-        drawLifeTokens(game.playerList);
-        drawHearts();
-        drawFlagsPickedUp();
+        for (PlayerStatus status : playerStatusList) {
+            status.draw(game.sb);
+        }
+       // statusSreen.draw(game.sb);
+       // drawLifeTokens(game.playerList);
+       // drawHearts();
+       // drawFlagsPickedUp();
         game.sb.end();
 
         playRound();
         animateLaser();
+
+    }
+
+    private void drawPlayerStatus() {
+
     }
 
     private void drawFlagsPickedUp() {
@@ -179,6 +200,18 @@ public class GameScreen implements Screen {
             currentHeartPos = -400;
         }
 
+    }
+
+    public Point[] createSixPoints() {
+        Point[] arr = new Point[6];
+        arr[0] = new Point(-300, 900);
+        arr[1] = new Point(1500, 900);
+        arr[2] = new Point(-300, 600);
+        arr[3] = new Point(1500, 600);
+        arr[4] = new Point(-300, 300);
+        arr[5] = new Point(1500, 300);
+
+        return arr;
     }
 
     @Override

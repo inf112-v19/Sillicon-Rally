@@ -91,6 +91,8 @@ public class GameObjectFactory {
         lasers = new ArrayList<>();
 
         MapLayer laserLayer = map.getMapLayerByName("Lasers");
+        if (laserLayer == null)
+            return;
 
         for (MapObject laser : laserLayer.getObjects() ) {
             RectangleMapObject laserRectangleObject = (RectangleMapObject) laser;
@@ -102,6 +104,8 @@ public class GameObjectFactory {
         repairs = new ArrayList<>();
 
         MapLayer repairLayer = map.getMapLayerByName("Repairs");
+        if (repairLayer == null)
+            return;
 
         for (MapObject repair : repairLayer.getObjects() ) {
             RectangleMapObject repairRectangleObject = (RectangleMapObject) repair;
@@ -114,6 +118,8 @@ public class GameObjectFactory {
         pitfalls = new ArrayList<>();
 
         MapLayer pitLayer = map.getMapLayerByName("Pits");
+        if (pitLayer == null)
+            return;
 
         for (MapObject pit : pitLayer.getObjects() ) {
             RectangleMapObject pitRectangleObject = (RectangleMapObject) pit;
@@ -126,6 +132,8 @@ public class GameObjectFactory {
     private void createConveyorBelts() {
         this.ForwardBelts = new ArrayList<>();
         MapLayer belts = map.getMapLayerByName("Belts");
+        if (belts == null)
+            return;
 
 
         for (MapObject belt: belts.getObjects()) {
@@ -139,6 +147,8 @@ public class GameObjectFactory {
         this.turnGears = new ArrayList<>();
 
         MapLayer mapLayer = map.getMapLayerByName("turnGears");
+        if (mapLayer == null)
+            return;
 
         for (MapObject turnGear: mapLayer.getObjects()) {
             RectangleMapObject turnGearObject = (RectangleMapObject) turnGear;

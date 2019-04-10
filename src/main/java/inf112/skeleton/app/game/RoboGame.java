@@ -58,11 +58,10 @@ public class RoboGame extends Game {
 
     @Override
     public void create() {
-
         playerList = new ArrayList<>();
-        gameMap = new GameMap("map.v.01.tmx");
+        //gameMap = new GameMap("map.v.01.tmx");
+        gameMap = new GameMap("MapNumberOne.tmx");
         this.TILE_SIZE_IN_PX = getTileSize();
-       // tiledMap = new TmxMapLoader().load("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.grid = makeGrid();
         GameObjectFactory constructor = new GameObjectFactory(gameMap, grid, this);
@@ -70,14 +69,18 @@ public class RoboGame extends Game {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
 
         camera = new CustomCamera(gameMap.getTiledMap());
+
+        System.out.println(((CustomCamera) camera).pixelWidth);
+
         camera.translate( -470, -700);
 
         sb = new SpriteBatch();
 
         texture = new Texture("cardLayouts/mech.jpg");
         backboard = new Sprite(texture);
-        backboard.setSize(1950,1600);
+        backboard.setSize(((CustomCamera) camera).pixelWidth*2,((CustomCamera) camera).pixelHeight*2);
         backboard.setPosition(-480,-700);
+
 
 
         deck = new StackOfCards();
