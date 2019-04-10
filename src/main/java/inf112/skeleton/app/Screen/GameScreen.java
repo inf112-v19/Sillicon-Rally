@@ -2,6 +2,7 @@ package inf112.skeleton.app.Screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -91,8 +92,28 @@ public class GameScreen implements Screen {
 
     private void drawFlagsPickedUp() {
         font.getData().setScale(3);
-        font.draw(game.sb, "1", -300, 600);
-        font.draw(game.sb, "1", 1000, 600);
+        font.setColor(new Color(0xaaaa));
+
+        int[] playersFlags = new int[game.playerList.size()];
+        for (int i = 0; i < game.playerList.size(); i++) {
+            Player player = game.playerList.get(i);
+            playersFlags[i] = player.flagNr;
+        }
+
+        String playerOneFlags = "Next flag: " + Integer.toString(playersFlags[0]);
+        String playerTwoFlags = "Next Flag: " + Integer.toString(playersFlags[1]);
+
+        if (playersFlags[0] == 5) {
+            playerOneFlags = "Winner!!!";
+        } else if (playersFlags[0] == 5) {
+            playerTwoFlags = "Winner!!!";
+        }
+
+        if (playerOneFlags.equalsIgnoreCase("2"))
+            System.out.println("Trig");
+
+        font.draw(game.sb, playerOneFlags, -300, 600);
+        font.draw(game.sb, playerTwoFlags, 1000, 600);
     }
 
     private void animateLaser() {
