@@ -204,12 +204,12 @@ public class GameScreen implements Screen {
 
     public Point[] createSixPoints() {
         Point[] arr = new Point[6];
-        arr[0] = new Point(-300, 900);
-        arr[1] = new Point(1500, 900);
-        arr[2] = new Point(-300, 600);
-        arr[3] = new Point(1500, 600);
-        arr[4] = new Point(-300, 300);
-        arr[5] = new Point(1500, 300);
+        arr[0] = new Point(-400, 900);
+        arr[1] = new Point(1200, 900);
+        arr[2] = new Point(-400, 600);
+        arr[3] = new Point(1200, 600);
+        arr[4] = new Point(-400, 300);
+        arr[5] = new Point(1200, 300);
 
         return arr;
     }

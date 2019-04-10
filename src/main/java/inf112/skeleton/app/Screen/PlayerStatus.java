@@ -49,7 +49,7 @@ public class PlayerStatus {
 
     private void drawNextFlagToPickUp(SpriteBatch sb) {
         font.getData().setScale(3);
-        font.setColor(new Color(0xaaaa));
+        font.setColor(new Color(999));
 
 
         String playerFlags = "Next flag: " + Integer.toString(player.flagNr);
@@ -58,7 +58,7 @@ public class PlayerStatus {
             playerFlags = "Winner!!!";
         }
 
-        font.draw(sb, playerFlags, xLocation, yLocation - 50);
+        font.draw(sb, playerFlags, xLocation, yLocation - 20);
     }
 
     private void drawLifeTokens(SpriteBatch sb) {
