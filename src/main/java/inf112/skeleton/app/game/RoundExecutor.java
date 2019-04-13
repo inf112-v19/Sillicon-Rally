@@ -8,7 +8,8 @@ public class RoundExecutor {
     List<Player> playerList;
     int playersTurn;
     public boolean isCurrentlyExecutingRound;
-    public int roundNr=1;
+
+    public int localRoundCounter=1;
 
     public RoundExecutor(List<Player> playerList) {
         this.playerList = playerList;
@@ -30,11 +31,10 @@ public class RoundExecutor {
         }
         Player player = playerList.get(playersTurn);
 
-        if(player.powerDownOn==roundNr) {
+        if(player.powerDownOn==localRoundCounter) {
             player.moveCardList.clear();
             player.powerDown();
             setNextPlayersTurn();
-            player.powerDownOn=0;
 
         }
         else {
@@ -51,11 +51,16 @@ public class RoundExecutor {
     }
 
     private boolean roundIsDone() {
-        roundNr++;
         for (Player player : playerList){
             if (!player.moveCardList.isEmpty())
                 return false;
+
+            player.roundNr=localRoundCounter;
+            //System.out.println("(player) current round: " + player.roundNr);
         }
+        localRoundCounter++;
+        //System.out.println("(local) current round: " + localRoundCounter);
+
         return true;
     }
 

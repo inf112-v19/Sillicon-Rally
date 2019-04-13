@@ -41,8 +41,9 @@ public class Player implements IGameObject, InputProcessor {
     public String name;
 
     public int flagNr=1;
+    public int roundNr=1;
 
-    public int powerDownOn=0;
+    public int powerDownOn = 0;
 
     //Constructor used for testing purposes only
     public Player(TileGrid grid) {
@@ -394,10 +395,8 @@ public class Player implements IGameObject, InputProcessor {
         }
 
         if (keycode==Input.Keys.P){
-            RoundExecutor roundExecutor = new RoundExecutor(game.playerList);
-            this.powerDownOn = (roundExecutor.roundNr)+1;
-            System.out.println("this player intends to power down next turn (turn: " + roundExecutor.roundNr +")");
-            //powerDown();
+            this.powerDownOn=roundNr+1;
+            System.out.println("this player intends to power on turn: " + (roundNr+1));
         }
 
         checkCollision(game.grid);
