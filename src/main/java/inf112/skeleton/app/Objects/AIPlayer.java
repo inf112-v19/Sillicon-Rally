@@ -8,7 +8,7 @@ public class AIPlayer extends Player {
 
     public AIPlayer(Texture texture, RoboGame.Direction startDirection, RoboGame game, String name) {
         super(texture,startDirection, game, name);
-        this.ai = new AI(this);
+        this.ai = new AI(this, game);
     }
 
     public void pickCards() {
