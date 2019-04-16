@@ -418,7 +418,7 @@ public class Player implements IGameObject, InputProcessor {
         return false;
     }
 
-    private void pickCard(int index) {
+    public void pickCard(int index) {
         MoveCard cardPicked = game.chooseCard(index, this);
 
         if (cardPicked != null)

@@ -29,15 +29,7 @@ public class GameScreen implements Screen {
     Texture NoLifeSprite;
     private RoboGame game;
     public GameMap gameMap;
-    public MainMenuScreen mainMenu;
-    public int TILE_SIZE_IN_PX;
-    public TiledMap tiledMap;
-    public SpriteBatch sb;
-    RoboGame.Direction startDirection;
     public TileGrid grid;
-    public StackOfCards deck;
-    private ArrayList<MoveCard> cardsOnBoard;
-    Player player;
     private DrawCards drawCards;
     private RoundExecutor roundExector;
     LaserAnimation laserAnimation;
@@ -46,18 +38,8 @@ public class GameScreen implements Screen {
     List<PlayerStatus> playerStatusList;
     Point[] statusScreenPoints;
 
-    private static final int upTopX = 1000;
-    private static final int upTopY = 700;
-    private static final int WidthButton = 240;
-    private static final int HeightButton = 100;
-    private static final int HeartCordY = 600;
-    private int HeartCordX = 1000;
-    private static final int HeartHeight = 60;
-    private static final int HeartWidth = 45;
-
     public GameScreen (RoboGame game){
         this.game = game;
-        //this.player = player;
         this.drawCards = new DrawCards(game);
         this.roundExector = new RoundExecutor(game.playerList);
         this.laserAnimation = new LaserAnimation();
@@ -96,10 +78,7 @@ public class GameScreen implements Screen {
         for (PlayerStatus status : playerStatusList) {
             status.draw(game.sb);
         }
-       // statusSreen.draw(game.sb);
-       // drawLifeTokens(game.playerList);
-       // drawHearts();
-       // drawFlagsPickedUp();
+
         game.sb.end();
 
         playRound();
@@ -107,36 +86,6 @@ public class GameScreen implements Screen {
 
     }
 
-    private void drawPlayerStatus() {
-
-    }
-
-    private void drawFlagsPickedUp() {
-        font.getData().setScale(3);
-        font.setColor(new Color(0xaaaa));
-
-        int[] playersFlags = new int[game.playerList.size()];
-        for (int i = 0; i < game.playerList.size(); i++) {
-            Player player = game.playerList.get(i);
-            playersFlags[i] = player.flagNr;
-        }
-
-
-        String playerOneFlags = "Next flag: " + Integer.toString(playersFlags[0]);
-        String playerTwoFlags = "Next Flag: " + Integer.toString(playersFlags[1]);
-
-        if (playersFlags[0] == 5) {
-            playerOneFlags = "Winner!!!";
-        } else if (playersFlags[0] == 5) {
-            playerTwoFlags = "Winner!!!";
-        }
-
-        if (playerOneFlags.equalsIgnoreCase("2"))
-            System.out.println("Trig");
-
-        font.draw(game.sb, playerOneFlags, -300, 600);
-        font.draw(game.sb, playerTwoFlags, 1000, 600);
-    }
 
     private void animateLaser() {
         if (roundExector.shootLaserNow) {
@@ -147,7 +96,7 @@ public class GameScreen implements Screen {
             roundExector.shootLaserNow = false;
         }
 
-        if (laserTimer >= 150) {
+        if (laserTimer >= 50) {
             for (Player player : game.playerList) {
                 player.removeLaser();
             }
@@ -170,37 +119,6 @@ public class GameScreen implements Screen {
             roundExector.playPlayerNextCard();
     }
 
-
-    private void drawLifeTokens(List<Player> players) {
-        int xDrawLocation = upTopX;
-
-        for (Player player : players) {
-            if (player.playerTokens == 2) {
-                game.sb.draw(TwoLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
-            } else if (player.playerTokens == 1) {
-                game.sb.draw(OneLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
-
-            } else if (player.playerTokens == 0) {
-                game.sb.draw(NoLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
-            } else
-                game.sb.draw(ThreeLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
-        xDrawLocation = -400;
-        }
-    }
-
-    public void drawHearts(){
-        List<Player> playerList = game.playerList;
-        int currentHeartPos = HeartCordX;
-
-        for (Player player : playerList) {
-            for (int i = 0; i < player.playerHP; i++) {
-                game.sb.draw(HeartSprite, currentHeartPos, HeartCordY, HeartWidth, HeartHeight);
-                currentHeartPos += 40;
-            }
-            currentHeartPos = -400;
-        }
-
-    }
 
     public Point[] createSixPoints() {
         Point[] arr = new Point[6];

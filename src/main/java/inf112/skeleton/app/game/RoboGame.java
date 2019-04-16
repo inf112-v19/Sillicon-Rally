@@ -59,12 +59,12 @@ public class RoboGame extends Game {
     @Override
     public void create() {
         playerList = new ArrayList<>();
-        //gameMap = new GameMap("map.v.01.tmx");
         gameMap = new GameMap("MapNumberOne.tmx");
         this.TILE_SIZE_IN_PX = getTileSize();
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.grid = makeGrid();
         GameObjectFactory constructor = new GameObjectFactory(gameMap, grid, this);
+        constructor.createObjects(this, playerList);
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
 

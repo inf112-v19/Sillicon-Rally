@@ -2,6 +2,7 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.Gdx;
 
+import inf112.skeleton.app.Objects.AIPlayer;
 import inf112.skeleton.app.Objects.Player;
 
 import java.util.List;
@@ -23,6 +24,10 @@ public class DrawCards {
     public void drawCards() {
         Player playerToDraw = playerList.get(playersTurn);
         Gdx.input.setInputProcessor(playerToDraw);
+
+        if (playerToDraw instanceof AIPlayer) {
+            ((AIPlayer) playerToDraw).pickCards();
+        }
         this.cardsDrawByPlayer = playerList.get(playersTurn).moveCardQueue.size();
 
         if ((cardsDrawByPlayer != 0) && cardsDrawByPlayer % 5 == 0)

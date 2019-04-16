@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import inf112.skeleton.app.Objects.AIPlayer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.game.RoboGame;
@@ -34,10 +35,10 @@ public class GameObjectFactory {
     public GameObjectFactory(GameMap map, TileGrid grid, RoboGame game) {
         this.map = map;
         this.grid = grid;
+    }
 
-
-        createPlayer1(game);
-        createPlayer2(game);
+    public void createObjects(RoboGame game, List<Player> playerList) {
+        createPlayers(playerList, game);
         createFlags();
         createTeleporter();
         createConveyorBelts();
@@ -48,27 +49,33 @@ public class GameObjectFactory {
         createPits();
     }
 
-    private void createPlayer(RoboGame game) {
-        RoboGame.Direction startDirection = RoboGame.Direction.North;
-        createPlayer1(game);
-        //player = new Player(new Texture("robot1.png"), startDirection,game, "Player 1");
-        //player2 = new Player(new Texture("robot2.png"), startDirection, game, "Player 2");
+    private void createPlayers(List<Player> playerList, RoboGame game) {
+        createPlayer1(playerList, game);
+        createPlayer2(playerList, game);
+        createAi(playerList, game);
+
     }
 
-    public Player createPlayer1(RoboGame game){
-
-        game.player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
-        grid.getTile(0, 0).addGameObject(game.player);
-        game.playerList.add(game.player);
-        return game.player;
-    }
-
-    public Player createPlayer2(RoboGame game){
+    private void createAi(List<Player> playerList, RoboGame game) {
         player2Texture = new Texture("robot2.png");
-        game.player2 = new Player((player2Texture), startDirection, game, "Player 2");
-        grid.getTile(0, 0).addGameObject(game.player2);
-        game.playerList.add(game.player2);
-        return game.player2;
+        AIPlayer player = new AIPlayer((player2Texture), startDirection, game, "AI");
+        grid.getTile(0, 0).addGameObject(player);
+        playerList.add(player);
+    }
+
+    public void createPlayer1(List<Player> playerList, RoboGame game){
+        //game.player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
+        Player player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
+        grid.getTile(0, 0).addGameObject(player);
+        playerList.add(player);
+    }
+
+
+    public void createPlayer2(List<Player> playerList, RoboGame game){
+        player2Texture = new Texture("robot2.png");
+        Player player = new Player((player2Texture), startDirection, game, "Player 2");
+        grid.getTile(0, 0).addGameObject(player);
+        playerList.add(player);
     }
 
     public void removePlayerSprite(RoboGame game, Player thisPlayer){
