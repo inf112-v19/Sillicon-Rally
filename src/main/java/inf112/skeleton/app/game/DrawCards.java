@@ -30,7 +30,7 @@ public class DrawCards {
         }
         this.cardsDrawByPlayer = playerList.get(playersTurn).moveCardQueue.size();
 
-        if ((cardsDrawByPlayer != 0) && cardsDrawByPlayer % 5 == 0)
+        if ((cardsDrawByPlayer != 0) && cardsDrawByPlayer % playerToDraw.maxCardsAllowedForPlayer == 0)
             setNextPlayersTurn();
     }
 
@@ -42,7 +42,6 @@ public class DrawCards {
 
         if (allPlayersDone()) {
             playersFinishedPickingCards = true;
-            //executeAllMoves();
             game.putCardsBackInDeck();
             game.drawNineCardsFromDeck();
         }

@@ -35,6 +35,7 @@ public class Player implements IGameObject, InputProcessor {
     public boolean playerIsDead = false;
     private int intPlayerInput = 0;
     public LinkedList<MoveCard> moveCardQueue;
+    public int maxCardsAllowedForPlayer;
 
     public MoveCard[] movecardArray;
     boolean[] booList;
@@ -78,6 +79,7 @@ public class Player implements IGameObject, InputProcessor {
         this.laserAnimation = new LaserAnimation();
         this.name = name;
         this.moveCardQueue = new LinkedList<>();
+        this.maxCardsAllowedForPlayer = 5;
     }
 
 
@@ -177,22 +179,7 @@ public class Player implements IGameObject, InputProcessor {
         }
     }
 
-    public void shootLaser() {
-        Tile playerTile = grid.getTileFromCoordinates(getY(), getX());
 
-        List<Tile> path = grid.getDirectPath(playerTile, getDirection());
-
-       // laserAnimation.animateLaser(this);
-
-        for (Tile tile : path) {
-            for (IGameObject object : tile.getGameObjects()) {
-                if (object instanceof Player && object != this) {
-                    Player otherPlayer = (Player) object;
-                    otherPlayer.damagePlayer(1, grid);
-                }
-            }
-        }
-    }
 
     public void removeLaser() {
         laserAnimation.removeLaser(this);
@@ -206,7 +193,10 @@ public class Player implements IGameObject, InputProcessor {
 
         if (playerHP <= 0)
             handleDeath(grid);
-            }
+
+        if (this.maxCardsAllowedForPlayer > 3)
+            this.maxCardsAllowedForPlayer--;
+    }
 
 
     @Override

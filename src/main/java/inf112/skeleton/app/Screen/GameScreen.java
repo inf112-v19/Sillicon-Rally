@@ -115,8 +115,10 @@ public class GameScreen implements Screen {
         if (drawCards.allPlayersDone())
             roundExector.isCurrentlyExecutingRound = true;
 
-        if (roundExector.isCurrentlyExecutingRound)
+        if (roundExector.isCurrentlyExecutingRound) {
+            Gdx.input.setInputProcessor(null);
             roundExector.playPlayerNextCard();
+        }
     }
 
 
