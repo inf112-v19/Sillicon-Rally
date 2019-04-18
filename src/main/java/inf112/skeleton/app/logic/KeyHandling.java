@@ -6,13 +6,16 @@ import inf112.skeleton.app.game.RoboGame;
 /**
  * Created by Martin on 22/03/2019.
  */
+/*
 public class KeyHandling extends RoboGame implements InputProcessor {
     RoboGame game;
+
 
     public KeyHandling(){
         game.create();
 
     }
+
 
     @Override
     public boolean keyDown(int i) {
@@ -54,3 +57,4 @@ public class KeyHandling extends RoboGame implements InputProcessor {
         return false;
     }
 }
+*/

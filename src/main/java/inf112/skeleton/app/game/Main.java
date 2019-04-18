@@ -2,6 +2,8 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import inf112.skeleton.app.Screen.MainMenuScreen;
+import inf112.skeleton.app.Screen.StartScreen;
 
 public class Main {
 
@@ -12,6 +14,8 @@ public class Main {
         cfg.height = RoboGame.ROBO_GAME_HEIGHT;
         cfg.resizable = true;
 
-        new LwjglApplication(new RoboGame(), cfg);
+
+        new LwjglApplication(new StartScreen(), cfg);
+       // new LwjglApplication(new RoboGame(), cfg);
     }
 }
