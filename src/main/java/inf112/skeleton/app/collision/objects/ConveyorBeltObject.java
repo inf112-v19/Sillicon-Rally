@@ -59,12 +59,12 @@ public class ConveyorBeltObject implements IGameObject {
 
     public int getConveyorSpeed(RectangleMapObject conveyorFromTile){
         String speedProperty = (String) conveyorFromTile.getProperties().get("speed");
-        int integer = 0;
+        int beltspeed = 0;
         switch (speedProperty){
-            case "1" : return integer = 1;
-            case "2" : return integer= 2;
+            case "1" : return beltspeed = 1;
+            case "2" : return beltspeed= 2;
         }
-        return integer;
+        return beltspeed;
     }
 
 
