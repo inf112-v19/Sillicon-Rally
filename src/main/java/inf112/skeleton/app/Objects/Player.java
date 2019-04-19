@@ -413,6 +413,7 @@ public class Player implements IGameObject, InputProcessor {
 
         if (cardPicked != null)
             moveCardQueue.add(cardPicked);
+
     }
 
     public LinkedList<MoveCard> getPlayersDeck() {

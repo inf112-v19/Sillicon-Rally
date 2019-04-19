@@ -24,7 +24,7 @@ public class DrawCards {
     public void drawCards() {
         Player playerToDraw = playerList.get(playersTurn);
         Gdx.input.setInputProcessor(playerToDraw);
-
+ 
         if (playerToDraw instanceof AIPlayer) {
             ((AIPlayer) playerToDraw).pickCards();
         }
@@ -60,7 +60,7 @@ public class DrawCards {
     public boolean allPlayersDone() {
 
         for (Player player : playerList) {
-            if (player.moveCardQueue.size() != 5)
+            if (player.moveCardQueue.size() != player.maxCardsAllowedForPlayer)
                 return false;
         }
 

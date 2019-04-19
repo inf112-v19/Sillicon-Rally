@@ -32,6 +32,16 @@ public class PlayerStatus {
         drawHearts(sb);
         drawLifeTokens(sb);
         drawNextFlagToPickUp(sb);
+        drawPlayerName(sb);
+    }
+
+    private void drawPlayerName(SpriteBatch sb) {
+        font.getData().setScale(3);
+        font.setColor(new Color(Color.YELLOW));
+        String name = player.name;
+
+        font.draw(sb, name, xLocation + 200, yLocation + 180);
+
     }
 
     private void drawHearts(SpriteBatch sb) {
