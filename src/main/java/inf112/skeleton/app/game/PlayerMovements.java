@@ -34,27 +34,26 @@ public class PlayerMovements {
 
     public void moveStraight(int steps, int moveDistance, TileGrid grid) {
         for (int i = 0; i < steps; i++) {
-            moveStraight(moveDistance, grid);
+            if (!moveStraight(moveDistance, grid))
+                return;
             player.checkForDamageTaken(grid);
         }
     }
 
 
-    private void moveStraight(int moveDistance, TileGrid grid) {
+    private boolean moveStraight(int moveDistance, TileGrid grid) {
         switch (direction) {
             case North:
-                setPosition((int) this.y + moveDistance, (int) this.x, grid);
-                break;
+                return setPosition((int) this.y + moveDistance, (int) this.x, grid);
             case East:
-                setPosition((int) this.y, (int) this.x + moveDistance, grid);
-                break;
+                return setPosition((int) this.y, (int) this.x + moveDistance, grid);
             case South:
-                setPosition((int) this.y - moveDistance, (int) this.x, grid);
-                break;
+                return setPosition((int) this.y - moveDistance, (int) this.x, grid);
             case West:
-                setPosition((int) this.y, (int) this.x - moveDistance, grid);
-                break;
+                return setPosition((int) this.y, (int) this.x - moveDistance, grid);
+
         }
+        return true;
     }
 
     public boolean checkIfMoveIsOutOfBounds(float y, float x, TileGrid grid) {
@@ -70,10 +69,10 @@ public class PlayerMovements {
     }
 
 
-    public void setPosition(float yDest, float xDest, TileGrid grid) {
+    public boolean setPosition(float yDest, float xDest, TileGrid grid) {
         if (checkIfMoveIsOutOfBounds(yDest, xDest, grid)) {
             player.handleDeath(grid);
-            return;
+            return false;
         }
 
         Tile currentTile = grid.getTileFromCoordinates(this.y, this.x);
@@ -83,6 +82,7 @@ public class PlayerMovements {
 
         currentTile.getGameObjects().remove(player);
         grid.getTileFromCoordinates(yDest, xDest).addGameObject(player);
+        return true;
     }
 
     public void rotateClockwise(TileGrid grid) {

@@ -19,6 +19,9 @@ public class TeleportObstacle implements IGameObject {
         this.map = map;
 
         MapLayer layer = map.getMapLayerByName("Teleports");
+        if (layer == null)
+            return;
+
         RectangleMapObject tpFrom = (RectangleMapObject) layer.getObjects().get(0);
         RectangleMapObject tpTo = (RectangleMapObject) layer.getObjects().get(1);
 

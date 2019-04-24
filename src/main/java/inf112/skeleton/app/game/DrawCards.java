@@ -2,6 +2,7 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.Gdx;
 
+import inf112.skeleton.app.Objects.AIPlayer;
 import inf112.skeleton.app.Objects.Player;
 
 import java.util.List;
@@ -23,9 +24,13 @@ public class DrawCards {
     public void drawCards() {
         Player playerToDraw = playerList.get(playersTurn);
         Gdx.input.setInputProcessor(playerToDraw);
-        this.cardsDrawByPlayer = playerList.get(playersTurn).moveCardList.size();
+ 
+        if (playerToDraw instanceof AIPlayer) {
+            ((AIPlayer) playerToDraw).pickCards();
+        }
+        this.cardsDrawByPlayer = playerList.get(playersTurn).moveCardQueue.size();
 
-        if ((cardsDrawByPlayer != 0) && cardsDrawByPlayer % 5 == 0)
+        if ((cardsDrawByPlayer != 0) && cardsDrawByPlayer % playerToDraw.maxCardsAllowedForPlayer == 0)
             setNextPlayersTurn();
     }
 
@@ -37,7 +42,6 @@ public class DrawCards {
 
         if (allPlayersDone()) {
             playersFinishedPickingCards = true;
-            //executeAllMoves();
             game.putCardsBackInDeck();
             game.drawNineCardsFromDeck();
         }
@@ -56,7 +60,7 @@ public class DrawCards {
     public boolean allPlayersDone() {
 
         for (Player player : playerList) {
-            if (player.moveCardList.size() != 5)
+            if (player.moveCardQueue.size() != player.maxCardsAllowedForPlayer)
                 return false;
         }
 

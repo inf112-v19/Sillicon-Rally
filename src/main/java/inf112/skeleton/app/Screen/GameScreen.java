@@ -2,10 +2,13 @@ package inf112.skeleton.app.Screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
@@ -26,32 +29,31 @@ public class GameScreen implements Screen {
     Texture NoLifeSprite;
     private RoboGame game;
     public GameMap gameMap;
-    public MainMenuScreen mainMenu;
-    public int TILE_SIZE_IN_PX;
-    public TiledMap tiledMap;
-    public SpriteBatch sb;
-    RoboGame.Direction startDirection;
     public TileGrid grid;
-    public StackOfCards deck;
-    private ArrayList<MoveCard> cardsOnBoard;
-    Player player;
     private DrawCards drawCards;
     private RoundExecutor roundExector;
+    LaserAnimation laserAnimation;
+    int laserTimer;
+    BitmapFont font;
+    List<PlayerStatus> playerStatusList;
+    Point[] statusScreenPoints;
 
-    private static final int upTopX = 1000;
-    private static final int upTopY = 700;
-    private static final int WidthButton = 240;
-    private static final int HeightButton = 100;
-    private static final int HeartCordY = 600;
-    private int HeartCordX = 1000;
-    private static final int HeartHeight = 60;
-    private static final int HeartWidth = 45;
-
-    public GameScreen (RoboGame game, Player player){
+    public GameScreen (RoboGame game){
         this.game = game;
-        this.player = player;
         this.drawCards = new DrawCards(game);
         this.roundExector = new RoundExecutor(game.playerList, game);
+        this.laserAnimation = new LaserAnimation();
+        this.laserTimer = 0;
+        this.font = new BitmapFont();
+        statusScreenPoints = createSixPoints();
+        playerStatusList = new ArrayList<>();
+
+        for (int i = 0; i < game.playerList.size(); i++) {
+            Player pl = game.playerList.get(i);
+            Point point = statusScreenPoints[i];
+            PlayerStatus status = new PlayerStatus(pl, point);
+            playerStatusList.add(status);
+        }
     }
 
 
@@ -62,6 +64,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+
         game.sb.begin();
         game.drawHUD();
         RoboGame.camera.update();
@@ -69,90 +72,66 @@ public class GameScreen implements Screen {
         RoboGame.tiledMapRenderer.render();
 
         game.sb.setProjectionMatrix(RoboGame.camera.combined);
-
-        game.handleInput(Gdx.graphics.getDeltaTime());
-        game.update(Gdx.graphics.getDeltaTime());
-
         game.drawSpritesFromGrid();
 
         game.sb.begin();
-
-        drawLifeTokens(game.playerList);
-        drawHearts();
+        for (PlayerStatus status : playerStatusList) {
+            status.draw(game.sb);
+        }
 
         game.sb.end();
 
+        playRound();
+        animateLaser();
+
+    }
+
+
+    private void animateLaser() {
+        if (roundExector.shootLaserNow) {
+            for (Player player : game.playerList) {
+                player.shootLaser(game.grid);
+                this.laserTimer++;
+            }
+            roundExector.shootLaserNow = false;
+        }
+
+        if (laserTimer >= 50) {
+            for (Player player : game.playerList) {
+                player.removeLaser();
+            }
+            laserTimer = 0;
+        }
+
+        if (laserTimer >= 0)
+            laserTimer++;
+
+    }
+
+    private void playRound() {
         if (!roundExector.isCurrentlyExecutingRound)
             drawCards.drawCards();
 
         if (drawCards.allPlayersDone())
             roundExector.isCurrentlyExecutingRound = true;
 
-        if (roundExector.isCurrentlyExecutingRound)
+        if (roundExector.isCurrentlyExecutingRound) {
+            Gdx.input.setInputProcessor(null);
             roundExector.playPlayerNextCard();
-    }
-
-    private void pickCards() {
-        List<Player> listOfPlayers = game.playerList;
-
-        int cardPicks = sumCardPicks(listOfPlayers);
-
-        for (Player player : game.playerList) {
-            Gdx.input.setInputProcessor(player);
-
-
-            if (player.chosenAllCards()) {
-                if (cardPicks % 5 == 0) {
-                    game.drawNineCardsFromDeck();
-                    cardPicks = 1;
-                }
-                continue;
-            }
         }
     }
 
-    private int sumCardPicks(List<Player> listOfPlayers) {
-        int sum = 0;
-        for (Player player : listOfPlayers) {
-            sum += player.chosencards;
-        }
-        return sum;
-    }
 
-    public void nextRound() {
-        game.putCardsBackInDeck();
-        game.drawNineCardsFromDeck();
-    }
+    public Point[] createSixPoints() {
+        Point[] arr = new Point[6];
+        arr[0] = new Point(-400, 900);
+        arr[1] = new Point(1200, 900);
+        arr[2] = new Point(-400, 600);
+        arr[3] = new Point(1200, 600);
+        arr[4] = new Point(-400, 300);
+        arr[5] = new Point(1200, 300);
 
-    private void drawLifeTokens(List<Player> players) {
-        int xDrawLocation = upTopX;
-
-        for (Player player : players) {
-            if (player.playerTokens == 2) {
-                game.sb.draw(TwoLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
-            } else if (player.playerTokens == 1) {
-                game.sb.draw(OneLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
-
-            } else if (player.playerTokens == 0) {
-                game.sb.draw(NoLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
-            } else
-                game.sb.draw(ThreeLifeSprite, xDrawLocation, upTopY, WidthButton, HeightButton);
-        xDrawLocation = -400;
-        }
-    }
-
-    public void drawHearts(){
-        List<Player> playerList = game.playerList;
-        int currentHeartPos = HeartCordX;
-
-        for (Player player : playerList) {
-            for (int i = 0; i < player.playerHP; i++) {
-                game.sb.draw(HeartSprite, currentHeartPos, HeartCordY, HeartWidth, HeartHeight);
-                currentHeartPos += 40;
-            }
-            currentHeartPos = -400;
-        }
-
+        return arr;
     }
 
     @Override

@@ -3,8 +3,10 @@ package inf112.skeleton.app.Objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import inf112.skeleton.app.Screen.GameOverScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.game.PlayerMovements;
@@ -30,32 +32,16 @@ public class Player implements IGameObject, InputProcessor {
     public final int MAX_DAMAGE_TOKENS = 3;
     public int MaxMoveCardLength = 5;
     public int chosencards = 0;
+    public boolean playerIsDead = false;
     private int intPlayerInput = 0;
-    public LinkedList<MoveCard> moveCardList;
+    public LinkedList<MoveCard> moveCardQueue;
+    public int maxCardsAllowedForPlayer;
 
     public MoveCard[] movecardArray;
     boolean[] booList;
     public String name;
 
-    public int flagNr=1;
-
-    //Constructor used for testing purposes only
-    public Player(TileGrid grid) {
-        RoboGame.Direction currentDirection = RoboGame.Direction.West;
-        backupLocation = null;
-        this.testCardsToBePlayed = new MoveCard[5];
-        playerMovements = new PlayerMovements(this, 0, 0, currentDirection);
-        this.playerHP = MAX_HP;
-        this.playerTokens = MAX_DAMAGE_TOKENS;
-
-        this.movecardArray = new MoveCard[5];
-        this.name = "";
-        this.laserAnimation = new LaserAnimation();
-
-        this.grid = grid;
-        this.sprite = new Sprite(new Texture("robot1.png"));
-        this.moveCardList = new LinkedList<>();
-    }
+    public int flagNr = 1;
 
     public void setName(String name) {
         this.name = name;
@@ -74,7 +60,8 @@ public class Player implements IGameObject, InputProcessor {
         this.movecardArray = new MoveCard[MaxMoveCardLength];
         this.laserAnimation = new LaserAnimation();
         this.name = name;
-        this.moveCardList = new LinkedList<>();
+        this.moveCardQueue = new LinkedList<>();
+        this.maxCardsAllowedForPlayer = 5;
     }
 
 
@@ -111,11 +98,21 @@ public class Player implements IGameObject, InputProcessor {
         }
         playerTokens -= 1;
         playerHP = MAX_HP;
-        System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);
+
+        if (playerTokens == 0) {
+            System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);
+
+            if (game != null){
+                game.setScreen(new GameOverScreen(game));}
+        }
+
+        if (this.maxCardsAllowedForPlayer > 3)
+            this.maxCardsAllowedForPlayer--;
     }
 
-    public void moveStraight(int speed, int moveDistance, TileGrid grid) {
-        playerMovements.moveStraight(speed, moveDistance, grid);
+
+    public void moveStraight(int steps, int moveDistance, TileGrid grid) {
+        playerMovements.moveStraight(steps, moveDistance, grid);
     }
 
     public void rotateClockwise(){playerMovements.rotateClockwise(grid);}
@@ -168,6 +165,12 @@ public class Player implements IGameObject, InputProcessor {
         }
     }
 
+
+
+    public void removeLaser() {
+        laserAnimation.removeLaser(this);
+    }
+
     public void damagePlayer(int damage, TileGrid grid) {
 
         this.playerHP -= damage;
@@ -176,7 +179,8 @@ public class Player implements IGameObject, InputProcessor {
 
         if (playerHP <= 0)
             handleDeath(grid);
-            }
+
+    }
 
 
     @Override
@@ -361,7 +365,7 @@ public class Player implements IGameObject, InputProcessor {
         else if (keycode == Input.Keys.R) {
             //nextRound();
         }
-        
+
         if (keycode == Input.Keys.L) {
             shootLaser(grid);
             return true;
@@ -388,28 +392,25 @@ public class Player implements IGameObject, InputProcessor {
         return false;
     }
 
-    private void pickCard(int index) {
+    public void pickCard(int index) {
         MoveCard cardPicked = game.chooseCard(index, this);
 
         if (cardPicked != null)
-            moveCardList.add(cardPicked);
-        System.out.println(moveCardList);
+            moveCardQueue.add(cardPicked);
 
-
-        //movecardArray[chosencards-1] = cardPicked;
     }
 
     public LinkedList<MoveCard> getPlayersDeck() {
-        return this.moveCardList;
+        return this.moveCardQueue;
     }
 
     public void setPlayerInput() {
-        if (game.currentPlayer == 0) {
+        if (game.currentPlayer == 0 && game.player2 != null) {
             Gdx.input.setInputProcessor(game.player2);
             game.currentPlayer = 1;
             return;
         }
-        
+
         if (game.currentPlayer == 1){
             Gdx.input.setInputProcessor(game.player);
             game.currentPlayer = 0;
@@ -419,29 +420,21 @@ public class Player implements IGameObject, InputProcessor {
 
 
     public void executeCard() {
-        int cardsBeenPlayed = 0;
         for (int i = 0; i < movecardArray.length; i++) {
-            /*
-            if (movecardArray[i] != null) {
-                MoveCard.Type type =  movecardArray[i].getType();
-                movePlayer(movecardArray[i].getType(), game.TILE_SIZE_IN_PX, grid);
-                cardsBeenPlayed++;
-            }
-            */
-            if (!moveCardList.isEmpty()) {
-                MoveCard card = moveCardList.poll();
+            if (!moveCardQueue.isEmpty()) {
+                MoveCard card = moveCardQueue.poll();
                 movePlayer(card.getType(), game.getTileSize(), grid);
             }
         }
         chosencards = 0;
-        moveCardList.clear();
+        moveCardQueue.clear();
     }
 
     public void executeNextCard() {
-        if (moveCardList.isEmpty())
+        if (moveCardQueue.isEmpty()) {
             return;
-
-        MoveCard card = moveCardList.poll();
+        }
+        MoveCard card = moveCardQueue.poll();
         game.addToDeck(card);
         movePlayer(card.getType(), game.getTileSize(), grid);
         chosencards--;
@@ -449,20 +442,8 @@ public class Player implements IGameObject, InputProcessor {
     }
 
     public boolean chosenAllCards() {
-       /* for (int i = 0; i < movecardArray.length; i++) {
-            if (movecardArray[i] == null)
-                return false;
-        }*/
-        return moveCardList.size() == 5;
+        return moveCardQueue.size() == 5;
     }
-
-    /*
-    public void nextRound() {
-            game.putCardsBackInDeck();
-            game.drawNineCardsFromDeck();
-    }
-    */
-
 
     @Override
     public boolean keyUp(int i) {
@@ -511,6 +492,7 @@ public class Player implements IGameObject, InputProcessor {
     /*
         For Testing only
      */
+
     public Player() {
         RoboGame.Direction currentDirection = RoboGame.Direction.West;
         backupLocation = null;
@@ -530,6 +512,25 @@ public class Player implements IGameObject, InputProcessor {
 
     public void increaseDeckCount() {
         this.chosencards++;
+    }
+
+    //Constructor used for testing purposes only
+    public Player(TileGrid grid) {
+        RoboGame.Direction currentDirection = RoboGame.Direction.West;
+        backupLocation = null;
+        this.testCardsToBePlayed = new MoveCard[5];
+        playerMovements = new PlayerMovements(this, 0, 0, currentDirection);
+        this.playerHP = MAX_HP;
+        this.playerTokens = MAX_DAMAGE_TOKENS;
+
+        this.movecardArray = new MoveCard[5];
+        this.name = "";
+        this.laserAnimation = new LaserAnimation();
+
+        this.grid = grid;
+        this.sprite = new Sprite(new Texture("robot1.png"));
+        this.moveCardQueue = new LinkedList<>();
+        this.maxCardsAllowedForPlayer = 5;
     }
 }
 

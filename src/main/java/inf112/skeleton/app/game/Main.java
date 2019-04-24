@@ -10,8 +10,7 @@ public class Main {
         cfg.title = "Silicon_Rally";
         cfg.width = RoboGame.ROBO_GAME_WIDTH;
         cfg.height = RoboGame.ROBO_GAME_HEIGHT;
-        cfg.resizable = false;
-
+        cfg.resizable = true;
 
         new LwjglApplication(new RoboGame(), cfg);
     }

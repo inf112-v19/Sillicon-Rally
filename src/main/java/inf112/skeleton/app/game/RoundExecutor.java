@@ -9,24 +9,38 @@ public class RoundExecutor {
     List<Player> playerList;
     int playersTurn;
     public boolean isCurrentlyExecutingRound;
+    public boolean shootLaserNow;
 
     public RoundExecutor(List<Player> playerList, RoboGame g) {
         this.game = g;
         this.playerList = playerList;
         this.playersTurn = 0;
         this.isCurrentlyExecutingRound = false;
+        this.shootLaserNow = false;
     }
 
     public void playPlayerNextCard() {
         if (roundIsDone() && isCurrentlyExecutingRound == true) {
             isCurrentlyExecutingRound = false;
             checkCollisions();
-            //game.shuffleDeck();
+            playerShootLaser();
             return;
         }
+        sleep(300);
 
+        Player player = playerList.get(playersTurn);
+        player.executeNextCard();
+        setNextPlayersTurn();
+
+    }
+
+    private void playerShootLaser() {
+        this.shootLaserNow = true;
+    }
+
+    private void sleep(int i) {
         try {
-            Thread.sleep(500);
+            Thread.sleep(i);
         } catch (Exception e) {
 
         }
@@ -45,7 +59,7 @@ public class RoundExecutor {
 
     private boolean roundIsDone() {
         for (Player player : playerList){
-            if (!player.moveCardList.isEmpty())
+            if (!player.moveCardQueue.isEmpty())
                 return false;
         }
         return true;

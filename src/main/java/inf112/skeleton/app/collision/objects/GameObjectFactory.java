@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import inf112.skeleton.app.Objects.AIPlayer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.game.RoboGame;
@@ -16,8 +17,8 @@ import java.util.List;
 public class GameObjectFactory {
     public GameMap map;
     public TileGrid grid;
-    public Player player;
-    public Player player2;
+    //public Player player;
+    //public Player player2;
     public ConveyorBeltObject conveyorBeltObject;
     public List<IGameObject> flags;
     public List<IGameObject> lasers;
@@ -28,12 +29,16 @@ public class GameObjectFactory {
     public List<ConveyorBeltObject> ForwardBelts;
     public List<TurnGearObject> turnGears;
 
+    private RoboGame.Direction startDirection = RoboGame.Direction.North;
+    public Texture player2Texture;
 
     public GameObjectFactory(GameMap map, TileGrid grid, RoboGame game) {
         this.map = map;
         this.grid = grid;
+    }
 
-        createPlayer(game);
+    public void createObjects(RoboGame game, List<Player> playerList) {
+        createPlayers(playerList, game);
         createFlags();
         createTeleporter();
         createConveyorBelts();
@@ -44,10 +49,37 @@ public class GameObjectFactory {
         createPits();
     }
 
-    private void createPlayer(RoboGame game) {
-        RoboGame.Direction startDirection = RoboGame.Direction.North;
-        player = new Player(new Texture("robot1.png"), startDirection,game, "Player 1");
-        player2 = new Player(new Texture("robot2.png"), startDirection, game, "Player 2");
+    private void createPlayers(List<Player> playerList, RoboGame game) {
+        createPlayer1(playerList, game);
+        createPlayer2(playerList, game);
+        createAi(playerList, game);
+
+    }
+
+    private void createAi(List<Player> playerList, RoboGame game) {
+        player2Texture = new Texture("robot2.png");
+        AIPlayer player = new AIPlayer((player2Texture), startDirection, game, "AI");
+        grid.getTile(0, 0).addGameObject(player);
+        playerList.add(player);
+    }
+
+    public void createPlayer1(List<Player> playerList, RoboGame game){
+        //game.player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
+        Player player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
+        grid.getTile(0, 0).addGameObject(player);
+        playerList.add(player);
+    }
+
+
+    public void createPlayer2(List<Player> playerList, RoboGame game){
+        player2Texture = new Texture("robot2.png");
+        Player player = new Player((player2Texture), startDirection, game, "Player 2");
+        grid.getTile(0, 0).addGameObject(player);
+        playerList.add(player);
+    }
+
+    public void removePlayerSprite(RoboGame game, Player thisPlayer){
+        grid.getTile(0,0).getGameObjects().remove(thisPlayer);
     }
 
     private void createFlags() {
@@ -66,6 +98,8 @@ public class GameObjectFactory {
         lasers = new ArrayList<>();
 
         MapLayer laserLayer = map.getMapLayerByName("Lasers");
+        if (laserLayer == null)
+            return;
 
         for (MapObject laser : laserLayer.getObjects() ) {
             RectangleMapObject laserRectangleObject = (RectangleMapObject) laser;
@@ -77,6 +111,8 @@ public class GameObjectFactory {
         repairs = new ArrayList<>();
 
         MapLayer repairLayer = map.getMapLayerByName("Repairs");
+        if (repairLayer == null)
+            return;
 
         for (MapObject repair : repairLayer.getObjects() ) {
             RectangleMapObject repairRectangleObject = (RectangleMapObject) repair;
@@ -89,6 +125,8 @@ public class GameObjectFactory {
         pitfalls = new ArrayList<>();
 
         MapLayer pitLayer = map.getMapLayerByName("Pits");
+        if (pitLayer == null)
+            return;
 
         for (MapObject pit : pitLayer.getObjects() ) {
             RectangleMapObject pitRectangleObject = (RectangleMapObject) pit;
@@ -101,6 +139,8 @@ public class GameObjectFactory {
     private void createConveyorBelts() {
         this.ForwardBelts = new ArrayList<>();
         MapLayer belts = map.getMapLayerByName("Belts");
+        if (belts == null)
+            return;
 
 
         for (MapObject belt: belts.getObjects()) {
@@ -114,6 +154,8 @@ public class GameObjectFactory {
         this.turnGears = new ArrayList<>();
 
         MapLayer mapLayer = map.getMapLayerByName("turnGears");
+        if (mapLayer == null)
+            return;
 
         for (MapObject turnGear: mapLayer.getObjects()) {
             RectangleMapObject turnGearObject = (RectangleMapObject) turnGear;

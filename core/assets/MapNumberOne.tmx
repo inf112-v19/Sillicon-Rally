@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="12" height="10" tilewidth="96" tileheight="96" infinite="0" nextlayerid="8" nextobjectid="54">
+ <tileset firstgid="1" source="standard.tsx"/>
+ <tileset firstgid="92" source="1.tsx"/>
+ <tileset firstgid="93" source="2.tsx"/>
+ <tileset firstgid="94" source="3.tsx"/>
+ <tileset firstgid="95" source="4.tsx"/>
+ <layer id="1" name="Rutelag 1" width="12" height="10">
+  <data encoding="csv">
+5,5,5,5,5,12,5,5,5,5,5,5,
+5,5,6,5,5,12,5,5,5,5,5,5,
+5,5,47,5,93,12,5,5,5,6,5,5,
+5,5,5,5,5,12,5,5,5,94,5,5,
+45,45,45,45,45,12,5,5,47,5,5,5,
+5,5,5,40,92,19,7,5,5,5,5,5,
+5,5,6,42,5,19,46,46,46,46,46,46,
+5,5,5,42,48,19,5,48,5,5,5,5,
+5,5,5,42,7,19,5,5,95,6,5,5,
+5,5,5,33,5,19,5,5,5,5,5,5
+</data>
+ </layer>
+ <objectgroup id="7" name="turnGears">
+  <object id="44" x="192" y="192" width="96" height="96">
+   <properties>
+    <property name="rotationDirection" value="counterClockwise"/>
+   </properties>
+  </object>
+  <object id="46" x="768" y="384" width="96" height="96">
+   <properties>
+    <property name="rotationDirection" value="counterClockwise"/>
+   </properties>
+  </object>
+  <object id="47" x="384" y="672" width="96" height="96">
+   <properties>
+    <property name="rotationDirection" value="clockwise"/>
+   </properties>
+  </object>
+  <object id="48" x="672" y="672" width="96" height="96">
+   <properties>
+    <property name="rotationDirection" value="clockwise"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="2" name="Pits">
+  <object id="1" x="864" y="192" width="96" height="96"/>
+  <object id="2" x="192" y="96" width="96" height="96"/>
+  <object id="3" x="192" y="576" width="96" height="96"/>
+  <object id="4" x="864" y="768" width="96" height="96"/>
+ </objectgroup>
+ <objectgroup id="3" name="Flags">
+  <object id="5" x="384" y="480" width="96" height="96">
+   <properties>
+    <property name="nr" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="6" x="384" y="192" width="96" height="96">
+   <properties>
+    <property name="nr" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="7" x="864" y="288" width="96" height="96">
+   <properties>
+    <property name="nr" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="8" x="768" y="768" width="96" height="96">
+   <properties>
+    <property name="nr" type="int" value="4"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Lasers">
+  <object id="11" x="288" y="480" width="96" height="96"/>
+  <object id="12" x="288" y="576" width="96" height="96"/>
+  <object id="14" x="288" y="672" width="96" height="96"/>
+  <object id="15" x="288" y="768" width="96" height="96"/>
+  <object id="16" x="288" y="864" width="96" height="96"/>
+ </objectgroup>
+ <objectgroup id="6" name="Belts">
+  <object id="21" x="480" y="192" width="96" height="96">
+   <properties>
+    <property name="direction" value="north"/>
+    <property name="speed" value="2"/>
+   </properties>
+  </object>
+  <object id="23" x="480" y="0" width="96" height="96">
+   <properties>
+    <property name="direction" value="north"/>
+    <property name="speed" value="2"/>
+   </properties>
+  </object>
+  <object id="24" x="480" y="96" width="96" height="96">
+   <properties>
+    <property name="direction" value="north"/>
+    <property name="speed" value="2"/>
+   </properties>
+  </object>
+  <object id="25" x="480" y="288" width="96" height="96">
+   <properties>
+    <property name="direction" value="north"/>
+    <property name="speed" value="2"/>
+   </properties>
+  </object>
+  <object id="26" x="480" y="384" width="96" height="96">
+   <properties>
+    <property name="direction" value="north"/>
+    <property name="speed" value="2"/>
+   </properties>
+  </object>
+  <object id="27" x="480" y="480" width="96" height="96">
+   <properties>
+    <property name="direction" value="south"/>
+    <property name="speed" value="2"/>
+   </properties>
+  </object>
+  <object id="28" x="480" y="576" width="96" height="96">
+   <properties>
+    <property name="direction" value="south"/>
+    <property name="speed" value="2"/>
+   </properties>
+  </object>
+  <object id="30" x="480" y="672" width="96" height="96">
+   <properties>
+    <property name="direction" value="south"/>
+    <property name="speed" value="2"/>
+   </properties>
+  </object>
+  <object id="31" x="480" y="768" width="96" height="96">
+   <properties>
+    <property name="direction" value="south"/>
+    <property name="speed" value="2"/>
+   </properties>
+  </object>
+  <object id="32" x="480" y="864" width="96" height="96">
+   <properties>
+    <property name="direction" value="south"/>
+    <property name="speed" value="2"/>
+   </properties>
+  </object>
+  <object id="33" x="384" y="384" width="96" height="96">
+   <properties>
+    <property name="direction" value="west"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="34" x="288" y="384" width="96" height="96">
+   <properties>
+    <property name="direction" value="west"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="35" x="192" y="384" width="96" height="96">
+   <properties>
+    <property name="direction" value="west"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="36" x="96" y="384" width="96" height="96">
+   <properties>
+    <property name="direction" value="west"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="37" x="0" y="384" width="96" height="96">
+   <properties>
+    <property name="direction" value="west"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="38" x="576" y="576" width="96" height="96">
+   <properties>
+    <property name="direction" value="east"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="49" x="672" y="576" width="96" height="96">
+   <properties>
+    <property name="direction" value="east"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="50" x="768" y="576" width="96" height="96">
+   <properties>
+    <property name="direction" value="east"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="51" x="864" y="576" width="96" height="96">
+   <properties>
+    <property name="direction" value="east"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="52" x="960" y="576" width="96" height="96">
+   <properties>
+    <property name="direction" value="east"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="53" x="1056" y="576" width="96" height="96">
+   <properties>
+    <property name="direction" value="east"/>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

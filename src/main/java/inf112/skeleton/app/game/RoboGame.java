@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.Screen.GameOverScreen;
 import inf112.skeleton.app.Screen.GameScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 
 public class RoboGame extends Game {
     public static OrthographicCamera camera;
-    public int TILE_SIZE_IN_PX;
+    public static int TILE_SIZE_IN_PX;
     public TiledMap tiledMap;
     public static TiledMapRenderer tiledMapRenderer;
     public SpriteBatch sb;
@@ -53,48 +54,50 @@ public class RoboGame extends Game {
         return player;
     }
 
+
+
     @Override
     public void create() {
-        gameMap = new GameMap("map.v.01.tmx");
+        playerList = new ArrayList<>();
+        gameMap = new GameMap("MapNumberOne.tmx");
         this.TILE_SIZE_IN_PX = getTileSize();
-       // tiledMap = new TmxMapLoader().load("map.v.01.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.grid = makeGrid();
         GameObjectFactory constructor = new GameObjectFactory(gameMap, grid, this);
-        //this.setScreen(new MainMenuScreen(this, player));
+        constructor.createObjects(this, playerList);
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
 
         camera = new CustomCamera(gameMap.getTiledMap());
+
+        System.out.println(((CustomCamera) camera).pixelWidth);
+
         camera.translate( -470, -700);
 
         sb = new SpriteBatch();
 
         texture = new Texture("cardLayouts/mech.jpg");
         backboard = new Sprite(texture);
-        backboard.setSize(1950,1600);
+        backboard.setSize(((CustomCamera) camera).pixelWidth*2,((CustomCamera) camera).pixelHeight*2);
         backboard.setPosition(-480,-700);
+
 
 
         deck = new StackOfCards();
         listOfNine = new MoveCard[9];
-
         chosenFive = new MoveCard[5];
-
-        playerList = new ArrayList<>();
-        player = constructor.player;
-        grid.getTile(0,0).addGameObject(player);
-        playerList.add(player);
-
-        player2 = constructor.player2;
-        grid.getTile(0,0).addGameObject(player2);
-        playerList.add(player2);
 
         Gdx.input.setInputProcessor(playerList.get(currentPlayer));
 
-        this.setScreen(new GameScreen(this, playerList.get(currentPlayer)));
+        this.setScreen(new GameScreen(this));
 
         drawNineCardsFromDeck();
+    }
+
+    public Player getCurrentPlayer(){
+        if (currentPlayer == 0)
+            return player2;
+        return player;
     }
 
     public MoveCard chooseCard(int index, Player currentPlayer) {
@@ -242,7 +245,7 @@ public class RoboGame extends Game {
     }
 
     public void update(float deltaTime) {
-        player.update(deltaTime, grid);
+        getCurrentPlayer().update(deltaTime, grid);
     }
 
 
