@@ -11,7 +11,7 @@ import java.util.LinkedList;
 public class Dfs {
     MoveCard[] listOfNine;
     boolean[] selected;
-    LinkedList<MoveCard> queue;
+    LinkedList<Integer> queue;
     int cardsToChoose;
     RoboGame game;
     int selectedCards = 0;
@@ -21,7 +21,7 @@ public class Dfs {
     TileGrid grid;
 
     //Only created so we can use the checkIfMoveIsOutOfBounds method
-    PlayerMovements movements = new PlayerMovements(new Player(), 0,0,RoboGame.Direction.North);
+    PlayerMovements movements;
     Graph graph;
 
     public Dfs(RoboGame game, int cardsToChoose, Position position) {
@@ -33,6 +33,7 @@ public class Dfs {
         this.queue = new LinkedList<>();
         this.currentPosition = position;
         this.originalPosition = position;
+        this.movements = new PlayerMovements(new Player(),position.y, position.x, position.dir);
     }
 
     public void dfs() {
@@ -59,7 +60,7 @@ public class Dfs {
     private void dfs(int i) {
         selected[i] = true;
         selectedCards++;
-        queue.add(listOfNine[i]);
+        queue.add(i);
 
         if (queue.size() == cardsToChoose) {
             foundAllCards = true;
@@ -68,19 +69,20 @@ public class Dfs {
 
 
         Iterator<Integer> iter = graph.getAdj()[i].listIterator();
-        while (iter.hasNext()) {
+        while (iter.hasNext() && !foundAllCards) {
             int n = iter.next();
-            if (!selected[n] && isNotLegalMove(listOfNine[i]))
+            if (!selected[n] && !isIllegalMove(listOfNine[i]))
                 dfs(n);
         }
     }
 
-    private boolean isNotLegalMove(MoveCard moveCard) {
+    private boolean isIllegalMove(MoveCard moveCard) {
+        currentPosition.movePosition(moveCard.getType(), movements, grid);
         return movements.checkIfMoveIsOutOfBounds(currentPosition.y, currentPosition.x, grid);
-        
+
     }
 
-    public LinkedList<MoveCard> getSelectedCards() {
+    public LinkedList<Integer> getSelectedCards() {
         return queue;
     }
 }

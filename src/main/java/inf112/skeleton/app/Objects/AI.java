@@ -3,6 +3,8 @@ package inf112.skeleton.app.Objects;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.game.RoboGame;
 
+import java.util.LinkedList;
+
 public class AI {
     Player player;
     RoboGame game;
@@ -15,16 +17,19 @@ public class AI {
     }
 
     public void pickCard() {
-        player.pickCard(1);
-        player.pickCard(2);
-        player.pickCard(3);
-        player.pickCard(4);
-        player.pickCard(5);
-
         MoveCard[] listOfNine = game.listOfNine;
         initiate();
         Position position = new Position(player.getY(), player.getX(), player.getDirection());
         Dfs dfs = new Dfs(game, player.maxCardsAllowedForPlayer, position);
+        dfs.dfs();
+        LinkedList<Integer> selectedCards = dfs.getSelectedCards();
+
+
+        while (!selectedCards.isEmpty()) {
+            int index = selectedCards.poll();
+            System.out.println("AI's selection: " + game.listOfNine[index]);
+            player.pickCard(index);
+        }
     }
 
     private void initiate() {
