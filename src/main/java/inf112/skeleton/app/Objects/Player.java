@@ -126,10 +126,6 @@ public class Player implements IGameObject, InputProcessor {
         this.powerDownOn=0;
     }
 
-    public void moveStraight(int speed, int moveDistance, TileGrid grid) {
-        playerMovements.moveStraight(speed, moveDistance, grid);
-    }
-
     public void rotateClockwise(){playerMovements.rotateClockwise(grid);}
 
     public void rotateCounterClockwise() {playerMovements.rotateCounterClockwise(grid);}

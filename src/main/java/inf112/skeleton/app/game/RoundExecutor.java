@@ -49,7 +49,7 @@ public class RoundExecutor {
         Player player = playerList.get(playersTurn);
 
         if(player.powerDownOn==localRoundCounter) {
-            player.moveCardList.clear();
+            player.moveCardQueue.clear();
             player.powerDown();
             setNextPlayersTurn();
             player.executeCard();
