@@ -35,7 +35,7 @@ public class RoundExecutor {
             player.moveCardList.clear();
             player.powerDown();
             setNextPlayersTurn();
-
+            player.executeCard();
         }
         else {
             player.executeNextCard();
