@@ -11,6 +11,8 @@ public class RoundExecutor {
     public boolean isCurrentlyExecutingRound;
     public boolean shootLaserNow;
 
+    public int localRoundCounter=1;
+
     public RoundExecutor(List<Player> playerList, RoboGame g) {
         this.game = g;
         this.playerList = playerList;
@@ -45,9 +47,18 @@ public class RoundExecutor {
 
         }
         Player player = playerList.get(playersTurn);
-        player.executeNextCard();
+
+        if(player.powerDownOn==localRoundCounter) {
+            player.moveCardList.clear();
+            player.powerDown();
+            setNextPlayersTurn();
+            player.executeCard();
+        }
+        else {
+            player.executeNextCard();
         checkCollisions();
-        setNextPlayersTurn();
+            setNextPlayersTurn();
+        }
     }
 
     private void checkCollisions() {
@@ -61,11 +72,17 @@ public class RoundExecutor {
         for (Player player : playerList){
             if (!player.moveCardQueue.isEmpty())
                 return false;
+
+            player.roundNr=localRoundCounter;
+            //System.out.println("(player) current round: " + player.roundNr);
         }
+        localRoundCounter++;
+        //System.out.println("(local) current round: " + localRoundCounter);
+
         return true;
     }
 
-    private void setNextPlayersTurn() {
+    private void setNextPlayersTurn(){
         int currentPlayer = playersTurn;
         this.playersTurn = (currentPlayer+1) % playerList.size();
 
