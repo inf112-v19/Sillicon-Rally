@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class RoboGame extends Game {
     public static OrthographicCamera camera;
-    public int TILE_SIZE_IN_PX;
+    public static int TILE_SIZE_IN_PX;
     public TiledMap tiledMap;
     public static TiledMapRenderer tiledMapRenderer;
     public SpriteBatch sb;

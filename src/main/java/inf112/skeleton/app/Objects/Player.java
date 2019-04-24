@@ -108,8 +108,8 @@ public class Player implements IGameObject, InputProcessor {
     }
 
 
-    public void moveStraight(int speed, int moveDistance, TileGrid grid) {
-        playerMovements.moveStraight(speed, moveDistance, grid);
+    public void moveStraight(int steps, int moveDistance, TileGrid grid) {
+        playerMovements.moveStraight(steps, moveDistance, grid);
     }
 
     public void rotateClockwise(){playerMovements.rotateClockwise(grid);}
