@@ -3,8 +3,6 @@ package inf112.skeleton.app.collision.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.grid.Tile;
@@ -15,7 +13,7 @@ public class FlagObject implements IGameObject {
     public int yLocation;
     public int xLocation;
     Tile flagTile;
-    public int flag;
+    public int flagNumber;
     public int maxFlags= 4;
 
     public FlagObject(RectangleMapObject flagFromTiled, TileGrid grid) {
@@ -28,7 +26,7 @@ public class FlagObject implements IGameObject {
         flagTile = grid.getTileFromCoordinates(yLocation, xLocation);
         flagTile.addGameObject(this);
 
-        flag=(int)flagFromTiled.getProperties().get("nr");
+        flagNumber =(int)flagFromTiled.getProperties().get("nr");
     }
 
     public FlagObject(int y, int x, TileGrid grid){
@@ -44,17 +42,21 @@ public class FlagObject implements IGameObject {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
 
-        if (flagTile.equals(playerTile) && (player.flagNr==flag)) {
+        if (flagTile.equals(playerTile) && (player.flagNr== flagNumber)) {
             player.setBackupLocation(flagTile);
             player.flagNr++;
         }
-        System.out.println("this is flag: " + flag);
+        System.out.println("this is flagNumber: " + flagNumber);
+        System.out.println(presentNextFlag(player)); //TODO victory screen
+    }
 
-        if(player.flagNr>maxFlags){
-            System.out.println("you win"); //TODO victory screen
+    public String presentNextFlag(Player player){
+        if (player.flagNr>maxFlags){
+            return "you win";
         }
-        else
-            System.out.println("player needs flag nr: " + player.flagNr);
+        else{
+            return "player needs flagNumber nr: " + player.flagNr;
+        }
     }
 
 

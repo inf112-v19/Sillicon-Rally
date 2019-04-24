@@ -8,6 +8,7 @@ import inf112.skeleton.app.grid.TileGrid;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 //import jdk.internal.util.xml.impl.Input;
@@ -181,5 +182,14 @@ public class PlayerTest {
         assertEquals(5, player.playerHP);
     }
 
+
+    @Test
+    void playerChooseFewerCardsAfterDamageTest(){
+        setup();
+        int initialMaxCards = player.maxCardsAllowedForPlayer;
+        player.handleDeath(grid);
+        System.out.println(player.maxCardsAllowedForPlayer);
+        assertTrue(initialMaxCards > player.maxCardsAllowedForPlayer);
+    }
 
 }

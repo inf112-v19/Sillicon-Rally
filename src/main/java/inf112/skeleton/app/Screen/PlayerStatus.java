@@ -62,7 +62,7 @@ public class PlayerStatus {
         font.setColor(new Color(999));
 
 
-        String playerFlags = "Next flag: " + Integer.toString(player.flagNr);
+        String playerFlags = "Next flagNumber: " + Integer.toString(player.flagNr);
 
         if (player.flagNr == 5) {
             playerFlags = "Winner!!!";
