@@ -18,8 +18,6 @@ public class GameOverScreen implements Screen {
 
 
 
-
-
     @Override
     public void show() {
         GameOver = new Texture("GAMEOVER.png");

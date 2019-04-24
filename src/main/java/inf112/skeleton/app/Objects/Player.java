@@ -43,24 +43,6 @@ public class Player implements IGameObject, InputProcessor {
 
     public int flagNr=1;
 
-    //Constructor used for testing purposes only
-    public Player(TileGrid grid) {
-        RoboGame.Direction currentDirection = RoboGame.Direction.West;
-        backupLocation = null;
-        this.testCardsToBePlayed = new MoveCard[5];
-        playerMovements = new PlayerMovements(this, 0, 0, currentDirection);
-        this.playerHP = MAX_HP;
-        this.playerTokens = MAX_DAMAGE_TOKENS;
-
-        this.movecardArray = new MoveCard[5];
-        this.name = "";
-        this.laserAnimation = new LaserAnimation();
-
-        this.grid = grid;
-        this.sprite = new Sprite(new Texture("robot1.png"));
-        this.moveCardQueue = new LinkedList<>();
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -120,9 +102,10 @@ public class Player implements IGameObject, InputProcessor {
         if (playerTokens == 0) {
             System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);
 
-            game.setScreen(new GameOverScreen(game));
+            if (game != null){
+                game.setScreen(new GameOverScreen(game));}
         }
-        }
+    }
 
 
     public void moveStraight(int speed, int moveDistance, TileGrid grid) {
@@ -381,7 +364,7 @@ public class Player implements IGameObject, InputProcessor {
         else if (keycode == Input.Keys.R) {
             //nextRound();
         }
-        
+
         if (keycode == Input.Keys.L) {
             shootLaser(grid);
             return true;
@@ -426,7 +409,7 @@ public class Player implements IGameObject, InputProcessor {
             game.currentPlayer = 1;
             return;
         }
-        
+
         if (game.currentPlayer == 1){
             Gdx.input.setInputProcessor(game.player);
             game.currentPlayer = 0;
@@ -507,6 +490,7 @@ public class Player implements IGameObject, InputProcessor {
     /*
         For Testing only
      */
+
     public Player() {
         RoboGame.Direction currentDirection = RoboGame.Direction.West;
         backupLocation = null;
@@ -526,6 +510,24 @@ public class Player implements IGameObject, InputProcessor {
 
     public void increaseDeckCount() {
         this.chosencards++;
+    }
+
+    //Constructor used for testing purposes only
+    public Player(TileGrid grid) {
+        RoboGame.Direction currentDirection = RoboGame.Direction.West;
+        backupLocation = null;
+        this.testCardsToBePlayed = new MoveCard[5];
+        playerMovements = new PlayerMovements(this, 0, 0, currentDirection);
+        this.playerHP = MAX_HP;
+        this.playerTokens = MAX_DAMAGE_TOKENS;
+
+        this.movecardArray = new MoveCard[5];
+        this.name = "";
+        this.laserAnimation = new LaserAnimation();
+
+        this.grid = grid;
+        this.sprite = new Sprite(new Texture("robot1.png"));
+        this.moveCardQueue = new LinkedList<>();
     }
 }
 

@@ -29,6 +29,7 @@ public class SetupVariables {
     public Player player;
     public int TILESIZE_IN_PX;
     public FlagObject flag;
+    public FlagObject flag2;
     public ConveyorBeltObject belt;
     public LaserObject laser;
     public RepairObject repairObject;
@@ -48,6 +49,7 @@ public class SetupVariables {
         this.player = new Player(grid);
         this.TILESIZE_IN_PX = gameMap.getTileSize();
         this.flag = new FlagObject(2,4,grid);
+        this.flag2 = new FlagObject(3,4, grid);
         this.belt = new ConveyorBeltObject(4, 4, grid, 1, RoboGame.Direction.West);
         this.laser = new LaserObject(2,2, grid);
         this.repairObject = new RepairObject(2,2,grid);
