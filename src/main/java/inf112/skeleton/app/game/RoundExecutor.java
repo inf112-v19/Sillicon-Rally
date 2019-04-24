@@ -5,11 +5,13 @@ import inf112.skeleton.app.Objects.Player;
 import java.util.List;
 
 public class RoundExecutor {
+    private RoboGame game;
     List<Player> playerList;
     int playersTurn;
     public boolean isCurrentlyExecutingRound;
 
-    public RoundExecutor(List<Player> playerList) {
+    public RoundExecutor(List<Player> playerList, RoboGame g) {
+        this.game = g;
         this.playerList = playerList;
         this.playersTurn = 0;
         this.isCurrentlyExecutingRound = false;
@@ -19,6 +21,7 @@ public class RoundExecutor {
         if (roundIsDone() && isCurrentlyExecutingRound == true) {
             isCurrentlyExecutingRound = false;
             checkCollisions();
+            //game.shuffleDeck();
             return;
         }
 

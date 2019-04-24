@@ -51,7 +51,7 @@ public class GameScreen implements Screen {
         this.game = game;
         this.player = player;
         this.drawCards = new DrawCards(game);
-        this.roundExector = new RoundExecutor(game.playerList);
+        this.roundExector = new RoundExecutor(game.playerList, game);
     }
 
 

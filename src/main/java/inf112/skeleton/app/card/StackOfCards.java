@@ -79,4 +79,8 @@ public class StackOfCards {
         }
     }
 
+    public void putCardInDeck(MoveCard cd) {
+        stack.push(cd);
+    }
+
 }

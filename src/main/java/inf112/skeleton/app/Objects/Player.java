@@ -442,6 +442,7 @@ public class Player implements IGameObject, InputProcessor {
             return;
 
         MoveCard card = moveCardList.poll();
+        game.addToDeck(card);
         movePlayer(card.getType(), game.getTileSize(), grid);
         chosencards--;
         checkForDamageTaken();
