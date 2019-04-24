@@ -105,6 +105,9 @@ public class Player implements IGameObject, InputProcessor {
             if (game != null){
                 game.setScreen(new GameOverScreen(game));}
         }
+
+        if (this.maxCardsAllowedForPlayer > 3)
+            this.maxCardsAllowedForPlayer--;
     }
 
 
@@ -177,8 +180,6 @@ public class Player implements IGameObject, InputProcessor {
         if (playerHP <= 0)
             handleDeath(grid);
 
-        if (this.maxCardsAllowedForPlayer > 3)
-            this.maxCardsAllowedForPlayer--;
     }
 
 
@@ -528,6 +529,7 @@ public class Player implements IGameObject, InputProcessor {
         this.grid = grid;
         this.sprite = new Sprite(new Texture("robot1.png"));
         this.moveCardQueue = new LinkedList<>();
+        this.maxCardsAllowedForPlayer = 5;
     }
 }
 
