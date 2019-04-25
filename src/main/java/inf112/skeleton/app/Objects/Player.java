@@ -11,6 +11,7 @@ import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.collision.objects.CollisionHandler;
 import inf112.skeleton.app.game.PlayerMovements;
 import inf112.skeleton.app.game.RoboGame;
+import inf112.skeleton.app.game.RoundExecutor;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
@@ -26,10 +27,12 @@ public class Player implements IGameObject, InputProcessor {
     private RoboGame game;
     private PlayerMovements playerMovements;
     private LaserAnimation laserAnimation;
+
     public int playerHP;
     public int playerTokens;
     public final int MAX_HP = 6;
     public final int MAX_DAMAGE_TOKENS = 3;
+
     public int MaxMoveCardLength = 5;
     public int chosencards = 0;
     public boolean playerIsDead = false;
@@ -41,7 +44,10 @@ public class Player implements IGameObject, InputProcessor {
     boolean[] booList;
     public String name;
 
-    public int flagNr=1;
+    public int flagNr = 1;
+    public int roundNr=1;
+
+    public int powerDownOn = 0;
 
     public void setName(String name) {
         this.name = name;
@@ -112,7 +118,12 @@ public class Player implements IGameObject, InputProcessor {
 
 
     public void moveStraight(int steps, int moveDistance, TileGrid grid) {
-        playerMovements.moveStraight(steps, moveDistance, grid);
+        playerMovements.moveStraight(steps, moveDistance, grid);}
+
+        public void powerDown(){
+        this.playerHP=MAX_HP;
+        System.out.println("player powering down");
+        this.powerDownOn=0;
     }
 
     public void rotateClockwise(){playerMovements.rotateClockwise(grid);}
@@ -386,6 +397,11 @@ public class Player implements IGameObject, InputProcessor {
             setPlayerInput();
         }
 
+        if (keycode==Input.Keys.P){
+            this.powerDownOn=roundNr+1;
+            System.out.println("this player intends to power on turn: " + (roundNr+1));
+        }
+
         checkCollision(game.grid);
         System.out.println("Cards picked: " + Arrays.toString(movecardArray));
 
@@ -431,10 +447,11 @@ public class Player implements IGameObject, InputProcessor {
     }
 
     public void executeNextCard() {
-        if (moveCardQueue.isEmpty())
+        if (moveCardQueue.isEmpty()) {
             return;
-
+        }
         MoveCard card = moveCardQueue.poll();
+        game.addToDeck(card);
         movePlayer(card.getType(), game.getTileSize(), grid);
         chosencards--;
         checkForDamageTaken();

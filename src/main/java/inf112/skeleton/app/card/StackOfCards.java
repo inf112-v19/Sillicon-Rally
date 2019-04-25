@@ -66,5 +66,21 @@ public class StackOfCards {
         return stack.pop();
     }
 
+    public void shuffle() {
+        ArrayList<MoveCard> shuffleableList = new ArrayList<>();
+        while (!stack.isEmpty()) {
+            MoveCard temp = stack.pop();
+            shuffleableList.add(temp);
+        }
+        Collections.shuffle(shuffleableList);
+        for (MoveCard m : shuffleableList) {
+            stack.push(m);
+            shuffleableList.remove(m);
+        }
+    }
+
+    public void putCardInDeck(MoveCard cd) {
+        stack.push(cd);
+    }
 
 }

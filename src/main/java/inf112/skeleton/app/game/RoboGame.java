@@ -33,7 +33,7 @@ public class RoboGame extends Game {
     public Player player2;
     public TileGrid grid;
     public GameMap gameMap;
-    private StackOfCards deck;
+    public StackOfCards deck;
     public MoveCard cardPickedByPlayer;
     public MoveCard[] listOfNine;
     public MoveCard[] chosenFive;
@@ -231,9 +231,17 @@ public class RoboGame extends Game {
     public void putCardsBackInDeck() {
         for (int i = 0; i < listOfNine.length; i++) {
             if(listOfNine[i] != null) {
-                deck.stack.push(listOfNine[i]);
+                addToDeck(listOfNine[i]);
             }
         }
+    }
+
+    public void shuffleDeck() {
+        this.deck.shuffle();
+    }
+
+    public void addToDeck(MoveCard cd) {
+        deck.putCardInDeck(cd);
     }
 
     public void update(float deltaTime) {
@@ -248,6 +256,8 @@ public class RoboGame extends Game {
     public GameScreen getGameScreen() {
         return this.gameScreen;
     }
+
+
 
     public void setGameScreen(GameScreen gameScreen) {
         this.gameScreen = gameScreen;

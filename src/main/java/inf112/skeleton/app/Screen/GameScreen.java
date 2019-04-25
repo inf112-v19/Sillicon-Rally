@@ -41,7 +41,7 @@ public class GameScreen implements Screen {
     public GameScreen (RoboGame game){
         this.game = game;
         this.drawCards = new DrawCards(game);
-        this.roundExector = new RoundExecutor(game.playerList);
+        this.roundExector = new RoundExecutor(game.playerList, game);
         this.laserAnimation = new LaserAnimation();
         this.laserTimer = 0;
         this.font = new BitmapFont();
