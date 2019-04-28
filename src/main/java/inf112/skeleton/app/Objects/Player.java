@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Player implements IGameObject, InputProcessor {
+public class Player implements IGameObject, InputProcessor, IPlayer {
     public MoveCard[] testCardsToBePlayed;
     TileGrid grid;
     Tile backupLocation;
@@ -27,6 +27,8 @@ public class Player implements IGameObject, InputProcessor {
     private RoboGame game;
     private PlayerMovements playerMovements;
     private LaserAnimation laserAnimation;
+    public boolean isAlive = true;
+    public boolean collectedAllFlags = false;
 
     public int playerHP;
     public int playerTokens;
@@ -158,6 +160,30 @@ public class Player implements IGameObject, InputProcessor {
         sprite.setY(getY());
         return this.sprite;
     }
+
+    @Override
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    @Override
+    public boolean collectedAllFlags() {
+        return collectedAllFlags;
+    }
+
+    public void setPlayerOutOfGame(){
+        removePlayer();
+    }
+
+
+    private void removePlayer(){
+        float y = this.getY();
+        float x = this.getX();
+        game.constructor.removePlayerSprite(game, this);
+        game.playerList.remove(this);
+
+    }
+
 
     public void shootLaser(TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(getY(), getX());

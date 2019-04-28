@@ -43,6 +43,7 @@ public class RoboGame extends Game {
     private RoboGame game;
     public GameScreen gameScreen;
     public ArrayList<Player> playerList;
+    public GameObjectFactory constructor;
 
     public int currentPlayer;
 
@@ -63,7 +64,7 @@ public class RoboGame extends Game {
         this.TILE_SIZE_IN_PX = getTileSize();
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.grid = makeGrid();
-        GameObjectFactory constructor = new GameObjectFactory(gameMap, grid, this);
+        constructor = new GameObjectFactory(gameMap, grid, this);
         constructor.createObjects(this, playerList);
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());

@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.collision.objects.GameObjectFactory;
+import inf112.skeleton.app.game.RoboGame;
 
 
 public class PlayerStatus {
@@ -28,11 +30,16 @@ public class PlayerStatus {
         font = new BitmapFont();
     }
 
+
     public void draw(SpriteBatch sb) {
         drawHearts(sb);
         drawLifeTokens(sb);
         drawNextFlagToPickUp(sb);
         drawPlayerName(sb);
+        //drawPlayerOutOfGrid(sb);
+        if (player.collectedAllFlags == true){
+            drawPlayerOutOfGrid(sb);
+        }
     }
 
     private void drawPlayerName(SpriteBatch sb) {
@@ -42,6 +49,9 @@ public class PlayerStatus {
 
         font.draw(sb, name, xLocation + 200, yLocation + 180);
 
+    }
+    public void drawPlayerOutOfGrid(SpriteBatch spriteBatch){
+        spriteBatch.draw(GameObjectFactory.player1Texture, xLocation+350, yLocation+400);
     }
 
     private void drawHearts(SpriteBatch sb) {
@@ -95,4 +105,5 @@ public class PlayerStatus {
         NoLifeSprite = new Sprite(new Texture("LifeSprites/exmpl0Life.png"));
         heartSprite = new Sprite(new Texture("LifeSprites/heart.png"));
     }
+
 }
