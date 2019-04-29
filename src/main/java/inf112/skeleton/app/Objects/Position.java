@@ -103,7 +103,15 @@ public class Position {
         }
     }
 
-    private boolean moveStraight(int i, int moveDistance, TileGrid grid) {
+    public boolean moveStraight(int steps, int moveDistance, TileGrid grid) {
+        for (int i = 0; i < steps; i++) {
+            if (!moveStraight(moveDistance, grid))
+                return false;
+        }
+        return true;
+    }
+
+    private boolean moveStraight(int moveDistance, TileGrid grid) {
 
         switch (this.dir) {
             case North:

@@ -40,7 +40,7 @@ public class Dfs {
         for (int i = 0; i < listOfNine.length; i++) {
 
             initialize();
-5            if (isLegalMove(listOfNine[i], currentPosition))
+            if (isLegalMove(listOfNine[i], currentPosition))
                 dfs(i, currentPosition, 0);
 
             if (foundAllCards)

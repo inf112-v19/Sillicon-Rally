@@ -50,7 +50,7 @@ public class GameObjectFactory {
     }
 
     private void createPlayers(List<Player> playerList, RoboGame game) {
-        createPlayer1(playerList, game);
+        //createPlayer1(playerList, game);
         //createPlayer2(playerList, game);
         createAi(playerList, game);
 
