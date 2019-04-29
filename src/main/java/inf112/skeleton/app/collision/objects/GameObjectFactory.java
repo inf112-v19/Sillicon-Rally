@@ -52,11 +52,8 @@ public class GameObjectFactory {
 
     public ArrayList<Player> createPlayers(int numberOfPlayers, RoboGame game) {
         ArrayList<Player> list = new ArrayList<>();
-        if (numberOfPlayers == 1)
+        for (int i = 0; i < numberOfPlayers; i++) {
             createPlayer1(list, game);
-        if (numberOfPlayers == 2) {
-            createPlayer1(list, game);
-            createPlayer2(list, game);
         }
 
         return list;
