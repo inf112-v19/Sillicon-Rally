@@ -38,7 +38,7 @@ public class GameObjectFactory {
     }
 
     public void createObjects(RoboGame game, List<Player> playerList, int numberOfPlayers) {
-        createPlayers(playerList, game, numberOfPlayers);
+        //createPlayers(playerList, game);
         createFlags();
         createTeleporter();
         createConveyorBelts();
@@ -49,14 +49,17 @@ public class GameObjectFactory {
         createPits();
     }
 
-    private void createPlayers(List<Player> playerList, RoboGame game, int numberOfPlayers) {
-        for (int i = 0; i < numberOfPlayers; i++) {
-            createPlayer1(playerList, game);
-        }
-       // createPlayer1(playerList, game);
-        //createPlayer2(playerList, game);
-        createAi(playerList, game);
 
+    public ArrayList<Player> createPlayers(int numberOfPlayers, RoboGame game) {
+        ArrayList<Player> list = new ArrayList<>();
+        if (numberOfPlayers == 1)
+            createPlayer1(list, game);
+        if (numberOfPlayers == 2) {
+            createPlayer1(list, game);
+            createPlayer2(list, game);
+        }
+
+        return list;
     }
 
     private void createAi(List<Player> playerList, RoboGame game) {
