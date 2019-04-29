@@ -32,12 +32,13 @@ public class PlayerMovements {
     public RoboGame.Direction getDirection() {return this.direction;}
 
 
-    public void moveStraight(int steps, int moveDistance, TileGrid grid) {
+    public boolean moveStraight(int steps, int moveDistance, TileGrid grid) {
         for (int i = 0; i < steps; i++) {
             if (!moveStraight(moveDistance, grid))
-                return;
+                return false;
             player.checkForDamageTaken(grid);
         }
+        return true;
     }
 
 
@@ -148,43 +149,6 @@ public class PlayerMovements {
     }
 
 
-    /*
-        For testing
-
-    public void rotateClockWiseTest(TileGrid grid){
-        switch (getDirection()) {
-            case North:
-                player.currentDirection = RoboGame.Direction.East;
-                break;
-            case East:
-                player.currentDirection = RoboGame.Direction.South;
-                break;
-            case South:
-                player.currentDirection = RoboGame.Direction.West;
-                break;
-            case West:
-                player.currentDirection = RoboGame.Direction.North;
-        }
-        player.checkForDamageTaken(grid);
-    }
-    public void rotateCounterClockwiseTest(TileGrid grid) {
-        switch (player.currentDirection) {
-            case North:
-                player.currentDirection = RoboGame.Direction.West;
-                break;
-            case East:
-                player.currentDirection = RoboGame.Direction.North;
-                break;
-            case South:
-                player.currentDirection = RoboGame.Direction.East;
-                break;
-            case West:
-                player.currentDirection = RoboGame.Direction.South;
-        }
-        player.checkForDamageTaken(grid);
-    }
-    */
-
 
     public void isKeyPressed(float deltaTime, RoboGame game) {
 
@@ -192,12 +156,6 @@ public class PlayerMovements {
 
 
 
-    private void setMoveTowardTarget(float y, float x) {
-        if (y < 0 || x < 0)
-            return;
-        this.targetY = y;
-        this.targetX = x;
-    }
 
     public void update(float deltaTime, TileGrid grid) {
 

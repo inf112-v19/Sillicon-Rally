@@ -22,6 +22,7 @@ import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RoboGame extends Game {
     public static OrthographicCamera camera;
@@ -50,8 +51,8 @@ public class RoboGame extends Game {
     public static final int ROBO_GAME_WIDTH = 1200;
     public static final int ROBO_GAME_HEIGHT = 700;
 
-    public Player getPlayer(Player player) {
-        return player;
+    public List<Player> getPlayers() {
+        return playerList;
     }
 
 

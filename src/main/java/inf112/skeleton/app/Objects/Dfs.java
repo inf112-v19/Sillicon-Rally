@@ -14,7 +14,6 @@ public class Dfs {
     LinkedList<Integer> queue;
     int cardsToChoose;
     RoboGame game;
-    int selectedCards = 0;
     boolean foundAllCards;
     Position currentPosition;
     Position originalPosition;
@@ -24,10 +23,9 @@ public class Dfs {
     PlayerMovements movements;
     Graph graph;
 
-    public Dfs(RoboGame game, int cardsToChoose, Position position) {
-        this.game = game;
-        this.grid = game.grid;
-        this.listOfNine = game.listOfNine;
+    public Dfs(TileGrid grid, int cardsToChoose, Position position, MoveCard[] listOfNine) {
+        this.grid = grid;
+        this.listOfNine = listOfNine;
         selected = new boolean[listOfNine.length];
         this.cardsToChoose = cardsToChoose;
         this.queue = new LinkedList<>();
@@ -40,11 +38,13 @@ public class Dfs {
         this.graph = new Graph(listOfNine, cardsToChoose);
 
         for (int i = 0; i < listOfNine.length; i++) {
-            if (foundAllCards)
-                break;
 
             initialize();
-            dfs(i);
+            if (isLegalMove(listOfNine[i], currentPosition))
+                dfs(i, currentPosition, 0);
+
+            if (foundAllCards)
+                break;
         }
     }
 
@@ -52,34 +52,36 @@ public class Dfs {
         for (int i = 0; i < selected.length; i++) {
             selected[i] = false;
         }
-        selectedCards = 0;
         foundAllCards = false;
-        currentPosition = originalPosition;
+        currentPosition = originalPosition.copy();
     }
 
-    private void dfs(int i) {
-        selected[i] = true;
-        selectedCards++;
-        queue.add(i);
 
-        if (queue.size() == cardsToChoose) {
-            foundAllCards = true;
-            return;
-        }
+    private void dfs(int i, Position position, int selectedCards) {
+            selected[i] = true;
+            selectedCards++;
+            queue.add(i);
+
+            if (queue.size() == cardsToChoose) {
+                foundAllCards = true;
+                return;
+            }
 
 
-        Iterator<Integer> iter = graph.getAdj()[i].listIterator();
-        while (iter.hasNext() && !foundAllCards) {
-            int n = iter.next();
-            if (!selected[n] && !isIllegalMove(listOfNine[i]))
-                dfs(n);
-        }
+            Iterator<Integer> iter = graph.getAdj()[i].listIterator();
+            while (iter.hasNext() && !foundAllCards) {
+                int n = iter.next();
+                MoveCard.Type type = listOfNine[n].getType();
+                Position newPosition = position.copy();
+                if (!selected[n] && isLegalMove(listOfNine[n], newPosition))
+                    dfs(n, newPosition, selectedCards);
+            }
     }
 
-    private boolean isIllegalMove(MoveCard moveCard) {
-        currentPosition.movePosition(moveCard.getType(), movements, grid);
-        return movements.checkIfMoveIsOutOfBounds(currentPosition.y, currentPosition.x, grid);
-
+    //This also updates the position
+    private boolean isLegalMove(MoveCard moveCard, Position position) {
+        return position.movePosition(moveCard.getType(), grid);
+       // return movements.checkIfMoveIsOutOfBounds(position.y, position.x, grid);
     }
 
     public LinkedList<Integer> getSelectedCards() {
