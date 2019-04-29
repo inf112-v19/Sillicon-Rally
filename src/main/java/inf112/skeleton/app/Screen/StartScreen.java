@@ -22,7 +22,7 @@ import javafx.application.Application;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class StartScreen extends ApplicationAdapter {
+public class StartScreen extends ApplicationAdapter implements Screen {
     Stage stage;
     TextButton button;
     private Skin skin;
@@ -33,6 +33,8 @@ public class StartScreen extends ApplicationAdapter {
     TextButton fivePlayers;
     TextButton sixPlayers;
     final int BUTTON_SIZE = 200;
+
+
 
     @Override
     public void create() {
@@ -78,5 +80,56 @@ public class StartScreen extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
+    }
+
+    public boolean hasSelectedPlayers() {
+        return false;
+    }
+
+    @Override
+    public void show() {
+
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+        Skin mySkin = new Skin(Gdx.files.internal("Buttons/glassy-ui.json"));
+        onePlayer = createButton("1P", mySkin);
+        twoPlayers = createButton("2P", mySkin);
+        threePlayers = createButton("3P", mySkin);
+        fourPlayers = createButton("4P", mySkin);
+
+        onePlayer.setPosition(stage.getWidth()/4 - 50, stage.getHeight() - onePlayer.getHeight()*2);
+        twoPlayers.setPosition(onePlayer.getX() + onePlayer.getWidth() + 50,stage.getHeight() - onePlayer.getHeight()*2);
+        threePlayers.setPosition(stage.getWidth()/4 - 50, stage.getHeight() - onePlayer.getHeight()*4);
+        fourPlayers.setPosition(threePlayers.getX() + threePlayers.getWidth() + 50, stage.getHeight() - onePlayer.getHeight()*4);
+
+        // add a listener to your buttons so it does something when clicked
+        onePlayer.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("One Player!");
+
+            }
+        });
+
+        twoPlayers.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                System.out.println("Two Players!");
+            }
+        });
+    }
+
+    @Override
+    public void render(float v) {
+
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.act();
+        stage.draw();
+    }
+
+    @Override
+    public void hide() {
+
     }
 }

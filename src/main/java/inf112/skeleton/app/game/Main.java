@@ -15,7 +15,7 @@ public class Main {
         cfg.resizable = true;
 
 
-        new LwjglApplication(new StartScreen(), cfg);
-       // new LwjglApplication(new RoboGame(), cfg);
+       // new LwjglApplication(new StartScreen(), cfg);
+        new LwjglApplication(new RoboGame(), cfg);
     }
 }

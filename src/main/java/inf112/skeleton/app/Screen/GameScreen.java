@@ -37,6 +37,7 @@ public class GameScreen implements Screen {
     BitmapFont font;
     List<PlayerStatus> playerStatusList;
     Point[] statusScreenPoints;
+    public boolean numberOfPlayersSelected;
 
     public GameScreen (RoboGame game){
         this.game = game;
@@ -54,6 +55,8 @@ public class GameScreen implements Screen {
             PlayerStatus status = new PlayerStatus(pl, point);
             playerStatusList.add(status);
         }
+
+        numberOfPlayersSelected = false;
     }
 
 
@@ -63,6 +66,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 
 
         game.sb.begin();
