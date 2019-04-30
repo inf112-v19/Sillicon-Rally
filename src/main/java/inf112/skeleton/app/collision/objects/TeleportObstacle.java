@@ -13,6 +13,7 @@ public class TeleportObstacle implements IGameObject {
     public int xTeleportFromInPx, yTeleportFromInPx;
     public int xTeleportToInPx, yTeleportToInPx;
     GameMap map;
+    Tile teleportTile;
 
 
     public TeleportObstacle(GameMap map,TileGrid grid) {
@@ -66,5 +67,19 @@ public class TeleportObstacle implements IGameObject {
         return null;
     }
 
+
+    /*
+        For testing
+     */
+
+    public TeleportObstacle(int startY, int startX, int endY, int endX, TileGrid grid){
+        yTeleportFromInPx = startY;
+        xTeleportFromInPx = startX;
+
+        yTeleportToInPx = endY;
+        xTeleportToInPx = endX;
+
+        teleportTile = grid.getTileFromCoordinates(startY, startX);
+    }
 
 }
