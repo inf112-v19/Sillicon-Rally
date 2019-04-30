@@ -33,14 +33,6 @@ public class MainMenuScreen extends RoboGame implements Screen {
     private static final int ButtonGap = 30;
 
 
-    public MainMenuScreen(RoboGame game, GameObjectFactory factory){
-        this.game = game;
-        this.factory = factory;
-
-    }
-
-
-
 
     @Override
     public void show() {

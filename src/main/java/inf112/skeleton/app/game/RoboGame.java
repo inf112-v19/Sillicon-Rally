@@ -15,6 +15,8 @@ import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.Screen.GameOverScreen;
 import inf112.skeleton.app.Screen.GameScreen;
+import inf112.skeleton.app.Screen.StartMenuScreen;
+import inf112.skeleton.app.Screen.StartScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
@@ -44,29 +46,30 @@ public class RoboGame extends Game {
     private RoboGame game;
     public GameScreen gameScreen;
     public ArrayList<Player> playerList;
+    int numberOfPlayers = 0;
     public GameObjectFactory constructor;
 
     public int currentPlayer;
-
-
     public static final int ROBO_GAME_WIDTH = 1200;
     public static final int ROBO_GAME_HEIGHT = 700;
+
 
     public List<Player> getPlayers() {
         return playerList;
     }
 
 
-
     @Override
     public void create() {
+
         playerList = new ArrayList<>();
         gameMap = new GameMap("MapNumberOne.tmx");
         this.TILE_SIZE_IN_PX = getTileSize();
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         this.grid = makeGrid();
-        constructor = new GameObjectFactory(gameMap, grid, this);
-        constructor.createObjects(this, playerList);
+
+        this.constructor = new GameObjectFactory(gameMap, grid, this);
+        constructor.createObjects(this, playerList, numberOfPlayers);
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
 
@@ -89,11 +92,17 @@ public class RoboGame extends Game {
         listOfNine = new MoveCard[9];
         chosenFive = new MoveCard[5];
 
-        Gdx.input.setInputProcessor(playerList.get(currentPlayer));
+        //Gdx.input.setInputProcessor(playerList.get(currentPlayer));
 
-        this.setScreen(new GameScreen(this));
+        //this.setScreen(new GameScreen(this));
+        this.setScreen(new StartMenuScreen(this));
+        //drawNineCardsFromDeck();
+    }
 
+    public void createPlayers(int numberOfPlayers) {
+        this.playerList = constructor.createPlayers(numberOfPlayers, this);
         drawNineCardsFromDeck();
+        this.setScreen(new GameScreen(this));
     }
 
     public Player getCurrentPlayer(){
@@ -178,7 +187,7 @@ public class RoboGame extends Game {
     @Override
     public void render() {
         handleInput(Gdx.graphics.getDeltaTime());
-         super.render();
+        super.render();
     }
 
     public void handleInput(float deltaTime) {

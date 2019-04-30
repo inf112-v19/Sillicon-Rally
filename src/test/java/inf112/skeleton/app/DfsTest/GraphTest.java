@@ -15,7 +15,8 @@ import sun.awt.image.ImageWatched;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class GraphTest {
     SetupVariables setup = new SetupVariables();

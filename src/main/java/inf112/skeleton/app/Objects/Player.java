@@ -125,7 +125,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
             removePlayer();
             System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);
 
-            if (game != null && deathCheck(game.getPlayer(this)) == true){
+            if (game != null && deathCheck(this) == true){
                 game.setScreen(new GameOverScreen(game));}
         }
 
