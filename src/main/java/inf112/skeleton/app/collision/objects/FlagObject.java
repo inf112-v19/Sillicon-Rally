@@ -52,6 +52,8 @@ public class FlagObject implements IGameObject {
 
     public String presentNextFlag(Player player){
         if (player.flagNr>maxFlags){
+            player.collectedAllFlags = true;
+            player.setPlayerOutOfGame();
             return "you win";
         }
         else{
@@ -69,6 +71,7 @@ public class FlagObject implements IGameObject {
 
         return sprite;
     }
+
 
     public void removeFlagFromMap(TileGrid grid) {
         this.sprite = null;

@@ -15,11 +15,12 @@ import inf112.skeleton.app.game.RoundExecutor;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Player implements IGameObject, InputProcessor {
+public class Player implements IGameObject, InputProcessor, IPlayer {
     public MoveCard[] testCardsToBePlayed;
     TileGrid grid;
     Tile backupLocation;
@@ -27,6 +28,8 @@ public class Player implements IGameObject, InputProcessor {
     private RoboGame game;
     private PlayerMovements playerMovements;
     private LaserAnimation laserAnimation;
+    public boolean isAlive = true;
+    public boolean collectedAllFlags = false;
 
     public int playerHP;
     public int playerTokens;
@@ -95,6 +98,19 @@ public class Player implements IGameObject, InputProcessor {
         collisionHandler.checkForDamageDealer();
     }
 
+    public boolean deathCheck(Player player) {
+        ArrayList<Player> playerlist = game.playerList;
+        boolean[] marked = new boolean[playerlist.size()];
+        for (int i = 0; i < playerlist.size(); i++) {
+            if(player.getHP() != 0)break;
+            marked[i] = true;
+            i++;
+        }
+        for(boolean check : marked){
+            if(!check)return false;
+        }
+        return true;
+    }
 
 
     public void handleDeath(TileGrid grid) {
@@ -106,9 +122,10 @@ public class Player implements IGameObject, InputProcessor {
         playerHP = MAX_HP;
 
         if (playerTokens == 0) {
+            removePlayer();
             System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);
 
-            if (game != null){
+            if (game != null && deathCheck(game.getPlayer(this)) == true){
                 game.setScreen(new GameOverScreen(game));}
         }
 
@@ -158,6 +175,30 @@ public class Player implements IGameObject, InputProcessor {
         sprite.setY(getY());
         return this.sprite;
     }
+
+    @Override
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    @Override
+    public boolean collectedAllFlags() {
+        return collectedAllFlags;
+    }
+
+    public void setPlayerOutOfGame(){
+        removePlayer();
+    }
+
+
+    private void removePlayer(){
+        float y = this.getY();
+        float x = this.getX();
+        game.constructor.removePlayerSprite(game, this);
+        game.playerList.remove(this);
+
+    }
+
 
     public void shootLaser(TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(getY(), getX());

@@ -30,7 +30,8 @@ public class GameObjectFactory {
     public List<TurnGearObject> turnGears;
 
     private RoboGame.Direction startDirection = RoboGame.Direction.North;
-    public Texture player2Texture;
+    public static Texture player2Texture;
+    public static Texture player1Texture;
 
     public GameObjectFactory(GameMap map, TileGrid grid, RoboGame game) {
         this.map = map;
@@ -65,7 +66,8 @@ public class GameObjectFactory {
 
     public void createPlayer1(List<Player> playerList, RoboGame game){
         //game.player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
-        Player player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
+        player1Texture = new Texture("robot1.png");
+        Player player = new Player(player1Texture, startDirection, game, "Player 1");
         grid.getTile(0, 0).addGameObject(player);
         playerList.add(player);
     }
@@ -79,7 +81,7 @@ public class GameObjectFactory {
     }
 
     public void removePlayerSprite(RoboGame game, Player thisPlayer){
-        grid.getTile(0,0).getGameObjects().remove(thisPlayer);
+        grid.getTileFromCoordinates(thisPlayer.getY() , thisPlayer.getX()).getGameObjects().remove(thisPlayer);
     }
 
     private void createFlags() {
