@@ -15,6 +15,7 @@ import inf112.skeleton.app.game.RoundExecutor;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -97,6 +98,19 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         collisionHandler.checkForDamageDealer();
     }
 
+    public boolean deathCheck(Player player) {
+        ArrayList<Player> playerlist = game.playerList;
+        boolean[] marked = new boolean[playerlist.size()];
+        for (int i = 0; i < playerlist.size(); i++) {
+            if(player.getHP() != 0)break;
+            marked[i] = true;
+            i++;
+        }
+        for(boolean check : marked){
+            if(!check)return false;
+        }
+        return true;
+    }
 
 
     public void handleDeath(TileGrid grid) {
