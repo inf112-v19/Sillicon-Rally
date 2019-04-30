@@ -44,6 +44,7 @@ public class LaserAnimation implements IGameObject {
         laserBeam.setRotation(player.getSprite().getRotation());
     }
 
+
     /*
     public void removeLaser(Player player) {
         if (laserTimer == 100) {

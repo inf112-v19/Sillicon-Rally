@@ -83,4 +83,8 @@ public class StackOfCards {
         stack.push(cd);
     }
 
+    public int getSize(){
+        return stack.size;
+    }
+
 }

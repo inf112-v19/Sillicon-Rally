@@ -42,6 +42,11 @@ public class MoveCardTest {
 	}
 
 	@Test
+	void desiredAmountOfCardsTest(){
+
+	}
+
+	@Test
 	void moveCardOneForwardTest(){
 		setup();
 		this.player = new Player(grid);

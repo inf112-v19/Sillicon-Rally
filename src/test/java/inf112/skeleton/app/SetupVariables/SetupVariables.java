@@ -8,6 +8,7 @@ import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
@@ -34,8 +35,9 @@ public class SetupVariables {
     public LaserObject laser;
     public RepairObject repairObject;
     public Round round;
-    public StackOfCards deck;
+    //public StackOfCards deck;
     public MoveCard card;
+    public LaserAnimation laserAnimation;
     public Texture texture;
     public ArrayList<Player> playerList;
     public ArrayList<MoveCard> cardList;
@@ -43,27 +45,36 @@ public class SetupVariables {
 
     public SetupVariables() {
         setup();
-        this.gameMap = new GameMap("map.v.01.tmx");
-        this.grid = makeGrid(gameMap);
-        this.teleport = new TeleportObstacle(gameMap, grid);
-        this.player = new Player(grid);
-        this.TILESIZE_IN_PX = gameMap.getTileSize();
-        this.flag = new FlagObject(2,4,grid);
-        this.flag2 = new FlagObject(3,4, grid);
-        this.belt = new ConveyorBeltObject(4, 4, grid, 1, RoboGame.Direction.West);
-        this.laser = new LaserObject(2,2, grid);
-        this.repairObject = new RepairObject(2,2,grid);
-        this.cardList = getDeck();
-        this.oneForwardCardList = getOneForwardDeck();
-        this.oneForwardCardList = getOneForwardDeck();
-        this.playerList = getPlayers();
-        this.round = new Round(new StackOfCards(), playerList);
+        //map related
+        gameMap = new GameMap("map.v.01.tmx");
+        grid = makeGrid(gameMap);
+        TILESIZE_IN_PX = gameMap.getTileSize();
 
-        this.cardList = getDeck();
+
+        //player related
+        player = new Player(grid);
+        laserAnimation = new LaserAnimation();
+
+
+        //Object related
+        flag = new FlagObject(2,4,grid);
+        flag2 = new FlagObject(3,4, grid);
+        belt = new ConveyorBeltObject(4, 4, grid, 1, RoboGame.Direction.West);
+        laser = new LaserObject(2,2, grid);
+        repairObject = new RepairObject(2,2,grid);
+        teleport = new TeleportObstacle(gameMap, grid);
+
+
+        //Function related
+        oneForwardCardList = getOneForwardDeck();
+        oneForwardCardList = getOneForwardDeck();
         playerList = getPlayers();
-
-
+        round = new Round(new StackOfCards(), playerList);
+        cardList = getDeck();
+        playerList = getPlayers();
     }
+
+
 
     public void playerDefaultPosition(Player player){
         int y = 0;
@@ -129,7 +140,7 @@ public class SetupVariables {
         return new SetupVariables();
     }
 
-    public void setup() {
+    private void setup() {
         application = new HeadlessApplication(new ApplicationListener() {
             @Override public void create() {}
             @Override public void resize(int width, int height) {}
