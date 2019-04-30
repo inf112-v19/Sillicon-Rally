@@ -10,7 +10,7 @@ import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.game.PlayerMovements;
 import inf112.skeleton.app.game.RoboGame;
 import org.junit.jupiter.api.Test;
-import sun.awt.image.ImageWatched;
+//import sun.awt.image.ImageWatched;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

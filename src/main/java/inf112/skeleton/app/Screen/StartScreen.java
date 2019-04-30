@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.game.RoboGame;
-import javafx.application.Application;
+//import javafx.application.Application;
 
 import java.awt.*;
 import java.util.ArrayList;
