@@ -122,9 +122,10 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         playerHP = MAX_HP;
 
         if (playerTokens == 0) {
+            removePlayer();
             System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);
 
-            if (game != null){
+            if (game != null && deathCheck(game.getPlayer(this)) == true){
                 game.setScreen(new GameOverScreen(game));}
         }
 
