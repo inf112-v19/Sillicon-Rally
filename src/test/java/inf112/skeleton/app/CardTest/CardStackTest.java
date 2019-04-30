@@ -24,7 +24,7 @@ public class CardStackTest {
 
 
     @Test
-    void DesiredAmountOfUniqueCards(){
+    void DesiredAmountOfUniqueCardsTest(){
         setup();
         int i = 0;
         assertEquals(5,deck.size());
@@ -35,7 +35,7 @@ public class CardStackTest {
     }
 
     @Test
-    void desiredAmountOfCards(){
+    void desiredAmountOfCardsTest(){
         setup();
         stackOfCards = new StackOfCards();
         assertEquals(84, stackOfCards.getSize());
