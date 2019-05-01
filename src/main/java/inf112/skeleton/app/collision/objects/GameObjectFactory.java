@@ -67,7 +67,7 @@ public class GameObjectFactory {
 
     public void createAi(List<Player> playerList, RoboGame game, int playernum) {
         playerTexture = new Texture(("RobotSprites/robot" +playernum+".png"));
-        Player player = new AIPlayer(playerTexture, startDirection, game, "AI");
+        Player player = new AIPlayer(playerTexture, startDirection, game, ("AI"+playernum));
         grid.getTile(0, 0).addGameObject(player);
         game.playerList.add(player);
     }

@@ -36,7 +36,7 @@ public class StartMenuScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         Skin mySkin = new Skin(Gdx.files.internal("Buttons/glassy-ui.json"));
-        totalRobots = createButton("AIs "+ numberOfAIs, mySkin);
+        totalRobots = createButton("AIs: "+ numberOfAIs, mySkin);
         humanPlayers = createButton("Human Players: " + numberOfPlayers, mySkin);
         startGame = createButton("Start Game", mySkin);
 
@@ -62,7 +62,7 @@ public class StartMenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 //System.out.println("Two Players!");
-                if (numberOfPlayers + numberOfPlayers >= maxNumberOfRobots) {
+                if (numberOfPlayers + numberOfAIs >= maxNumberOfRobots) {
                     numberOfPlayers = 0;
                 }
                 numberOfPlayers++;
