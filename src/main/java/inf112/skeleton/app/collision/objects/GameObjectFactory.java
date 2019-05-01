@@ -64,7 +64,7 @@ public class GameObjectFactory {
 
 
     public void createPlayer(List<Player> playerList, RoboGame game, int playernum){
-        playerTexture = new Texture(("robot" +playernum+".png"));
+        playerTexture = new Texture(("RobotSprites/robot" +playernum+".png"));
         Player player = new Player(playerTexture, startDirection, game, ("Player"+ playernum));
         grid.getTile(0, 0).addGameObject(player);
         game.playerList.add(player);
