@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
-public class ConveyorBeltTest {
+public class ConveyorBeltTests {
 private TileGrid grid;
 private Player player;
 private int TILE_SIZE_IN_PIX;
@@ -81,7 +81,7 @@ private LaserObject laser;
 
 
     @Test
-    void conveyorDoesNotMovePlayerOutOfMap(){
+    void DoesNotMovePlayerOutOfMap(){
        setup();
        player = new Player(grid);
        player.setPosition(0,0,grid);
@@ -91,7 +91,7 @@ private LaserObject laser;
     }
 
     @Test
-    void conveyorDoesNotRotatePlayer(){
+    void DoesNotRotatePlayer(){
        setup();
        player = new Player(grid);
        player.setPosition(0,0,grid);

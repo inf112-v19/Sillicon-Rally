@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //import jdk.internal.util.xml.impl.Input;
 
 
-public class PlayerTest {
+public class PlayerTests {
 
     Player player;
     TileGrid grid;
@@ -24,6 +24,7 @@ public class PlayerTest {
 
     public void setup() {
         SetupVariables variables = new SetupVariables();
+        roboGame = new RoboGame();
         grid = variables.grid;
         player = new Player(grid);
         TILE_SIZE_IN_PX = variables.gameMap.getTileSize();
@@ -132,20 +133,20 @@ public class PlayerTest {
     }
 
     @Test
-    void playerHasDamageTokens() {
+    void playerHasDamageTokensTest() {
         setup();
         assertEquals(player.MAX_DAMAGE_TOKENS, player.playerTokens);
     }
 
     @Test
-    void updatePlayerTokensAfterLosingOneLife(){
+    void updatedTokensAfterLostlifeTest(){
         setup();
         player.handleDeath(grid);
         assertEquals(player.playerTokens, player.MAX_DAMAGE_TOKENS-1);
     }
 
     @Test
-    void updatePlayerTokensAfterLosingTwoLives(){
+    void fewerTokensAfterLostLifeTest(){
         setup();
         player.handleDeath(grid);
         player.handleDeath(grid);
@@ -157,7 +158,9 @@ public class PlayerTest {
         setup();
         player.handleDeath(grid);
         player.handleDeath(grid);
+        System.out.println(player.playerHP + ", " + player.playerTokens);
         player.handleDeath(grid);
+        System.out.println(player.playerHP);
         assertEquals(player.playerTokens, 0);
     }
 
@@ -183,8 +186,9 @@ public class PlayerTest {
     }
 
 
+
     @Test
-    void playerChooseFewerCardsAfterDamageTest(){
+    void FewerCardsAfterDamageTest(){
         setup();
         int initialMaxCards = player.maxCardsAllowedForPlayer;
         player.handleDeath(grid);

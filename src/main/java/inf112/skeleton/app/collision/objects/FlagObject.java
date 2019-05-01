@@ -73,13 +73,6 @@ public class FlagObject implements IGameObject {
     }
 
 
-    public void removeFlagFromMap(TileGrid grid) {
-        this.sprite = null;
-
-        Tile myTile = grid.getTileFromCoordinates(this.yLocation, this.xLocation);
-        myTile.getGameObjects().remove(this);
-    }
-
     public Tile getTile() {
         return this.flagTile;
     }

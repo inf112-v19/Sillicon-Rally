@@ -16,6 +16,7 @@ public class MoveCard extends Sprite{
     private int priority;
     private Player player;
 
+
     public MoveCard(Type t, Texture texture) {
         super(texture);
         this.type = t;
@@ -54,24 +55,6 @@ public class MoveCard extends Sprite{
         return type + "";
     }
 
-
-    /*
-        For testing
-     */
-
-    /*public void handleTestCollision(Type t, Player player, TileGrid grid){
-        int moveDistance = grid.tileSizeInPx;
-        this.type = t;
-        switch (t) {
-            case move1: player.moveStraight(1, moveDistance, grid);
-            case move2: player.moveStraight(2, moveDistance, grid);
-            case move3: player.moveStraight(3, moveDistance, grid);
-            case turnleft: player.rotateCounterClockwise();
-            case turnright: player.rotateClockwise();
-            case uturn: player.rotateClockwise();
-            case reverse: priority = rand.nextInt(480) + 430;
-        }
-    }*/
 }
 
 

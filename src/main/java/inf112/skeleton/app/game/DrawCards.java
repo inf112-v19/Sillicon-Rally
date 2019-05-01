@@ -8,10 +8,10 @@ import inf112.skeleton.app.Objects.Player;
 import java.util.List;
 
 public class DrawCards {
-    List<Player> playerList;
-    int playersTurn;
-    RoboGame game;
-    int cardsDrawByPlayer;
+    private List<Player> playerList;
+    private int playersTurn;
+    private RoboGame game;
+    private int cardsDrawByPlayer;
     private boolean playersFinishedPickingCards;
 
     public DrawCards(RoboGame game) {

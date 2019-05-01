@@ -28,6 +28,10 @@ public class Tile implements ITile, Comparable<Tile> {
         return this.x;
     }
 
+    public int getY(){
+        return this.y;
+    }
+
     @Override
     public int compareTo(Tile o) {
         return 0;
@@ -49,7 +53,7 @@ public class Tile implements ITile, Comparable<Tile> {
 
     @Override
     public String toString() {
-        return "[x: " + this.x + " y: " +this.y + " ]";
+        return "[xPosition: " + this.x + " yPosition: " +this.y + " ]";
     }
 
     public ArrayList<IGameObject> getGameObjects() {

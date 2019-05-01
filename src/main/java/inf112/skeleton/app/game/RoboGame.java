@@ -13,10 +13,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.Screen.GameOverScreen;
 import inf112.skeleton.app.Screen.GameScreen;
 import inf112.skeleton.app.Screen.StartMenuScreen;
-import inf112.skeleton.app.Screen.StartScreen;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
@@ -27,31 +25,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoboGame extends Game {
+    //Map related
+    public TileGrid grid;
     public static OrthographicCamera camera;
-    public static int TILE_SIZE_IN_PX;
     public TiledMap tiledMap;
+    public GameMap gameMap;
     public static TiledMapRenderer tiledMapRenderer;
+    public static int TILE_SIZE_IN_PX;
+    public static final int ROBO_GAME_WIDTH = 1500;
+    public static final int ROBO_GAME_HEIGHT = 900;
+
+
+    //Sprite related
     public SpriteBatch sb;
+    private Sprite backboard;
+    private Texture texture;
+
+    //Player related
     public Player player;
     public Player player2;
-    public TileGrid grid;
-    public GameMap gameMap;
+    public ArrayList<Player> playerList;
+    public int currentPlayer;
+
+    //Card related
     public StackOfCards deck;
     public MoveCard cardPickedByPlayer;
     public MoveCard[] listOfNine;
     public MoveCard[] chosenFive;
-    private Sprite backboard;
-    private Sprite lives;
-    private Texture texture;
-    private RoboGame game;
+
     public GameScreen gameScreen;
-    public ArrayList<Player> playerList;
-    int numberOfPlayers = 0;
     public GameObjectFactory constructor;
 
-    public int currentPlayer;
-    public static final int ROBO_GAME_WIDTH = 1200;
-    public static final int ROBO_GAME_HEIGHT = 700;
 
 
     public List<Player> getPlayers() {
@@ -64,18 +68,17 @@ public class RoboGame extends Game {
 
         playerList = new ArrayList<>();
         gameMap = new GameMap("MapNumberOne.tmx");
-        this.TILE_SIZE_IN_PX = getTileSize();
+        TILE_SIZE_IN_PX = getTileSize();
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
-        this.grid = makeGrid();
+        grid = makeGrid();
 
-        this.constructor = new GameObjectFactory(gameMap, grid, this);
-        constructor.createObjects(this, playerList, numberOfPlayers);
+        constructor = new GameObjectFactory(gameMap, grid);
+        constructor.createObjects();
 
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
 
         camera = new CustomCamera(gameMap.getTiledMap());
 
-        System.out.println(((CustomCamera) camera).pixelWidth);
+        System.out.println(((CustomCamera) camera).pixelWidth);     //TODO println
 
         camera.translate( -470, -700);
 
@@ -92,15 +95,11 @@ public class RoboGame extends Game {
         listOfNine = new MoveCard[9];
         chosenFive = new MoveCard[5];
 
-        //Gdx.input.setInputProcessor(playerList.get(currentPlayer));
-
-        //this.setScreen(new GameScreen(this));
         this.setScreen(new StartMenuScreen(this));
-        //drawNineCardsFromDeck();
     }
 
     public void createPlayers(int numberOfPlayers) {
-        this.playerList = constructor.createPlayers(numberOfPlayers, this);
+        constructor.createPlayers(numberOfPlayers, this);
         drawNineCardsFromDeck();
         this.setScreen(new GameScreen(this));
     }
@@ -125,14 +124,13 @@ public class RoboGame extends Game {
             }
         }
 
-        //currentPlayer.chosencards++;
         currentPlayer.increaseDeckCount();
         return cardPickedByPlayer;
     }
 
 
     private boolean canChooseMoreCard(Player currentPlayer) {
-        if (currentPlayer.chosencards == currentPlayer.MaxMoveCardLength)
+        if (currentPlayer.chosenCards == currentPlayer.MaxMoveCardLength)
             return false;
 
         return true;
@@ -212,10 +210,9 @@ public class RoboGame extends Game {
                 chosenFive[i].draw(sb);
             }
         }
-        //lives.draw(sb);
-
         sb.end();
     }
+
 
     public void drawSpritesFromGrid() {
         sb.begin();
@@ -263,11 +260,6 @@ public class RoboGame extends Game {
     public enum Direction{
         North, East, South, West
     }
-
-    public GameScreen getGameScreen() {
-        return this.gameScreen;
-    }
-
 
 
     public void setGameScreen(GameScreen gameScreen) {

@@ -12,7 +12,9 @@ import inf112.skeleton.app.map.GameMap;
 public class TeleportObstacle implements IGameObject {
     public int xTeleportFromInPx, yTeleportFromInPx;
     public int xTeleportToInPx, yTeleportToInPx;
-    GameMap map;
+    private GameMap map;
+    private Tile teleportFromTile;
+    private Tile teleportToTile;
 
 
     public TeleportObstacle(GameMap map,TileGrid grid) {
@@ -66,5 +68,25 @@ public class TeleportObstacle implements IGameObject {
         return null;
     }
 
+
+
+
+
+    /*
+        For testing
+     */
+
+    public TeleportObstacle(int startY, int startX, int endY, int endX, TileGrid grid){
+        yTeleportFromInPx = startY;
+        xTeleportFromInPx = startX;
+
+        yTeleportToInPx = endY;
+        xTeleportToInPx = endX;
+
+        teleportFromTile = grid.getTileFromCoordinates(yTeleportFromInPx,xTeleportFromInPx);
+        teleportFromTile.addGameObject(this);
+        teleportToTile = grid.getTileFromCoordinates(yTeleportToInPx, xTeleportToInPx);
+        teleportToTile.addGameObject(this);
+    }
 
 }
