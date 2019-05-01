@@ -50,25 +50,18 @@ public class StartMenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 //game.createPlayers(1);
-                if (numberOfPlayers + numberOfAIs >= maxNumberOfRobots) {
-                    numberOfAIs = 0;
-                }
-                numberOfAIs++;
+                numberOfAIs = incrementPlayers(numberOfAIs);
                 totalRobots.setText("AIs: " + numberOfAIs);
             }
         });
+
 
         humanPlayers.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 //System.out.println("Two Players!");
-                if (numberOfPlayers + numberOfAIs >= maxNumberOfRobots) {
-                    numberOfPlayers = 0;
-                }
-                numberOfPlayers++;
+                numberOfPlayers = incrementPlayers(numberOfPlayers);
                 humanPlayers.setText("Human Players: " + numberOfPlayers);
-
-
             }
         });
 
@@ -85,6 +78,13 @@ public class StartMenuScreen implements Screen {
         TextButton button = new TextButton(label, skin);
         stage.addActor(button);
         return button;
+    }
+
+    public int incrementPlayers(int player){
+        if (numberOfPlayers + numberOfAIs >= maxNumberOfRobots){
+            player = 0;
+        }
+        return ++player;
     }
 
     @Override

@@ -51,7 +51,7 @@ public class GameObjectFactory {
     public ArrayList<Player> createPlayers(int numberOfPlayers, RoboGame game) {
         for (int i = 0; i < numberOfPlayers; i++) {
             createPlayer(game.playerList, game, (i+1));
-            temp ++;
+            temp++;
         }
         return game.playerList;
     }
@@ -59,6 +59,7 @@ public class GameObjectFactory {
     public ArrayList<Player> createAis(int numberOfPlayers, RoboGame game) {
         for (int j = 0; j < numberOfPlayers; j++) {
             createAi(game.playerList, game, (temp+1));
+            temp++;
         }
         return game.playerList;
     }
