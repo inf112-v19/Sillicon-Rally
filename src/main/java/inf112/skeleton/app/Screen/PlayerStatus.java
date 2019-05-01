@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
-import inf112.skeleton.app.game.RoboGame;
 
 
 public class PlayerStatus {
@@ -51,7 +50,7 @@ public class PlayerStatus {
 
     }
     public void drawPlayerOutOfGrid(SpriteBatch spriteBatch){
-        spriteBatch.draw(GameObjectFactory.player1Texture, xLocation+350, yLocation+400);
+        spriteBatch.draw(GameObjectFactory.playerTexture, xLocation+350, yLocation+400);
     }
 
     private void drawHearts(SpriteBatch sb) {

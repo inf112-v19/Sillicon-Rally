@@ -17,8 +17,6 @@ import java.util.List;
 public class GameObjectFactory {
     public GameMap map;
     public TileGrid grid;
-    //public Player player;
-    //public Player player2;
     public ConveyorBeltObject conveyorBeltObject;
     public List<IGameObject> flags;
     public List<IGameObject> lasers;
@@ -31,7 +29,7 @@ public class GameObjectFactory {
 
     private RoboGame.Direction startDirection = RoboGame.Direction.North;
     public static Texture player2Texture;
-    public static Texture player1Texture;
+    public static Texture playerTexture;
 
     public GameObjectFactory(GameMap map, TileGrid grid, RoboGame game) {
         this.map = map;
@@ -54,7 +52,7 @@ public class GameObjectFactory {
     public ArrayList<Player> createPlayers(int numberOfPlayers, RoboGame game) {
         ArrayList<Player> list = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
-            createPlayer1(list, game);
+            createPlayer(list, game, (i+1));
         }
 
         return list;
@@ -67,18 +65,9 @@ public class GameObjectFactory {
         playerList.add(player);
     }
 
-    public void createPlayer1(List<Player> playerList, RoboGame game){
-        //game.player = new Player(new Texture("robot1.png"), startDirection, game, "Player 1");
-        player1Texture = new Texture("robot1.png");
-        Player player = new Player(player1Texture, startDirection, game, "Player 1");
-        grid.getTile(0, 0).addGameObject(player);
-        playerList.add(player);
-    }
-
-
-    public void createPlayer2(List<Player> playerList, RoboGame game){
-        player2Texture = new Texture("robot2.png");
-        Player player = new Player((player2Texture), startDirection, game, "Player 2");
+    public void createPlayer(List<Player> playerList, RoboGame game, int playernum){
+        playerTexture = new Texture(("robot" + playernum+".png"));
+        Player player = new Player(playerTexture, startDirection, game, ("Player"+ playernum));
         grid.getTile(0, 0).addGameObject(player);
         playerList.add(player);
     }
