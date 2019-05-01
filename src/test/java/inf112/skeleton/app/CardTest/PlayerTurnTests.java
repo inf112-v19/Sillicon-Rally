@@ -25,7 +25,7 @@ public class PlayerTurnTests {
 	private StackOfCards deck;
 	private RoboGame game;
 
-	//Player default position (y, x) = (0 ,4)
+	//Player default position (yPosition, xPosition) = (0 ,4)
 	//Player default direction North
 	@Test
 	public void doTurnTestAndMoveTest(){ //perfectTitle

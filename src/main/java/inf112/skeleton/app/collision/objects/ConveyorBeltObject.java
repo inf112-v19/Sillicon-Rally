@@ -20,23 +20,10 @@ public class ConveyorBeltObject implements IGameObject {
         speed = getConveyorSpeed(conveyorFromTile);
         yLocation = (int) conveyorFromTile.getRectangle().getY();
         xLocation = (int) conveyorFromTile.getRectangle().getX();
-        //System.out.println(conveyorFromTile.getProperties().get("east"));
-
-        //getDirection(conveyorFromTile);
         direction = getDirection(conveyorFromTile);
 
         conveyorTile = grid.getTileFromCoordinates(yLocation, xLocation);
         conveyorTile.addGameObject(this);
-    }
-
-    //For testing only
-    public ConveyorBeltObject(int y, int x, TileGrid grid, int speed, RoboGame.Direction dir){
-        this.yLocation = y;
-        this.xLocation = x;
-        conveyorTile = grid.getTileFromCoordinates(yLocation, xLocation);
-        conveyorTile.addGameObject(this);
-        this.direction = dir;
-        this.speed = speed;
     }
 
 
@@ -110,5 +97,20 @@ public class ConveyorBeltObject implements IGameObject {
     @Override
     public Sprite getSprite() {
         return null;
+    }
+
+
+
+
+   /*
+        For testing
+    */
+    public ConveyorBeltObject(int y, int x, TileGrid grid, int speed, RoboGame.Direction dir){
+        this.yLocation = y;
+        this.xLocation = x;
+        conveyorTile = grid.getTileFromCoordinates(yLocation, xLocation);
+        conveyorTile.addGameObject(this);
+        this.direction = dir;
+        this.speed = speed;
     }
 }

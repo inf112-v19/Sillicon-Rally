@@ -13,8 +13,8 @@ public class RepairObject implements IGameObject {
     public int xLocation;
     public int yLocation;
     public final int REPAIR_REGENERATE = 2;
-    Sprite sprite;
-    Tile repairTile;
+    private Sprite sprite;
+    private Tile repairTile;
 
     public RepairObject(RectangleMapObject repairFromTiled, TileGrid grid){
         xLocation = (int) repairFromTiled.getRectangle().getX();
@@ -28,6 +28,7 @@ public class RepairObject implements IGameObject {
         repairTile.addGameObject(this);
     }
 
+
     public void handleCollision(Player player, TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
@@ -35,6 +36,7 @@ public class RepairObject implements IGameObject {
             healDamage(player);
         }
     }
+
 
     public void healDamage(Player player){
         player.playerHP += REPAIR_REGENERATE;
@@ -51,6 +53,8 @@ public class RepairObject implements IGameObject {
 
         return sprite;
     }
+
+
 
 
     /*

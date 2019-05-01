@@ -22,33 +22,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameScreen implements Screen {
+    //Sprite related
     Texture HeartSprite;
     Texture ThreeLifeSprite;
     Texture TwoLifeSprite;
     Texture OneLifeSprite;
     Texture NoLifeSprite;
-    private RoboGame game;
-    public GameMap gameMap;
-    public TileGrid grid;
-    private DrawCards drawCards;
-    private RoundExecutor roundExector;
+    BitmapFont font;
+    Point[] statusScreenPoints;
     LaserAnimation laserAnimation;
     int laserTimer;
-    BitmapFont font;
-    List<PlayerStatus> playerStatusList;
-    Point[] statusScreenPoints;
-    public boolean numberOfPlayersSelected;
-    boolean start = false;
+
+    //Function related
+    private RoboGame game;
+    private DrawCards drawCards;
+    private List<PlayerStatus> playerStatusList;
+    private RoundExecutor roundExector;
+    public GameMap gameMap;
+    public TileGrid grid;
+
+
+
 
     public GameScreen (RoboGame game){
         this.game = game;
-        this.drawCards = new DrawCards(game);
-        this.roundExector = new RoundExecutor(game.playerList, game);
-        this.laserAnimation = new LaserAnimation();
-        this.laserTimer = 0;
-        this.font = new BitmapFont();
-        statusScreenPoints = createSixPoints();
+
+        drawCards = new DrawCards(game);
+        roundExector = new RoundExecutor(game.playerList, game);
+        laserAnimation = new LaserAnimation();
+        font = new BitmapFont();
         playerStatusList = new ArrayList<>();
+
+        laserTimer = 0;
+        statusScreenPoints = createSixPoints();
+
 
         for (int i = 0; i < game.playerList.size(); i++) {
             Player pl = game.playerList.get(i);

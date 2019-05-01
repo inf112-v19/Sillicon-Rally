@@ -55,7 +55,7 @@ public class TeleportTests {
 
 
     @Test
-    public void teleportTest() {
+    public void playerIsTeleportedTest() {
         setup();
         //Put player at the teleportFrom position and make the teleporter do it's magid
         player.setPosition(teleport.xTeleportFromInPx, teleport.yTeleportFromInPx, grid);

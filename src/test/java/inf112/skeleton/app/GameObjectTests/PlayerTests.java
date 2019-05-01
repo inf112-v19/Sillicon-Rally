@@ -133,20 +133,20 @@ public class PlayerTests {
     }
 
     @Test
-    void playerHasDamageTokens() {
+    void playerHasDamageTokensTest() {
         setup();
         assertEquals(player.MAX_DAMAGE_TOKENS, player.playerTokens);
     }
 
     @Test
-    void updatePlayerTokensAfterLosingOneLife(){
+    void updatedTokensAfterLostlifeTest(){
         setup();
         player.handleDeath(grid);
         assertEquals(player.playerTokens, player.MAX_DAMAGE_TOKENS-1);
     }
 
     @Test
-    void updatePlayerTokensAfterLosingTwoLives(){
+    void fewerTokensAfterLostLifeTest(){
         setup();
         player.handleDeath(grid);
         player.handleDeath(grid);
@@ -188,7 +188,7 @@ public class PlayerTests {
 
 
     @Test
-    void playerChooseFewerCardsAfterDamageTest(){
+    void FewerCardsAfterDamageTest(){
         setup();
         int initialMaxCards = player.maxCardsAllowedForPlayer;
         player.handleDeath(grid);

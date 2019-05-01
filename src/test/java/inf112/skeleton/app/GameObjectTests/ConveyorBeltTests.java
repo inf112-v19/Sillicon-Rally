@@ -81,7 +81,7 @@ private LaserObject laser;
 
 
     @Test
-    void conveyorDoesNotMovePlayerOutOfMap(){
+    void DoesNotMovePlayerOutOfMap(){
        setup();
        player = new Player(grid);
        player.setPosition(0,0,grid);
@@ -91,7 +91,7 @@ private LaserObject laser;
     }
 
     @Test
-    void conveyorDoesNotRotatePlayer(){
+    void DoesNotRotatePlayer(){
        setup();
        player = new Player(grid);
        player.setPosition(0,0,grid);

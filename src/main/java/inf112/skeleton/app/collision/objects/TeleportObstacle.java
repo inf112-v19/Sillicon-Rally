@@ -12,9 +12,9 @@ import inf112.skeleton.app.map.GameMap;
 public class TeleportObstacle implements IGameObject {
     public int xTeleportFromInPx, yTeleportFromInPx;
     public int xTeleportToInPx, yTeleportToInPx;
-    GameMap map;
-    public Tile teleportFromTile;
-    public Tile teleportToTile;
+    private GameMap map;
+    private Tile teleportFromTile;
+    private Tile teleportToTile;
 
 
     public TeleportObstacle(GameMap map,TileGrid grid) {

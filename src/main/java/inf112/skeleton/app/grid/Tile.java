@@ -53,7 +53,7 @@ public class Tile implements ITile, Comparable<Tile> {
 
     @Override
     public String toString() {
-        return "[x: " + this.x + " y: " +this.y + " ]";
+        return "[xPosition: " + this.x + " yPosition: " +this.y + " ]";
     }
 
     public ArrayList<IGameObject> getGameObjects() {

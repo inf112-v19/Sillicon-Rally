@@ -46,7 +46,7 @@ public class GridTests {
         for (int i = 0; i < rows -1; i++) {
             for (int j = 0; j < columns -1; j++) {
                 String s = tg.getTile(i, j).toString();
-                assertEquals(("[x: " + j + " y: " + i + " ]"), s);
+                assertEquals(("[xPosition: " + j + " yPosition: " + i + " ]"), s);
             }
         }
     }

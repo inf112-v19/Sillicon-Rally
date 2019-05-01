@@ -5,10 +5,12 @@ import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.SetupVariables.SetupVariables;
 import inf112.skeleton.app.collision.objects.TurnGearObject;
 import inf112.skeleton.app.game.RoboGame;
+import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import org.junit.jupiter.api.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class
 TurnGearTests {
@@ -28,6 +30,13 @@ TurnGearTests {
         player.setDirection(RoboGame.Direction.West);
     }
 
+    @Test
+    void turnGearPresentOnMapTest(){
+        setup();
+        turnGear = new TurnGearObject(2 * TILE_SIZE_IN_PIX, 2 * TILE_SIZE_IN_PIX, grid, TurnGearObject.RotateDirection.CLOCKWISE);
+        Tile gearTile = grid.getTileFromCoordinates(turnGear.yLocation, turnGear.xLocation);
+        assertTrue(gearTile.getGameObjects().contains(turnGear));
+    }
     @Test
     void turnGearClockwiseTest() {
         setup();

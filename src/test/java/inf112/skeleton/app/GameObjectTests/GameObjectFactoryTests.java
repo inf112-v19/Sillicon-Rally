@@ -37,7 +37,7 @@ public class GameObjectFactoryTests {
 
 
     @Test
-    void rightPlayerTextureTest(){
+    void playerOneRightTexturTest(){
         setup();
         factory.createPlayers(1,game);
         String expectedString = ("robot1.png");
@@ -53,21 +53,21 @@ public class GameObjectFactoryTests {
 
 
     @Test
-    void canCreateTwoPlayersTest(){
+    void createTwoPlayersTest(){
         setup();
         factory.createPlayers(2,game);
         assertEquals(2, game.playerList.size());
     }
 
     @Test
-    void canCreateThreePlayersTest(){
+    void createThreePlayersTest(){
         setup();
         factory.createPlayers(3,game);
         assertEquals(3, game.playerList.size());
     }
 
     @Test
-    void canCreateFourPlayersTest(){
+    void createFourPlayersTest(){
         setup();
         factory.createPlayers(4, game);
         assertEquals(4, game.playerList.size());
@@ -76,7 +76,7 @@ public class GameObjectFactoryTests {
 
 
     @Test
-    void allPlayersGetRightTextureTest(){
+    void playersGetRightTextureTest(){
         setup();
         factory.createPlayers(4,game);
         String playerOne = "robot1.png";

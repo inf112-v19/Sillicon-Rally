@@ -18,8 +18,9 @@ public class LaserObject implements IGameObject, IDamageDealer {
     public int xLocation;
     public int yLocation;
     public final int LASER_DAMAGE = 1;
-    Sprite sprite;
-    Tile laserTile;
+
+    private Sprite sprite;
+    private Tile laserTile;
 
     public LaserObject(RectangleMapObject laserFromTiled, TileGrid grid){
         xLocation = (int) laserFromTiled.getRectangle().getX();
@@ -33,6 +34,7 @@ public class LaserObject implements IGameObject, IDamageDealer {
         laserTile.addGameObject(this);
     }
 
+
     public void handleCollision(Player player, TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
 
@@ -40,6 +42,7 @@ public class LaserObject implements IGameObject, IDamageDealer {
             dealDamage(player, grid);
         }
     }
+
 
     @Override
     public Sprite getSprite() {
@@ -54,7 +57,13 @@ public class LaserObject implements IGameObject, IDamageDealer {
         player.damagePlayer(LASER_DAMAGE, grid);
     }
 
-    //for testing
+
+
+
+
+    /*
+        For testing
+     */
     public LaserObject(int y, int x, TileGrid grid){
         this.yLocation = y;
         this.xLocation = x;

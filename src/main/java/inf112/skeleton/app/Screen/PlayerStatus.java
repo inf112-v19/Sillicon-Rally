@@ -22,11 +22,14 @@ public class PlayerStatus {
 
     public PlayerStatus(Player player, Point point) {
         this.player = player;
-        this.xLocation = point.x;
-        this.yLocation = point.y;
+
         heartSprite = new Sprite(new Texture("LifeSprites/heart.png"));
-        createSprites();
         font = new BitmapFont();
+
+        xLocation = point.x;
+        yLocation = point.y;
+
+        createSprites();
     }
 
 
@@ -35,7 +38,6 @@ public class PlayerStatus {
         drawLifeTokens(sb);
         drawNextFlagToPickUp(sb);
         drawPlayerName(sb);
-        //drawPlayerOutOfGrid(sb);
         if (player.collectedAllFlags == true){
             drawPlayerOutOfGrid(sb);
         }
@@ -66,19 +68,21 @@ public class PlayerStatus {
         }
     }
 
+
+
     private void drawNextFlagToPickUp(SpriteBatch sb) {
         font.getData().setScale(3);
         font.setColor(new Color(999));
 
 
-        String playerFlags = "Next flagNumber: " + Integer.toString(player.flagNr);
-
+        String playerFlags = "Next flagNumber: " + (player.flagNr);
         if (player.flagNr == 5) {
             playerFlags = "Winner!!!";
         }
-
         font.draw(sb, playerFlags, xLocation, yLocation - 20);
     }
+
+
 
     private void drawLifeTokens(SpriteBatch sb) {
         float xDrawLocation = xLocation-20;

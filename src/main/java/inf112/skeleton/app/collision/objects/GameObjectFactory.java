@@ -17,17 +17,17 @@ import java.util.List;
 public class GameObjectFactory {
     public GameMap map;
     public TileGrid grid;
-    public ConveyorBeltObject conveyorBeltObject;
+    private RoboGame.Direction startDirection = RoboGame.Direction.North;
+
     public List<IGameObject> flags;
     public List<IGameObject> lasers;
     public List<IGameObject> pitfalls;
     public List<IGameObject> repairs;
-    public TeleportObstacle teleportObstacle;
-
     public List<ConveyorBeltObject> ForwardBelts;
     public List<TurnGearObject> turnGears;
 
-    private RoboGame.Direction startDirection = RoboGame.Direction.North;
+    public TeleportObstacle teleportObstacle;
+
     public static Texture player2Texture;
     public static Texture playerTexture;
 
@@ -36,11 +36,10 @@ public class GameObjectFactory {
         this.grid = grid;
     }
 
-    public void createObjects(RoboGame game, List<Player> playerList, int numberOfPlayers) {
+    public void createObjects() {
         createFlags();
         createTeleporter();
         createConveyorBelts();
-
         createLasers();
         createRepairs();
         createTurnGears();
@@ -49,13 +48,12 @@ public class GameObjectFactory {
 
 
     public ArrayList<Player> createPlayers(int numberOfPlayers, RoboGame game) {
-        //ArrayList<Player> list = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             createPlayer(game.playerList, game, (i+1));
         }
-
         return game.playerList;
     }
+
 
     private void createAi(List<Player> playerList, RoboGame game) {
         player2Texture = new Texture("robot2.png");
@@ -64,6 +62,7 @@ public class GameObjectFactory {
         playerList.add(player);
     }
 
+
     public void createPlayer(List<Player> playerList, RoboGame game, int playernum){
         playerTexture = new Texture(("robot" +playernum+".png"));
         Player player = new Player(playerTexture, startDirection, game, ("Player"+ playernum));
@@ -71,15 +70,15 @@ public class GameObjectFactory {
         game.playerList.add(player);
     }
 
-    public void removePlayerSprite(RoboGame game, Player thisPlayer){
+
+    public void removePlayerSprite(Player thisPlayer){
         grid.getTileFromCoordinates(thisPlayer.getY() , thisPlayer.getX()).getGameObjects().remove(thisPlayer);
     }
 
+
     private void createFlags() {
         flags = new ArrayList<>();
-
         MapLayer layer = map.getMapLayerByName("Flags");
-
         for (MapObject flag : layer.getObjects()) {
             RectangleMapObject flagRectangleObject = (RectangleMapObject) flag;
             flags.add(new FlagObject(flagRectangleObject, grid));
@@ -89,7 +88,6 @@ public class GameObjectFactory {
 
     private void createLasers(){
         lasers = new ArrayList<>();
-
         MapLayer laserLayer = map.getMapLayerByName("Lasers");
         if (laserLayer == null)
             return;
@@ -98,11 +96,11 @@ public class GameObjectFactory {
             RectangleMapObject laserRectangleObject = (RectangleMapObject) laser;
             lasers.add(new LaserObject(laserRectangleObject, grid));
         }
-
     }
+
+
     private void createRepairs(){
         repairs = new ArrayList<>();
-
         MapLayer repairLayer = map.getMapLayerByName("Repairs");
         if (repairLayer == null)
             return;
@@ -111,12 +109,11 @@ public class GameObjectFactory {
             RectangleMapObject repairRectangleObject = (RectangleMapObject) repair;
             repairs.add(new RepairObject(repairRectangleObject, grid));
         }
-
     }
+
 
     private void createPits(){
         pitfalls = new ArrayList<>();
-
         MapLayer pitLayer = map.getMapLayerByName("Pits");
         if (pitLayer == null)
             return;
@@ -125,7 +122,6 @@ public class GameObjectFactory {
             RectangleMapObject pitRectangleObject = (RectangleMapObject) pit;
             pitfalls.add(new PitObject(pitRectangleObject, grid));
         }
-
     }
 
 
@@ -134,7 +130,6 @@ public class GameObjectFactory {
         MapLayer belts = map.getMapLayerByName("Belts");
         if (belts == null)
             return;
-
 
         for (MapObject belt: belts.getObjects()) {
             RectangleMapObject beltRectangleObject = (RectangleMapObject) belt;
@@ -145,7 +140,6 @@ public class GameObjectFactory {
 
     private void createTurnGears(){
         this.turnGears = new ArrayList<>();
-
         MapLayer mapLayer = map.getMapLayerByName("turnGears");
         if (mapLayer == null)
             return;
@@ -155,7 +149,6 @@ public class GameObjectFactory {
             turnGears.add(new TurnGearObject(turnGearObject, grid));
         }
     }
-
 
 
     private void createTeleporter() {
