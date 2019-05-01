@@ -21,7 +21,6 @@ public class GameOverScreen implements Screen {
     @Override
     public void show() {
         GameOver = new Texture("GAMEOVER.png");
-        SilCon = new Texture("SiliconRallyOut.png");
         YasQueen = new Texture("YasQueen.png");
     }
 

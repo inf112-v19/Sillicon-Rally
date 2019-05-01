@@ -2,9 +2,7 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import inf112.skeleton.app.Screen.MainMenuScreen;
-import inf112.skeleton.app.Screen.StartMenuScreen;
-import inf112.skeleton.app.Screen.StartScreen;
+
 
 
 public class Main {

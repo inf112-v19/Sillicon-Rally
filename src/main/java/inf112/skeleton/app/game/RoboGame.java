@@ -32,8 +32,8 @@ public class RoboGame extends Game {
     public GameMap gameMap;
     public static TiledMapRenderer tiledMapRenderer;
     public static int TILE_SIZE_IN_PX;
-    public static final int ROBO_GAME_WIDTH = 1200;
-    public static final int ROBO_GAME_HEIGHT = 700;
+    public static final int ROBO_GAME_WIDTH = 1500;
+    public static final int ROBO_GAME_HEIGHT = 900;
 
 
     //Sprite related
