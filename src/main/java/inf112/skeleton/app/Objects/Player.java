@@ -112,8 +112,8 @@ public class Player implements IGameObject, InputProcessor {
                 game.setScreen(new GameOverScreen(game));}
         }
 
-        if (this.maxCardsAllowedForPlayer > 3)
-            this.maxCardsAllowedForPlayer--;
+        //if (this.maxCardsAllowedForPlayer > 3)
+            //this.maxCardsAllowedForPlayer--;
     }
 
 

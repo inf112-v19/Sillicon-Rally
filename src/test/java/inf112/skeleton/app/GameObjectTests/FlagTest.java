@@ -106,7 +106,7 @@ public class FlagTest {
     public void gameInformsPlayerAllFlagsHaveBeenPickedUp(){
         setup();
         flag.flagNumber = flag.maxFlags;
-        player.flagNr =4;
+        player.flagNr = 4;
         player.setPosition(flag.yLocation, flag.xLocation,grid);
         flag.handleCollision(player,grid);
         String string = flag.presentNextFlag(player);
