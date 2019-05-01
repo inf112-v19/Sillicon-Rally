@@ -2,6 +2,7 @@ package inf112.skeleton.app.game;
 
 import inf112.skeleton.app.Objects.Player;
 
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class RoundExecutor {
@@ -62,9 +63,13 @@ public class RoundExecutor {
     }
 
     private void checkCollisions() {
-        for (Player player : playerList) {
-            player.checkCollision();
-            player.checkForDamageTaken();
+        try {
+            for (Player player : playerList) {
+                player.checkCollision();
+                player.checkForDamageTaken();
+            }
+        } catch (ConcurrentModificationException e) {
+
         }
     }
 
