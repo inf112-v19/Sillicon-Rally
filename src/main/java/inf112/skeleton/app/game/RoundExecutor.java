@@ -24,18 +24,22 @@ public class RoundExecutor {
     }
 
     public void playPlayerNextCard() {
-        if (roundIsDone() && isCurrentlyExecutingRound == true) {
-            isCurrentlyExecutingRound = false;
-            checkCollisions();
-            playerShootLaser();
-            game.deck = new StackOfCards();
-            return;
-        }
-        sleep(300);
+        if (playerList.size() > 0) {
+            if (roundIsDone() && isCurrentlyExecutingRound == true) {
+                isCurrentlyExecutingRound = false;
+                checkCollisions();
+                playerShootLaser();
+                game.deck = new StackOfCards();
+                return;
+            }
+            sleep(300);
 
-        Player player = playerList.get(playersTurn);
-        player.executeNextCard();
-        setNextPlayersTurn();
+            if (playerList.size() > 0) {
+                Player player = playerList.get(playersTurn);
+                player.executeNextCard();
+                setNextPlayersTurn();
+            }
+        }
 
     }
 
@@ -90,8 +94,10 @@ public class RoundExecutor {
     }
 
     private void setNextPlayersTurn(){
-        int currentPlayer = playersTurn;
-        this.playersTurn = (currentPlayer+1) % playerList.size();
+        if (playerList.size() > 0) {
+            int currentPlayer = playersTurn;
+            this.playersTurn = (currentPlayer + 1) % playerList.size();
+        }
 
     }
 

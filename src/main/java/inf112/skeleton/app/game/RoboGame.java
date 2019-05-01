@@ -101,7 +101,11 @@ public class RoboGame extends Game {
     public void createPlayers(int numberOfPlayers) {
         constructor.createPlayers(numberOfPlayers, this);
         drawNineCardsFromDeck();
-        this.setScreen(new GameScreen(this));
+    }
+
+    public void createAIs(int numberofAIs){
+        constructor.createAis(numberofAIs, this);
+
     }
 
     public Player getCurrentPlayer(){
