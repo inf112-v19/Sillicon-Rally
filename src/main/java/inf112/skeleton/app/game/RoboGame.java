@@ -64,11 +64,11 @@ public class RoboGame extends Game {
 
         playerList = new ArrayList<>();
         gameMap = new GameMap("MapNumberOne.tmx");
-        this.TILE_SIZE_IN_PX = getTileSize();
+        TILE_SIZE_IN_PX = getTileSize();
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
-        this.grid = makeGrid();
+        grid = makeGrid();
 
-        this.constructor = new GameObjectFactory(gameMap, grid, this);
+        constructor = new GameObjectFactory(gameMap, grid);
         constructor.createObjects(this, playerList, numberOfPlayers);
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
@@ -100,7 +100,7 @@ public class RoboGame extends Game {
     }
 
     public void createPlayers(int numberOfPlayers) {
-        this.playerList = constructor.createPlayers(numberOfPlayers, this);
+        constructor.createPlayers(numberOfPlayers, this);
         drawNineCardsFromDeck();
         this.setScreen(new GameScreen(this));
     }

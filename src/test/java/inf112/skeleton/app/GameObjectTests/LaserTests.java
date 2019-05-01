@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
-public class LaserTest {
+public class LaserTests {
     private TileGrid grid;
     private Player player;
     private LaserObject laserObject;

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class MoveCardTest {
+public class MoveCardTests {
 	private ArrayList<Player> playerList;
 	private ArrayList<MoveCard> cardList;
 	private Round round;
@@ -25,7 +25,7 @@ public class MoveCardTest {
 	private TileGrid grid;
 	private StackOfCards deck;
 	int TILE_SIZE_IN_PIX;
-	Texture textureCard;		//texture does not matter in testing, it is used to avoid exceptions for classes demading sprite for card
+	Texture textureCard;		//texture does not matter in testing, it is used to avoid exceptions for classes demanding sprite for card
 
 	public void setup() {
 		SetupVariables variables = new SetupVariables();

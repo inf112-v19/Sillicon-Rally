@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class
-TurnGearTest {
+TurnGearTests {
     private TileGrid grid;
     private Player player;
     private int TILE_SIZE_IN_PIX;

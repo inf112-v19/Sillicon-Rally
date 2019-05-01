@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TeleportTest {
+public class TeleportTests {
     SetupVariables variables;
     private Player player;
     private TileGrid grid;

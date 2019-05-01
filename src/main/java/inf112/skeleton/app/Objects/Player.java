@@ -25,6 +25,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
     TileGrid grid;
     Tile backupLocation;
     Sprite sprite;
+    public Texture texture;
     private RoboGame game;
     private PlayerMovements playerMovements;
     private LaserAnimation laserAnimation;
@@ -59,6 +60,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
 
     public Player(Texture texture, RoboGame.Direction startDirection, RoboGame game, String name) {
         this.sprite = new Sprite(texture);
+        this.texture = texture;
         this.backupLocation = null;
         this.game = game;
         playerMovements = new PlayerMovements(this, 0, 0, startDirection);

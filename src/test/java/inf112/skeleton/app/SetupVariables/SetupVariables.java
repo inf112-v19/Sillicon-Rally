@@ -23,35 +23,47 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 
 public class SetupVariables {
-    private Application application;
+    //Map related
     public TileGrid grid;
     public GameMap gameMap;
-    public TeleportObstacle teleport;
-    public Player player;
-    public int TILESIZE_IN_PX;
+
+
+    //Object related
     public FlagObject flag;
     public FlagObject flag2;
+    public TeleportObstacle teleport;
+    public Player player;
     public ConveyorBeltObject belt;
     public LaserObject laser;
     public RepairObject repairObject;
-    public Round round;
-    //public StackOfCards deck;
-    public MoveCard card;
     public LaserAnimation laserAnimation;
-    public Texture texture;
+
+
+    //Function related
+    private Application application;
+    public RoboGame game;
     public ArrayList<Player> playerList;
     public ArrayList<MoveCard> cardList;
     public ArrayList<MoveCard> oneForwardCardList;
+    public Round round;
+    public int TILESIZE_IN_PX;
+
+
+
+
+
+
+
 
     public SetupVariables() {
         setup();
-        //map related
+        //Map related
         gameMap = new GameMap("map.v.01.tmx");
         grid = makeGrid(gameMap);
         TILESIZE_IN_PX = gameMap.getTileSize();
 
 
-        //player related
+        //Player related
         player = new Player(grid);
         laserAnimation = new LaserAnimation();
 
@@ -66,12 +78,14 @@ public class SetupVariables {
 
 
         //Function related
+        game = new RoboGame();
         oneForwardCardList = getOneForwardDeck();
         oneForwardCardList = getOneForwardDeck();
         playerList = getPlayers();
         round = new Round(new StackOfCards(), playerList);
         cardList = getDeck();
         playerList = getPlayers();
+
     }
 
 

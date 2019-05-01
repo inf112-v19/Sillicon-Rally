@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class GraphTest {
+public class GraphTests {
     SetupVariables setup = new SetupVariables();
 
     @Test

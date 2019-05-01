@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class PlayerTurnTest {
+public class PlayerTurnTests {
 
 	private Round round;
 	private Player player;

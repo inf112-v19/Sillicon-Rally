@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
-public class RepairTest {
+public class RepairTests {
     private TileGrid grid;
     private Player player;
     private int TILE_SIZE_IN_PIX;

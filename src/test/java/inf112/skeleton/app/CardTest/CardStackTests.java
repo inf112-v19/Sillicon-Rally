@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardStackTest {
+public class CardStackTests {
     private ArrayList<MoveCard> deck;
     StackOfCards stackOfCards;
 
@@ -38,5 +38,20 @@ public class CardStackTest {
         setup();
         stackOfCards = new StackOfCards();
         assertEquals(84, stackOfCards.getSize());
+    }
+
+    @Test
+    void stackIsShuffledTest(){
+        setup();
+        stackOfCards = new StackOfCards();
+        boolean isShuffled = true;
+        MoveCard card1 = stackOfCards.stack.pop();
+        MoveCard card2 = stackOfCards.stack.pop();
+        MoveCard card3 = stackOfCards.stack.pop();
+        MoveCard card4 = stackOfCards.stack.pop();
+        if ((card1 == card2) && (card2 == card3) && (card3 == card4)){
+            isShuffled = false;
+        }
+        assertTrue(isShuffled);
     }
 }

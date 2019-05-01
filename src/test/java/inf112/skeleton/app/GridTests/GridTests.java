@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class GridTest {
+public class GridTests {
     int rows = 10;
     int columns = 8;
     int tileSizeInPx = 128;

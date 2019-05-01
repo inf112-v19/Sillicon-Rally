@@ -15,7 +15,7 @@ import java.util.Set;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class FlagTest {
+public class FlagTests {
     TileGrid grid;
     FlagObject flag;
     Player player;

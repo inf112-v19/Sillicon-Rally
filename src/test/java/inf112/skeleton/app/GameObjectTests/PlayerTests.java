@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //import jdk.internal.util.xml.impl.Input;
 
 
-public class PlayerTest {
+public class PlayerTests {
 
     Player player;
     TileGrid grid;

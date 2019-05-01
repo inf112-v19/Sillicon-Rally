@@ -31,13 +31,12 @@ public class GameObjectFactory {
     public static Texture player2Texture;
     public static Texture playerTexture;
 
-    public GameObjectFactory(GameMap map, TileGrid grid, RoboGame game) {
+    public GameObjectFactory(GameMap map, TileGrid grid) {
         this.map = map;
         this.grid = grid;
     }
 
     public void createObjects(RoboGame game, List<Player> playerList, int numberOfPlayers) {
-        //createPlayers(playerList, game);
         createFlags();
         createTeleporter();
         createConveyorBelts();
@@ -50,12 +49,12 @@ public class GameObjectFactory {
 
 
     public ArrayList<Player> createPlayers(int numberOfPlayers, RoboGame game) {
-        ArrayList<Player> list = new ArrayList<>();
+        //ArrayList<Player> list = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
-            createPlayer(list, game, (i+1));
+            createPlayer(game.playerList, game, (i+1));
         }
 
-        return list;
+        return game.playerList;
     }
 
     private void createAi(List<Player> playerList, RoboGame game) {
@@ -66,10 +65,10 @@ public class GameObjectFactory {
     }
 
     public void createPlayer(List<Player> playerList, RoboGame game, int playernum){
-        playerTexture = new Texture(("robot" + playernum+".png"));
+        playerTexture = new Texture(("robot" +playernum+".png"));
         Player player = new Player(playerTexture, startDirection, game, ("Player"+ playernum));
         grid.getTile(0, 0).addGameObject(player);
-        playerList.add(player);
+        game.playerList.add(player);
     }
 
     public void removePlayerSprite(RoboGame game, Player thisPlayer){
