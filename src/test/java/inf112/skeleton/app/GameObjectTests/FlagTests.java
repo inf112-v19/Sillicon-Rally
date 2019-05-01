@@ -15,7 +15,7 @@ import java.util.Set;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class FlagTest {
+public class FlagTests {
     TileGrid grid;
     FlagObject flag;
     Player player;
@@ -45,7 +45,7 @@ public class FlagTest {
     }
 
     @Test
-   public void flagIsNotRemovedWhenPickedUpTest(){
+   public void NotRemovedWhenTouchedTest(){
         setup();
         player.setPosition(flag.yLocation, flag.xLocation, grid);
         Tile flagtile = grid.getTileFromCoordinates(flag.yLocation, flag.xLocation);
@@ -57,7 +57,7 @@ public class FlagTest {
 
 
     @Test
-    public void playerCannotPickUpFlagTwoBeforeFlagOne(){
+    public void mustPickUpFlagTwoBeforeFlagOneTest(){
         setup();
         Player player = variables.player;
         FlagObject flag = variables.flag;
@@ -68,7 +68,7 @@ public class FlagTest {
     }
 
     @Test
-    public void playerCanPickUpFlagTwoAfterFlagOne(){
+    public void canPickUpFlagTwoAfterFlagOneTest(){
         setup();
         Player player = variables.player;
         FlagObject flag1 = variables.flag;
@@ -85,7 +85,7 @@ public class FlagTest {
     }
 
     @Test
-    public void gamePresentsFirstFlagToPickUp(){
+    public void presentsFirstFlagToPickUp(){
         setup();
         flag.handleCollision(player,grid);
         String string = flag.presentNextFlag(player);
@@ -93,7 +93,7 @@ public class FlagTest {
     }
 
     @Test
-    public void gamePresentsFlagToPickupUpdatesTest(){
+    public void presentsNextFlagToPickUp(){
         setup();
         player.setPosition(flag.yLocation, flag.xLocation,grid);
         flag.flagNumber = 1;
@@ -103,7 +103,7 @@ public class FlagTest {
     }
 
     @Test
-    public void gameInformsPlayerAllFlagsHaveBeenPickedUp(){
+    public void displayAllFlagsPickedUp(){
         setup();
         flag.flagNumber = flag.maxFlags;
         player.flagNr = 4;

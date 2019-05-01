@@ -1,18 +1,14 @@
 package inf112.skeleton.app.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class PlayerMovements {
-    Player player;
+    private Player player;
     public float y;
     public float x;
-    RoboGame.Direction direction ;
-    float targetY;
-    float targetX;
+    private RoboGame.Direction direction ;
     float speed;
 
     public PlayerMovements(Player player, float y, float x, RoboGame.Direction direction) {
@@ -86,8 +82,7 @@ public class PlayerMovements {
         return true;
     }
 
-    public void rotateClockwise(TileGrid grid) {
-        //player.checkForDamageTaken(grid);
+    public void rotateClockwise() {
         if (player.getSprite() != null)
             player.getSprite().rotate(-90);
 
@@ -107,10 +102,9 @@ public class PlayerMovements {
     }
 
 
-    public void rotateCounterClockwise(TileGrid grid) {
+    public void rotateCounterClockwise() {
         if (player.getSprite() != null)
             player.getSprite().rotate(90);
-        //player.checkForDamageTaken(grid);
 
 
         switch (getDirection()) {
@@ -128,10 +122,9 @@ public class PlayerMovements {
         }
     }
 
-    public void uTurn(TileGrid grid) {
+    public void uTurn() {
         if (player.getSprite() != null)
             player.getSprite().rotate(180);
-        //player.checkForDamageTaken(grid);
 
         switch (getDirection()) {
             case North:

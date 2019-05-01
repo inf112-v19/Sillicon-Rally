@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.collision.objects.GameObjectFactory;
 
 
 public class PlayerStatus {
@@ -21,18 +22,25 @@ public class PlayerStatus {
 
     public PlayerStatus(Player player, Point point) {
         this.player = player;
-        this.xLocation = point.x;
-        this.yLocation = point.y;
+
         heartSprite = new Sprite(new Texture("LifeSprites/heart.png"));
-        createSprites();
         font = new BitmapFont();
+
+        xLocation = point.x;
+        yLocation = point.y;
+
+        createSprites();
     }
+
 
     public void draw(SpriteBatch sb) {
         drawHearts(sb);
         drawLifeTokens(sb);
         drawNextFlagToPickUp(sb);
         drawPlayerName(sb);
+        if (player.collectedAllFlags == true){
+            drawPlayerOutOfGrid(sb);
+        }
     }
 
     private void drawPlayerName(SpriteBatch sb) {
@@ -42,6 +50,9 @@ public class PlayerStatus {
 
         font.draw(sb, name, xLocation + 200, yLocation + 180);
 
+    }
+    public void drawPlayerOutOfGrid(SpriteBatch spriteBatch){
+        spriteBatch.draw(GameObjectFactory.playerTexture, xLocation+350, yLocation+400);
     }
 
     private void drawHearts(SpriteBatch sb) {
@@ -57,19 +68,21 @@ public class PlayerStatus {
         }
     }
 
+
+
     private void drawNextFlagToPickUp(SpriteBatch sb) {
         font.getData().setScale(3);
         font.setColor(new Color(999));
 
 
-        String playerFlags = "Next flagNumber: " + Integer.toString(player.flagNr);
-
+        String playerFlags = "Next flagNumber: " + (player.flagNr);
         if (player.flagNr == 5) {
             playerFlags = "Winner!!!";
         }
-
         font.draw(sb, playerFlags, xLocation, yLocation - 20);
     }
+
+
 
     private void drawLifeTokens(SpriteBatch sb) {
         float xDrawLocation = xLocation-20;
@@ -95,4 +108,5 @@ public class PlayerStatus {
         NoLifeSprite = new Sprite(new Texture("LifeSprites/exmpl0Life.png"));
         heartSprite = new Sprite(new Texture("LifeSprites/heart.png"));
     }
+
 }

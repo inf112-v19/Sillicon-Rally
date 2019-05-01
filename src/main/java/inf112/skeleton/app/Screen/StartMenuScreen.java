@@ -20,6 +20,9 @@ public class StartMenuScreen implements Screen {
     private final Button twoPlayers;
     private final Button threePlayers;
     private final Button fourPlayers;
+    private final Button fivePlayers;
+    private final Button sixPlayers;
+
     public RoboGame game;
     public int numberofPlayers;
 
@@ -35,11 +38,19 @@ public class StartMenuScreen implements Screen {
         twoPlayers = createButton("2P", mySkin);
         threePlayers = createButton("3P", mySkin);
         fourPlayers = createButton("4P", mySkin);
+        fivePlayers = createButton("5P", mySkin);
+        sixPlayers = createButton("6P", mySkin);
 
-        onePlayer.setPosition(stage.getWidth()/4 - 50, stage.getHeight() - onePlayer.getHeight()*2);
+
+
+        onePlayer.setPosition(stage.getWidth()/2 - (stage.getWidth()/4), stage.getHeight() - onePlayer.getHeight()*2);
         twoPlayers.setPosition(onePlayer.getX() + onePlayer.getWidth() + 50,stage.getHeight() - onePlayer.getHeight()*2);
-        threePlayers.setPosition(stage.getWidth()/4 - 50, stage.getHeight() - onePlayer.getHeight()*4);
+
+        threePlayers.setPosition(stage.getWidth()/2 - (stage.getWidth()/4), stage.getHeight() - onePlayer.getHeight()*4);
         fourPlayers.setPosition(threePlayers.getX() + threePlayers.getWidth() + 50, stage.getHeight() - onePlayer.getHeight()*4);
+
+        fivePlayers.setPosition(stage.getWidth()/2 - (stage.getWidth()/4), stage.getHeight() - onePlayer.getHeight()*6);
+        sixPlayers.setPosition(fivePlayers.getX() + fivePlayers.getWidth() + 50, stage.getHeight() -onePlayer.getHeight()*6);
 
         // add a listener to your buttons so it does something when clicked
         onePlayer.addListener(new ChangeListener() {
@@ -73,6 +84,19 @@ public class StartMenuScreen implements Screen {
             }
         });
 
+       fivePlayers.addListener(new ChangeListener() {
+           @Override
+           public void changed(ChangeEvent event, Actor actor) {
+               numberofPlayers = 5;
+           }
+       });
+
+       sixPlayers.addListener(new ChangeListener() {
+           @Override
+           public void changed(ChangeEvent event, Actor actor) {
+             numberofPlayers = 6;
+           }
+       });
     }
 
     private TextButton createButton(String label, Skin skin) {

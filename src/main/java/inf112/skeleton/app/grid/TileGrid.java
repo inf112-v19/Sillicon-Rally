@@ -63,7 +63,7 @@ public class TileGrid {
     }
 
     /*
-    * Get a tile based on the Tiles x and y coordinates, 0,0 being bottom left
+    * Get a tile based on the Tiles xPosition and yPosition coordinates, 0,0 being bottom left
      */
     public Tile getTile(int y, int x) {
         if (x >= columns || y >= rows) {

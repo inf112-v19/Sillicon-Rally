@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-public class PlayerTurnTest {
+public class PlayerTurnTests {
 
 	private Round round;
 	private Player player;
@@ -25,7 +25,7 @@ public class PlayerTurnTest {
 	private StackOfCards deck;
 	private RoboGame game;
 
-	//Player default position (y, x) = (0 ,4)
+	//Player default position (yPosition, xPosition) = (0 ,4)
 	//Player default direction North
 	@Test
 	public void doTurnTestAndMoveTest(){ //perfectTitle
