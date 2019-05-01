@@ -1,7 +1,6 @@
 package inf112.skeleton.app.GameObjectTests;
 
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.Objects.iPlayer;
 import inf112.skeleton.app.SetupVariables.SetupVariables;
 import inf112.skeleton.app.collision.objects.TeleportObstacle;
 import inf112.skeleton.app.grid.Tile;

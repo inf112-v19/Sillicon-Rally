@@ -194,9 +194,10 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
     private void removePlayer(){
         float y = this.getY();
         float x = this.getX();
-        game.constructor.removePlayerSprite(game, this);
-        game.playerList.remove(this);
-
+        if (game != null) {
+            game.constructor.removePlayerSprite(game, this);
+            game.playerList.remove(this);
+        }
     }
 
 

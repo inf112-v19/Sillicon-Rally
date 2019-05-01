@@ -24,6 +24,7 @@ public class PlayerTest {
 
     public void setup() {
         SetupVariables variables = new SetupVariables();
+        roboGame = new RoboGame();
         grid = variables.grid;
         player = new Player(grid);
         TILE_SIZE_IN_PX = variables.gameMap.getTileSize();
@@ -157,7 +158,9 @@ public class PlayerTest {
         setup();
         player.handleDeath(grid);
         player.handleDeath(grid);
+        System.out.println(player.playerHP + ", " + player.playerTokens);
         player.handleDeath(grid);
+        System.out.println(player.playerHP);
         assertEquals(player.playerTokens, 0);
     }
 
