@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 import inf112.skeleton.app.Objects.AIPlayer;
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.Screen.GameOverScreen;
 
 import java.util.List;
 
@@ -22,8 +23,10 @@ public class DrawCards {
     }
 
     public void drawCards() {
-        if (playerList.size() == 0)
+        if (playerList.size() == 0){
+            game.setScreen(new GameOverScreen(game));
             return;
+        }
 
         Player playerToDraw = playerList.get(playersTurn);
         Gdx.input.setInputProcessor(playerToDraw);
