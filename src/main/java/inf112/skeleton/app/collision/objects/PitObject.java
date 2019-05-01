@@ -10,19 +10,19 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class PitObject implements IGameObject, IDamageDealer {
-
     public int xLocation;
     public int yLocation;
-    Tile pitTile;
+    private Tile pitTile;
+
 
     public PitObject(RectangleMapObject pitFromTiled, TileGrid grid){
         xLocation = (int) pitFromTiled.getRectangle().getX();
         yLocation = (int) pitFromTiled.getRectangle().getY();
 
-
         pitTile = grid.getTileFromCoordinates(yLocation, xLocation);
         pitTile.addGameObject(this);
     }
+
 
     public void handleCollision(Player player, TileGrid grid) {
         Tile playerTile = grid.getTileFromCoordinates(player.getY(), player.getX());
@@ -30,6 +30,7 @@ public class PitObject implements IGameObject, IDamageDealer {
             dealDamage(player, grid);
         }
     }
+
 
     public void dealDamage(Player player, TileGrid grid) {
         // Falling in pit is instant death

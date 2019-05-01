@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.Texture;
 import inf112.skeleton.app.game.RoboGame;
 
 public class GameOverScreen implements Screen {
-    Texture GameOver;
-    Texture SilCon;
-    Texture YasQueen;
-    RoboGame game;
+    private Texture GameOver;
+    private Texture SilCon;
+    private Texture YasQueen;
+    private RoboGame game;
 
     public GameOverScreen(RoboGame game){
         this.game = game;

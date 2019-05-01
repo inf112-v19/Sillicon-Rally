@@ -12,12 +12,13 @@ public class MyStack<E> {
         private Node next;
         private E payload;
 
+
         public Node(E item) {
             this.payload = item;
             this.next = null;
         }
-
     }
+
 
     public MyStack() {
         size = 0;

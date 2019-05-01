@@ -31,7 +31,7 @@ public class Dfs {
         this.queue = new LinkedList<>();
         this.currentPosition = position;
         this.originalPosition = position;
-        this.movements = new PlayerMovements(new Player(),position.y, position.x, position.dir);
+        this.movements = new PlayerMovements(new Player(),position.yPosition, position.xPosition, position.direction);
     }
 
     public void dfs() {
@@ -81,7 +81,7 @@ public class Dfs {
     //This also updates the position
     private boolean isLegalMove(MoveCard moveCard, Position position) {
         return position.movePosition(moveCard.getType(), grid);
-       // return movements.checkIfMoveIsOutOfBounds(position.y, position.x, grid);
+       // return movements.checkIfMoveIsOutOfBounds(position.yPosition, position.xPosition, grid);
     }
 
     public LinkedList<Integer> getSelectedCards() {

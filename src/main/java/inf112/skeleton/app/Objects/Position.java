@@ -3,21 +3,22 @@ package inf112.skeleton.app.Objects;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.game.PlayerMovements;
 import inf112.skeleton.app.game.RoboGame;
-import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 import static inf112.skeleton.app.game.RoboGame.Direction.*;
 
 public class Position {
-    public float x;
-    public float y;
-    public RoboGame.Direction dir;
+    public float xPosition;
+    public float yPosition;
+    public RoboGame.Direction direction;
+
 
     public Position(float y, float x, RoboGame.Direction dir) {
-        this.y = y;
-        this.x = x;
-        this.dir = dir;
+        this.yPosition = y;
+        this.xPosition = x;
+        this.direction = dir;
     }
+
 
     public boolean movePosition(MoveCard.Type type, TileGrid grid) {
         boolean legalMove = true;
@@ -35,21 +36,21 @@ public class Position {
             case reverse:
                 legalMove = moveStraight(1, grid.tileSizeInPx*-1, grid);
             case uturn:
-                uTurn(grid);
+                uTurn();
                 break;
             case turnleft:
-                rotateCounterClockwise(grid);
+                rotateCounterClockwise();
                 break;
             case turnright:
-                rotateClockwise(grid);
+                rotateClockwise();
                 break;
         }
 
         return legalMove;
     }
 
-    private void rotateClockwise(TileGrid grid) {
-        switch (this.dir) {
+    private void rotateClockwise() {
+        switch (this.direction) {
             case North:
                 setDirection(RoboGame.Direction.East);
                 break;
@@ -64,8 +65,8 @@ public class Position {
         }
     }
 
-    private void rotateCounterClockwise(TileGrid grid) {
-        switch (this.dir) {
+    private void rotateCounterClockwise() {
+        switch (this.direction) {
             case North:
                 setDirection(RoboGame.Direction.West);
                 break;
@@ -82,13 +83,13 @@ public class Position {
     }
 
     public void setDirection(RoboGame.Direction dir) {
-        this.dir = dir;
+        this.direction = dir;
     }
 
-    private void uTurn(TileGrid grid) {
+    private void uTurn() {
 
 
-        switch (this.dir) {
+        switch (this.direction) {
             case North:
                 setDirection(South);
                 break;
@@ -113,15 +114,15 @@ public class Position {
 
     private boolean moveStraight(int moveDistance, TileGrid grid) {
 
-        switch (this.dir) {
+        switch (this.direction) {
             case North:
-                return setPosition((this.y + moveDistance), this.x, grid);
+                return setPosition((this.yPosition + moveDistance), this.xPosition, grid);
             case East:
-                return setPosition( this.y,  this.x + moveDistance, grid);
+                return setPosition( this.yPosition,  this.xPosition + moveDistance, grid);
             case South:
-                return setPosition((int) this.y - moveDistance, (int) this.x, grid);
+                return setPosition((int) this.yPosition - moveDistance, (int) this.xPosition, grid);
             case West:
-                return setPosition((int) this.y, (int) this.x - moveDistance, grid);
+                return setPosition((int) this.yPosition, (int) this.xPosition - moveDistance, grid);
 
         }
         return false;
@@ -132,10 +133,8 @@ public class Position {
             return false;
         }
 
-        Tile currentTile = grid.getTileFromCoordinates(this.y, this.x);
-
-        this.x = xDest;
-        this.y = yDest;
+        xPosition = xDest;
+        yPosition = yDest;
 
         return true;
     }
@@ -153,17 +152,17 @@ public class Position {
     }
 
     private void updatePosition(PlayerMovements movements) {
-        this.y = movements.getY();
-        this.x = movements.getX();
-        this.dir = movements.getDirection();
+        yPosition = movements.getY();
+        xPosition = movements.getX();
+        direction = movements.getDirection();
     }
 
 
     public Position copy() {
-        return new Position(this.y, this.x, this.dir);
+        return new Position(this.yPosition, this.xPosition, this.direction);
     }
 
     public String toString() {
-        return "Y: " + this.y + " X: " + this.x + " Direction: " + this.dir;
+        return "Y: " + this.yPosition + " X: " + this.xPosition + " Direction: " + this.direction;
     }
 }

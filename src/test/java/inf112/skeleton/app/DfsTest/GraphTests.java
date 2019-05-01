@@ -10,7 +10,7 @@ import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.game.PlayerMovements;
 import inf112.skeleton.app.game.RoboGame;
 import org.junit.jupiter.api.Test;
-import sun.awt.image.ImageWatched;
+//import sun.awt.image.ImageWatched;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class GraphTest {
+public class GraphTests {
     SetupVariables setup = new SetupVariables();
 
     @Test
@@ -49,8 +49,8 @@ public class GraphTest {
         Position position = new Position(2,0, RoboGame.Direction.South);
         Texture textureCard = new Texture("cardLayouts/Move1.png");
         MoveCard moveCard = new MoveCard(MoveCard.Type.move3, textureCard);
-        PlayerMovements movements = new PlayerMovements(new Player(),position.y*setup.grid.tileSizeInPx,
-                position.x*setup.grid.tileSizeInPx, position.dir);
+        PlayerMovements movements = new PlayerMovements(new Player(),position.yPosition *setup.grid.tileSizeInPx,
+                position.xPosition *setup.grid.tileSizeInPx, position.direction);
 
         boolean legalMove = position.movePosition(moveCard.getType(), setup.grid);
         System.out.println(position);
