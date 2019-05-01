@@ -1,6 +1,7 @@
 package inf112.skeleton.app.game;
 
 import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.card.StackOfCards;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class RoundExecutor {
             isCurrentlyExecutingRound = false;
             checkCollisions();
             playerShootLaser();
+            game.deck = new StackOfCards();
             return;
         }
         sleep(300);
