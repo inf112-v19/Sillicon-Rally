@@ -40,7 +40,7 @@ public class GameObjectFactoryTests {
     void playerOneRightTexturTest(){
         setup();
         factory.createPlayers(1,game);
-        String expectedString = ("robot1.png");
+        String expectedString = ("RobotSprites/robot1.png");
         assertEquals(expectedString, GameObjectFactory.playerTexture.toString());
     }
 
@@ -79,10 +79,10 @@ public class GameObjectFactoryTests {
     void playersGetRightTextureTest(){
         setup();
         factory.createPlayers(4,game);
-        String playerOne = "robot1.png";
-        String playerTwo = "robot2.png";
-        String playerThree = "robot3.png";
-        String playerFour = "robot4.png";
+        String playerOne = "RobotSprites/robot1.png";
+        String playerTwo = "RobotSprites/robot2.png";
+        String playerThree = "RobotSprites/robot3.png";
+        String playerFour = "RobotSprites/robot4.png";
         assertEquals(game.playerList.get(0).texture.toString(), playerOne);
         assertEquals(game.playerList.get(1).texture.toString(), playerTwo);
         assertEquals(game.playerList.get(2).texture.toString(), playerThree);

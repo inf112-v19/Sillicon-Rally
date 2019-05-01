@@ -566,7 +566,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         this.laserAnimation = new LaserAnimation();
 
         this.grid = grid;
-        this.sprite = new Sprite(new Texture("robot1.png"));
+        this.sprite = new Sprite(new Texture("RobotSprites/robot1.png"));
         this.moveCardQueue = new LinkedList<>();
         this.maxCardsAllowedForPlayer = 5;
     }
