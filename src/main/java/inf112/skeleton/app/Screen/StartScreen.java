@@ -1,38 +1,24 @@
 package inf112.skeleton.app.Screen;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import inf112.skeleton.app.game.RoboGame;
-//import javafx.application.Application;
 
-import java.awt.*;
-import java.util.ArrayList;
+//import javafx.application.Application;
 
 public class StartScreen extends Game {
     public Integer i;
     Stage stage;
-    TextButton button;
-    private Skin skin;
     TextButton onePlayer;
     TextButton twoPlayers;
     TextButton threePlayers;
     TextButton fourPlayers;
-    final int BUTTON_SIZE = 200;
 
 
     public StartScreen(Integer i) {
