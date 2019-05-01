@@ -24,7 +24,7 @@ public class DrawCards {
     public void drawCards() {
         if (playerList.size() == 0)
             return;
-        
+
         Player playerToDraw = playerList.get(playersTurn);
         Gdx.input.setInputProcessor(playerToDraw);
  

@@ -43,6 +43,57 @@ enn resultatet på den runden ble vist på skjermen.
 #### Ting som har fungert godt
 
 
+##### Kode
+
+Vi er godt fordnøyd med å ha tatt i bruk programmet Tiled som vi bruker til å lage kart. Tiled har tatt seg av mye av den tunge løftingen ved å
+lage grafisk tilfredsstillende kart. 
+I tillegg er vi fornøyd med måten vi brukte datastrukturen TileGrid og Tile til å simulere kartet i koden. Dette lot oss gjøre all logikk og
+aritmetikk som egentlig gjøres på pikselnivå i Libgdx om til "Tilenivå" i koden vår. 
+
+##### Samarbeid
+
+Nok en gang må vi trekke inn parprogrammering som en ordning vi er godt fornøyd med.
+Ellers har vi ikke gjort noen uvanlige valg, vi har stort sett jbobet jevnt og trutt hele semesteret, hatt møter minst én gang hver uke,
+og holdt hverandre oppdatert på facebook. 
+
+#### Hvis vi skulle fortsatt prosjektet
+
+Siden vi ikke forstod Libgdx spesielt godt i starten, så gjorde vi noen grunnleggende valg som vi nok hadde justert dersom vi skulle fortsatt
+med prosjektet. For eksempel ville vi konsentrert dataflyten i programmet på en slik måte at det hadde vært enkelt å gjøre spillet mulig å 
+spille på flere PCer samtidig. Sånn som det er nå er vår største utfordring med nettverk at vi ikke har noen fornuftig "inngangsport" til
+programmet. 
+
+I tillegg hadde vi muligens tatt i bruk ting som "Stage" i Libgdx, ting som vi ikke visste eksisterte eller hvordan fungerte før vi var godt
+uti utviklingen. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
