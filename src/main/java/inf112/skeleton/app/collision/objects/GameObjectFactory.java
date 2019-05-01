@@ -18,6 +18,7 @@ public class GameObjectFactory {
     public GameMap map;
     public TileGrid grid;
     private RoboGame.Direction startDirection = RoboGame.Direction.North;
+    private int temp;
 
     public List<IGameObject> flags;
     public List<IGameObject> lasers;
@@ -28,12 +29,12 @@ public class GameObjectFactory {
 
     public TeleportObstacle teleportObstacle;
 
-    public static Texture player2Texture;
     public static Texture playerTexture;
 
     public GameObjectFactory(GameMap map, TileGrid grid) {
         this.map = map;
         this.grid = grid;
+        temp = 0;
     }
 
     public void createObjects() {
@@ -50,16 +51,25 @@ public class GameObjectFactory {
     public ArrayList<Player> createPlayers(int numberOfPlayers, RoboGame game) {
         for (int i = 0; i < numberOfPlayers; i++) {
             createPlayer(game.playerList, game, (i+1));
+            temp ++;
+        }
+        return game.playerList;
+    }
+
+    public ArrayList<Player> createAis(int numberOfPlayers, RoboGame game) {
+        for (int j = 0; j < numberOfPlayers; j++) {
+            createAi(game.playerList, game, (temp+1));
         }
         return game.playerList;
     }
 
 
-    private void createAi(List<Player> playerList, RoboGame game) {
-        player2Texture = new Texture("robot2.png");
-        AIPlayer player = new AIPlayer((player2Texture), startDirection, game, "AI");
+
+    public void createAi(List<Player> playerList, RoboGame game, int playernum) {
+        playerTexture = new Texture(("RobotSprites/robot" +playernum+".png"));
+        Player player = new AIPlayer(playerTexture, startDirection, game, "AI");
         grid.getTile(0, 0).addGameObject(player);
-        playerList.add(player);
+        game.playerList.add(player);
     }
 
 
