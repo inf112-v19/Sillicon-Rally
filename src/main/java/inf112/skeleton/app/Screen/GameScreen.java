@@ -2,16 +2,11 @@ package inf112.skeleton.app.Screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
-import inf112.skeleton.app.card.MoveCard;
-import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.game.DrawCards;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.game.RoundExecutor;
