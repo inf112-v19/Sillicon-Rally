@@ -64,8 +64,15 @@ spille på flere PCer samtidig. Sånn som det er nå er vår største utfordring med 
 programmet. 
 
 I tillegg hadde vi muligens tatt i bruk ting som "Stage" i Libgdx, ting som vi ikke visste eksisterte eller hvordan fungerte før vi var godt
-uti utviklingen. 
+uti utviklingen av programmet. 
 
+
+#### Det viktigste vi har lært
+
+Den kanskje viktigste tingen vi har lært mens vi jobbet med dette prosjektet, er å sette seg inn i et relativt stort og utfordrende rammeverk
+sånn som Libgdx. Det å ta i bruk kode som er skrevet av andre gjør at vi kan "outsource" mye av det tyngste arbeidet. Samtidig tvinger det oss
+til å jobbe rundt rammeverket, til å strukturere prosjektet vårt på en måte vi kanskje ikke opplever som optimalt.
+Det første veier ofte opp for det andre, og dette har vært en særdelelis lærerik opplevelse for alle på teamet.
 
 
 
