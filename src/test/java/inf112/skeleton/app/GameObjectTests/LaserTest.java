@@ -2,7 +2,6 @@ package inf112.skeleton.app.GameObjectTests;
 
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.SetupVariables.SetupVariables;
-import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.collision.objects.LaserObject;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
@@ -20,18 +19,15 @@ public class LaserTest {
     private int TILE_SIZE_IN_PX;
 
 
-    public void setup(){
+    private void setup(){
         SetupVariables variables = new SetupVariables();
         grid = variables.grid;
         player = variables.player;
 
-        //player = new Player(grid);
         player.setPosition(2 * TILE_SIZE_IN_PX, 2 * TILE_SIZE_IN_PX, grid);
         laserObject = variables.laser;
         laser = new LaserObject(2,2,grid);
-        //laserObject = new LaserObject(2 * TILE_SIZE_IN_PX, 2 * TILE_SIZE_IN_PX, grid);
         TILE_SIZE_IN_PX = grid.tileSizeInPx;
-                //variables.gameMap.getTileSize();
     }
 
     @Test

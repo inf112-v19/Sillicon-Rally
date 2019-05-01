@@ -41,6 +41,7 @@ public class MoveCardTest {
 		textureCard = new Texture("cardLayouts/Move1.png");
 	}
 
+
 	@Test
 	void moveCardOneForwardTest(){
 		setup();

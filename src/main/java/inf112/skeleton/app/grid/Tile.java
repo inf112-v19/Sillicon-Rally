@@ -28,6 +28,10 @@ public class Tile implements ITile, Comparable<Tile> {
         return this.x;
     }
 
+    public int getY(){
+        return this.y;
+    }
+
     @Override
     public int compareTo(Tile o) {
         return 0;
