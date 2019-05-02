@@ -78,7 +78,7 @@ public class PlayerStatus {
 
     private void drawNextFlagToPickUp(SpriteBatch sb) {
         font.getData().setScale(3);
-        font.setColor(new Color(999));
+        font.setColor(new Color(Color.YELLOW));
 
 
         String playerFlags = "Next flagNumber: " + (player.flagNr);
