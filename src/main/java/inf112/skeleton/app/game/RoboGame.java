@@ -2,8 +2,10 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -40,6 +42,9 @@ public class RoboGame extends Game {
     public SpriteBatch sb;
     private Sprite backboard;
     private Texture texture;
+    private BitmapFont font;
+    private float xLoc;
+    private float yLoc;
 
     //Player related
     public Player player;
@@ -72,6 +77,10 @@ public class RoboGame extends Game {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         grid = makeGrid();
 
+        font = new BitmapFont();
+        xLoc = -400;
+        yLoc = -600;
+
         constructor = new GameObjectFactory(gameMap, grid);
         constructor.createObjects();
 
@@ -88,8 +97,6 @@ public class RoboGame extends Game {
         backboard = new Sprite(texture);
         backboard.setSize(((CustomCamera) camera).pixelWidth*2,((CustomCamera) camera).pixelHeight*2);
         backboard.setPosition(-480,-700);
-
-
 
         deck = new StackOfCards();
         listOfNine = new MoveCard[9];
@@ -203,7 +210,7 @@ public class RoboGame extends Game {
     public void drawHUD() {
         sb.end();
         sb.begin();
-        backboard.draw(sb);
+        //backboard.draw(sb);
         for (int i = 0; i < listOfNine.length; i++) {
             if (listOfNine[i] != null) {
                 listOfNine[i].draw(sb);
@@ -214,9 +221,22 @@ public class RoboGame extends Game {
                 chosenFive[i].draw(sb);
             }
         }
+        drawNumbers(sb);
         sb.end();
     }
 
+    private void drawNumbers(SpriteBatch sb) {
+        float n = xLoc;
+        float m = yLoc;
+        font.getData().setScale(4);
+        font.setColor(new Color(Color.GREEN));
+
+        for (int i = 1; i < 10; i++) {
+            String num = i + "";
+            font.draw(sb, num,n, m);
+            n += 204;
+        }
+    }
 
     public void drawSpritesFromGrid() {
         sb.begin();
