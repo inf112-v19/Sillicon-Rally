@@ -14,16 +14,15 @@ import inf112.skeleton.app.game.RoboGame;
 
 public class StartMenuScreen implements Screen {
 
-    private final Stage stage;
-    private final TextButton totalRobots;
-    private final TextButton humanPlayers;
-    private final Button startGame;
-
-
+    private Stage stage;
+    private TextButton totalRobotsButton;
+    private TextButton humanPlayersButton;
+    private Button startGameButton;
     public RoboGame game;
+
     public final int maxNumberOfRobots = 6;
     public int numberOfPlayers;
-    int numberOfAIs;
+    public int numberOfAIs;
     private boolean gameToBeStarted;
 
     public StartMenuScreen(RoboGame game) {
@@ -36,36 +35,36 @@ public class StartMenuScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         Skin mySkin = new Skin(Gdx.files.internal("Buttons/glassy-ui.json"));
-        totalRobots = createButton("AIs: "+ numberOfAIs, mySkin);
-        humanPlayers = createButton("Human Players: " + numberOfPlayers, mySkin);
-        startGame = createButton("Start Game", mySkin);
+        this.totalRobotsButton = createButton("AIs: "+ numberOfAIs, mySkin);
+        humanPlayersButton = createButton("Human Players: " + numberOfPlayers, mySkin);
+        startGameButton = createButton("Start Game", mySkin);
 
 
-        totalRobots.setPosition(stage.getWidth()/2 - (stage.getWidth()/4) - 200, stage.getHeight() - totalRobots.getHeight()*2 -50);
-        humanPlayers.setPosition(humanPlayers.getX() + humanPlayers.getWidth() + 200,stage.getHeight() - humanPlayers.getHeight()*2 -50);
-        startGame.setPosition(humanPlayers.getX() + humanPlayers.getWidth() - 725,stage.getHeight() - humanPlayers.getHeight()*2 -300);
+        totalRobotsButton.setPosition(stage.getWidth()/2 - (stage.getWidth()/4) - 200, stage.getHeight() - totalRobotsButton.getHeight()*2 -50);
+        humanPlayersButton.setPosition(humanPlayersButton.getX() + humanPlayersButton.getWidth() + 200,stage.getHeight() - humanPlayersButton.getHeight()*2 -50);
+        startGameButton.setPosition(humanPlayersButton.getX() + humanPlayersButton.getWidth() - 725,stage.getHeight() - humanPlayersButton.getHeight()*2 -300);
 
         // add a listener to your buttons so it does something when clicked
-        totalRobots.addListener(new ChangeListener() {
+        totalRobotsButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 //game.createPlayers(1);
                 numberOfAIs = incrementPlayers(numberOfAIs);
-                totalRobots.setText("AIs: " + numberOfAIs);
+                totalRobotsButton.setText("AIs: " + numberOfAIs);
             }
         });
 
 
-        humanPlayers.addListener(new ChangeListener() {
+        humanPlayersButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 //System.out.println("Two Players!");
                 numberOfPlayers = incrementPlayers(numberOfPlayers);
-                humanPlayers.setText("Human Players: " + numberOfPlayers);
+                humanPlayersButton.setText("Human Players: " + numberOfPlayers);
             }
         });
 
-        startGame.addListener(new ChangeListener() {
+        startGameButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 gameToBeStarted = true;
@@ -129,5 +128,25 @@ public class StartMenuScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+
+
+
+
+    /*
+        For testing
+     */
+
+    public StartMenuScreen(boolean testConstructor, int numPlayers, int numAIs) {
+        if (testConstructor) {
+            totalRobotsButton = null;
+            humanPlayersButton = null;
+            startGameButton = null;
+            stage = null;
+
+            numberOfPlayers = numPlayers;
+            numberOfAIs = numAIs;
+        }
     }
 }
