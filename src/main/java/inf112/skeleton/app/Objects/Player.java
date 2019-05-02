@@ -79,29 +79,26 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
 
     public int[] getSpawn(){
         int[] returnArray = {0, 0};
-
+        boolean open = false;
         //spawnpoints in top right corner of the map
         int[] SpawnX={(96*9),(96*10), (96*11), (96*10), (96*11),(96*11)};
         int[] SpawnY={(96*9), (96*9), (96*9), (96*8), (96*8),(96*7) };
 
-        int maxSpawnsAvailable=6;
         Random rand = new Random();
-        int value = rand.nextInt(maxSpawnsAvailable);
+        int value=rand.nextInt(6);
 
-        //making sure the spawnpoint is available
-        while(SpawnX[value]==0 && maxSpawnsAvailable>0){
-            value=rand.nextInt(maxSpawnsAvailable);
+       while(!open) {
+             Tile comparison = grid.getTile(SpawnY[value], SpawnX[value]);
+             if(comparison.getGameObjects().isEmpty()){
+                 open=true;
+             }
+             value=rand.nextInt(6);
         }
 
-        returnArray[0]=SpawnX[value];
-        returnArray[1]=SpawnY[value];
 
-        //setting the values to 0 to signify that the spawn is taken
-        SpawnX[value]=0;
-        SpawnY[value]=0;
 
-        maxSpawnsAvailable--;
-
+        returnArray[0] = SpawnX[value];
+        returnArray[1] = SpawnY[value];
         return returnArray;
     }
 
