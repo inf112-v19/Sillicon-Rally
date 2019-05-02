@@ -10,7 +10,8 @@ Det ligger i slike gruppeoppgavers natur at gruppens medlemmer har forskjellige 
 
 Vi har ikke vært spesielt flinke til å planlegge møter utover de oppsatte lab- og forelesningstimene. 
 De fleste møtene har vært planlagt en eller to dager i forveien, og gjort at ikke alle kunne møte.
-I tillegg kunne vi vært flinkere formalisere møtene, som hadde gjort det enklere å skrive gode referat. 
+I tillegg kunne vi vært flinkere formalisere møtene, som hadde gjort det enklere å skrive gode referat. Vi har
+stort sett hatt veldig uformelle møter, uten agenda eller plan annet enn å fordele oppgaver. 
 
 ## Gruppedynamikken 
 Vi er fremdeles godt fornøyd med gruppdynamikken. Lagmedlemene har tatt eierskap til sine egne oppgaver,

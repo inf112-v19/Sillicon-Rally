@@ -28,11 +28,14 @@ public class GameScreen implements Screen {
     LaserAnimation laserAnimation;
     int laserTimer;
 
+
     //Function related
     private RoboGame game;
     private DrawCards drawCards;
     private List<PlayerStatus> playerStatusList;
     private RoundExecutor roundExector;
+    private int xLoc;
+    private int yLoc;
     public GameMap gameMap;
     public TileGrid grid;
     PlayerStatus playerStatus;
@@ -88,7 +91,6 @@ public class GameScreen implements Screen {
 
         playRound();
         animateLaser();
-
     }
 
 
@@ -119,6 +121,7 @@ public class GameScreen implements Screen {
 
         if (drawCards.allPlayersDone())
             roundExector.isCurrentlyExecutingRound = true;
+
 
         if (roundExector.isCurrentlyExecutingRound) {
             Gdx.input.setInputProcessor(null);
