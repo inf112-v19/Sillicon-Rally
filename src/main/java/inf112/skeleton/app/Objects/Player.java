@@ -12,10 +12,7 @@ import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 public class Player implements IGameObject, InputProcessor, IPlayer {
@@ -64,18 +61,20 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         this.name = name;
 
         sprite = new Sprite(texture);
+        grid = game.grid;
+
         playerMovements = new PlayerMovements(this, 0, 0, startDirection);
         movecardArray = new MoveCard[MaxMoveCardLength];
         laserAnimation = new LaserAnimation();
         moveCardQueue = new LinkedList<>();
 
         backupLocation = null;
-        grid = game.grid;
         playerHP = MAX_HP;
         playerTokens = MAX_DAMAGE_TOKENS;
         maxCardsAllowedForPlayer = 5;
         previousMaxCards = 5;
     }
+
 
 
     public int getHP(){
