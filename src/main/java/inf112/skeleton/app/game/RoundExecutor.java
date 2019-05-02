@@ -1,5 +1,8 @@
 package inf112.skeleton.app.game;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.StackOfCards;
 
@@ -9,16 +12,18 @@ import java.util.List;
 public class RoundExecutor {
     private RoboGame game;
     List<Player> playerList;
-    int playersTurn;
+    public static int playersTurn;
     public boolean isCurrentlyExecutingRound;
     public boolean shootLaserNow;
+    private BitmapFont font = new BitmapFont();
+
 
     public int localRoundCounter=1;
 
     public RoundExecutor(List<Player> playerList, RoboGame g) {
         this.game = g;
         this.playerList = playerList;
-        this.playersTurn = 0;
+        playersTurn = g.currentPlayer;
         this.isCurrentlyExecutingRound = false;
         this.shootLaserNow = false;
     }
@@ -48,24 +53,8 @@ public class RoundExecutor {
     }
 
     private void sleep(int i) {
-        try {
-            Thread.sleep(i);
-        } catch (Exception e) {
-
-        }
-        Player player = playerList.get(playersTurn);
-
-        if(player.powerDownOn==localRoundCounter) {
-            player.moveCardQueue.clear();
-            player.powerDown();
-            setNextPlayersTurn();
-            player.executeCard();
-        }
-        else {
-            player.executeNextCard();
-        checkCollisions();
-            setNextPlayersTurn();
-        }
+        try {Thread.sleep(i);}
+        catch (Exception e) {}
     }
 
     private void checkCollisions() {
@@ -97,8 +86,18 @@ public class RoundExecutor {
         if (playerList.size() > 0) {
             int currentPlayer = playersTurn;
             this.playersTurn = (currentPlayer + 1) % playerList.size();
+            drawCurrentPlayer();
         }
+    }
 
+    public void drawCurrentPlayer() {
+        game.sb.begin();
+            font.getData().setScale(3);
+            font.setColor(new Color(Color.GREEN));
+            String str = "Current player " + playerList.get(playersTurn);
+
+            font.draw(game.sb, str, 200,200);
+            game.sb.end();
     }
 
 

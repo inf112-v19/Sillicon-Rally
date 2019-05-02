@@ -35,6 +35,7 @@ public class GameScreen implements Screen {
     private RoundExecutor roundExector;
     public GameMap gameMap;
     public TileGrid grid;
+    PlayerStatus playerStatus;
 
 
 
@@ -55,7 +56,7 @@ public class GameScreen implements Screen {
         for (int i = 0; i < game.playerList.size(); i++) {
             Player pl = game.playerList.get(i);
             Point point = statusScreenPoints[i];
-            PlayerStatus status = new PlayerStatus(pl, point);
+            PlayerStatus status = new PlayerStatus(pl, point, game);
             playerStatusList.add(status);
         }
     }
@@ -81,6 +82,7 @@ public class GameScreen implements Screen {
         for (PlayerStatus status : playerStatusList) {
             status.draw(game.sb);
         }
+
 
         game.sb.end();
 
