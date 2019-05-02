@@ -41,7 +41,6 @@ public class PlayerStatus {
         drawLifeTokens(sb);
         drawNextFlagToPickUp(sb);
         drawPlayerName(sb);
-        drawCurrentPlayer(sb);
         if (player.collectedAllFlags == true){
             drawPlayerOutOfGrid(sb);
         }
@@ -54,16 +53,6 @@ public class PlayerStatus {
 
         font.draw(sb, name, xLocation + 200, yLocation + 180);
 
-    }
-
-    public void drawCurrentPlayer(SpriteBatch sb) {
-            if (player == game.playerList.get(RoundExecutor.playersTurn)) {
-                font.getData().setScale(3);
-                font.setColor(new Color(Color.GREEN));
-                String str = "Current player";
-
-                font.draw(sb, str, xLocation, yLocation);
-            }
     }
 
 

@@ -90,13 +90,15 @@ public class RoundExecutor {
         }
     }
 
-    public void drawCurrentPlayer() {
+
+
+    private void drawCurrentPlayer() {
         game.sb.begin();
             font.getData().setScale(3);
             font.setColor(new Color(Color.GREEN));
-            String str = "Current player " + playerList.get(playersTurn);
+            String str = "player executing move: " + playerList.get(playersTurn);
 
-            font.draw(game.sb, str, 200,200);
+            font.draw(game.sb, str, 360,-10);
             game.sb.end();
     }
 

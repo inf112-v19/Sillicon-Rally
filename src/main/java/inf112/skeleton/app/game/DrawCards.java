@@ -34,8 +34,6 @@ public class DrawCards {
         Player playerToDraw = playerList.get(playersTurn);
         Gdx.input.setInputProcessor(playerToDraw);
         drawCurrentPlayer();
-
-        System.out.println(playerToDraw.name +"   ");
  
         if (playerToDraw instanceof AIPlayer) {
             ((AIPlayer) playerToDraw).pickCards();
@@ -59,11 +57,11 @@ public class DrawCards {
         }
     }
 
-    public void drawCurrentPlayer() {
+    private void drawCurrentPlayer() {
         game.sb.begin();
         font.getData().setScale(3);
         font.setColor(new Color(Color.GREEN));
-        String str = "Current player " + playerList.get(playersTurn);
+        String str = "player drawing card: " + playerList.get(playersTurn);
 
         font.draw(game.sb, str, 360,-10);
         game.sb.end();
