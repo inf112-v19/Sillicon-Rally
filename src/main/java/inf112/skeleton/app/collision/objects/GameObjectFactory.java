@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.sun.tools.javac.util.ArrayUtils;
 import inf112.skeleton.app.Objects.AIPlayer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
@@ -13,6 +14,7 @@ import inf112.skeleton.app.map.GameMap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameObjectFactory {
     public GameMap map;
@@ -47,6 +49,33 @@ public class GameObjectFactory {
     }
 
 
+    public int[] getSpawn(){
+        int[] returnArray = {0, 0};
+
+        //spawnpoints in top right corner of the map
+        int[] SpawnX={1110, 1010, 910, 1010, 1110, 1110};
+        int[] SpawnY={50, 50, 50, 150, 150, 250};
+
+        int maxSpawnsAvailable=6;
+        Random rand = new Random();
+        int value = rand.nextInt(maxSpawnsAvailable);
+
+        //making sure the spawnpoint is available
+        while(SpawnX[value]==0 && maxSpawnsAvailable>0){
+            value=rand.nextInt(maxSpawnsAvailable);
+        }
+
+        returnArray[0]=SpawnX[value];
+        returnArray[1]=SpawnY[value];
+
+        //setting the values to 0 to signify that the spawn is taken
+        SpawnX[value]=0;
+        SpawnY[value]=0;
+
+        return returnArray;
+    }
+
+
     public ArrayList<Player> createPlayers(int numberOfPlayers, RoboGame game) {
         for (int i = 0; i < numberOfPlayers; i++) {
             createPlayer(game.playerList, game, (i+1));
@@ -66,6 +95,7 @@ public class GameObjectFactory {
     public void createPlayer(List<Player> playerList, RoboGame game, int playernum){
         playerTexture = new Texture(("RobotSprites/robot" +playernum+".png"));
         Player player = new Player(playerTexture, startDirection, game, ("Player"+ playernum));
+
         grid.getTile(0, 0).addGameObject(player);
         game.playerList.add(player);
     }
