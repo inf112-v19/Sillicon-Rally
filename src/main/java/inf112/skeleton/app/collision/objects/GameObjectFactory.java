@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.sun.tools.javac.util.ArrayUtils;
 import inf112.skeleton.app.Objects.AIPlayer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
@@ -14,12 +13,11 @@ import inf112.skeleton.app.map.GameMap;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class GameObjectFactory {
     public GameMap map;
     public TileGrid grid;
-    private RoboGame.Direction startDirection = RoboGame.Direction.North;
+    private RoboGame.Direction startDirection = RoboGame.Direction.South;
 
     public List<IGameObject> flags;
     public List<IGameObject> lasers;
@@ -32,6 +30,8 @@ public class GameObjectFactory {
 
     public static Texture player2Texture;
     public static Texture playerTexture;
+
+    public int spawnCounter=0;
 
     public GameObjectFactory(GameMap map, TileGrid grid) {
         this.map = map;
@@ -73,6 +73,27 @@ public class GameObjectFactory {
         Player player = new Player(playerTexture, startDirection, game, ("Player"+ playernum));
         grid.getTile(0, 0).addGameObject(player);
         game.playerList.add(player);
+        int[] array=getSpawn();
+        player.setPosition(array[1], array[0], grid);
+    }
+
+
+
+    public int[] getSpawn(){
+        int[] returnArray = {0, 0};
+        //spawnpoints in top right corner of the map
+        int[] SpawnX={(96*9),(96*10), (96*11), (96*10), (96*11),(96*11)};
+        int[] SpawnY={(96*9), (96*9), (96*9), (96*8), (96*8),(96*7) };
+
+        returnArray[0] = SpawnX[spawnCounter];
+        returnArray[1] = SpawnY[spawnCounter];
+
+        SpawnX[spawnCounter]=0;
+        SpawnY[spawnCounter]=0;
+
+        spawnCounter++;
+
+        return returnArray;
     }
 
 
