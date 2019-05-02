@@ -74,6 +74,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         playerHP = MAX_HP;
         playerTokens = MAX_DAMAGE_TOKENS;
         maxCardsAllowedForPlayer = 5;
+        previousMaxCards = 5;
     }
 
 
@@ -530,6 +531,8 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
 
         this.movecardArray = new MoveCard[5];
         this.name = "";
+        this.maxCardsAllowedForPlayer = 5;
+        this.previousMaxCards = 5;
     }
 
     //Constructor used for testing purposes only
@@ -549,6 +552,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         this.sprite = new Sprite(new Texture("RobotSprites/robot1.png"));
         this.moveCardQueue = new LinkedList<>();
         this.maxCardsAllowedForPlayer = 5;
+        this.previousMaxCards = maxCardsAllowedForPlayer;
     }
 }
 
