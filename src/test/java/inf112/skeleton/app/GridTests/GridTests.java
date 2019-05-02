@@ -2,6 +2,8 @@ package inf112.skeleton.app.GridTests;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Objects.IGameObject;
+import inf112.skeleton.app.Objects.Player;
+import inf112.skeleton.app.SetupVariables.SetupVariables;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import org.junit.jupiter.api.Test;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class GridTests {
@@ -70,10 +73,22 @@ public class GridTests {
         ArrayList<IGameObject> sprites = tg.getAllSpritesOnMap();
 
         for (IGameObject sp : sprites) {
-    //        assertEquals(one, sp);
+            assertEquals(one, sp);
         }
+    }
 
+    @Test
+    void findPlayerOnTileTest() {
+        TileGrid tg = newGrid();
+        SetupVariables setup = new SetupVariables();
+        tg.getTile(0,0).addGameObject(setup.player);
 
+        for (IGameObject o : tg.getTile(0,0).getGameObjects()) {
+            if (o instanceof Player)
+                assertEquals(true, true);
+            else
+                fail();
+        }
     }
 
 

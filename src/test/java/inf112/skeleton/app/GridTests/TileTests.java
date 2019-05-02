@@ -8,6 +8,8 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,9 +18,10 @@ public class TileTests {
     private int TILESIZE_IN_PIX;
     private LaserObject laser;
     private Tile testTile;
+    private SetupVariables variables;
 
     void setup(){
-      SetupVariables variables = new SetupVariables();
+      this.variables = new SetupVariables();
       grid = variables.grid;
       TILESIZE_IN_PIX = grid.tileSizeInPx;
       laser = variables.laser;
@@ -56,6 +59,14 @@ public class TileTests {
         laser.yLocation = 0;
         testTile.addGameObject(laser);
         assertTrue(testTile.getGameObjects().contains(laser));
+    }
+
+    @Test
+    void playerApearsOnTile() {
+        setup();
+        Tile tile = new Tile(0,0, 96);
+        tile.addGameObject(variables.player);
+        assertEquals(true, tile.getGameObjects().contains(variables.player));
     }
 
 }
