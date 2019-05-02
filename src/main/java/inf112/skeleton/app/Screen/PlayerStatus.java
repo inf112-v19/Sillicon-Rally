@@ -7,10 +7,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.collision.objects.GameObjectFactory;
+import inf112.skeleton.app.game.RoboGame;
+import inf112.skeleton.app.game.RoundExecutor;
 
 
 public class PlayerStatus {
     Player player;
+    RoboGame game;
     float xLocation;
     float yLocation;
     Sprite heartSprite;
@@ -20,9 +23,9 @@ public class PlayerStatus {
     private Sprite NoLifeSprite;
     private BitmapFont font;
 
-    public PlayerStatus(Player player, Point point) {
+    public PlayerStatus(Player player, Point point, RoboGame game) {
         this.player = player;
-
+        this.game = game;
         heartSprite = new Sprite(new Texture("LifeSprites/heart.png"));
         font = new BitmapFont();
 
@@ -51,6 +54,9 @@ public class PlayerStatus {
         font.draw(sb, name, xLocation + 200, yLocation + 180);
 
     }
+
+
+
     public void drawPlayerOutOfGrid(SpriteBatch spriteBatch){
         spriteBatch.draw(GameObjectFactory.playerTexture, xLocation+350, yLocation+400);
     }

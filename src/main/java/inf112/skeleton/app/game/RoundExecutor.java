@@ -1,5 +1,8 @@
 package inf112.skeleton.app.game;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.StackOfCards;
 
@@ -9,14 +12,16 @@ import java.util.List;
 public class RoundExecutor {
     private RoboGame game;
     List<Player> playerList;
-    int playersTurn;
+    public static int playersTurn;
     public boolean isCurrentlyExecutingRound;
     public boolean shootLaserNow;
+    private BitmapFont font = new BitmapFont();
+
 
     public RoundExecutor(List<Player> playerList, RoboGame g) {
         this.game = g;
         this.playerList = playerList;
-        this.playersTurn = 0;
+        playersTurn = g.currentPlayer;
         this.isCurrentlyExecutingRound = false;
         this.shootLaserNow = false;
     }
@@ -53,6 +58,7 @@ public class RoundExecutor {
         this.shootLaserNow = true;
     }
 
+
     public void sleep(int i) {
         try {
             Thread.sleep(i);
@@ -86,8 +92,20 @@ public class RoundExecutor {
         if (playerList.size() > 0) {
             int currentPlayer = playersTurn;
             this.playersTurn = (currentPlayer + 1) % playerList.size();
+            drawCurrentPlayer();
         }
+    }
 
+
+
+    private void drawCurrentPlayer() {
+        game.sb.begin();
+            font.getData().setScale(3);
+            font.setColor(new Color(Color.GREEN));
+            String str = "player executing move: " + playerList.get(playersTurn);
+
+            font.draw(game.sb, str, 360,-10);
+            game.sb.end();
     }
 
 

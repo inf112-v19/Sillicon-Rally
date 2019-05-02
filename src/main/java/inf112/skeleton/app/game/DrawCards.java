@@ -2,6 +2,8 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.Gdx;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import inf112.skeleton.app.Objects.AIPlayer;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.Screen.GameOverScreen;
@@ -14,6 +16,7 @@ public class DrawCards {
     private RoboGame game;
     private int cardsDrawByPlayer;
     private boolean playersFinishedPickingCards;
+    private BitmapFont font = new BitmapFont();
 
     public DrawCards(RoboGame game) {
         this.playerList = game.playerList;
@@ -34,6 +37,7 @@ public class DrawCards {
 
         Player playerToDraw = playerList.get(playersTurn);
         Gdx.input.setInputProcessor(playerToDraw);
+        drawCurrentPlayer();
  
         if (playerToDraw instanceof AIPlayer) {
             ((AIPlayer) playerToDraw).pickCards();
@@ -58,6 +62,21 @@ public class DrawCards {
         }
     }
 
+    private void drawCurrentPlayer() {
+        game.sb.begin();
+        font.getData().setScale(3);
+        font.setColor(new Color(Color.GREEN));
+        String str = "player drawing card: " + playerList.get(playersTurn);
+
+        font.draw(game.sb, str, 360,-10);
+        game.sb.end();
+    }
+
+    private void executeAllMoves() {
+        for (Player player : playerList) {
+            player.executeCard();
+        }
+    }
 
     private void drawNewCardsFromDeck() {
         game.drawNineCardsFromDeck();

@@ -2,8 +2,10 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -21,6 +23,7 @@ import inf112.skeleton.app.collision.objects.GameObjectFactory;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,10 +60,6 @@ public class RoboGame extends Game {
     public GameObjectFactory constructor;
 
 
-
-    public List<Player> getPlayers() {
-        return playerList;
-    }
 
 
     @Override
@@ -105,14 +104,8 @@ public class RoboGame extends Game {
 
     public void createAIs(int numberofAIs){
         constructor.createAis(numberofAIs, this);
-
     }
 
-    public Player getCurrentPlayer(){
-        if (currentPlayer == 0)
-            return player2;
-        return player;
-    }
 
     public MoveCard chooseCard(int index, Player currentPlayer) {
         if(!canChooseMoreCard(currentPlayer))
@@ -188,7 +181,7 @@ public class RoboGame extends Game {
 
     @Override
     public void render() {
-        handleInput(Gdx.graphics.getDeltaTime());
+        //handleInput(Gdx.graphics.getDeltaTime());
         super.render();
     }
 
@@ -197,6 +190,9 @@ public class RoboGame extends Game {
             player.handleInput(deltaTime, this);
             }
         }
+
+
+
 
 
 
@@ -256,9 +252,7 @@ public class RoboGame extends Game {
         deck.putCardInDeck(cd);
     }
 
-    public void update(float deltaTime) {
-        getCurrentPlayer().update(deltaTime, grid);
-    }
+
 
 
     public enum Direction{
