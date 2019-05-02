@@ -72,6 +72,8 @@ public class GameObjectFactory {
         Player player = new AIPlayer(playerTexture, startDirection, game, ("AI"+playernum));
         grid.getTile(0, 0).addGameObject(player);
         game.playerList.add(player);
+        int[] array=getSpawn();
+        player.setPosition(array[1], array[0], grid);
     }
 
 
