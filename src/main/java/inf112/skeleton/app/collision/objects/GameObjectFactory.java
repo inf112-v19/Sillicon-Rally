@@ -70,6 +70,7 @@ public class GameObjectFactory {
     public void createAi(List<Player> playerList, RoboGame game, int playernum) {
         playerTexture = new Texture(("RobotSprites/robot" +playernum+".png"));
         Player player = new AIPlayer(playerTexture, startDirection, game, ("AI"+playernum));
+        player.getSprite().rotate(180);
         grid.getTile(0, 0).addGameObject(player);
         game.playerList.add(player);
         int[] array=getSpawn();
@@ -80,6 +81,7 @@ public class GameObjectFactory {
     public void createPlayer(List<Player> playerList, RoboGame game, int playernum){
         playerTexture = new Texture(("RobotSprites/robot" +playernum+".png"));
         Player player = new Player(playerTexture, startDirection, game, ("Player"+ playernum));
+        player.getSprite().rotate(180);
         grid.getTile(0, 0).addGameObject(player);
         game.playerList.add(player);
         int[] array=getSpawn();
