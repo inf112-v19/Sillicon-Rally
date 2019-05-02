@@ -85,16 +85,15 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
 
         Random rand = new Random();
         int value=rand.nextInt(6);
+        Tile comparison;
 
         while(!open) {
-             Tile comparison = grid.getTileFromCoordinates(SpawnY[value], SpawnX[value]);
-             if(comparison.getGameObjects().isEmpty()){
-                 open=true;
-             }
-             value=rand.nextInt(6);
+            comparison = grid.getTileFromCoordinates(SpawnY[value], SpawnX[value]);
+            if(comparison.getGameObjects().isEmpty()) {
+                open = true;
+            }
+            value=rand.nextInt(6);
         }
-
-
 
 
         returnArray[0] = SpawnX[value];
