@@ -1,30 +1,42 @@
 package inf112.skeleton.app.ScreenTests;
 
 import inf112.skeleton.app.Screen.StartMenuScreen;
-import inf112.skeleton.app.SetupVariables.SetupVariables;
-import inf112.skeleton.app.game.RoboGame;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-
-/**
- * Created by Martin on 01/05/2019.
- */
 public class StartMenuTests {
-    RoboGame game;
 
+    @Test
+    public void cannotCreateMoreThanMaxPlayers(){
+        StartMenuScreen start = new StartMenuScreen(true,6,0);
+        start.numberOfPlayers = start.incrementPlayers(start.numberOfPlayers);
+        assertEquals(1, start.numberOfPlayers);
+    }
 
 
     @Test
-    void cannotCreateMoreThanMaxPlayers(){
-        SetupVariables variables = new SetupVariables();
-        this.game = variables.game;
-        StartMenuScreen start = new StartMenuScreen(game);
-        int num = 0;
-        start.incrementPlayers(num);
-        assertEquals(1, 1);
+    public void canIncrementNumberOfAIsTest(){
+        StartMenuScreen start = new StartMenuScreen(true,0,1);
+        start.numberOfAIs = start.incrementPlayers(start.numberOfAIs);
+        assertEquals(2, start.numberOfAIs);
+    }
+
+
+    @Test
+    public void nPlayersLimitnAIsTest(){
+        StartMenuScreen start = new StartMenuScreen(true,4,2);
+        start.numberOfAIs = start.incrementPlayers(start.numberOfAIs);
+        assertEquals(1, start.numberOfAIs);
+    }
+
+
+    @Test
+    public void nAIsLimitnPlayersTest(){
+        StartMenuScreen start = new StartMenuScreen(true, 2,4);
+        start.numberOfPlayers = start.incrementPlayers(start.numberOfPlayers);
+        assertEquals(1, start.numberOfPlayers);
     }
 
 }
