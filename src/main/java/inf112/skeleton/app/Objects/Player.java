@@ -62,7 +62,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         this.name = name;
 
         sprite = new Sprite(texture);
-
+        grid = game.grid;
         int[] chooseSpawn= getSpawn();
 
         playerMovements = new PlayerMovements(this, chooseSpawn[1], chooseSpawn[0], startDirection);
@@ -71,7 +71,6 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         moveCardQueue = new LinkedList<>();
 
         backupLocation = null;
-        grid = game.grid;
         playerHP = MAX_HP;
         playerTokens = MAX_DAMAGE_TOKENS;
         maxCardsAllowedForPlayer = 5;
@@ -87,13 +86,14 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         Random rand = new Random();
         int value=rand.nextInt(6);
 
-       while(!open) {
-             Tile comparison = grid.getTile(SpawnY[value], SpawnX[value]);
+        while(!open) {
+             Tile comparison = grid.getTileFromCoordinates(SpawnY[value], SpawnX[value]);
              if(comparison.getGameObjects().isEmpty()){
                  open=true;
              }
              value=rand.nextInt(6);
         }
+
 
 
 
