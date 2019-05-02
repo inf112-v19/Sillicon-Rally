@@ -13,8 +13,6 @@ public class RoundExecutor {
     public boolean isCurrentlyExecutingRound;
     public boolean shootLaserNow;
 
-    public int localRoundCounter=1;
-
     public RoundExecutor(List<Player> playerList, RoboGame g) {
         this.game = g;
         this.playerList = playerList;
@@ -30,6 +28,7 @@ public class RoundExecutor {
                 checkCollisions();
                 playerShootLaser();
                 game.deck = new StackOfCards();
+                allPlayersPowerOn();
                 return;
             }
             sleep(300);
@@ -43,28 +42,22 @@ public class RoundExecutor {
 
     }
 
+    private void allPlayersPowerOn() {
+        for (Player player : playerList) {
+            player.powerDownOn = false;
+            player.maxCardsAllowedForPlayer = player.previousMaxCards;
+        }
+    }
+
     private void playerShootLaser() {
         this.shootLaserNow = true;
     }
 
-    private void sleep(int i) {
+    public void sleep(int i) {
         try {
             Thread.sleep(i);
         } catch (Exception e) {
 
-        }
-        Player player = playerList.get(playersTurn);
-
-        if(player.powerDownOn==localRoundCounter) {
-            player.moveCardQueue.clear();
-            player.powerDown();
-            setNextPlayersTurn();
-            player.executeCard();
-        }
-        else {
-            player.executeNextCard();
-        checkCollisions();
-            setNextPlayersTurn();
         }
     }
 
@@ -84,11 +77,7 @@ public class RoundExecutor {
             if (!player.moveCardQueue.isEmpty())
                 return false;
 
-            player.roundNr=localRoundCounter;
-            //System.out.println("(player) current round: " + player.roundNr);
-        }
-        localRoundCounter++;
-        //System.out.println("(local) current round: " + localRoundCounter);
+            }
 
         return true;
     }

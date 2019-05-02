@@ -29,7 +29,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
     public String name;
     public int flagNr = 1;
     public int roundNr=1;
-    public int powerDownOn = 0;
+    public boolean powerDownOn = false;
 
 
     //Function related
@@ -50,8 +50,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
     public LinkedList<MoveCard> moveCardQueue;
     public int maxCardsAllowedForPlayer;
     public MoveCard[] movecardArray;
-
-
+    public int previousMaxCards;
 
 
     public void setName(String name) {
@@ -136,12 +135,16 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
 
 
     public void moveStraight(int steps, int moveDistance, TileGrid grid) {
-        playerMovements.moveStraight(steps, moveDistance, grid);}
+        playerMovements.moveStraight(steps, moveDistance, grid);
+    }
 
-        public void powerDown(){
-        playerHP=MAX_HP;
-        System.out.println("player powering down");
-        powerDownOn=0;
+    public void powerDown(){
+        if (this.moveCardQueue.isEmpty()) {
+            playerHP = MAX_HP;
+            this.powerDownOn = true;
+            previousMaxCards = maxCardsAllowedForPlayer;
+            maxCardsAllowedForPlayer = 0;
+        }
     }
 
     public void rotateClockwise(){playerMovements.rotateClockwise();}
@@ -261,26 +264,6 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         return playerMovements.checkIfMoveIsOutOfBounds(y, x, grid);
     }
 
-
-
-    public void emptyList() {
-        for (int i = 0; i < testCardsToBePlayed.length; i++) {
-            testCardsToBePlayed[i] = null;
-        }
-    }
-
-    public void addToList(int index, MoveCard card) {
-        testCardsToBePlayed[index] = card;
-    }
-
-    public boolean listIsFull() {
-        for (int i = 0; i < testCardsToBePlayed.length; i++) {
-            if (testCardsToBePlayed[i] == null) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public void movePlayer(MoveCard.Type type, int tile_size_in_px, TileGrid grid) {
 
@@ -520,9 +503,9 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         }
 
         if (keycode==Input.Keys.P){
-            this.powerDownOn=roundNr+1;
-            System.out.println("this player intends to power on turn: " + (roundNr+1));
+            powerDown();
         }
+
 
         checkCollision(game.grid);
         System.out.println("Cards picked: " + Arrays.toString(movecardArray));
