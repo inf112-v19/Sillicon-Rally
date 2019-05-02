@@ -23,6 +23,10 @@ public class DrawCards {
     }
 
     public void drawCards() {
+        if (playerList.size() == 1)
+            playersTurn = 0;
+
+
         if (playerList.size() == 0){
             game.setScreen(new GameOverScreen(game));
             return;
@@ -36,7 +40,8 @@ public class DrawCards {
         }
         this.cardsDrawByPlayer = playerList.get(playersTurn).moveCardQueue.size();
 
-        if ((cardsDrawByPlayer != 0) && cardsDrawByPlayer % playerToDraw.maxCardsAllowedForPlayer == 0)
+        if (playerToDraw.powerDownOn ||
+                (cardsDrawByPlayer != 0) && cardsDrawByPlayer % playerToDraw.maxCardsAllowedForPlayer == 0)
             setNextPlayersTurn();
     }
 
@@ -53,11 +58,6 @@ public class DrawCards {
         }
     }
 
-    private void executeAllMoves() {
-        for (Player player : playerList) {
-            player.executeCard();
-        }
-    }
 
     private void drawNewCardsFromDeck() {
         game.drawNineCardsFromDeck();
