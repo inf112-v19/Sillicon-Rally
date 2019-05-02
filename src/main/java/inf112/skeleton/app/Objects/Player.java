@@ -12,10 +12,7 @@ import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 public class Player implements IGameObject, InputProcessor, IPlayer {
@@ -65,7 +62,10 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         this.name = name;
 
         sprite = new Sprite(texture);
-        playerMovements = new PlayerMovements(this, 0, 0, startDirection);
+
+        int[] chooseSpawn= getSpawn();
+
+        playerMovements = new PlayerMovements(this, chooseSpawn[1], chooseSpawn[0], startDirection);
         movecardArray = new MoveCard[MaxMoveCardLength];
         laserAnimation = new LaserAnimation();
         moveCardQueue = new LinkedList<>();
@@ -75,6 +75,34 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         playerHP = MAX_HP;
         playerTokens = MAX_DAMAGE_TOKENS;
         maxCardsAllowedForPlayer = 5;
+    }
+
+    public int[] getSpawn(){
+        int[] returnArray = {0, 0};
+
+        //spawnpoints in top right corner of the map
+        int[] SpawnX={(96*9),(96*10), (96*11), (96*10), (96*11),(96*11)};
+        int[] SpawnY={(96*9), (96*9), (96*9), (96*8), (96*8),(96*7) };
+
+        int maxSpawnsAvailable=6;
+        Random rand = new Random();
+        int value = rand.nextInt(maxSpawnsAvailable);
+
+        //making sure the spawnpoint is available
+        while(SpawnX[value]==0 && maxSpawnsAvailable>0){
+            value=rand.nextInt(maxSpawnsAvailable);
+        }
+
+        returnArray[0]=SpawnX[value];
+        returnArray[1]=SpawnY[value];
+
+        //setting the values to 0 to signify that the spawn is taken
+        SpawnX[value]=0;
+        SpawnY[value]=0;
+
+        maxSpawnsAvailable--;
+
+        return returnArray;
     }
 
 
