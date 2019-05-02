@@ -1,4 +1,4 @@
-# Deloppgave 2
+# Deloppgave 1 - Prosjekt og prosjektstruktur
 
 ## Erfaringer vi har gjort oss om prosjektdynamikk
 
@@ -73,6 +73,43 @@ Den kanskje viktigste tingen vi har lært mens vi jobbet med dette prosjektet, er
 sånn som Libgdx. Det å ta i bruk kode som er skrevet av andre gjør at vi kan "outsource" mye av det tyngste arbeidet. Samtidig tvinger det oss
 til å jobbe rundt rammeverket, til å strukturere prosjektet vårt på en måte vi kanskje ikke opplever som optimalt.
 Det første veier ofte opp for det andre, og dette har vært en særdelelis lærerik opplevelse for alle på teamet.
+
+Når det gjelder det å jobbe i team har vi erfart hvor viktig det er å holde hverandre oppdatert på hva man jobber med til enhver tid.
+Vi har hatt et par opplevelser der to personer i teamet jobber med akkurat samme ting, og bedre kommunikasjon kunne forhindret det. 
+I en mer profesjonell setting der vi møttes daglig kunne vi for eksempel hatt en daglig stand up, slik at alle til enhver tid er ca orientert
+om hva de andre holder på med. 
+
+
+# Deloppgave 2 - Krav
+
+Liste over krav vi har implementert: 
+
+* Man kan spille en komplett runde
+* Man kan vinne spillet ved å besøke siste flagg
+* Det er lasere på brettet
+* Det er hull på brettet
+* Skademekanismer (spilleren får færre kort ved skade)
+* Spillmekanismer for å skyte andre spillere innen rekkevidde med laser som peker rett frem
+* fungerende samlebånd på brettet som flytter robotene
+* fungerende gyroer på brettet som flytter robotene
+* game over etter 3 tapte liv
+* samlebånd som går i dobbelt tempo
+* spille mot AI (single-player-mode), evt spill mot random-roboter
+
+Kravene vi foreløpig ikke har implementert er 
+
+* Power down
+* Multiplayer over nettverk
+
+Dette er ting vi nedprioriterte og ikke fikk tid til å gjøre. Særlig dette med multiplayer viste seg å være utofrdrende, da vi ikke hadde 
+laget koden med tanke på å involvere mer enn én datamaskin før helt på slutten. 
+
+# Deloppgave 3 - Kode
+
+### Hvordan man bygger og kjører programmet samt testene
+
+Klassediagram ligger vedlagt. 
+
 
 
 
