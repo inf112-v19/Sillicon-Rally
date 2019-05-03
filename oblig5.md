@@ -110,7 +110,25 @@ laget koden med tanke på å involvere mer enn én datamaskin før helt på slut
 
 ### Hvordan man bygger og kjører programmet samt testene
 
-Klassediagram ligger vedlagt. 
+
+*For å kjøre programkode
+For å kjøre programmet må man sette working directory til core/assets, og så kjøre main-metoden i Main-klassen som ligger i packagen «RoboGame».
+
+*Lokasjon av tester 
+Testene ligger under `src/test/java/inf112.skeleton.app` Klikk på pakken "inf112.skeleton.app" under tests og enten trykk ctrl+shift+F10, eller høyreklikk og run.
+
+*For å kjøre testkode
+Gå til run -> edit configurations Lag en ny junit tests configuration Gi den et valgfritt navn Velg «Test kind -> All in package» Velg «In whole project» Set working directory til «core/assets» apply Main klassen ligger i `src/main/java/inf112.skeleton.app/game`
+
+
+*Klassediagram
+Klassediagram ligger vedlagt under `Silicon-Rally/Deliverables`
+
+*Fordeling av Oppgaver
+Oversikt over foredeling og status av oppgaver ligger på [trello](https://trello.com/b/zOgCmmNW/silicon-rally)
+
+
+
 
 
 
