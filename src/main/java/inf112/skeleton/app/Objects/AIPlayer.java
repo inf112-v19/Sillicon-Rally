@@ -13,5 +13,6 @@ public class AIPlayer extends Player {
 
     public void pickCards() {
         ai.pickCard();
+        removeLaser();
     }
 }
