@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RoundExecutor {
     private RoboGame game;
-    List<Player> playerList;
+    public List<Player> playerList;
     public static int playersTurn;
     public boolean isCurrentlyExecutingRound;
     public boolean shootLaserNow;
@@ -64,7 +64,7 @@ public class RoundExecutor {
         }
     }
 
-    private void checkCollisions() {
+    public void checkCollisions() {
         try {
             for (Player player : playerList) {
                 player.checkCollision();
@@ -75,7 +75,7 @@ public class RoundExecutor {
         }
     }
 
-    private boolean roundIsDone() {
+    public boolean roundIsDone() {
         for (Player player : playerList){
             if (!player.moveCardQueue.isEmpty())
                 return false;
@@ -89,7 +89,8 @@ public class RoundExecutor {
         if (playerList.size() > 0) {
             int currentPlayer = playersTurn;
             this.playersTurn = (currentPlayer + 1) % playerList.size();
-            drawCurrentPlayer();
+            if (game.sb != null)
+                drawCurrentPlayer();
         }
     }
 

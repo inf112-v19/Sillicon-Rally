@@ -33,6 +33,7 @@ public class SetupVariables {
     public FlagObject flag2;
     public TeleportObstacle teleport;
     public Player player;
+    public Player player2;
     public ConveyorBeltObject belt;
     public LaserObject laser;
     public RepairObject repairObject;
@@ -64,7 +65,6 @@ public class SetupVariables {
 
 
         //Player related
-        player = new Player(grid);
         laserAnimation = new LaserAnimation();
 
 
@@ -86,6 +86,9 @@ public class SetupVariables {
         cardList = getDeck();
         playerList = getPlayers();
 
+        player = playerList.get(0);
+        player2 = playerList.get(1);
+
     }
 
 
@@ -103,10 +106,11 @@ public class SetupVariables {
 
     public ArrayList<Player> getPlayers(){
         ArrayList<Player> playerList = new ArrayList<>();
+        Texture playerTexture = new Texture("RobotSprites/robot1.png");
+        Player player1 = new Player(playerTexture, RoboGame.Direction.North,this.game, "Player1");
 
-        Player player1 = new Player(grid);
         player1.setName("Vegard");
-        Player player2 = new Player(grid);
+        Player player2 = new Player(playerTexture, RoboGame.Direction.North, this.game, "Player2");
         player2.setName("Martin");
 
 
