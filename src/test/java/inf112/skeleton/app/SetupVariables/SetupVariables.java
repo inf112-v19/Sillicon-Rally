@@ -7,12 +7,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.Objects.LaserAnimation;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.*;
+import inf112.skeleton.app.game.CustomCamera;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
@@ -88,10 +93,35 @@ public class SetupVariables {
 
         player = playerList.get(0);
         player2 = playerList.get(1);
-
+        setUpGame();
     }
 
+    public void setUpGame() {
+        game.playerList = new ArrayList<>();
+        game.gameMap = this.gameMap;
+        game.TILE_SIZE_IN_PX = game.getTileSize();
+     //   game.tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
+        game.grid = this.grid;
 
+        game.font = new BitmapFont();
+        game.xLoc = -400;
+        game.yLoc = -600;
+
+
+        game.camera = new CustomCamera(game.gameMap.getTiledMap());
+        game.camera.translate( -470, -700);
+
+//        game.sb = new SpriteBatch();
+
+        game.texture = new Texture("cardLayouts/mech.jpg");
+        game.backboard = new Sprite(game.texture);
+        game.backboard.setSize(((CustomCamera) game.camera).pixelWidth*2,((CustomCamera) game.camera).pixelHeight*2);
+        game.backboard.setPosition(-480,-700);
+
+        game.deck = new StackOfCards();
+        game.listOfNine = new MoveCard[9];
+        game.chosenFive = new MoveCard[5];
+    }
 
     public void playerDefaultPosition(Player player){
         int y = 0;

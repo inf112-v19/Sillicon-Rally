@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.SetupVariables.SetupVariables;
 import inf112.skeleton.app.card.MoveCard;
+import inf112.skeleton.app.card.StackOfCards;
 import inf112.skeleton.app.collision.objects.LaserObject;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.game.RoundExecutor;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -23,18 +25,18 @@ public class RoundExecutorTests {
     RoundExecutor roundExecutor;
     Player player;
     Player player2;
+    List<Player> playerList;
     RoboGame game;
     private MoveCard card;
     private Texture textureCard;		//texture does not matter in testing, it is used to avoid exceptions for classes demanding
-    private ArrayList<Player> playerList = new ArrayList<>();
 
     void setup(){
         variable = new SetupVariables();
         grid = variable.grid;
-        player = variable.player;
-        player2 = variable.player2;
-        playerList.add(player);
-        playerList.add(player2);
+        playerList = variable.getPlayers();
+        player = playerList.get(0);
+        player2 = playerList.get(1);
+
         game = variable.game;
         textureCard = new Texture("cardLayouts/Move1.png");
         roundExecutor = new RoundExecutor(playerList, game);
@@ -57,14 +59,22 @@ public class RoundExecutorTests {
     void executeCardsTest(){
         setup();
         card = new MoveCard(MoveCard.Type.move1, textureCard);
+        game.deck = new StackOfCards();
+
+        float p1Y = player.getY();
+        float p2Y = player2.getY();
 
 
         player.moveCardQueue.add(card);
         player2.moveCardQueue.add(card);
-        System.out.println(player.moveCardQueue);
-        System.out.println(player.getX() + " , " + player.getY());
         roundExecutor.playPlayerNextCard();
-        System.out.println(player.getX() + " , " + player.getY());
+
+        float p1After = player.getY();
+        float p2After = player2.getY();
+
+        assertTrue((p1Y < p1After || p2Y < p2After));
+
+
     }
 
     @Test
