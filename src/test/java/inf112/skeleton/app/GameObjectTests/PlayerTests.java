@@ -192,7 +192,7 @@ public class PlayerTests {
     void FewerCardsAfterDamageTest(){
         setup();
         int initialMaxCards = player.maxCardsAllowedForPlayer;
-        player.handleDeath(grid);
+        player.damagePlayer(1, grid);
         System.out.println(player.maxCardsAllowedForPlayer);
         assertTrue(initialMaxCards > player.maxCardsAllowedForPlayer);
     }

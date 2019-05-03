@@ -1,4 +1,7 @@
-﻿# Deloppgave 1 - Prosjekt og prosjektstruktur
+﻿Siste kommit:
+
+
+# Deloppgave 1 - Prosjekt og prosjektstruktur
 
 ## Erfaringer vi har gjort oss om prosjektdynamikk
 

@@ -12,7 +12,7 @@ public class StartMenuTests {
     public void cannotCreateMoreThanMaxPlayers(){
         StartMenuScreen start = new StartMenuScreen(true,6,0);
         start.numberOfPlayers = start.incrementPlayers(start.numberOfPlayers);
-        assertEquals(1, start.numberOfPlayers);
+        assertEquals(0, start.numberOfPlayers);
     }
 
 
@@ -28,7 +28,7 @@ public class StartMenuTests {
     public void nPlayersLimitnAIsTest(){
         StartMenuScreen start = new StartMenuScreen(true,4,2);
         start.numberOfAIs = start.incrementPlayers(start.numberOfAIs);
-        assertEquals(1, start.numberOfAIs);
+        assertEquals(0, start.numberOfAIs);
     }
 
 
@@ -36,7 +36,7 @@ public class StartMenuTests {
     public void nAIsLimitnPlayersTest(){
         StartMenuScreen start = new StartMenuScreen(true, 2,4);
         start.numberOfPlayers = start.incrementPlayers(start.numberOfPlayers);
-        assertEquals(1, start.numberOfPlayers);
+        assertEquals(0, start.numberOfPlayers);
     }
 
 }
