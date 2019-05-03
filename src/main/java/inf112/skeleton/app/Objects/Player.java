@@ -452,16 +452,20 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
 
         else if (keycode == Input.Keys.U) {
             playerMovements.uTurn();
+            checkCollision(game.grid);
         }
         else if (keycode == Input.Keys.UP) {
             playerMovements.moveStraight(1, moveDistance, game.grid);
+            checkCollision(game.grid);
         }
         else if (keycode == Input.Keys.W) {
             playerMovements.moveStraight(2, moveDistance, game.grid);
+            checkCollision(game.grid);
         }
 
         else if (keycode == Input.Keys.DOWN) {
             playerMovements.moveStraight(1,moveDistance * (-1),game.grid);
+            checkCollision(game.grid);
         }
 
 
@@ -478,10 +482,6 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         if (keycode==Input.Keys.P){
             powerDown();
         }
-
-
-        checkCollision(game.grid);
-        System.out.println("Cards picked: " + Arrays.toString(movecardArray));
 
         return false;
     }
