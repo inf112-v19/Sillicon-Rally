@@ -475,13 +475,6 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
             return true;
         }
 
-        else if (keycode == Input.Keys.ENTER) {
-            executeCard();
-            chosenCards = 0;
-            movecardArray = null;
-            movecardArray = new MoveCard[MaxMoveCardLength];
-        }
-
         if (keycode==Input.Keys.P){
             powerDown();
         }
