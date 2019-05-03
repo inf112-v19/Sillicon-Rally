@@ -14,21 +14,17 @@ import inf112.skeleton.app.grid.TileGrid;
  */
 
 public class LaserObject implements IGameObject, IDamageDealer {
+    private Tile laserTile;
 
     public int xLocation;
     public int yLocation;
     public final int LASER_DAMAGE = 1;
 
-    private Sprite sprite;
-    private Tile laserTile;
+
 
     public LaserObject(RectangleMapObject laserFromTiled, TileGrid grid){
         xLocation = (int) laserFromTiled.getRectangle().getX();
         yLocation = (int) laserFromTiled.getRectangle().getY();
-
-        Texture texture = new Texture("TileSprites/tile-laser-1-start.png");
-        sprite = new Sprite(texture);
-        sprite.setSize(0, 0); //hiding sprite, not having a sprite throws error.
 
         laserTile = grid.getTileFromCoordinates(yLocation, xLocation);
         laserTile.addGameObject(this);
@@ -46,10 +42,7 @@ public class LaserObject implements IGameObject, IDamageDealer {
 
     @Override
     public Sprite getSprite() {
-        sprite.setX(xLocation);
-        sprite.setY(yLocation);
-
-        return sprite;
+        return null;
     }
 
     @Override

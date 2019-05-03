@@ -31,9 +31,6 @@ public class MoveCard extends Sprite{
         }
     }
 
-    public int getPriority() {
-        return priority;
-    }
 
     public void setPlayer(Player p) {
         this.player = p;

@@ -8,7 +8,6 @@ import inf112.skeleton.app.game.RoboGame;
 
 public class GameOverScreen implements Screen {
     private Texture GameOver;
-    private Texture SilCon;
     private Texture YasQueen;
     private RoboGame game;
 

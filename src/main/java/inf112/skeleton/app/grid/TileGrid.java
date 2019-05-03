@@ -1,6 +1,5 @@
 package inf112.skeleton.app.grid;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.game.RoboGame;
 
@@ -15,10 +14,11 @@ import java.util.ArrayList;
  */
 
 public class TileGrid {
-    public int tileSizeInPx;
-    Tile[][] grid;
+    private Tile[][] grid;
+
     public int rows;
     public int columns;
+    public int tileSizeInPx;
     int size;
 
     public TileGrid(int rows, int columns, int tileSizeInPx) {
@@ -31,23 +31,22 @@ public class TileGrid {
         grid = createGrid(rows, columns);
     }
 
+
     public Tile[][] createGrid(int rows, int columns) {
         grid = new Tile[rows][columns];
 
         int y = 0;
-
         for (int i = rows-1; i >= 0 ; i--) {
             for (int j = 0; j < grid[i].length; j++) {
                 grid[i][j] = new Tile(j, y, tileSizeInPx);
             }
             y++;
-
         }
         return grid;
     }
 
-    public Tile getTileFromCoordinates(float yCoor, float xCoor) {
 
+    public Tile getTileFromCoordinates(float yCoor, float xCoor) {
         int yTile = (int) yCoor/tileSizeInPx;
         int xTile = (int) xCoor/tileSizeInPx;
 
@@ -62,18 +61,19 @@ public class TileGrid {
         return getTile(yTile, xTile);
     }
 
+
     /*
-    * Get a tile based on the Tiles xPosition and yPosition coordinates, 0,0 being bottom left
+    Get a tile based on the Tiles xPosition and yPosition coordinates, 0,0 being bottom left
      */
     public Tile getTile(int y, int x) {
         if (x >= columns || y >= rows) {
             throw new IllegalArgumentException("Attempt to move out of map");
         }
-
         Tile tile = grid[(rows-1) - y][x];
 
         return tile;
     }
+
 
     public ArrayList<IGameObject> getAllSpritesOnMap() {
         ArrayList<IGameObject> list = new ArrayList<>();
@@ -86,9 +86,9 @@ public class TileGrid {
                 }
             }
         }
-
         return list;
     }
+
 
     public ArrayList<Tile> getDirectPath(Tile tile, RoboGame.Direction dir) {
         ArrayList<Tile> list = new ArrayList<>();
@@ -103,9 +103,9 @@ public class TileGrid {
             case East:
                 return getAllEastTiles(tile);
         }
-
         return list;
     }
+
 
     private ArrayList<Tile> getAllEastTiles(Tile tile) {
         ArrayList<Tile> list = new ArrayList<>();
@@ -115,10 +115,9 @@ public class TileGrid {
         for (int i = tile.x+1; i < columns; i++) {
             list.add(getTile(tile.y, i));
         }
-
         return list;
-
     }
+
 
     private ArrayList<Tile> getAllWestTiles(Tile tile) {
         ArrayList<Tile> list = new ArrayList<>();
@@ -128,9 +127,9 @@ public class TileGrid {
         for (int i = tile.x-1; i >= 0; i--) {
             list.add(getTile(tile.y, i));
         }
-
         return list;
     }
+
 
     private ArrayList<Tile> getAllSouthTiles(Tile tile) {
         ArrayList<Tile> list = new ArrayList<>();
@@ -140,9 +139,9 @@ public class TileGrid {
         for (int i = tile.y-1; i >= 0; i--) {
             list.add(getTile(i, tile.x));
         }
-
         return list;
     }
+
 
     private ArrayList<Tile> getAllNorthTiles(Tile tile) {
         ArrayList<Tile> list = new ArrayList<>();
@@ -154,7 +153,6 @@ public class TileGrid {
         }
         return list;
     }
-
 
 }
 

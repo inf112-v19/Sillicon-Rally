@@ -9,10 +9,12 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class TurnGearObject implements IGameObject {
-    public int yLocation;
-    public int xLocation;
     private Tile turnGearTile;
     private RotateDirection rotateDirection;
+
+    public int yLocation;
+    public int xLocation;
+
 
 
     public TurnGearObject(RectangleMapObject turnGearObjectFromTiled, TileGrid grid){

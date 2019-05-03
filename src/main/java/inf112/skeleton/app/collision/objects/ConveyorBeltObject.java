@@ -13,8 +13,9 @@ public class ConveyorBeltObject implements IGameObject {
     public int speed;
     public int yLocation;
     public int xLocation;
-    Tile conveyorTile;
+    private Tile conveyorTile;
     public RoboGame.Direction direction;
+
 
     public ConveyorBeltObject(RectangleMapObject conveyorFromTile, TileGrid grid){
         speed = getConveyorSpeed(conveyorFromTile);

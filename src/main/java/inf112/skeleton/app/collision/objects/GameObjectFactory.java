@@ -72,7 +72,7 @@ public class GameObjectFactory {
         Player player = new AIPlayer(playerTexture, startDirection, game, ("AI"+playernum));
         player.getSprite().rotate(180);
         grid.getTile(0, 0).addGameObject(player);
-        game.playerList.add(player);
+        playerList.add(player);
         int[] array=getSpawn();
         player.setPosition(array[1], array[0], grid);
     }
@@ -83,7 +83,7 @@ public class GameObjectFactory {
         Player player = new Player(playerTexture, startDirection, game, ("Player"+ playernum));
         player.getSprite().rotate(180);
         grid.getTile(0, 0).addGameObject(player);
-        game.playerList.add(player);
+        playerList.add(player);
         int[] array=getSpawn();
         player.setPosition(array[1], array[0], grid);
     }

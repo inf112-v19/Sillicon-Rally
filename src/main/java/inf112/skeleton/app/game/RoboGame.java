@@ -81,11 +81,7 @@ public class RoboGame extends Game {
         constructor = new GameObjectFactory(gameMap, grid);
         constructor.createObjects();
 
-
         camera = new CustomCamera(gameMap.getTiledMap());
-
-        System.out.println(((CustomCamera) camera).pixelWidth);     //TODO println
-
         camera.translate( -470, -700);
 
         sb = new SpriteBatch();
@@ -112,6 +108,7 @@ public class RoboGame extends Game {
     }
 
 
+
     public MoveCard chooseCard(int index, Player currentPlayer) {
         if(!canChooseMoreCard(currentPlayer))
             return null;
@@ -125,7 +122,6 @@ public class RoboGame extends Game {
                 break;
             }
         }
-
         currentPlayer.increaseDeckCount();
         return cardPickedByPlayer;
     }
@@ -138,9 +134,6 @@ public class RoboGame extends Game {
         return true;
     }
 
-    public MoveCard getCard(int index){
-        return listOfNine[index];
-    }
 
     private MoveCard alignCard(MoveCard temp, int index) {
         int x = 0 + 170*(index);
@@ -186,25 +179,13 @@ public class RoboGame extends Game {
 
     @Override
     public void render() {
-        //handleInput(Gdx.graphics.getDeltaTime());
         super.render();
     }
-
-    public void handleInput(float deltaTime) {
-        if (player != null) {
-            player.handleInput(deltaTime, this);
-            }
-        }
-
-
-
-
 
 
     public void drawHUD() {
         sb.end();
         sb.begin();
-        //backboard.draw(sb);
         for (int i = 0; i < listOfNine.length; i++) {
             if (listOfNine[i] != null) {
                 listOfNine[i].draw(sb);
@@ -218,6 +199,7 @@ public class RoboGame extends Game {
         drawNumbers(sb);
         sb.end();
     }
+
 
     private void drawNumbers(SpriteBatch sb) {
         float n = xLoc;
@@ -254,6 +236,7 @@ public class RoboGame extends Game {
         gameMap.getTiledMap().dispose();
     }
 
+
     public void putCardsBackInDeck() {
         for (int i = 0; i < listOfNine.length; i++) {
             if(listOfNine[i] != null) {
@@ -262,23 +245,14 @@ public class RoboGame extends Game {
         }
     }
 
-    public void shuffleDeck() {
-        this.deck.shuffle();
-    }
 
     public void addToDeck(MoveCard cd) {
         deck.putCardInDeck(cd);
     }
 
 
-
-
     public enum Direction{
         North, East, South, West
     }
 
-
-    public void setGameScreen(GameScreen gameScreen) {
-        this.gameScreen = gameScreen;
-    }
 }

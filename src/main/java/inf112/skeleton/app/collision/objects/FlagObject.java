@@ -9,10 +9,11 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class FlagObject implements IGameObject {
-    Sprite sprite;
+    private Sprite sprite;
+    private Tile flagTile;
+
     public int yLocation;
     public int xLocation;
-    Tile flagTile;
     public int flagNumber;
     public int maxFlags= 4;
 

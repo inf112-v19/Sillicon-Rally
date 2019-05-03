@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class LaserAnimation implements IGameObject {
-    Sprite laserBeam;
-    int laserTimer;
+    private Sprite laserBeam;
+    private int laserTimer;
 
     public LaserAnimation() {
         Texture texture = new Texture("texture_laser_cutout.png");
@@ -41,15 +41,6 @@ public class LaserAnimation implements IGameObject {
         laserBeam.setRotation(player.getSprite().getRotation());
     }
 
-
-    /*
-    public void removeLaser(Player player) {
-        if (laserTimer == 100) {
-            player.grid.getTileFromCoordinates(0, 0).getGameObjects().remove(this);
-            laserTimer = 0;
-        }
-    }
-    */
 
     public boolean removeLaser(Player player) {
         player.grid.getTileFromCoordinates(0, 0).getGameObjects().remove(this);

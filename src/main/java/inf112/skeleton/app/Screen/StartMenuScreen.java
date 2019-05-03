@@ -15,14 +15,15 @@ import inf112.skeleton.app.game.RoboGame;
 public class StartMenuScreen implements Screen {
 
     private Stage stage;
+    private Button startGameButton;
     private TextButton totalRobotsButton;
     private TextButton humanPlayersButton;
-    private Button startGameButton;
     public RoboGame game;
 
     public final int maxNumberOfRobots = 6;
     public int numberOfPlayers;
     public int numberOfAIs;
+
     private boolean gameToBeStarted;
 
     public StartMenuScreen(RoboGame game) {
@@ -35,14 +36,15 @@ public class StartMenuScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         Skin mySkin = new Skin(Gdx.files.internal("Buttons/glassy-ui.json"));
-        this.totalRobotsButton = createButton("AIs: "+ numberOfAIs, mySkin);
-        humanPlayersButton = createButton("Human Players: " + numberOfPlayers, mySkin);
         startGameButton = createButton("Start Game", mySkin);
+        totalRobotsButton = createButton("AIs: "+ numberOfAIs, mySkin);
+        humanPlayersButton = createButton("Human Players: " + numberOfPlayers, mySkin);
+
 
 
         totalRobotsButton.setPosition(stage.getWidth()/2 - (stage.getWidth()/4) - 200, stage.getHeight() - totalRobotsButton.getHeight()*2 -50);
-        humanPlayersButton.setPosition(humanPlayersButton.getX() + humanPlayersButton.getWidth() + 200,stage.getHeight() - humanPlayersButton.getHeight()*2 -50);
-        startGameButton.setPosition(humanPlayersButton.getX() + humanPlayersButton.getWidth() - 725,stage.getHeight() - humanPlayersButton.getHeight()*2 -300);
+        humanPlayersButton.setPosition(stage.getWidth() - (humanPlayersButton.getWidth() +50),stage.getHeight() - humanPlayersButton.getHeight()*2 -50);
+        startGameButton.setPosition(stage.getWidth()/2 - startGameButton.getWidth()/2,stage.getHeight() - humanPlayersButton.getHeight()*2 -300);
 
         // add a listener to your buttons so it does something when clicked
         totalRobotsButton.addListener(new ChangeListener() {

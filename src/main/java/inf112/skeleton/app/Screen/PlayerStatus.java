@@ -12,20 +12,21 @@ import inf112.skeleton.app.game.RoundExecutor;
 
 
 public class PlayerStatus {
-    Player player;
-    RoboGame game;
-    float xLocation;
-    float yLocation;
-    Sprite heartSprite;
+    private Player player;
     private Sprite TwoLifeSprite;
     private Sprite ThreeLifeSprite;
     private Sprite OneLifeSprite;
     private Sprite NoLifeSprite;
+    private Sprite heartSprite;
     private BitmapFont font;
 
-    public PlayerStatus(Player player, Point point, RoboGame game) {
+    float xLocation;
+    float yLocation;
+
+
+
+    public PlayerStatus(Player player, Point point) {
         this.player = player;
-        this.game = game;
         heartSprite = new Sprite(new Texture("LifeSprites/heart.png"));
         font = new BitmapFont();
 
@@ -52,7 +53,6 @@ public class PlayerStatus {
         String name = player.name;
 
         font.draw(sb, name, xLocation + 200, yLocation + 180);
-
     }
 
 

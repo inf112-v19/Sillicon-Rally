@@ -9,9 +9,10 @@ import java.util.Collections;
  * Created by Martin on 01/02/2019.
  */
 public class StackOfCards {
-
-
     public MyStack<MoveCard> stack = new MyStack<>();
+
+
+
 
     public StackOfCards() {
         ArrayList<MoveCard> cards = new ArrayList<>();

@@ -6,9 +6,10 @@ import inf112.skeleton.app.grid.TileGrid;
 
 public class PlayerMovements {
     private Player player;
+    private RoboGame.Direction direction;
+
     public float y;
     public float x;
-    private RoboGame.Direction direction ;
     float speed;
 
     public PlayerMovements(Player player, float y, float x, RoboGame.Direction direction) {
@@ -16,7 +17,7 @@ public class PlayerMovements {
         this.y = y;
         this.x = x;
         this.direction = direction;
-        this.speed = 0;
+        speed = 0;
     }
 
     public void setY(float y){this.y = y;}
@@ -141,18 +142,6 @@ public class PlayerMovements {
         }
     }
 
-
-
-    public void isKeyPressed(float deltaTime, RoboGame game) {
-
-    }
-
-
-
-
-    public void update(float deltaTime, TileGrid grid) {
-
-    }
 
     public void setDirection(RoboGame.Direction dir) {
         this.direction = dir;

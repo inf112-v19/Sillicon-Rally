@@ -2,22 +2,20 @@ package inf112.skeleton.app.Objects;
 
 import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.game.PlayerMovements;
-import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.grid.TileGrid;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Dfs {
-    MoveCard[] listOfNine;
-    boolean[] selected;
-    LinkedList<Integer> queue;
-    int cardsToChoose;
-    RoboGame game;
-    boolean foundAllCards;
-    Position currentPosition;
-    Position originalPosition;
-    TileGrid grid;
+    private MoveCard[] listOfNine;
+    private boolean[] selected;
+    private LinkedList<Integer> queue;
+    private int cardsToChoose;
+    private Position currentPosition;
+    private Position originalPosition;
+    private TileGrid grid;
+    public boolean foundAllCards;
 
     //Only created so we can use the checkIfMoveIsOutOfBounds method
     PlayerMovements movements;
@@ -25,20 +23,20 @@ public class Dfs {
 
     public Dfs(TileGrid grid, int cardsToChoose, Position position, MoveCard[] listOfNine) {
         this.grid = grid;
-        this.listOfNine = listOfNine;
-        selected = new boolean[listOfNine.length];
         this.cardsToChoose = cardsToChoose;
-        this.queue = new LinkedList<>();
-        this.currentPosition = position;
-        this.originalPosition = position;
-        this.movements = new PlayerMovements(new Player(),position.yPosition, position.xPosition, position.direction);
+        this.listOfNine = listOfNine;
+        currentPosition = position;
+        originalPosition = position;
+        selected = new boolean[listOfNine.length];
+
+        queue = new LinkedList<>();
+        movements = new PlayerMovements(new Player(),position.yPosition, position.xPosition, position.direction);
     }
 
     public void dfs() {
         this.graph = new Graph(listOfNine, cardsToChoose);
 
         for (int i = 0; i < listOfNine.length; i++) {
-
             initialize();
             if (isLegalMove(listOfNine[i], currentPosition))
                 dfs(i, currentPosition, 0);
@@ -47,6 +45,7 @@ public class Dfs {
                 break;
         }
     }
+
 
     private void initialize() {
         for (int i = 0; i < selected.length; i++) {
@@ -81,7 +80,6 @@ public class Dfs {
     //This also updates the position
     private boolean isLegalMove(MoveCard moveCard, Position position) {
         return position.movePosition(moveCard.getType(), grid);
-       // return movements.checkIfMoveIsOutOfBounds(position.yPosition, position.xPosition, grid);
     }
 
     public LinkedList<Integer> getSelectedCards() {

@@ -6,13 +6,14 @@ import inf112.skeleton.app.Objects.IGameObject;
 import java.util.ArrayList;
 
 public class Tile implements ITile, Comparable<Tile> {
+    private ArrayList<IGameObject> listOfObjectsOnTile;
     public int x;
     public int y;
     public int xCoordFrom;
-    public int xCoordTo;
     public int yCoordFrom;
+    public int xCoordTo;
     public int yCoordTo;
-    ArrayList<IGameObject> listOfObjectsOnTile;
+
 
     public Tile(int x, int y, int tileSizeInPx) {
         this.x = x;

@@ -6,34 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Graph {
-    ArrayList<Integer>[] adj;
-    MoveCard[] listOfNine;
-    int[] testList;
+    private ArrayList<Integer>[] adj;
+    private MoveCard[] listOfNine;
+    private int[] testList;
 
     public Graph(MoveCard[] listOfNine, int depth) {
         this.listOfNine = listOfNine;
         this.adj = new ArrayList[listOfNine.length];
         initialize();
         createGraph();
-    }
-
-    //For testing
-    public Graph(int[] testList) {
-        this.testList = testList;
-        this.adj = new ArrayList[testList.length];
-        initialize();
-        createGraph(testList);
-    }
-
-    private void createGraph(int[] testList) {
-        for (int i = 0; i < testList.length; i++) {
-            for (int j = 0; j < testList.length; j++) {
-                if (j == i)
-                    continue;
-
-                adj[i].add(j);
-            }
-        }
     }
 
     private void createGraph() {
@@ -57,4 +38,29 @@ public class Graph {
         return this.adj;
     }
 
+
+
+
+    /*
+         For testing
+     */
+
+    public Graph(int[] testList) {
+        this.testList = testList;
+        this.adj = new ArrayList[testList.length];
+        initialize();
+        createGraph(testList);
+    }
+
+
+    private void createGraph(int[] testList) {
+        for (int i = 0; i < testList.length; i++) {
+            for (int j = 0; j < testList.length; j++) {
+                if (j == i)
+                    continue;
+
+                adj[i].add(j);
+            }
+        }
+    }
 }

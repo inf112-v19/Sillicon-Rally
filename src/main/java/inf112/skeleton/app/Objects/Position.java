@@ -20,6 +20,17 @@ public class Position {
     }
 
 
+    public boolean setPosition(float yDest, float xDest, TileGrid grid) {
+        if (checkIfMoveIsOutOfBounds(yDest, xDest, grid)) {
+            return false;
+        }
+        xPosition = xDest;
+        yPosition = yDest;
+
+        return true;
+    }
+
+
     public boolean movePosition(MoveCard.Type type, TileGrid grid) {
         boolean legalMove = true;
 
@@ -45,9 +56,11 @@ public class Position {
                 rotateClockwise();
                 break;
         }
-
         return legalMove;
     }
+
+
+    public void setDirection(RoboGame.Direction dir) { this.direction = dir; }
 
     private void rotateClockwise() {
         switch (this.direction) {
@@ -65,6 +78,7 @@ public class Position {
         }
     }
 
+
     private void rotateCounterClockwise() {
         switch (this.direction) {
             case North:
@@ -79,16 +93,10 @@ public class Position {
             case West:
                 setDirection(RoboGame.Direction.South);
         }
-
     }
 
-    public void setDirection(RoboGame.Direction dir) {
-        this.direction = dir;
-    }
 
     private void uTurn() {
-
-
         switch (this.direction) {
             case North:
                 setDirection(South);
@@ -104,6 +112,8 @@ public class Position {
         }
     }
 
+
+
     public boolean moveStraight(int steps, int moveDistance, TileGrid grid) {
         for (int i = 0; i < steps; i++) {
             if (!moveStraight(moveDistance, grid))
@@ -111,6 +121,7 @@ public class Position {
         }
         return true;
     }
+
 
     private boolean moveStraight(int moveDistance, TileGrid grid) {
 
@@ -128,16 +139,6 @@ public class Position {
         return false;
     }
 
-    public boolean setPosition(float yDest, float xDest, TileGrid grid) {
-        if (checkIfMoveIsOutOfBounds(yDest, xDest, grid)) {
-            return false;
-        }
-
-        xPosition = xDest;
-        yPosition = yDest;
-
-        return true;
-    }
 
     public boolean checkIfMoveIsOutOfBounds(float y, float x, TileGrid grid) {
         if (y < 0 || x < 0)
@@ -151,11 +152,6 @@ public class Position {
         return false;
     }
 
-    private void updatePosition(PlayerMovements movements) {
-        yPosition = movements.getY();
-        xPosition = movements.getX();
-        direction = movements.getDirection();
-    }
 
 
     public Position copy() {

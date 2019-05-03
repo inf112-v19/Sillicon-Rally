@@ -10,7 +10,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 * layers from the map.
  */
 public class GameMap  {
-    TiledMap tiledMap;
+    private TiledMap tiledMap;
 
     public GameMap(String fileName) {
         this.tiledMap = new TmxMapLoader().load(fileName);
@@ -25,6 +25,7 @@ public class GameMap  {
         MapLayer layer = tiledMap.getLayers().get(i);
         return layer;
     }
+
 
     public TiledMap getTiledMap() {
         return this.tiledMap;

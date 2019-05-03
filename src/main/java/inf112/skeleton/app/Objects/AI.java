@@ -1,13 +1,12 @@
 package inf112.skeleton.app.Objects;
 
-import inf112.skeleton.app.card.MoveCard;
 import inf112.skeleton.app.game.RoboGame;
 
 import java.util.LinkedList;
 
 public class AI {
-    Player player;
-    RoboGame game;
+    private Player player;
+    private RoboGame game;
 
     public AI(Player player, RoboGame game) {
         this.player = player;
@@ -27,8 +26,5 @@ public class AI {
             player.pickCard(index);
         }
     }
-
-
-
 
 }

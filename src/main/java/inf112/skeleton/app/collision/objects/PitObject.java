@@ -10,9 +10,10 @@ import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 
 public class PitObject implements IGameObject, IDamageDealer {
+    private Tile pitTile;
     public int xLocation;
     public int yLocation;
-    private Tile pitTile;
+
 
 
     public PitObject(RectangleMapObject pitFromTiled, TileGrid grid){

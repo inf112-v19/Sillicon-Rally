@@ -30,15 +30,12 @@ public class GameScreen implements Screen {
 
 
     //Function related
-    private RoboGame game;
     private DrawCards drawCards;
     private List<PlayerStatus> playerStatusList;
     private RoundExecutor roundExector;
-    private int xLoc;
-    private int yLoc;
+    private RoboGame game;
     public GameMap gameMap;
     public TileGrid grid;
-    PlayerStatus playerStatus;
 
 
 
@@ -59,7 +56,7 @@ public class GameScreen implements Screen {
         for (int i = 0; i < game.playerList.size(); i++) {
             Player pl = game.playerList.get(i);
             Point point = statusScreenPoints[i];
-            PlayerStatus status = new PlayerStatus(pl, point, game);
+            PlayerStatus status = new PlayerStatus(pl, point);
             playerStatusList.add(status);
         }
     }
@@ -86,7 +83,6 @@ public class GameScreen implements Screen {
             status.draw(game.sb);
         }
 
-
         game.sb.end();
 
         playRound();
@@ -109,10 +105,8 @@ public class GameScreen implements Screen {
             }
             laserTimer = 0;
         }
-
         if (laserTimer >= 0)
             laserTimer++;
-
     }
 
     private void playRound() {
@@ -121,7 +115,6 @@ public class GameScreen implements Screen {
 
         if (drawCards.allPlayersDone())
             roundExector.isCurrentlyExecutingRound = true;
-
 
         if (roundExector.isCurrentlyExecutingRound) {
             Gdx.input.setInputProcessor(null);

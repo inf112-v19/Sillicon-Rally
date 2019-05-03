@@ -18,17 +18,19 @@ public class DrawCards {
     private boolean playersFinishedPickingCards;
     private BitmapFont font = new BitmapFont();
 
+
+
     public DrawCards(RoboGame game) {
-        this.playerList = game.playerList;
         this.game = game;
-        this.playersTurn = 0;
-        this.playersFinishedPickingCards = false;
+        playerList = game.playerList;
+        playersTurn = 0;
+        playersFinishedPickingCards = false;
     }
+
 
     public void drawCards() {
         if (playerList.size() == 1)
             playersTurn = 0;
-
 
         if (playerList.size() == 0){
             game.setScreen(new GameOverScreen(game));
@@ -48,6 +50,7 @@ public class DrawCards {
                 (cardsDrawByPlayer != 0) && cardsDrawByPlayer % playerToDraw.maxCardsAllowedForPlayer == 0)
             setNextPlayersTurn();
     }
+
 
     public void setNextPlayersTurn() {
         int currentPlayer = playersTurn;

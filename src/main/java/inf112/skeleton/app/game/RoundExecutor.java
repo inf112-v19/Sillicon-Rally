@@ -2,7 +2,6 @@ package inf112.skeleton.app.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.card.StackOfCards;
 
@@ -18,10 +17,10 @@ public class RoundExecutor {
     private BitmapFont font = new BitmapFont();
 
 
-    public RoundExecutor(List<Player> playerList, RoboGame g) {
-        this.game = g;
+    public RoundExecutor(List<Player> playerList, RoboGame game) {
+        this.game = game;
         this.playerList = playerList;
-        playersTurn = g.currentPlayer;
+        playersTurn = game.currentPlayer;
         this.isCurrentlyExecutingRound = false;
         this.shootLaserNow = false;
     }
@@ -60,10 +59,8 @@ public class RoundExecutor {
 
 
     public void sleep(int i) {
-        try {
-            Thread.sleep(i);
-        } catch (Exception e) {
-
+        try {Thread.sleep(i);}
+        catch (Exception e) {
         }
     }
 

@@ -17,37 +17,36 @@ import java.util.*;
 
 public class Player implements IGameObject, InputProcessor, IPlayer {
     //Player specifics
-    private boolean isAlive = true;
-    public int playerHP;
-    public int playerTokens;
     public final int MAX_HP = 6;
     public final int MAX_DAMAGE_TOKENS = 3;
-    public boolean playerIsDead = false;
-    public String name;
+    public int playerHP;
+    public int playerTokens;
     public int flagNr = 1;
-    public int roundNr=1;
+    public String name;
     public boolean powerDownOn = false;
+    public boolean isAlive = true;
 
 
     //Function related
     private Tile backupLocation;
+    public TileGrid grid;
     private Sprite sprite;
+    public Texture texture;
     private RoboGame game;
     private PlayerMovements playerMovements;
     private LaserAnimation laserAnimation;
-    public TileGrid grid;
-    public Texture texture;
     public boolean collectedAllFlags = false;
 
 
     //Card related
     public int MaxMoveCardLength = 5;
     public int chosenCards = 0;
+    public int maxCardsAllowedForPlayer;
+    public int previousMaxCards;
     public MoveCard[] testCardsToBePlayed;
     public LinkedList<MoveCard> moveCardQueue;
-    public int maxCardsAllowedForPlayer;
     public MoveCard[] movecardArray;
-    public int previousMaxCards;
+
 
 
     public void setName(String name) {
@@ -101,6 +100,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         collisionHandler.checkForDamageDealer();
     }
 
+
     public boolean deathCheck(Player player) {
         ArrayList<Player> playerlist = game.playerList;
         boolean[] marked = new boolean[playerlist.size()];
@@ -116,6 +116,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
     }
 
 
+    //Player looses one health token, in which the HP is full.
     public void handleDeath(TileGrid grid) {
         if (backupLocation != null) {
             resetToBackupLocation(grid);
@@ -147,9 +148,10 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         }
     }
 
-    public void rotateClockwise(){playerMovements.rotateClockwise();}
 
+    public void rotateClockwise(){playerMovements.rotateClockwise();}
     public void rotateCounterClockwise() {playerMovements.rotateCounterClockwise();}
+
 
 
     public void setBackupLocation(Tile backupLocation) {
@@ -161,7 +163,6 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         backupLocation = null;
     }
 
-
     public void resetToBackupLocation(TileGrid grid) {
         int tileSizeInPx = grid.tileSizeInPx;
         if (backupLocation != null) {
@@ -169,6 +170,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
             System.out.println(grid.getTileFromCoordinates(getY(), getX()));
         }
     }
+
 
     @Override
     public Sprite getSprite() {
@@ -299,16 +301,9 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
 
     public void pickCard(int index) {
         MoveCard cardPicked = game.chooseCard(index, this);
-
         if (cardPicked != null)
             moveCardQueue.add(cardPicked);
-
     }
-
-    public LinkedList<MoveCard> getPlayersDeck() {
-        return this.moveCardQueue;
-    }
-
 
 
     public void executeCard() {
@@ -322,6 +317,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         moveCardQueue.clear();
     }
 
+
     public void executeNextCard() {
         if (moveCardQueue.isEmpty()) {
             return;
@@ -333,53 +329,36 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         checkForDamageTaken();
     }
 
-    public boolean chosenAllCards() {
-        return moveCardQueue.size() == 5;
-    }
 
     @Override
     public boolean keyUp(int i) {
         return false;
     }
-
     @Override
     public boolean keyTyped(char c) {
         return false;
     }
-
     @Override
     public boolean touchDown(int i, int i1, int i2, int i3) {
         return false;
     }
-
     @Override
     public boolean touchUp(int i, int i1, int i2, int i3) {
         return false;
     }
-
     @Override
     public boolean touchDragged(int i, int i1, int i2) {
         return false;
     }
-
     @Override
     public boolean mouseMoved(int i, int i1) {
         return false;
     }
-
     @Override
     public boolean scrolled(int i) {
         return false;
     }
 
-    public void handleInput(float deltaTime, RoboGame game) {
-        playerMovements.isKeyPressed(deltaTime, game);
-
-    }
-
-    public void update(float deltaTime, TileGrid grid) {
-        playerMovements.update(deltaTime, grid);
-    }
 
 
     @Override
@@ -390,6 +369,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
     public void increaseDeckCount() {
         this.chosenCards++;
     }
+
 
     @Override
     public boolean keyDown(int keycode) {
