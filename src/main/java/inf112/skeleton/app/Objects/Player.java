@@ -213,13 +213,17 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         List<Tile> path = grid.getDirectPath(playerTile, getDirection());
         laserAnimation.animateLaser(this);
 
-        for (Tile tile : path) {
-            for (IGameObject object : tile.getGameObjects()) {
-                if (object instanceof Player && object != this) {
-                    Player otherPlayer = (Player) object;
-                    otherPlayer.damagePlayer(1, grid);
+        try {
+            for (Tile tile : path) {
+                for (IGameObject object : tile.getGameObjects()) {
+                    if (object instanceof Player && object != this) {
+                        Player otherPlayer = (Player) object;
+                        otherPlayer.damagePlayer(1, grid);
+                    }
                 }
             }
+        } catch (ConcurrentModificationException e) {
+            
         }
     }
 
