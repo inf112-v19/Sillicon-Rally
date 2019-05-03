@@ -120,10 +120,11 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
     public void handleDeath(TileGrid grid) {
         if (backupLocation != null) {
             resetToBackupLocation(grid);
-            deleteBackupLocation();
         }
+        
         playerTokens -= 1;
         playerHP = MAX_HP;
+        maxCardsAllowedForPlayer--;
 
         if (playerTokens == 0) {
             removePlayer();

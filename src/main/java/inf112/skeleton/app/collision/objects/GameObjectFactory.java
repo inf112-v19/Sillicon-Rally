@@ -8,6 +8,7 @@ import inf112.skeleton.app.Objects.AIPlayer;
 import inf112.skeleton.app.Objects.IGameObject;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.game.RoboGame;
+import inf112.skeleton.app.grid.Tile;
 import inf112.skeleton.app.grid.TileGrid;
 import inf112.skeleton.app.map.GameMap;
 
@@ -86,6 +87,8 @@ public class GameObjectFactory {
         playerList.add(player);
         int[] array=getSpawn();
         player.setPosition(array[1], array[0], grid);
+        Tile backupTile = grid.getTileFromCoordinates(array[1], array[0]);
+        player.setBackupLocation(backupTile);
     }
 
 
