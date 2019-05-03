@@ -125,6 +125,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         playerTokens -= 1;
         playerHP = MAX_HP;
 
+
         if (playerTokens == 0) {
             removePlayer();
             System.out.println("Tokens:" + playerTokens + ", HP:" + playerHP);

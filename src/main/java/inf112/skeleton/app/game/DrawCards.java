@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import inf112.skeleton.app.Objects.AIPlayer;
 import inf112.skeleton.app.Objects.Player;
 import inf112.skeleton.app.Screen.GameOverScreen;
@@ -70,6 +71,10 @@ public class DrawCards {
         font.getData().setScale(3);
         font.setColor(new Color(Color.GREEN));
         String str = "player drawing card: " + playerList.get(playersTurn);
+        Sprite sprite = playerList.get(playersTurn).getSprite();
+        sprite.setPosition(280,-100);
+        sprite.draw(game.sb);
+
 
         font.draw(game.sb, str, 360,-10);
         game.sb.end();
