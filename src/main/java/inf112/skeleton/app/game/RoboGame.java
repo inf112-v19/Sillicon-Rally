@@ -41,11 +41,11 @@ public class RoboGame extends Game {
 
     //Sprite related
     public SpriteBatch sb;
-    private Sprite backboard;
-    private Texture texture;
-    private BitmapFont font;
-    private float xLoc;
-    private float yLoc;
+    public Sprite backboard;
+    public Texture texture;
+    public BitmapFont font;
+    public float xLoc;
+    public float yLoc;
 
     //Player related
     public Player player;
