@@ -57,8 +57,6 @@ public class RoundExecutorTests {
     void executeCardsTest(){
         setup();
         card = new MoveCard(MoveCard.Type.move1, textureCard);
-
-
         player.moveCardQueue.add(card);
         player2.moveCardQueue.add(card);
         System.out.println(player.moveCardQueue);
