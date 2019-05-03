@@ -1,4 +1,4 @@
-﻿Siste kommit:
+﻿Siste kommit: 1a1f2effb6eb6d024bf09d4475c9eb56a1f720d6
 
 
 # Deloppgave 1 - Prosjekt og prosjektstruktur
