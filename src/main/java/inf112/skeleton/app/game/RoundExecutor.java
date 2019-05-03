@@ -29,7 +29,6 @@ public class RoundExecutor {
         if (playerList.size() > 0) {
             if (roundIsDone() && isCurrentlyExecutingRound == true) {
                 isCurrentlyExecutingRound = false;
-                checkCollisions();
                 playerShootLaser();
                 game.deck = new StackOfCards();
                 allPlayersPowerOn();

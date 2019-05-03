@@ -329,6 +329,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         movePlayer(card.getType(), game.getTileSize(), grid);
         chosenCards--;
         checkForDamageTaken();
+        checkCollision(grid);
     }
 
 
