@@ -82,10 +82,11 @@ public class StartMenuScreen implements Screen {
     }
 
     public int incrementPlayers(int player){
+        ++player;
         if (numberOfPlayers + numberOfAIs >= maxNumberOfRobots){
             player = 0;
         }
-        return ++player;
+        return player;
     }
 
     @Override
