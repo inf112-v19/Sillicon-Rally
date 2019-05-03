@@ -58,7 +58,7 @@ public class SetupVariables {
     public SetupVariables() {
         setup();
         //Map related
-        gameMap = new GameMap("map.v.01.tmx");
+        gameMap = new GameMap("MapNumberOne.tmx");
         grid = makeGrid(gameMap);
         TILESIZE_IN_PX = gameMap.getTileSize();
 

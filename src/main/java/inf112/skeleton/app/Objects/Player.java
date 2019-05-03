@@ -17,7 +17,7 @@ import java.util.*;
 
 public class Player implements IGameObject, InputProcessor, IPlayer {
     //Player specifics
-    public final int MAX_HP = 6;
+    public final int MAX_HP = 3;
     public final int MAX_DAMAGE_TOKENS = 3;
     public int playerHP;
     public int playerTokens;
@@ -121,7 +121,7 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         if (backupLocation != null) {
             resetToBackupLocation(grid);
         }
-        
+
         playerTokens -= 1;
         playerHP = MAX_HP;
         maxCardsAllowedForPlayer--;

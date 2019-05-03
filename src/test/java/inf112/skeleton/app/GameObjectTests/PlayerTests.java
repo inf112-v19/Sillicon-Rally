@@ -20,6 +20,7 @@ public class PlayerTests {
     TileGrid grid;
     RoboGame roboGame;
     int TILE_SIZE_IN_PX;
+    final int MAX_HP = 3;
 
 
     public void setup() {
@@ -176,13 +177,13 @@ public class PlayerTests {
         otherPlayer.setPosition(5 * setup.grid.tileSizeInPx, 0, setup.grid);
         otherPlayer.setDirection(RoboGame.Direction.South);
 
-        assertEquals(6, otherPlayer.playerHP);
+        assertEquals(MAX_HP, otherPlayer.playerHP);
 
         player.shootLaser(setup.grid);
-        assertEquals(5, otherPlayer.playerHP);
+        assertEquals(MAX_HP-1, otherPlayer.playerHP);
 
         otherPlayer.shootLaser(setup.grid);
-        assertEquals(5, player.playerHP);
+        assertEquals(MAX_HP-1, player.playerHP);
     }
 
 
