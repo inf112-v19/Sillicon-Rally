@@ -124,8 +124,9 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
 
         playerTokens -= 1;
         playerHP = MAX_HP;
-        maxCardsAllowedForPlayer--;
 
+        maxCardsAllowedForPlayer = 5;
+        previousMaxCards = 5;
 
         if (playerTokens == 0) {
             removePlayer();
@@ -233,7 +234,10 @@ public class Player implements IGameObject, InputProcessor, IPlayer {
         this.playerHP -= damage;
         System.out.println("you took " + damage + " damage. New HP: " + playerHP +
                 " \n Player tokens: " + playerTokens + "Max damage Tokens" + MAX_DAMAGE_TOKENS);
-        //TODO println
+
+
+        if (maxCardsAllowedForPlayer > 3)
+            maxCardsAllowedForPlayer--;
 
         if (playerHP <= 0)
             handleDeath(grid);

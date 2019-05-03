@@ -1,4 +1,4 @@
-# Deloppgave 1 - Prosjekt og prosjektstruktur
+﻿# Deloppgave 1 - Prosjekt og prosjektstruktur
 
 ## Erfaringer vi har gjort oss om prosjektdynamikk
 
@@ -74,6 +74,9 @@ Den kanskje viktigste tingen vi har lært mens vi jobbet med dette prosjektet, e
 sånn som Libgdx. Det å ta i bruk kode som er skrevet av andre gjør at vi kan "outsource" mye av det tyngste arbeidet. Samtidig tvinger det oss
 til å jobbe rundt rammeverket, til å strukturere prosjektet vårt på en måte vi kanskje ikke opplever som optimalt.
 Det første veier ofte opp for det andre, og dette har vært en særdelelis lærerik opplevelse for alle på teamet.
+
+I tillegg har det blitt tydlig for oss hvor nyttig automatiserte tester kan være. God dekning av godt navgitte tester hjelper oss til å vite hva
+det er vi ønsker og oppnå, og det sier ifra til oss dersom vi skulle klare å ødelegge koden med nye forandringer. 
 
 Når det gjelder det å jobbe i team har vi erfart hvor viktig det er å holde hverandre oppdatert på hva man jobber med til enhver tid, når man utvikler et større prosjekt.
 Dette innebærer å oppdatere gruppemedlemmene på ny-implementert kode, og som en gruppe bli enig om motivasjon av kode framover.
