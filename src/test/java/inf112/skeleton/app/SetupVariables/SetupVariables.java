@@ -68,7 +68,6 @@ public class SetupVariables {
         grid = makeGrid(gameMap);
         TILESIZE_IN_PX = gameMap.getTileSize();
 
-
         //Player related
         laserAnimation = new LaserAnimation();
 
@@ -81,19 +80,17 @@ public class SetupVariables {
         repairObject = new RepairObject(2,2,grid);
         teleport = new TeleportObstacle(gameMap, grid);
 
-
-        //Function related
         game = new RoboGame();
-        oneForwardCardList = getOneForwardDeck();
-        oneForwardCardList = getOneForwardDeck();
+        setUpGame();
         playerList = getPlayers();
-        round = new Round(new StackOfCards(), playerList);
-        cardList = getDeck();
-        playerList = getPlayers();
-
         player = playerList.get(0);
         player2 = playerList.get(1);
-        setUpGame();
+
+        //Function related
+        oneForwardCardList = getOneForwardDeck();
+        oneForwardCardList = getOneForwardDeck();
+        round = new Round(new StackOfCards(), playerList);
+        cardList = getDeck();
     }
 
     public void setUpGame() {
@@ -102,6 +99,8 @@ public class SetupVariables {
         game.TILE_SIZE_IN_PX = game.getTileSize();
      //   game.tiledMapRenderer = new OrthogonalTiledMapRenderer(gameMap.getTiledMap());
         game.grid = this.grid;
+        game.constructor = new GameObjectFactory(gameMap, grid);
+
 
         game.font = new BitmapFont();
         game.xLoc = -400;
